@@ -72,11 +72,10 @@
       const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '');
       document.getElementById('detail-content').innerHTML = `
         <div class="product-nav-bar">
-          <button class="btn-back" onclick="goBack('products.html')" aria-label="Quay lại">
-            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <button class="btn-back" onclick="goBack('products.html')" aria-label="Quay lại" title="Quay lại">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M19 12H5M12 19l-7-7 7-7"/>
             </svg>
-            <span>Quay lại</span>
           </button>
           <div class="breadcrumb">
             <a href="index.html">Trang chủ</a> / 
@@ -323,22 +322,20 @@
 </script>
 
 <!-- Floating Back Button on Scroll -->
-<button class="floating-back-btn" id="floating-back-btn" onclick="goBack('products.html')" aria-label="Quay lại">
-  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+<button class="floating-back-btn" id="floating-back-btn" onclick="goBack('products.html')" aria-label="Quay lại" title="Quay lại">
+  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <path d="M19 12H5M12 19l-7-7 7-7"/>
   </svg>
-  <span>Quay lại</span>
 </button>
 
 <!-- Fullscreen Image Inspection Lightbox -->
 <div class="image-lightbox" id="image-lightbox" onclick="if(event.target===this) closeImageLightbox()">
   <div class="lightbox-content">
     <div class="lightbox-header">
-      <button class="btn-back" onclick="closeImageLightbox()" aria-label="Quay lại">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <button class="btn-back" onclick="closeImageLightbox()" aria-label="Quay lại" title="Đóng xem chi tiết">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
           <path d="M19 12H5M12 19l-7-7 7-7"/>
         </svg>
-        <span>Quay lại</span>
       </button>
       <div class="lightbox-title" id="lightbox-title">Chi tiết sản phẩm</div>
     </div>

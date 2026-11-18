@@ -1234,11 +1234,10 @@ function goBack(fallbackUrl = 'products.html') {
 
 function renderBackButton(fallbackUrl = 'products.html', label = 'Quay lại') {
   return `
-    <button class="btn-back" onclick="goBack('${fallbackUrl}')" aria-label="${label}">
-      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <button class="btn-back" onclick="goBack('${fallbackUrl}')" aria-label="${label}" title="${label}">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <path d="M19 12H5M12 19l-7-7 7-7"/>
       </svg>
-      <span>${label}</span>
     </button>
   `;
 }

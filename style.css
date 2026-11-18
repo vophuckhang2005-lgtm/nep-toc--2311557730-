@@ -743,45 +743,43 @@ nav a.active::after {
 }
 
 /* ==========================================================================
-   Apple-Style Slender Back Button (.btn-back) & Navigation Elements
+   Apple-Style Slender Circular Back Button (.btn-back)
    ========================================================================== */
 .btn-back {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 7px 15px 7px 11px;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 500;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border-radius: 50%;
   color: var(--apple-secondary);
   background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--apple-border);
-  border-radius: 980px;
   cursor: pointer;
   text-decoration: none;
   transition: all 0.25s var(--spring-snappy);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  line-height: 1;
   user-select: none;
+  flex-shrink: 0;
 }
 
 .btn-back svg {
-  width: 15px;
-  height: 15px;
+  width: 17px;
+  height: 17px;
   stroke: currentColor;
-  stroke-width: 1.75;
+  stroke-width: 1.8;
   transition: transform 0.25s var(--spring-snappy);
-  flex-shrink: 0;
 }
 
 .btn-back:hover {
   background: #ffffff;
   color: var(--apple-black);
   border-color: rgba(0, 0, 0, 0.2);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  transform: translateX(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateX(-2px) scale(1.04);
 }
 
 .btn-back:hover svg {
@@ -789,7 +787,7 @@ nav a.active::after {
 }
 
 .btn-back:active {
-  transform: scale(0.96) translateX(-3px);
+  transform: scale(0.92);
 }
 
 .product-nav-bar {
@@ -805,7 +803,7 @@ nav a.active::after {
   margin-bottom: 0;
 }
 
-/* Floating Back Button (Appears on scroll for effortless 1-tap return) */
+/* Floating Back Button (Circular Glass Icon) */
 .floating-back-btn {
   position: fixed;
   bottom: 24px;
@@ -813,17 +811,16 @@ nav a.active::after {
   z-index: 990;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px 10px 14px;
-  font-family: inherit;
-  font-size: 13.5px;
-  font-weight: 600;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: 50%;
   color: var(--apple-black);
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--apple-border);
-  border-radius: 980px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   cursor: pointer;
   text-decoration: none;
@@ -840,17 +837,17 @@ nav a.active::after {
 }
 
 .floating-back-btn svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   stroke: currentColor;
-  stroke-width: 1.75;
+  stroke-width: 1.8;
   transition: transform 0.25s var(--spring-snappy);
 }
 
 .floating-back-btn:hover {
   background: #ffffff;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.05);
 }
 
 .floating-back-btn:hover svg {
@@ -858,15 +855,15 @@ nav a.active::after {
 }
 
 .floating-back-btn:active {
-  transform: scale(0.96);
+  transform: scale(0.92);
 }
 
 @media (max-width: 768px) {
   .floating-back-btn {
     bottom: 84px; /* Above mobile sticky ATC bar */
     left: 16px;
-    padding: 8px 14px 8px 10px;
-    font-size: 12.5px;
+    width: 40px;
+    height: 40px;
   }
 }
 
