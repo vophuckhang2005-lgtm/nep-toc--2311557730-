@@ -6,13 +6,13 @@ function renderHeader() {
   h.innerHTML = `
     <header id="app-header">
       <div class="nav-inner">
-        <a href="/index.html" class="logo">Nếp <span>Tóc</span></a>
+        <a href="index.html" class="logo">Nếp <span>Tóc</span></a>
         <nav id="main-nav">
-          <a href="/index.html">Trang chủ</a>
-          <a href="/products.html">Sản phẩm</a>
-          <a href="/about.html">Về chúng tôi</a>
-          <a href="/policy.html">Chính sách</a>
-          <a href="/contact.html">Liên hệ</a>
+          <a href="index.html">Trang chủ</a>
+          <a href="products.html">Sản phẩm</a>
+          <a href="about.html">Về chúng tôi</a>
+          <a href="policy.html">Chính sách</a>
+          <a href="contact.html">Liên hệ</a>
         </nav>
         <div class="nav-actions">
           <!-- Wishlist Nav Button -->
@@ -120,11 +120,11 @@ function renderFooter() {
         </div>
         <div class="footer-col">
           <h4>Khám phá</h4>
-          <a href="/index.html">Trang chủ</a>
-          <a href="/products.html">Tất cả sản phẩm</a>
-          <a href="/about.html">Về chúng tôi</a>
-          <a href="/policy.html">Chính sách bảo hành</a>
-          <a href="/contact.html">Liên hệ cửa hàng</a>
+          <a href="index.html">Trang chủ</a>
+          <a href="products.html">Tất cả sản phẩm</a>
+          <a href="about.html">Về chúng tôi</a>
+          <a href="policy.html">Chính sách bảo hành</a>
+          <a href="contact.html">Liên hệ cửa hàng</a>
         </div>
         <div class="footer-col">
           <h4>Hỗ trợ & Liên hệ</h4>
@@ -152,7 +152,7 @@ function renderFloatingHelp() {
       <a href="tel:0901234567" class="float-btn phone-btn" title="Hotline">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       </a>
-      <a href="/contact.html" class="float-btn chat-btn" title="Tư vấn">
+      <a href="contact.html" class="float-btn chat-btn" title="Tư vấn">
         <span class="float-label">Tư vấn chọn kẹp</span>
       </a>
     </div>
@@ -317,8 +317,8 @@ function renderCartDrawerContent() {
       <span class="drawer-total-label">Tổng thanh toán</span>
       <span class="drawer-total-num">${fmt(total)}</span>
     </div>
-    <a href="/checkout.html" class="btn-drawer-checkout" onclick="closeCartDrawer()">Đặt hàng COD ngay →</a>
-    <a href="/cart.html" class="drawer-view-cart-link" onclick="closeCartDrawer()">Xem trang giỏ hàng chi tiết</a>
+    <a href="checkout.html" class="btn-drawer-checkout" onclick="closeCartDrawer()">Đặt hàng COD ngay →</a>
+    <a href="cart.html" class="drawer-view-cart-link" onclick="closeCartDrawer()">Xem trang giỏ hàng chi tiết</a>
   `;
 }
 
@@ -402,7 +402,7 @@ function renderWishlistDrawerContent() {
             ${productVisualSVG(p)}
           </div>
           <div class="drawer-item-info">
-            <div class="drawer-item-name" style="cursor:pointer;" onclick="location.href='/product-detail.html?id=${p.id}'">${p.name}</div>
+            <div class="drawer-item-name" style="cursor:pointer;" onclick="location.href='product-detail.html?id=${p.id}'">${p.name}</div>
             <div class="drawer-item-swatch">${p.categoryName}</div>
             <div class="drawer-item-price">${fmt(p.price)}</div>
           </div>
@@ -549,7 +549,7 @@ function productCardHTML(p) {
   const wishlisted = isWishlisted(p.id);
 
   return `
-    <div class="product-card" onclick="location.href='/product-detail.html?id=${p.id}'">
+    <div class="product-card" onclick="location.href='product-detail.html?id=${p.id}'">
       <div class="product-card-img" style="background:${p.cardBg}; color:${p.cardAccent}">
         <div class="img-view-primary">
           ${productVisualSVG(p)}

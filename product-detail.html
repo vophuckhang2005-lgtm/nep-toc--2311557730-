@@ -66,9 +66,9 @@
       const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '');
       document.getElementById('detail-content').innerHTML = `
         <div class="breadcrumb">
-          <a href="/index.html">Trang chủ</a> / 
-          <a href="/products.html">Sản phẩm</a> / 
-          <a href="/products.html?cat=${p.category}">${p.categoryName}</a> / 
+          <a href="index.html">Trang chủ</a> / 
+          <a href="products.html">Sản phẩm</a> / 
+          <a href="products.html?cat=${p.category}">${p.categoryName}</a> / 
           ${p.name}
         </div>
         <div class="detail-layout">
@@ -188,7 +188,7 @@
       // Buy now
       document.getElementById('btn-buy-now').addEventListener('click', () => {
         addToCart(p.id, qty, selectedSwatch);
-        location.href = '/checkout.html';
+        location.href = 'checkout.html';
       });
 
       // Related products
