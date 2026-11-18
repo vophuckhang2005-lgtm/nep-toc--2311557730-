@@ -5,3 +5,10 @@ Thumbs.db
 .vscode/
 .idea/
 server.js
+
+# Bí mật và môi trường
+.env
+.env.*
+*.pem
+*.key
+*.cert
