@@ -230,7 +230,8 @@ function renderFloatingHelp() {
       e.stopPropagation();
       chatBox.classList.toggle('open');
       if (chatBox.classList.contains('open')) {
-        document.getElementById('live-chat-input')?.focus();
+        const chatInp = document.getElementById('live-chat-input');
+        if (chatInp) chatInp.focus();
       }
     });
   }
@@ -359,11 +360,11 @@ function renderCartDrawerContent() {
             <div class="drawer-item-price" style="margin-top:4px;">${fmt(item.price * item.qty)}</div>
           </div>
           <div class="drawer-item-actions">
-            <button class="btn-remove" onclick="removeFromCart(${item.id}, ${item.swatch ? `'${item.swatch.replace(/'/g, "\\'")}'` : 'null'}, ${item.customEngraving?.text ? `'${item.customEngraving.text.replace(/'/g, "\\'")}'` : 'null'})" aria-label="Xóa">×</button>
+            <button class="btn-remove" onclick="removeFromCart(${item.id}, ${item.swatch ? `'${item.swatch.replace(/'/g, "\\'")}'` : 'null'}, ${(item.customEngraving && item.customEngraving.text) ? `'${item.customEngraving.text.replace(/'/g, "\\'")}'` : 'null'})" aria-label="Xóa">×</button>
             <div class="cart-qty-ctrl">
-              <button onclick="updateQty(${item.id}, ${item.swatch ? `'${item.swatch.replace(/'/g, "\\'")}'` : 'null'}, ${item.qty - 1}, ${item.customEngraving?.text ? `'${item.customEngraving.text.replace(/'/g, "\\'")}'` : 'null'})">−</button>
+              <button onclick="updateQty(${item.id}, ${item.swatch ? `'${item.swatch.replace(/'/g, "\\'")}'` : 'null'}, ${item.qty - 1}, ${(item.customEngraving && item.customEngraving.text) ? `'${item.customEngraving.text.replace(/'/g, "\\'")}'` : 'null'})">−</button>
               <span>${item.qty}</span>
-              <button onclick="updateQty(${item.id}, ${item.swatch ? `'${item.swatch.replace(/'/g, "\\'")}'` : 'null'}, ${item.qty + 1}, ${item.customEngraving?.text ? `'${item.customEngraving.text.replace(/'/g, "\\'")}'` : 'null'})">+</button>
+              <button onclick="updateQty(${item.id}, ${item.swatch ? `'${item.swatch.replace(/'/g, "\\'")}'` : 'null'}, ${item.qty + 1}, ${(item.customEngraving && item.customEngraving.text) ? `'${item.customEngraving.text.replace(/'/g, "\\'")}'` : 'null'})">+</button>
             </div>
           </div>
         </div>
@@ -552,7 +553,7 @@ function showToast(msg, type = '') {
 const WISHLIST_KEY = 'nep_toc_wishlist';
 function getWishlist() {
   try { return JSON.parse(localStorage.getItem(WISHLIST_KEY)) || []; }
-  catch { return []; }
+  catch (e) { return []; }
 }
 
 function isWishlisted(id) {
@@ -858,7 +859,7 @@ function getAllUsers() {
   try {
     const list = JSON.parse(localStorage.getItem(USERS_DB_KEY));
     if (Array.isArray(list) && list.length > 0) return list;
-  } catch {}
+  } catch (e) {}
   const defaultUsers = [
     {
       account: '0901234567',
@@ -954,7 +955,7 @@ function updateUserProfile(updated) {
 function getUser() {
   try {
     return JSON.parse(localStorage.getItem(USER_KEY)) || null;
-  } catch {
+  } catch (e) {
     return null;
   }
 }
@@ -972,7 +973,7 @@ function logoutUser() {
 function getOrders() {
   try {
     return JSON.parse(localStorage.getItem(ORDERS_KEY)) || [];
-  } catch {
+  } catch (e) {
     return [];
   }
 }

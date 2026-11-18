@@ -10,7 +10,7 @@
   <meta property="og:title" content="Chi tiết sản phẩm — Nếp Tóc"/>
   <meta property="og:description" content="Phụ kiện tóc cao cấp TP.HCM — Kẹp càng cua, kẹp mái thiết kế tối giản, vật liệu an toàn không gãy rụng nếp tóc."/>
   <meta property="og:image" content="favicon.svg"/>
-  <link rel="stylesheet" href="style.css?v=7"/>
+  <link rel="stylesheet" href="style.css?v=8"/>
 </head>
 <body>
 
@@ -45,32 +45,69 @@
 <div id="site-footer"></div>
 <div class="toast-container"></div>
 
-<script src="products.js?v=7"></script>
-<script src="cart.js?v=7"></script>
-<script src="main.js?v=7"></script>
+<script src="products.js?v=8"></script>
+<script src="cart.js?v=8"></script>
+<script src="main.js?v=8"></script>
 <script>
-  renderHeader();
-  renderFooter();
+  // Safe helper fallbacks in case of script delay or partial load
+  function safeFmt(n) {
+    try {
+      if (typeof fmt === 'function') return fmt(n);
+    } catch (e) {}
+    return (Number(n) || 0).toLocaleString('vi-VN') + 'đ';
+  }
 
-  const params = new URLSearchParams(location.search);
-  const id = parseInt(params.get('id'));
-  const p = PRODUCTS.find(x => x.id === id);
+  function initDetailPage() {
+    try {
+      if (typeof renderHeader === 'function') renderHeader();
+      if (typeof renderFooter === 'function') renderFooter();
+    } catch (e) {
+      console.warn('Header/Footer render error:', e);
+    }
 
-  if (!p) {
-    document.getElementById('not-found').style.display = 'block';
-  } else {
-    document.title = p.name + ' — Nếp Tóc';
-    const discount = Math.round((1 - p.price / p.originalPrice) * 100);
-    let selectedSwatch = p.swatches[0].name;
+    const params = new URLSearchParams(location.search);
+    const id = parseInt(params.get('id'), 10);
+    const prodList = (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) ? PRODUCTS : [];
+    const p = prodList.find(function(x) { return Number(x.id) === Number(id); });
+
+    if (!p) {
+      const nf = document.getElementById('not-found');
+      if (nf) nf.style.display = 'block';
+      return;
+    }
+
+    try {
+      document.title = p.name + ' — Nếp Tóc';
+    } catch (e) {}
+
+    const discount = Math.round((1 - p.price / (p.originalPrice || p.price)) * 100);
+    let selectedSwatch = (p.swatches && p.swatches[0]) ? p.swatches[0].name : 'Tiêu chuẩn';
     let qty = 1;
 
     function getVisualLarge() {
-      return productVisualSVG(p, 200);
+      try {
+        if (typeof productVisualSVG === 'function') {
+          return productVisualSVG(p, 200);
+        }
+      } catch (e) {
+        console.error('getVisualLarge error:', e);
+      }
+      return '<svg width="200" height="200" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="38" fill="' + (p.cardBg || '#f5f5f7') + '" stroke="' + (p.cardAccent || '#d6336c') + '" stroke-width="2.5"/><text x="50" y="54" font-size="9" text-anchor="middle" fill="' + (p.cardAccent || '#d6336c') + '" font-weight="700">' + (p.shortName || p.name) + '</text></svg>';
     }
 
     function renderDetail() {
-      const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '');
-      document.getElementById('detail-content').innerHTML = `
+      const contentEl = document.getElementById('detail-content');
+      if (!contentEl) return;
+
+      const swatchesHTML = (p.swatches || []).map(function(s, i) {
+        return '<div class="swatch-preview" data-idx="' + i + '" style="width:48px;height:48px;border-radius:10px;border:2px solid ' + (i === 0 ? 'var(--black)' : '#ddd') + ';background:' + s.color + ';cursor:pointer;transition:border-color 0.15s;" title="' + s.name + '"></div>';
+      }).join('');
+
+      const swatchesRowHTML = (p.swatches || []).map(function(s, i) {
+        return '<div class="swatch-opt ' + (i === 0 ? 'selected' : '') + '" data-swatch="' + s.name + '" data-idx="' + i + '"><div class="dot" style="background:' + s.color + ';"></div>' + s.name + '</div>';
+      }).join('');
+
+      contentEl.innerHTML = `
         <div class="product-nav-bar">
           <button class="btn-back" onclick="goBack('products.html')" aria-label="Quay lại" title="Quay lại">
             <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -96,9 +133,7 @@
             </div>
             <!-- Swatches preview -->
             <div style="display:flex; gap:8px; margin-top:12px;">
-              ${p.swatches.map((s,i) => `
-                <div class="swatch-preview" data-idx="${i}" style="width:48px;height:48px;border-radius:10px;border:2px solid ${i===0?'var(--black)':'#ddd'};background:${s.color};cursor:pointer;transition:border-color 0.15s;" title="${s.name}"></div>
-              `).join('')}
+              ${swatchesHTML}
             </div>
           </div>
           <div class="detail-info">
@@ -108,20 +143,15 @@
               ${p.category === 'claw' ? 'Phù hợp: Tóc vừa đến tóc dày • Búi củ tỏi Pháp & kẹp gáy' : 'Phù hợp: Mọi chất tóc • Kẹp mái tạo kiểu & kẹp nửa đầu'}
             </div>
             <div class="detail-price-row">
-              <span class="detail-price">${fmt(p.price)}</span>
-              <span class="detail-original">${fmt(p.originalPrice)}</span>
+              <span class="detail-price">${safeFmt(p.price)}</span>
+              <span class="detail-original">${safeFmt(p.originalPrice)}</span>
               <span class="detail-discount">-${discount}%</span>
             </div>
             <p class="detail-desc">${p.description}</p>
 
             <div class="detail-section-title">Màu sắc — <span id="swatch-label" style="font-weight:400; text-transform:none;">${selectedSwatch}</span></div>
             <div class="swatch-row" id="swatch-row">
-              ${p.swatches.map((s,i) => `
-                <div class="swatch-opt ${i===0?'selected':''}" data-swatch="${s.name}" data-idx="${i}">
-                  <div class="dot" style="background:${s.color};"></div>
-                  ${s.name}
-                </div>
-              `).join('')}
+              ${swatchesRowHTML}
             </div>
 
             <div class="detail-section-title">Số lượng</div>
@@ -208,105 +238,187 @@
       `;
 
       // Swatch interactions
-      document.querySelectorAll('.swatch-opt').forEach(opt => {
-        opt.addEventListener('click', () => {
-          document.querySelectorAll('.swatch-opt').forEach(o => o.classList.remove('selected'));
+      document.querySelectorAll('.swatch-opt').forEach(function(opt) {
+        opt.addEventListener('click', function() {
+          document.querySelectorAll('.swatch-opt').forEach(function(o) { o.classList.remove('selected'); });
           opt.classList.add('selected');
-          selectedSwatch = opt.dataset.swatch;
-          document.getElementById('swatch-label').textContent = selectedSwatch;
+          selectedSwatch = opt.getAttribute('data-swatch');
+          const lbl = document.getElementById('swatch-label');
+          if (lbl) lbl.textContent = selectedSwatch;
           // Sync preview dots
-          const idx = parseInt(opt.dataset.idx);
-          document.querySelectorAll('.swatch-preview').forEach((d, i) => {
-            d.style.borderColor = i === idx ? 'var(--black)' : '#ddd';
+          const idx = parseInt(opt.getAttribute('data-idx'), 10);
+          document.querySelectorAll('.swatch-preview').forEach(function(d, i) {
+            d.style.borderColor = (i === idx) ? 'var(--black)' : '#ddd';
           });
         });
       });
 
       // Swatch preview dots sync
-      document.querySelectorAll('.swatch-preview').forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-          document.querySelectorAll('.swatch-opt')[i]?.click();
+      document.querySelectorAll('.swatch-preview').forEach(function(dot, i) {
+        dot.addEventListener('click', function() {
+          const opts = document.querySelectorAll('.swatch-opt');
+          if (opts && opts[i]) {
+            opts[i].click();
+          }
         });
       });
 
       // Qty controls
       const qtyInput = document.getElementById('qty-input');
-      document.getElementById('qty-minus').addEventListener('click', () => {
-        qty = Math.max(1, qty - 1);
-        qtyInput.value = qty;
-      });
-      document.getElementById('qty-plus').addEventListener('click', () => {
-        qty = Math.min(99, qty + 1);
-        qtyInput.value = qty;
-      });
-      qtyInput.addEventListener('change', () => {
-        qty = Math.min(99, Math.max(1, parseInt(qtyInput.value) || 1));
-        qtyInput.value = qty;
-      });
+      const minusBtn = document.getElementById('qty-minus');
+      const plusBtn = document.getElementById('qty-plus');
+      if (minusBtn && qtyInput) {
+        minusBtn.addEventListener('click', function() {
+          qty = Math.max(1, qty - 1);
+          qtyInput.value = qty;
+        });
+      }
+      if (plusBtn && qtyInput) {
+        plusBtn.addEventListener('click', function() {
+          qty = Math.min(99, qty + 1);
+          qtyInput.value = qty;
+        });
+      }
+      if (qtyInput) {
+        qtyInput.addEventListener('change', function() {
+          qty = Math.min(99, Math.max(1, parseInt(qtyInput.value, 10) || 1));
+          qtyInput.value = qty;
+        });
+      }
 
       // Add to cart
-      document.getElementById('btn-add-detail').addEventListener('click', () => {
-        addToCart(p.id, qty, selectedSwatch);
-        showToast('Đã thêm vào giỏ hàng');
-      });
-
-      // Buy now
-      document.getElementById('btn-buy-now').addEventListener('click', () => {
-        addToCart(p.id, qty, selectedSwatch);
-        location.href = 'checkout.html';
-      });
-
-      // Related products
-      const related = PRODUCTS.filter(x => x.category === p.category && x.id !== p.id).slice(0, 3);
-      document.getElementById('related-grid').innerHTML = related.map(productCardHTML).join('');
-
-      // Setup Sticky Mobile Add-to-Cart Bar
-      const stickyBar = document.getElementById('sticky-atc-bar');
-      const stickyTitle = document.getElementById('sticky-atc-title');
-      const stickyPrice = document.getElementById('sticky-atc-price');
-      const stickyBtn = document.getElementById('sticky-atc-btn');
-
-      if (stickyBar && stickyTitle && stickyPrice && stickyBtn) {
-        stickyTitle.textContent = p.name;
-        stickyPrice.textContent = fmt(p.price);
-
-        stickyBtn.addEventListener('click', () => {
-          addToCart(p.id, qty, selectedSwatch);
-          showToast(`Đã thêm vào giỏ: ${p.name}`);
-          if (typeof openCartDrawer === 'function') {
-            openCartDrawer();
+      const addBtn = document.getElementById('btn-add-detail');
+      if (addBtn) {
+        addBtn.addEventListener('click', function() {
+          if (typeof addToCart === 'function') {
+            addToCart(p.id, qty, selectedSwatch);
+          }
+          if (typeof showToast === 'function') {
+            showToast('Đã thêm vào giỏ hàng');
           }
         });
+      }
 
-        const targetArea = document.getElementById('main-actions-area');
-        if (targetArea && 'IntersectionObserver' in window) {
-          const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
-                stickyBar.classList.add('visible');
-                document.body.classList.add('has-sticky-atc');
-              } else {
-                stickyBar.classList.remove('visible');
-                document.body.classList.remove('has-sticky-atc');
-              }
-            });
-          }, { threshold: 0 });
-          observer.observe(targetArea);
+      // Buy now
+      const buyBtn = document.getElementById('btn-buy-now');
+      if (buyBtn) {
+        buyBtn.addEventListener('click', function() {
+          if (typeof addToCart === 'function') {
+            addToCart(p.id, qty, selectedSwatch);
+          }
+          location.href = 'checkout.html';
+        });
+      }
+
+      // Related products
+      try {
+        const related = prodList.filter(function(x) { return x.category === p.category && Number(x.id) !== Number(p.id); }).slice(0, 3);
+        const relGrid = document.getElementById('related-grid');
+        if (relGrid) {
+          if (typeof productCardHTML === 'function') {
+            relGrid.innerHTML = related.map(productCardHTML).join('');
+          } else {
+            relGrid.innerHTML = related.map(function(r) {
+              return '<a href="product-detail.html?id=' + r.id + '" class="product-card"><div class="product-info"><div class="product-name">' + r.name + '</div><div class="product-price">' + safeFmt(r.price) + '</div></div></a>';
+            }).join('');
+          }
         }
+      } catch (relErr) {
+        console.warn('Related products error:', relErr);
+      }
+
+      // Setup Sticky Mobile Add-to-Cart Bar
+      try {
+        const stickyBar = document.getElementById('sticky-atc-bar');
+        const stickyTitle = document.getElementById('sticky-atc-title');
+        const stickyPrice = document.getElementById('sticky-atc-price');
+        const stickyBtn = document.getElementById('sticky-atc-btn');
+
+        if (stickyBar && stickyTitle && stickyPrice && stickyBtn) {
+          stickyTitle.textContent = p.name;
+          stickyPrice.textContent = safeFmt(p.price);
+
+          stickyBtn.addEventListener('click', function() {
+            if (typeof addToCart === 'function') {
+              addToCart(p.id, qty, selectedSwatch);
+            }
+            if (typeof showToast === 'function') {
+              showToast('Đã thêm vào giỏ: ' + p.name);
+            }
+            if (typeof openCartDrawer === 'function') {
+              openCartDrawer();
+            }
+          });
+
+          const targetArea = document.getElementById('main-actions-area');
+          if (targetArea && 'IntersectionObserver' in window) {
+            const observer = new IntersectionObserver(function(entries) {
+              entries.forEach(function(entry) {
+                if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+                  stickyBar.classList.add('visible');
+                  document.body.classList.add('has-sticky-atc');
+                } else {
+                  stickyBar.classList.remove('visible');
+                  document.body.classList.remove('has-sticky-atc');
+                }
+              });
+            }, { threshold: 0 });
+            observer.observe(targetArea);
+          }
+        }
+      } catch (stickyErr) {
+        console.warn('Sticky bar error:', stickyErr);
       }
     }
 
-    renderDetail();
+    try {
+      renderDetail();
+    } catch (renderError) {
+      console.error('Critical render error in product-detail:', renderError);
+      const container = document.getElementById('detail-content');
+      if (container) {
+        container.innerHTML = `
+          <div class="product-nav-bar">
+            <button class="btn-back" onclick="goBack('products.html')" aria-label="Quay lại">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <div class="breadcrumb">
+              <a href="index.html">Trang chủ</a> / <a href="products.html">Sản phẩm</a> / <span>${p.name}</span>
+            </div>
+          </div>
+          <div style="padding: 24px; background:#fff; border-radius:18px; border:1px solid #eee; margin-top:16px;">
+            <h1 style="font-size:24px; font-weight:700; margin-bottom:12px;">${p.name}</h1>
+            <div style="font-size:26px; font-weight:700; color:var(--apple-accent,#d6336c); margin-bottom:16px;">${safeFmt(p.price)}</div>
+            <p style="font-size:15px; color:#555; line-height:1.6; margin-bottom:24px;">${p.description}</p>
+            <button class="btn-primary" style="width:100%; padding:14px; font-size:16px;" onclick="if(typeof addToCart==='function') addToCart(${p.id}, 1, '${(p.swatches && p.swatches[0]) ? p.swatches[0].name : ''}'); if(typeof showToast==='function') showToast('Đã thêm vào giỏ hàng'); if(typeof openCartDrawer==='function') openCartDrawer();">Thêm vào giỏ hàng (${safeFmt(p.price)})</button>
+          </div>
+        `;
+      }
+    }
+  }
+
+  // Execute reliably when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDetailPage);
+  } else {
+    initDetailPage();
   }
 
   function openImageLightbox() {
     const lb = document.getElementById('image-lightbox');
     const lbVisual = document.getElementById('lightbox-visual');
     const lbTitle = document.getElementById('lightbox-title');
-    const prod = PRODUCTS.find(x => x.id === id);
+    const params = new URLSearchParams(location.search);
+    const id = parseInt(params.get('id'), 10);
+    const prodList = (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) ? PRODUCTS : [];
+    const prod = prodList.find(function(x) { return Number(x.id) === Number(id); });
     if (lb && lbVisual && prod) {
       if (lbTitle) lbTitle.textContent = prod.name;
-      lbVisual.innerHTML = productVisualSVG(prod, 260);
+      if (typeof productVisualSVG === 'function') {
+        lbVisual.innerHTML = productVisualSVG(prod, 260);
+      }
       lb.classList.add('active');
     }
   }
@@ -316,7 +428,7 @@
     if (lb) lb.classList.remove('active');
   }
 
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeImageLightbox();
   });
 </script>

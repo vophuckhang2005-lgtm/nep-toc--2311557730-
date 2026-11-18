@@ -7,7 +7,7 @@ const GIFT_FEE = 15000;
 
 function getCart() {
   try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
-  catch { return []; }
+  catch (e) { return []; }
 }
 
 function saveCart(cart) {
@@ -21,7 +21,7 @@ function saveCart(cart) {
 function getGiftOption() {
   try {
     return JSON.parse(localStorage.getItem(GIFT_KEY)) || { enabled: false, note: '' };
-  } catch {
+  } catch (e) {
     return { enabled: false, note: '' };
   }
 }
