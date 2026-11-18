@@ -1215,6 +1215,37 @@ function animateCounter(el) {
   requestAnimationFrame(updateCount);
 }
 
+// Global Navigation Helper: goBack & renderBackButton
+function goBack(fallbackUrl = 'products.html') {
+  if (window.history.length > 1 && document.referrer && document.referrer.indexOf(window.location.host) !== -1) {
+    window.history.back();
+  } else {
+    window.location.href = fallbackUrl;
+  }
+}
+
+function renderBackButton(fallbackUrl = 'products.html', label = 'Quay lại') {
+  return `
+    <button class="btn-back" onclick="goBack('${fallbackUrl}')" aria-label="${label}">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M19 12H5M12 19l-7-7 7-7"/>
+      </svg>
+      <span>${label}</span>
+    </button>
+  `;
+}
+
+// Global Floating Back Button Scroll Detection
+window.addEventListener('scroll', () => {
+  const floatBtn = document.getElementById('floating-back-btn');
+  if (!floatBtn) return;
+  if (window.scrollY > 280) {
+    floatBtn.classList.add('visible');
+  } else {
+    floatBtn.classList.remove('visible');
+  }
+}, { passive: true });
+
 // Auto-run on load
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initScrollReveal);

@@ -71,17 +71,29 @@
     function renderDetail() {
       const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '');
       document.getElementById('detail-content').innerHTML = `
-        <div class="breadcrumb">
-          <a href="index.html">Trang chủ</a> / 
-          <a href="products.html">Sản phẩm</a> / 
-          <a href="products.html?cat=${p.category}">${p.categoryName}</a> / 
-          ${p.name}
+        <div class="product-nav-bar">
+          <button class="btn-back" onclick="goBack('products.html')" aria-label="Quay lại">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            <span>Quay lại</span>
+          </button>
+          <div class="breadcrumb">
+            <a href="index.html">Trang chủ</a> / 
+            <a href="products.html">Sản phẩm</a> / 
+            <a href="products.html?cat=${p.category}">${p.categoryName}</a> / 
+            <span>${p.name}</span>
+          </div>
         </div>
         <div class="detail-layout">
           <div>
-            <div class="detail-visual" style="background:${p.cardBg}">
+            <div class="detail-visual" id="detail-visual-box" style="background:${p.cardBg}" onclick="openImageLightbox()" title="Nhấn để phóng to chi tiết">
               <div class="detail-tag">${p.tag}</div>
               ${getVisualLarge()}
+              <div class="visual-zoom-badge">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                <span>Phóng to chi tiết</span>
+              </div>
             </div>
             <!-- Swatches preview -->
             <div style="display:flex; gap:8px; margin-top:12px;">
@@ -287,6 +299,52 @@
 
     renderDetail();
   }
+
+  function openImageLightbox() {
+    const lb = document.getElementById('image-lightbox');
+    const lbVisual = document.getElementById('lightbox-visual');
+    const lbTitle = document.getElementById('lightbox-title');
+    const p = PRODUCTS.find(x => x.id === pid);
+    if (lb && lbVisual && p) {
+      if (lbTitle) lbTitle.textContent = p.name;
+      lbVisual.innerHTML = productVisualSVG(p, 260);
+      lb.classList.add('active');
+    }
+  }
+
+  function closeImageLightbox() {
+    const lb = document.getElementById('image-lightbox');
+    if (lb) lb.classList.remove('active');
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeImageLightbox();
+  });
 </script>
+
+<!-- Floating Back Button on Scroll -->
+<button class="floating-back-btn" id="floating-back-btn" onclick="goBack('products.html')" aria-label="Quay lại">
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 12H5M12 19l-7-7 7-7"/>
+  </svg>
+  <span>Quay lại</span>
+</button>
+
+<!-- Fullscreen Image Inspection Lightbox -->
+<div class="image-lightbox" id="image-lightbox" onclick="if(event.target===this) closeImageLightbox()">
+  <div class="lightbox-content">
+    <div class="lightbox-header">
+      <button class="btn-back" onclick="closeImageLightbox()" aria-label="Quay lại">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>Quay lại</span>
+      </button>
+      <div class="lightbox-title" id="lightbox-title">Chi tiết sản phẩm</div>
+    </div>
+    <div id="lightbox-visual" style="padding:20px 0;"></div>
+    <p style="font-size:12.5px; color:var(--apple-tertiary); margin:0;">Vật liệu Cellulose Acetate nguyên bản • Lò xo Titan trợ lực</p>
+  </div>
+</div>
 </body>
 </html>
