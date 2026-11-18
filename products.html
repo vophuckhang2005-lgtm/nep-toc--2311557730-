@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sản phẩm — Nếp Tóc</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="page">
+  <div style="margin-bottom:36px;">
+    <h1 class="section-title">Tất cả <em>sản phẩm</em></h1>
+    <p class="section-sub">Chọn theo mood hôm nay của bạn — ngon hết á</p>
+  </div>
+
+  <!-- Filter -->
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" data-cat="all">Tất cả</button>
+    <button class="filter-btn" data-cat="claw">Kẹp Càng Cua</button>
+    <button class="filter-btn" data-cat="clip-set">Kẹp Mái & Set</button>
+  </div>
+
+  <!-- Grid -->
+  <div class="product-grid" id="product-grid"></div>
+</div>
+
+<div id="site-footer"></div>
+<div class="toast-container"></div>
+
+<script src="products.js"></script>
+<script src="cart.js"></script>
+<script src="main.js"></script>
+<script>
+  renderHeader();
+  renderFooter();
+
+  let currentCat = 'all';
+
+  // Đọc query param ?cat=
+  const urlParams = new URLSearchParams(location.search);
+  const catParam = urlParams.get('cat');
+  if (catParam) currentCat = catParam;
+
+  function renderGrid() {
+    const filtered = currentCat === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === currentCat);
+    document.getElementById('product-grid').innerHTML = filtered.map(productCardHTML).join('');
+    // Update active filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.cat === currentCat);
+    });
+  }
+
+  document.getElementById('filter-bar').addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    currentCat = btn.dataset.cat;
+    renderGrid();
+  });
+
+  renderGrid();
+</script>
+</body>
+</html>

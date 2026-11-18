@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Về chúng tôi — Nếp Tóc</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="page">
+  <!-- Hero about -->
+  <div class="about-hero">
+    <div>
+      <div style="font-family:'Syne',sans-serif; font-size:clamp(32px,6vw,56px); font-weight:800; line-height:1.1; margin-bottom:16px;">
+        Chúng mình là<br/><span style="color:var(--pink);">Nếp Tóc</span> 🩷
+      </div>
+      <p style="font-size:16px; line-height:1.8; color:#555; max-width:400px;">Một cửa hàng nhỏ tại TP.HCM — bán những chiếc kẹp tóc nhỏ nhưng có khả năng thay đổi cả outfit của bạn.</p>
+    </div>
+    <div class="about-visual">
+      <svg width="200" height="200" viewBox="0 0 200 200" fill="none">
+        <ellipse cx="100" cy="75" rx="70" ry="50" fill="#fffbf5" stroke="#1a1a1a" stroke-width="4"/>
+        <rect x="85" y="122" width="30" height="55" rx="15" fill="#1a1a1a"/>
+        <ellipse cx="100" cy="75" rx="48" ry="30" fill="#FF3D7F" opacity="0.25"/>
+        <line x1="40" y1="75" x2="160" y2="75" stroke="#1a1a1a" stroke-width="3" stroke-dasharray="12 7"/>
+        <circle cx="150" cy="30" r="18" fill="#FFE14D" stroke="#1a1a1a" stroke-width="3"/>
+        <text x="150" y="37" text-anchor="middle" font-size="18">✨</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Story -->
+  <div style="margin-bottom:60px;">
+    <h2 class="section-title" style="margin-bottom:16px;">Câu chuyện <em>của tụi mình</em></h2>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px;">
+      <p style="font-size:16px; line-height:1.8; color:#444;">Nếp Tóc bắt đầu từ một cô gái mê kẹp tóc, tìm mãi không thấy chiếc kẹp vừa đẹp vừa chắc vừa không "nhìn vào là thấy AI làm". Thế là tự đi tìm nguồn, tự thiết kế, tự bán.</p>
+      <p style="font-size:16px; line-height:1.8; color:#444;">Mỗi sản phẩm tụi mình bày bán đều được test thực tế — cài thật, đi chơi thật, chụp ảnh thật — trước khi đưa lên shop. Không có chuyện hàng ảnh đẹp hàng tay xấu ở đây.</p>
+    </div>
+  </div>
+
+  <!-- Values -->
+  <div style="margin-bottom:60px;">
+    <h2 class="section-title" style="margin-bottom:8px;">Tụi mình <em>cam kết</em></h2>
+    <p class="section-sub" style="margin-bottom:32px;">Những giá trị tụi mình không bao giờ thỏa hiệp</p>
+    <div class="value-cards">
+      <div class="value-card">
+        <div class="value-icon">🔍</div>
+        <div class="value-title">Chất liệu minh bạch</div>
+        <div class="value-desc">Mỗi sản phẩm đều ghi rõ chất liệu, xuất xứ. Không "hàng cao cấp" mơ hồ — chỉ có thông tin thật.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">📸</div>
+        <div class="value-title">Ảnh thật 100%</div>
+        <div class="value-desc">Tất cả ảnh sản phẩm đều chụp bằng điện thoại, không chỉnh màu quá mức, không lừa dối.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">🛡️</div>
+        <div class="value-title">Đổi trả dễ dàng</div>
+        <div class="value-desc">Lỗi từ nhà sản xuất thì đổi mới ngay, không hỏi nhiều. Khách vui là tụi mình vui.</div>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">💬</div>
+        <div class="value-title">Support nhanh</div>
+        <div class="value-desc">Nhắn tin qua mọi kênh — tụi mình phản hồi trong vòng 1 tiếng (giờ hành chính nhé).</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div style="background:var(--black); border-radius:var(--radius); padding:48px 40px; text-align:center;">
+    <h2 style="font-family:'Syne',sans-serif; font-size:clamp(24px,4vw,36px); font-weight:800; color:#fff; margin-bottom:12px;">Sẵn sàng thử chưa? 😏</h2>
+    <p style="color:#aaa; font-size:16px; margin-bottom:28px;">Xem qua bộ sưu tập mới nhất — chắc chắn có cái bạn thích.</p>
+    <a href="products.html" class="btn-primary" style="display:inline-block;">Khám phá ngay →</a>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<div class="toast-container"></div>
+
+<script src="products.js"></script>
+<script src="cart.js"></script>
+<script src="main.js"></script>
+<script>
+  renderHeader();
+  renderFooter();
+</script>
+</body>
+</html>

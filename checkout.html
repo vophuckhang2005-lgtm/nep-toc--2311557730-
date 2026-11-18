@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Đặt hàng — Nếp Tóc</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="page">
+  <h1 class="section-title" style="margin-bottom:8px;">Đặt <em>hàng</em></h1>
+  <p class="section-sub" style="margin-bottom:36px;">Điền thông tin để chúng mình giao hàng đến bạn nhé!</p>
+
+  <div id="empty-checkout" style="display:none; text-align:center; padding:60px 0;">
+    <div style="font-size:64px; margin-bottom:16px;">🛒</div>
+    <h2 style="font-family:'Syne',sans-serif; font-size:22px; margin-bottom:8px;">Giỏ hàng đang trống</h2>
+    <a href="products.html" class="btn-primary" style="display:inline-block; margin-top:16px;">Mua sắm ngay</a>
+  </div>
+
+  <div class="checkout-layout" id="checkout-layout">
+    <!-- Form -->
+    <div class="checkout-form-box">
+      <div class="form-title">Thông tin giao hàng</div>
+      <form id="checkout-form" novalidate>
+        <div class="form-group">
+          <label for="fullname">Họ và tên <span>*</span></label>
+          <input type="text" id="fullname" class="form-control" placeholder="Nguyễn Thị Lan Anh"/>
+          <div class="error-msg" id="err-fullname">Vui lòng nhập họ tên (ít nhất 2 ký tự)</div>
+        </div>
+        <div class="form-group">
+          <label for="phone">Số điện thoại <span>*</span></label>
+          <input type="tel" id="phone" class="form-control" placeholder="0901 234 567"/>
+          <div class="error-msg" id="err-phone">Số điện thoại không hợp lệ (VD: 0901234567)</div>
+        </div>
+        <div class="form-group">
+          <label for="address">Địa chỉ giao hàng <span>*</span></label>
+          <textarea id="address" class="form-control" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, TP.HCM" rows="3"></textarea>
+          <div class="error-msg" id="err-address">Vui lòng nhập địa chỉ giao hàng đầy đủ</div>
+        </div>
+        <div class="form-group">
+          <label for="note">Ghi chú (không bắt buộc)</label>
+          <textarea id="note" class="form-control" placeholder="Giao giờ hành chính, để hàng trước cửa, v.v." rows="2"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Phương thức thanh toán</label>
+          <div class="payment-box">
+            <div class="payment-icon">💵</div>
+            <div>
+              <div style="font-weight:700;">Thanh toán khi nhận hàng (COD)</div>
+              <div style="font-size:13px; color:#666; margin-top:2px;">Trả tiền mặt khi shipper giao hàng — an toàn & tiện lợi</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="consent-row">
+            <input type="checkbox" id="consent"/>
+            <label for="consent" class="consent-label">Tôi đồng ý cho cửa hàng <strong>Nếp Tóc</strong> sử dụng thông tin trên để xử lý và giao hàng đến tôi.</label>
+          </div>
+          <div class="error-msg" id="err-consent">Bạn cần đồng ý để tiếp tục đặt hàng</div>
+        </div>
+
+        <button type="submit" class="btn-submit">Xác nhận đặt hàng →</button>
+      </form>
+    </div>
+
+    <!-- Order summary -->
+    <div class="order-summary-box">
+      <div style="font-family:'Syne',sans-serif; font-size:18px; font-weight:800; margin-bottom:20px;">Đơn hàng của bạn</div>
+      <div id="order-items-list" style="margin-bottom:16px;"></div>
+      <div style="border-top:2px solid var(--black); padding-top:14px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span>Tạm tính</span><span id="co-subtotal"></span></div>
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span>Phí giao hàng</span><span id="co-ship"></span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid #ccc;">
+          <span style="font-weight:700; font-size:16px;">Tổng cộng</span>
+          <span style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--pink);" id="co-total"></span>
+        </div>
+      </div>
+      <div style="margin-top:16px; background:var(--yellow); border:1.5px solid var(--black); border-radius:8px; padding:10px 14px; font-size:13px; font-weight:600;">
+        🚚 Giao hàng 1–2 ngày tại TP.HCM
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Success modal -->
+<div class="modal-overlay" id="success-modal">
+  <div class="modal-box">
+    <div class="modal-icon">🎉</div>
+    <div class="modal-title">Đặt hàng thành công!</div>
+    <div class="modal-code" id="order-code">#NT-000000</div>
+    <p class="modal-desc">Cảm ơn bạn đã mua hàng tại <strong>Nếp Tóc</strong>!<br/>Chúng mình sẽ gọi điện xác nhận và giao hàng trong <strong>1–2 ngày</strong> nhé. 🛍️</p>
+    <a href="index.html" class="btn-primary" style="display:inline-block; margin-top:4px;">Về trang chủ</a>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<div class="toast-container"></div>
+
+<script src="products.js"></script>
+<script src="cart.js"></script>
+<script src="main.js"></script>
+<script>
+  renderHeader();
+  renderFooter();
+
+  const cart = getCart();
+  if (cart.length === 0) {
+    document.getElementById('empty-checkout').style.display = 'block';
+    document.getElementById('checkout-layout').style.display = 'none';
+  } else {
+    // Render order summary sidebar
+    document.getElementById('order-items-list').innerHTML = cart.map(item => `
+      <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #ddd;font-size:14px;">
+        <div>
+          <div style="font-weight:600;">${item.name}</div>
+          ${item.swatch ? `<div style="font-size:12px;color:#888;">Màu: ${item.swatch}</div>` : ''}
+          <div style="font-size:12px;color:#888;">x${item.qty}</div>
+        </div>
+        <div style="font-weight:700;color:var(--pink);flex-shrink:0;margin-left:8px;">${fmt(item.price * item.qty)}</div>
+      </div>
+    `).join('');
+
+    const sub = getSubtotal();
+    const ship = getShipFee();
+    document.getElementById('co-subtotal').textContent = fmt(sub);
+    document.getElementById('co-ship').textContent = ship === 0 ? 'Miễn phí' : fmt(ship);
+    document.getElementById('co-total').textContent = fmt(getTotal());
+  }
+
+  // Validation
+  function validate() {
+    let ok = true;
+
+    const fullname = document.getElementById('fullname').value.trim();
+    const errName = document.getElementById('err-fullname');
+    if (fullname.length < 2) {
+      document.getElementById('fullname').classList.add('error');
+      errName.classList.add('show');
+      ok = false;
+    } else {
+      document.getElementById('fullname').classList.remove('error');
+      errName.classList.remove('show');
+    }
+
+    const phone = document.getElementById('phone').value.trim().replace(/\s/g,'');
+    const errPhone = document.getElementById('err-phone');
+    const phoneValid = /^0[35789]\d{8}$/.test(phone);
+    if (!phoneValid) {
+      document.getElementById('phone').classList.add('error');
+      errPhone.classList.add('show');
+      ok = false;
+    } else {
+      document.getElementById('phone').classList.remove('error');
+      errPhone.classList.remove('show');
+    }
+
+    const address = document.getElementById('address').value.trim();
+    const errAddr = document.getElementById('err-address');
+    if (address.length < 10) {
+      document.getElementById('address').classList.add('error');
+      errAddr.classList.add('show');
+      ok = false;
+    } else {
+      document.getElementById('address').classList.remove('error');
+      errAddr.classList.remove('show');
+    }
+
+    const consent = document.getElementById('consent').checked;
+    const errConsent = document.getElementById('err-consent');
+    if (!consent) {
+      errConsent.classList.add('show');
+      ok = false;
+    } else {
+      errConsent.classList.remove('show');
+    }
+
+    return ok;
+  }
+
+  document.getElementById('checkout-form').addEventListener('submit', e => {
+    e.preventDefault();
+    if (!validate()) {
+      showToast('Vui lòng kiểm tra lại thông tin!', 'error');
+      return;
+    }
+    // Generate order code
+    const code = '#NT-' + Math.random().toString(36).substring(2,8).toUpperCase();
+    document.getElementById('order-code').textContent = code;
+    document.getElementById('success-modal').classList.add('show');
+    clearCart();
+  });
+</script>
+</body>
+</html>

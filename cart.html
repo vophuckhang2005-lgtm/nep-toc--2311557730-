@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giỏ hàng — Nếp Tóc</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="page">
+  <h1 class="section-title" style="margin-bottom:8px;">Giỏ <em>hàng</em></h1>
+  <p class="section-sub" style="margin-bottom:36px;">Kiểm tra lại trước khi đặt nhé!</p>
+
+  <!-- Empty state -->
+  <div class="empty-cart" id="empty-cart" style="display:none;">
+    <div class="big-icon">🛒</div>
+    <h2>Giỏ hàng đang trống</h2>
+    <p>Chưa có gì trong giỏ — đi xem hàng thôi nào!</p>
+    <a href="products.html" class="btn-primary">Xem sản phẩm</a>
+  </div>
+
+  <div class="cart-layout" id="cart-layout">
+    <!-- Items -->
+    <div>
+      <div id="cart-items-list"></div>
+      <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="products.html" style="font-size:14px; font-weight:600; color:var(--pink); display:flex; align-items:center; gap:4px;">← Tiếp tục mua sắm</a>
+        <button id="clear-cart-btn" style="font-size:14px; font-weight:600; color:var(--text-muted); margin-left:auto;" onclick="confirmClear()">Xóa giỏ hàng</button>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <div class="cart-summary-box">
+      <div class="summary-title">Tóm tắt đơn hàng</div>
+      <div class="summary-row"><span>Tạm tính</span><span id="sum-subtotal">—</span></div>
+      <div class="summary-row" id="sum-ship-row"><span>Phí giao hàng</span><span id="sum-ship">—</span></div>
+      <div id="free-ship-banner" class="free-ship-notice" style="display:none;">🎉 Bạn được miễn phí giao hàng!</div>
+      <div id="near-free-ship" class="free-ship-notice" style="display:none; background:#555;"></div>
+      <div class="summary-total">
+        <span class="summary-total-label">Tổng cộng</span>
+        <span class="summary-total-price" id="sum-total">—</span>
+      </div>
+      <a href="checkout.html" class="btn-checkout" id="checkout-btn">Đặt hàng →</a>
+      <p style="font-size:12px; color:#aaa; text-align:center; margin-top:12px;">Thanh toán khi nhận hàng (COD) · Giao 1–2 ngày</p>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<div class="toast-container"></div>
+
+<script src="products.js"></script>
+<script src="cart.js"></script>
+<script src="main.js"></script>
+<script>
+  renderHeader();
+  renderFooter();
+
+  function getItemVisual(item) {
+    const p = PRODUCTS.find(x => x.id === item.id);
+    if (!p) return '<div style="font-size:28px;">📦</div>';
+    if (p.category === 'claw') {
+      return `<svg width="36" height="36" viewBox="0 0 80 80" fill="none"><ellipse cx="40" cy="30" rx="30" ry="20" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="4"/><rect x="34" y="48" width="12" height="22" rx="6" fill="${p.cardAccent}"/></svg>`;
+    } else {
+      return `<svg width="36" height="36" viewBox="0 0 80 80" fill="none"><rect x="10" y="30" width="60" height="12" rx="6" fill="${p.cardAccent}" opacity="0.3" stroke="${p.cardAccent}" stroke-width="2"/><circle cx="40" cy="36" r="8" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/></svg>`;
+    }
+  }
+
+  function renderCart() {
+    const cart = getCart();
+    const empty = cart.length === 0;
+
+    document.getElementById('empty-cart').style.display = empty ? 'block' : 'none';
+    document.getElementById('cart-layout').style.display = empty ? 'none' : 'grid';
+
+    if (empty) return;
+
+    // Items
+    document.getElementById('cart-items-list').innerHTML = cart.map(item => {
+      const p = PRODUCTS.find(x => x.id === item.id);
+      return `
+        <div class="cart-item">
+          <div class="cart-item-thumb" style="background:${p?.cardBg || '#f5f5f5'}">
+            ${getItemVisual(item)}
+          </div>
+          <div>
+            <div class="cart-item-name">${item.name}</div>
+            ${item.swatch ? `<div class="cart-item-swatch">Màu: ${item.swatch}</div>` : ''}
+            <div class="cart-item-price">${fmt(item.price * item.qty)}</div>
+          </div>
+          <div class="cart-item-right">
+            <button class="btn-remove" onclick="doRemove(${item.id},'${item.swatch}')">×</button>
+            <div class="cart-qty-ctrl">
+              <button onclick="doQty(${item.id},'${item.swatch}',${item.qty - 1})">−</button>
+              <span>${item.qty}</span>
+              <button onclick="doQty(${item.id},'${item.swatch}',${item.qty + 1})">+</button>
+            </div>
+            <div style="font-size:13px; color:var(--text-muted);">${fmt(item.price)} × ${item.qty}</div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    // Summary
+    const sub = getSubtotal();
+    const ship = getShipFee();
+    const total = getTotal();
+    document.getElementById('sum-subtotal').textContent = fmt(sub);
+    document.getElementById('sum-ship').textContent = ship === 0 ? 'Miễn phí' : fmt(ship);
+    document.getElementById('sum-total').textContent = fmt(total);
+
+    if (ship === 0 && sub > 0) {
+      document.getElementById('free-ship-banner').style.display = 'block';
+      document.getElementById('near-free-ship').style.display = 'none';
+    } else {
+      document.getElementById('free-ship-banner').style.display = 'none';
+      const remaining = FREE_SHIP_THRESHOLD - sub;
+      if (remaining > 0 && remaining < FREE_SHIP_THRESHOLD) {
+        document.getElementById('near-free-ship').style.display = 'block';
+        document.getElementById('near-free-ship').textContent = `Mua thêm ${fmt(remaining)} để được miễn phí ship!`;
+      } else {
+        document.getElementById('near-free-ship').style.display = 'none';
+      }
+    }
+  }
+
+  function doRemove(id, swatch) {
+    removeFromCart(id, swatch === 'null' ? null : swatch);
+    showToast('Đã xóa khỏi giỏ hàng');
+    renderCart();
+  }
+
+  function doQty(id, swatch, newQty) {
+    updateQty(id, swatch === 'null' ? null : swatch, newQty);
+    renderCart();
+  }
+
+  function confirmClear() {
+    if (confirm('Xóa toàn bộ giỏ hàng?')) {
+      clearCart();
+      renderCart();
+      showToast('Đã xóa giỏ hàng');
+    }
+  }
+
+  renderCart();
+</script>
+</body>
+</html>

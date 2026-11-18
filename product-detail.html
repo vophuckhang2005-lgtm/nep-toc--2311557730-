@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chi tiết sản phẩm — Nếp Tóc</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="page" id="detail-page">
+  <div id="not-found" style="display:none; text-align:center; padding:80px 0;">
+    <div style="font-size:64px; margin-bottom:16px;">😕</div>
+    <h2 style="font-family:'Syne',sans-serif; font-size:24px; margin-bottom:8px;">Không tìm thấy sản phẩm</h2>
+    <a href="products.html" class="btn-primary" style="display:inline-block; margin-top:16px;">Quay lại cửa hàng</a>
+  </div>
+  <div id="detail-content"></div>
+</div>
+
+<div id="site-footer"></div>
+<div class="toast-container"></div>
+
+<script src="products.js"></script>
+<script src="cart.js"></script>
+<script src="main.js"></script>
+<script>
+  renderHeader();
+  renderFooter();
+
+  const params = new URLSearchParams(location.search);
+  const id = parseInt(params.get('id'));
+  const p = PRODUCTS.find(x => x.id === id);
+
+  if (!p) {
+    document.getElementById('not-found').style.display = 'block';
+  } else {
+    document.title = p.name + ' — Nếp Tóc';
+    const discount = Math.round((1 - p.price / p.originalPrice) * 100);
+    let selectedSwatch = p.swatches[0].name;
+    let qty = 1;
+
+    function getVisualLarge() {
+      if (p.category === 'claw') {
+        return `<svg width="180" height="180" viewBox="0 0 180 180" fill="none">
+          <ellipse cx="90" cy="68" rx="66" ry="45" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="4"/>
+          <rect x="78" y="110" width="24" height="48" rx="12" fill="${p.cardAccent}"/>
+          <ellipse cx="90" cy="68" rx="44" ry="28" fill="${p.cardAccent}" opacity="0.25"/>
+          <line x1="36" y1="68" x2="144" y2="68" stroke="${p.cardAccent}" stroke-width="2.5" stroke-dasharray="10 6"/>
+        </svg>`;
+      } else {
+        return `<svg width="180" height="180" viewBox="0 0 180 180" fill="none">
+          <rect x="20" y="72" width="140" height="28" rx="14" fill="${p.cardAccent}" opacity="0.25" stroke="${p.cardAccent}" stroke-width="3"/>
+          <circle cx="50" cy="86" r="22" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="3"/>
+          <circle cx="90" cy="86" r="22" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="3"/>
+          <circle cx="130" cy="86" r="22" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="3"/>
+          <line x1="50" y1="108" x2="50" y2="140" stroke="${p.cardAccent}" stroke-width="4"/>
+          <line x1="90" y1="108" x2="90" y2="140" stroke="${p.cardAccent}" stroke-width="4"/>
+          <line x1="130" y1="108" x2="130" y2="140" stroke="${p.cardAccent}" stroke-width="4"/>
+        </svg>`;
+      }
+    }
+
+    function renderDetail() {
+      const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '');
+      document.getElementById('detail-content').innerHTML = `
+        <div class="breadcrumb">
+          <a href="/index.html">Trang chủ</a> / 
+          <a href="/products.html">Sản phẩm</a> / 
+          <a href="/products.html?cat=${p.category}">${p.categoryName}</a> / 
+          ${p.name}
+        </div>
+        <div class="detail-layout">
+          <div>
+            <div class="detail-visual" style="background:${p.cardBg}">
+              <div class="detail-tag">${p.tag}</div>
+              ${getVisualLarge()}
+            </div>
+            <!-- Swatches preview -->
+            <div style="display:flex; gap:8px; margin-top:12px;">
+              ${p.swatches.map((s,i) => `
+                <div class="swatch-preview" data-idx="${i}" style="width:48px;height:48px;border-radius:10px;border:2px solid ${i===0?'var(--black)':'#ddd'};background:${s.color};cursor:pointer;transition:border-color 0.15s;" title="${s.name}"></div>
+              `).join('')}
+            </div>
+          </div>
+          <div class="detail-info">
+            <div class="detail-name">${p.name}</div>
+            <div class="detail-rating">
+              <span class="stars" style="color:#f59e0b; font-size:18px;">${stars}</span>
+              <span style="font-weight:700;">${p.rating}</span>
+              <span style="color:var(--text-muted);">(${p.reviewsCount} đánh giá)</span>
+            </div>
+            <div class="detail-price-row">
+              <span class="detail-price">${fmt(p.price)}</span>
+              <span class="detail-original">${fmt(p.originalPrice)}</span>
+              <span class="detail-discount">-${discount}%</span>
+            </div>
+            <p class="detail-desc">${p.description}</p>
+
+            <div class="detail-section-title">Màu sắc — <span id="swatch-label" style="font-weight:400; text-transform:none;">${selectedSwatch}</span></div>
+            <div class="swatch-row" id="swatch-row">
+              ${p.swatches.map((s,i) => `
+                <div class="swatch-opt ${i===0?'selected':''}" data-swatch="${s.name}" data-idx="${i}">
+                  <div class="dot" style="background:${s.color};"></div>
+                  ${s.name}
+                </div>
+              `).join('')}
+            </div>
+
+            <div class="detail-section-title">Số lượng</div>
+            <div class="qty-row">
+              <div class="qty-ctrl">
+                <button id="qty-minus">−</button>
+                <input type="number" id="qty-input" value="1" min="1" max="99"/>
+                <button id="qty-plus">+</button>
+              </div>
+              <span style="font-size:14px; color:var(--text-muted);">Còn hàng</span>
+            </div>
+
+            <div class="detail-actions">
+              <button class="btn-buy-now" id="btn-buy-now">Mua ngay →</button>
+              <button class="btn-add-detail" id="btn-add-detail">Thêm vào giỏ hàng</button>
+            </div>
+
+            <div class="detail-specs" style="margin-top:24px;">
+              <p><strong>Chất liệu:</strong> ${p.material}</p>
+              <p><strong>Thông số:</strong> ${p.spec}</p>
+              <p><strong>Nhóm:</strong> ${p.categoryName}</p>
+              <p><strong>Giao hàng:</strong> 1–2 ngày tại TP.HCM • Miễn ship đơn 300k</p>
+              <p><strong>Đổi trả:</strong> 7 ngày nếu lỗi từ nhà sản xuất</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mô tả chi tiết -->
+        <div style="margin-top:60px; padding-top:40px; border-top:2px solid #eee;">
+          <h2 class="section-title" style="margin-bottom:16px;">Mô tả <em>chi tiết</em></h2>
+          <p style="font-size:16px; line-height:1.8; color:#444; max-width:720px;">${p.longDesc}</p>
+        </div>
+
+        <!-- Sản phẩm liên quan -->
+        <div style="margin-top:60px; padding-top:40px; border-top:2px solid #eee;">
+          <h2 class="section-title" style="margin-bottom:8px;">Có thể <em>bạn thích</em></h2>
+          <p class="section-sub" style="margin-bottom:28px;">Cùng nhóm ${p.categoryName}</p>
+          <div class="product-grid" id="related-grid"></div>
+        </div>
+      `;
+
+      // Swatch interactions
+      document.querySelectorAll('.swatch-opt').forEach(opt => {
+        opt.addEventListener('click', () => {
+          document.querySelectorAll('.swatch-opt').forEach(o => o.classList.remove('selected'));
+          opt.classList.add('selected');
+          selectedSwatch = opt.dataset.swatch;
+          document.getElementById('swatch-label').textContent = selectedSwatch;
+          // Sync preview dots
+          const idx = parseInt(opt.dataset.idx);
+          document.querySelectorAll('.swatch-preview').forEach((d, i) => {
+            d.style.borderColor = i === idx ? 'var(--black)' : '#ddd';
+          });
+        });
+      });
+
+      // Swatch preview dots sync
+      document.querySelectorAll('.swatch-preview').forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          document.querySelectorAll('.swatch-opt')[i]?.click();
+        });
+      });
+
+      // Qty controls
+      const qtyInput = document.getElementById('qty-input');
+      document.getElementById('qty-minus').addEventListener('click', () => {
+        qty = Math.max(1, qty - 1);
+        qtyInput.value = qty;
+      });
+      document.getElementById('qty-plus').addEventListener('click', () => {
+        qty = Math.min(99, qty + 1);
+        qtyInput.value = qty;
+      });
+      qtyInput.addEventListener('change', () => {
+        qty = Math.min(99, Math.max(1, parseInt(qtyInput.value) || 1));
+        qtyInput.value = qty;
+      });
+
+      // Add to cart
+      document.getElementById('btn-add-detail').addEventListener('click', () => {
+        addToCart(p.id, qty, selectedSwatch);
+        showToast('Đã thêm vào giỏ hàng! 🛍️', 'success');
+      });
+
+      // Buy now
+      document.getElementById('btn-buy-now').addEventListener('click', () => {
+        addToCart(p.id, qty, selectedSwatch);
+        location.href = '/checkout.html';
+      });
+
+      // Related products
+      const related = PRODUCTS.filter(x => x.category === p.category && x.id !== p.id).slice(0, 3);
+      document.getElementById('related-grid').innerHTML = related.map(productCardHTML).join('');
+    }
+
+    renderDetail();
+  }
+</script>
+</body>
+</html>
