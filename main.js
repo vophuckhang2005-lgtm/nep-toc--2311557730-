@@ -790,3 +790,85 @@ function removeTypingIndicator() {
   const ind = document.getElementById('chat-typing');
   if (ind) ind.remove();
 }
+
+// ── Apple Scroll Transitions & Cinematic Reveal Engine ──
+function initScrollReveal() {
+  // 1. Scroll Progress Bar
+  let progressLine = document.querySelector('.scroll-progress-line');
+  if (!progressLine) {
+    progressLine = document.createElement('div');
+    progressLine.className = 'scroll-progress-line';
+    document.body.appendChild(progressLine);
+  }
+
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+        progressLine.style.width = Math.min(100, Math.max(0, progress)) + '%';
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+
+  // 2. IntersectionObserver for Reveal Animations
+  const revealElements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right');
+  if (!revealElements.length) return;
+
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+
+        // Animate counter if available
+        const counterEl = entry.target.querySelector('[data-counter]');
+        if (counterEl && !counterEl.dataset.counted) {
+          animateCounter(counterEl);
+        }
+
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+}
+
+function animateCounter(el) {
+  el.dataset.counted = 'true';
+  const target = parseInt(el.getAttribute('data-counter'), 10);
+  const suffix = el.getAttribute('data-suffix') || '';
+  const prefix = el.getAttribute('data-prefix') || '';
+  const duration = 1200;
+  const startTime = performance.now();
+
+  function updateCount(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const easeOut = 1 - Math.pow(1 - progress, 3);
+    const currentVal = Math.floor(easeOut * target);
+
+    el.textContent = prefix + currentVal.toLocaleString('vi-VN') + suffix;
+
+    if (progress < 1) {
+      requestAnimationFrame(updateCount);
+    } else {
+      el.textContent = prefix + target.toLocaleString('vi-VN') + suffix;
+    }
+  }
+
+  requestAnimationFrame(updateCount);
+}
+
+// Auto-run on load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initScrollReveal);
+} else {
+  setTimeout(initScrollReveal, 100);
+}
