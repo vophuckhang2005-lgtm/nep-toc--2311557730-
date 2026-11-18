@@ -13,16 +13,18 @@
 
 <div class="page">
   <div style="text-align:center; max-width:640px; margin:0 auto 48px;">
-    <div class="hero-eyebrow" style="margin-bottom:14px;">💬 Hỗ trợ 24/7</div>
+    <div class="hero-eyebrow" style="margin-bottom:14px;">Hỗ trợ khách hàng</div>
     <h1 class="section-title">Liên hệ <em>Nếp Tóc</em></h1>
-    <p class="section-sub">Bạn có thắc mắc về sản phẩm, chọn size kẹp hay cần hỗ trợ đơn hàng? Đừng ngần ngại nhắn tin cho tụi mình nhé!</p>
+    <p class="section-sub">Bạn có thắc mắc về sản phẩm, chọn size kẹp hay cần hỗ trợ đơn hàng? Đừng ngần ngại nhắn tin cho tụi mình nhé.</p>
   </div>
 
   <div class="contact-grid">
-    <!-- Contact Info Cards -->
+    <!-- Contact Info Cards (Clean Minimalist Line Icons) -->
     <div class="contact-info-wrap">
       <div class="contact-card">
-        <div class="contact-icon">📍</div>
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
         <div>
           <div class="contact-card-title">Địa chỉ cửa hàng</div>
           <p class="contact-card-desc">123 Nguyễn Thị Minh Khai, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh</p>
@@ -31,7 +33,9 @@
       </div>
 
       <div class="contact-card">
-        <div class="contact-icon">📱</div>
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
         <div>
           <div class="contact-card-title">Hotline & Zalo tư vấn</div>
           <p class="contact-card-desc">
@@ -42,7 +46,9 @@
       </div>
 
       <div class="contact-card">
-        <div class="contact-icon">✉️</div>
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
         <div>
           <div class="contact-card-title">Email hỗ trợ</div>
           <p class="contact-card-desc">
@@ -53,13 +59,15 @@
       </div>
 
       <div class="contact-card">
-        <div class="contact-icon">⚡</div>
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
         <div>
-          <div class="contact-card-title">Kênh mạng xã hội</div>
+          <div class="contact-card-title">Kênh trực tuyến</div>
           <div class="social-links-row">
-            <a href="https://instagram.com" target="_blank" class="social-pill">📷 Instagram</a>
-            <a href="https://facebook.com" target="_blank" class="social-pill">📘 Facebook</a>
-            <a href="https://tiktok.com" target="_blank" class="social-pill">🎵 TikTok Shop</a>
+            <a href="https://instagram.com" target="_blank" class="social-pill">Instagram</a>
+            <a href="https://facebook.com" target="_blank" class="social-pill">Facebook</a>
+            <a href="https://tiktok.com" target="_blank" class="social-pill">TikTok Shop</a>
           </div>
         </div>
       </div>
@@ -176,7 +184,7 @@
     }
 
     if (valid) {
-      showToast('Đã gửi tin nhắn! Nếp Tóc sẽ liên hệ lại trong ít phút 💌', 'success');
+      showToast('Đã gửi tin nhắn! Nếp Tóc sẽ liên hệ lại trong ít phút', 'success');
       document.getElementById('contact-form').reset();
     }
   });
