@@ -544,6 +544,9 @@ nav a.active::after {
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  -webkit-tap-highlight-color: transparent;
   transition: transform 0.3s var(--spring-snappy), box-shadow 0.3s var(--spring-snappy), border-color 0.3s ease;
 }
 
@@ -1892,9 +1895,33 @@ footer {
     height: 240px;
   }
 
-  .detail-layout, .cart-layout, .checkout-layout, .about-hero {
+  .detail-layout {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 20px;
+  }
+
+  .detail-visual {
+    height: 250px !important;
+    border-radius: var(--radius-md);
+  }
+
+  .detail-visual svg {
+    max-height: 180px;
+    width: auto;
+  }
+
+  .detail-name {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+
+  .detail-price {
+    font-size: 28px;
+  }
+
+  .cart-layout, .checkout-layout, .about-hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .cart-summary-box, .order-summary-box {
