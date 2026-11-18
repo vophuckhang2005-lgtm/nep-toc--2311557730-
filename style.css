@@ -2960,3 +2960,291 @@ footer {
 .wishlist-item-btn-add:hover {
   background: var(--accent-rose);
 }
+
+/* ── Account Nav Button & Account Dashboard ── */
+.account-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--apple-surface);
+  border: 1px solid var(--apple-border);
+  border-radius: var(--radius-pill);
+  padding: 8px 14px;
+  font-weight: 500;
+  font-size: 13px;
+  color: var(--apple-black);
+  box-shadow: var(--shadow-subtle);
+  transition: all 0.2s var(--spring-snappy);
+  text-decoration: none;
+}
+
+.account-nav-btn:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  transform: scale(1.02);
+}
+
+.account-nav-btn svg {
+  width: 16px;
+  height: 16px;
+  color: var(--apple-black);
+}
+
+@media (max-width: 640px) {
+  .account-nav-btn span {
+    display: none;
+  }
+  .account-nav-btn {
+    padding: 8px;
+    width: 38px;
+    height: 38px;
+    justify-content: center;
+  }
+}
+
+/* Auth Card */
+.auth-card {
+  background: var(--apple-surface);
+  border: 1px solid var(--apple-border-light);
+  border-radius: var(--radius-lg);
+  padding: 44px 36px;
+  max-width: 480px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.auth-avatar-circle {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--accent-rose-soft);
+  color: var(--accent-rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.auth-form {
+  text-align: left;
+  margin-top: 24px;
+}
+
+.auth-form .form-group {
+  margin-bottom: 18px;
+}
+
+.auth-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-bottom: 6px;
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--apple-border);
+  border-radius: var(--radius-sm);
+  font-size: 14.5px;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-form input:focus {
+  outline: none;
+  border-color: var(--apple-black);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Profile Banner */
+.profile-banner {
+  background: var(--apple-surface);
+  border: 1px solid var(--apple-border-light);
+  border-radius: var(--radius-lg);
+  padding: 32px 36px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.profile-user-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.profile-avatar-initials {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1d1d1f 0%, #3a3a3c 100%);
+  color: #ffffff;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.profile-name {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--apple-black);
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.profile-tag {
+  display: inline-block;
+  padding: 3px 10px;
+  background: var(--accent-rose-soft);
+  color: var(--accent-rose);
+  font-size: 11.5px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+}
+
+.profile-stats {
+  display: flex;
+  gap: 24px;
+}
+
+.profile-stat-box {
+  text-align: center;
+  padding: 10px 16px;
+  background: #fafafc;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--apple-border-light);
+}
+
+.profile-stat-num {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--apple-black);
+}
+
+.profile-stat-label {
+  font-size: 11.5px;
+  color: var(--apple-tertiary);
+  margin-top: 2px;
+}
+
+/* Order Cards */
+.order-card {
+  background: var(--apple-surface);
+  border: 1px solid var(--apple-border-light);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s var(--spring-snappy), box-shadow 0.2s ease;
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.order-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 14px;
+  border-bottom: 0.5px solid var(--apple-border-light);
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.order-code-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--apple-black);
+}
+
+.order-status-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+}
+
+.order-status-pill.processing {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.order-status-pill.shipping {
+  background: #cce5ff;
+  color: #004085;
+}
+
+.order-status-pill.delivered {
+  background: #d4edda;
+  color: #155724;
+}
+
+/* Stepper */
+.order-stepper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  margin: 18px 0 22px;
+}
+
+.order-stepper::before {
+  content: '';
+  position: absolute;
+  top: 14px;
+  left: 20px;
+  right: 20px;
+  height: 2px;
+  background: var(--apple-border);
+  z-index: 1;
+}
+
+.order-step-node {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  flex: 1;
+}
+
+.order-step-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--apple-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--apple-secondary);
+}
+
+.order-step-node.active .order-step-dot {
+  background: var(--apple-black);
+  border-color: var(--apple-black);
+  color: #ffffff;
+}
+
+.order-step-label {
+  font-size: 11.5px;
+  color: var(--apple-secondary);
+}
+
+.order-step-node.active .order-step-label {
+  color: var(--apple-black);
+  font-weight: 600;
+}

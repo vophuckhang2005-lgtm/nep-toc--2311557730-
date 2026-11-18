@@ -13,8 +13,18 @@ function renderHeader() {
           <a href="about.html">Về chúng tôi</a>
           <a href="policy.html">Chính sách</a>
           <a href="contact.html">Liên hệ</a>
+          <a href="account.html">Tài khoản</a>
         </nav>
         <div class="nav-actions">
+          <!-- Account Nav Button -->
+          <a href="account.html" class="account-nav-btn" id="open-account-btn" aria-label="Tài khoản cá nhân" title="Tài khoản">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span id="account-name-label">Tài khoản</span>
+          </a>
+
           <!-- Wishlist Nav Button -->
           <button class="wishlist-nav-btn" id="open-wishlist-btn" aria-label="Xem sản phẩm yêu thích" title="Danh sách yêu thích">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
@@ -103,6 +113,7 @@ function renderHeader() {
 
   updateCartBadge();
   updateWishlistBadge();
+  updateAccountUI();
   renderFloatingHelp();
   initCartDrawer();
   initWishlistDrawer();
@@ -125,6 +136,7 @@ function renderFooter() {
           <a href="about.html">Về chúng tôi</a>
           <a href="policy.html">Chính sách bảo hành</a>
           <a href="contact.html">Liên hệ cửa hàng</a>
+          <a href="account.html">Tài khoản & Đơn hàng</a>
         </div>
         <div class="footer-col">
           <h4>Hỗ trợ & Liên hệ</h4>
@@ -587,4 +599,54 @@ function productCardHTML(p) {
 function quickAdd(id) {
   addToCart(id, 1, null);
   showToast('Đã thêm vào giỏ hàng');
+}
+
+// ── Account / User Profile & Orders Logic ──
+const USER_KEY = 'nep_toc_user';
+const ORDERS_KEY = 'nep_toc_orders';
+
+function getUser() {
+  try {
+    return JSON.parse(localStorage.getItem(USER_KEY)) || null;
+  } catch {
+    return null;
+  }
+}
+
+function saveUser(user) {
+  localStorage.setItem(USER_KEY, JSON.stringify(user));
+  updateAccountUI();
+}
+
+function logoutUser() {
+  localStorage.removeItem(USER_KEY);
+  updateAccountUI();
+}
+
+function getOrders() {
+  try {
+    return JSON.parse(localStorage.getItem(ORDERS_KEY)) || [];
+  } catch {
+    return [];
+  }
+}
+
+function saveOrder(order) {
+  const orders = getOrders();
+  orders.unshift(order);
+  localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+}
+
+function updateAccountUI() {
+  const label = document.getElementById('account-name-label');
+  const user = getUser();
+  if (label) {
+    if (user && user.fullname) {
+      const parts = user.fullname.trim().split(' ');
+      const shortName = parts[parts.length - 1];
+      label.textContent = shortName;
+    } else {
+      label.textContent = 'Tài khoản';
+    }
+  }
 }

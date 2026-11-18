@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tài khoản cá nhân — Nếp Tóc</title>
+  <meta name="description" content="Quản lý thông tin cá nhân, lịch sử đơn hàng COD và danh sách sản phẩm yêu thích tại Nếp Tóc."/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="page-sm" style="max-width:920px; margin:0 auto; padding:40px 24px 80px;">
+
+  <!-- View 1: Auth Screen (Khi chưa đăng nhập) -->
+  <div id="auth-view" style="display:none;">
+    <div class="auth-card">
+      <div class="auth-avatar-circle">
+        <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </div>
+      <h1 style="font-size:24px; font-weight:700; color:var(--apple-black); margin-bottom:8px; letter-spacing:-0.02em;">Tài khoản của bạn</h1>
+      <p style="font-size:14px; color:var(--apple-secondary); line-height:1.6; margin:0 auto 20px;">
+        Đăng nhập nhanh để theo dõi lịch sử đơn hàng COD, lưu địa chỉ giao hàng và đồng bộ danh sách yêu thích.
+      </p>
+
+      <form class="auth-form" id="login-form">
+        <div class="form-group">
+          <label for="auth-fullname">Họ và tên *</label>
+          <input type="text" id="auth-fullname" placeholder="Ví dụ: Nguyễn Phương Linh" required/>
+        </div>
+        <div class="form-group">
+          <label for="auth-phone">Số điện thoại *</label>
+          <input type="tel" id="auth-phone" placeholder="Ví dụ: 0901234567" required pattern="0[35789][0-9]{8}"/>
+        </div>
+        <div class="form-group">
+          <label for="auth-address">Địa chỉ nhận hàng (TP.HCM)</label>
+          <input type="text" id="auth-address" placeholder="Ví dụ: 123 Nguyễn Thị Minh Khai, P. Bến Thành, Q.1"/>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%; padding:13px; font-size:14.5px; margin-top:8px;">Đăng nhập / Đăng ký</button>
+      </form>
+
+      <div style="margin:24px 0 18px; display:flex; align-items:center; gap:12px;">
+        <div style="flex:1; height:1px; background:var(--apple-border-light);"></div>
+        <span style="font-size:12px; color:var(--apple-tertiary); font-weight:500;">HOẶC TRẢI NGHIỆM</span>
+        <div style="flex:1; height:1px; background:var(--apple-border-light);"></div>
+      </div>
+
+      <button type="button" class="btn-outline" id="btn-demo-login" style="width:100%; padding:12px; font-size:13.5px;">
+        Dùng thử bằng tài khoản mẫu (1 chạm)
+      </button>
+    </div>
+  </div>
+
+  <!-- View 2: Dashboard Screen (Khi đã đăng nhập) -->
+  <div id="dashboard-view" style="display:none;">
+    
+    <!-- Profile Banner -->
+    <div class="profile-banner">
+      <div class="profile-user-info">
+        <div class="profile-avatar-initials" id="profile-avatar">PL</div>
+        <div>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:4px; flex-wrap:wrap;">
+            <h1 class="profile-name" id="profile-name">Phương Linh</h1>
+            <span class="profile-tag">Nàng Nếp Tóc • Thành viên Thân Thiết</span>
+          </div>
+          <div style="font-size:13.5px; color:var(--apple-secondary);" id="profile-phone">0901 234 567</div>
+          <div style="font-size:13px; color:var(--apple-tertiary); margin-top:3px;" id="profile-address">123 Nguyễn Thị Minh Khai, Q.1, TP.HCM</div>
+        </div>
+      </div>
+
+      <div class="profile-stats">
+        <div class="profile-stat-box">
+          <div class="profile-stat-num" id="stat-orders-count">0</div>
+          <div class="profile-stat-label">Đơn hàng</div>
+        </div>
+        <div class="profile-stat-box">
+          <div class="profile-stat-num" id="stat-wishlist-count">0</div>
+          <div class="profile-stat-label">Yêu thích</div>
+        </div>
+        <div class="profile-stat-box">
+          <div class="profile-stat-num" style="color:var(--accent-rose);">COD</div>
+          <div class="profile-stat-label">Đồng kiểm 100%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Apple Segmented Control Tabs -->
+    <div class="policy-tabs-wrap" id="account-tabs" style="max-width:560px; margin-bottom:28px;">
+      <button class="policy-tab-btn active" data-tab="tab-orders">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:-2px; margin-right:5px;"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        Đơn hàng của tôi
+      </button>
+      <button class="policy-tab-btn" data-tab="tab-address">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:-2px; margin-right:5px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Sổ địa chỉ
+      </button>
+      <button class="policy-tab-btn" data-tab="tab-wishlist">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block; vertical-align:-2px; margin-right:5px;"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        Sản phẩm yêu thích
+      </button>
+    </div>
+
+    <!-- Tab 1: Đơn hàng của tôi -->
+    <div class="account-tab-panel active" id="tab-orders">
+      <div id="orders-list-wrap">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- Tab 2: Sổ địa chỉ & Thông tin cá nhân -->
+    <div class="account-tab-panel" id="tab-address" style="display:none;">
+      <div style="background:var(--apple-surface); border:1px solid var(--apple-border-light); border-radius:var(--radius-lg); padding:32px 36px; box-shadow:var(--shadow-card); max-width:640px; margin:0 auto;">
+        <h2 style="font-size:20px; font-weight:700; color:var(--apple-black); margin-bottom:6px;">Thông tin nhận hàng mặc định</h2>
+        <p style="font-size:13.5px; color:var(--apple-secondary); margin-bottom:24px;">Thông tin này sẽ tự động điền khi bạn tiến hành thanh toán đơn hàng COD.</p>
+        
+        <form id="profile-edit-form">
+          <div class="form-group" style="margin-bottom:16px;">
+            <label style="display:block; font-size:13px; font-weight:600; color:var(--apple-black); margin-bottom:6px;">Họ và tên</label>
+            <input type="text" id="edit-fullname" style="width:100%; padding:12px 14px; border:1px solid var(--apple-border); border-radius:var(--radius-sm); font-size:14.5px;" required/>
+          </div>
+          <div class="form-group" style="margin-bottom:16px;">
+            <label style="display:block; font-size:13px; font-weight:600; color:var(--apple-black); margin-bottom:6px;">Số điện thoại</label>
+            <input type="tel" id="edit-phone" style="width:100%; padding:12px 14px; border:1px solid var(--apple-border); border-radius:var(--radius-sm); font-size:14.5px;" required/>
+          </div>
+          <div class="form-group" style="margin-bottom:24px;">
+            <label style="display:block; font-size:13px; font-weight:600; color:var(--apple-black); margin-bottom:6px;">Địa chỉ giao hàng (TP.HCM)</label>
+            <input type="text" id="edit-address" style="width:100%; padding:12px 14px; border:1px solid var(--apple-border); border-radius:var(--radius-sm); font-size:14.5px;" required/>
+          </div>
+          <button type="submit" class="btn-primary" style="padding:12px 26px; font-size:14px;">Lưu thay đổi</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tab 3: Sản phẩm yêu thích -->
+    <div class="account-tab-panel" id="tab-wishlist" style="display:none;">
+      <div id="account-wishlist-grid" class="products-grid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+
+    <!-- Logout Action Button -->
+    <div style="text-align:center; margin-top:48px; padding-top:24px; border-top:1px solid var(--apple-border-light);">
+      <button class="btn-outline" id="btn-logout" style="color:#d9534f; border-color:rgba(217, 83, 79, 0.3); font-size:13px; padding:9px 20px;">
+        Đăng xuất tài khoản
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<div id="site-footer"></div>
+<div class="toast-container"></div>
+
+<script src="products.js"></script>
+<script src="cart.js"></script>
+<script src="main.js"></script>
+<script>
+  renderHeader();
+  renderFooter();
+
+  // Tab switching
+  const tabBtns = document.querySelectorAll('#account-tabs .policy-tab-btn');
+  const panels = document.querySelectorAll('.account-tab-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const target = btn.dataset.tab;
+      panels.forEach(p => {
+        if (p.id === target) {
+          p.style.display = 'block';
+          p.classList.add('active');
+        } else {
+          p.style.display = 'none';
+          p.classList.remove('active');
+        }
+      });
+    });
+  });
+
+  function renderAccountPage() {
+    const user = getUser();
+    const authView = document.getElementById('auth-view');
+    const dashView = document.getElementById('dashboard-view');
+
+    if (!user) {
+      authView.style.display = 'block';
+      dashView.style.display = 'none';
+      return;
+    }
+
+    authView.style.display = 'none';
+    dashView.style.display = 'block';
+
+    // Profile info
+    const names = user.fullname.trim().split(' ');
+    const initials = names.length > 1 ? (names[0][0] + names[names.length - 1][0]).toUpperCase() : user.fullname.substring(0, 2).toUpperCase();
+    document.getElementById('profile-avatar').textContent = initials;
+    document.getElementById('profile-name').textContent = user.fullname;
+    document.getElementById('profile-phone').textContent = user.phone;
+    document.getElementById('profile-address').textContent = user.address || 'Chưa lưu địa chỉ mặc định';
+
+    // Profile edit form
+    document.getElementById('edit-fullname').value = user.fullname || '';
+    document.getElementById('edit-phone').value = user.phone || '';
+    document.getElementById('edit-address').value = user.address || '';
+
+    // Stats
+    const orders = getOrders();
+    const wishlist = getWishlist();
+    document.getElementById('stat-orders-count').textContent = orders.length;
+    document.getElementById('stat-wishlist-count').textContent = wishlist.length;
+
+    renderOrders(orders);
+    renderAccountWishlist(wishlist);
+  }
+
+  // Render Orders
+  function renderOrders(orders) {
+    const wrap = document.getElementById('orders-list-wrap');
+    if (!wrap) return;
+
+    if (orders.length === 0) {
+      wrap.innerHTML = `
+        <div style="text-align:center; padding:48px 20px; background:var(--apple-surface); border:1px solid var(--apple-border-light); border-radius:var(--radius-lg);">
+          <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" style="margin:0 auto 14px; color:var(--apple-tertiary);"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <div style="font-size:16px; font-weight:700; color:var(--apple-black); margin-bottom:6px;">Bạn chưa có đơn hàng nào</div>
+          <p style="font-size:13.5px; color:var(--apple-secondary); margin-bottom:20px;">Những đơn hàng bạn đặt thanh toán COD sẽ tự động lưu lại tại đây để tiện theo dõi hành trình.</p>
+          <a href="products.html" class="btn-primary" style="display:inline-block; font-size:13.5px; padding:10px 24px;">Khám phá sản phẩm ngay</a>
+        </div>
+      `;
+      return;
+    }
+
+    wrap.innerHTML = orders.map(ord => {
+      const isDelivered = ord.status === 'Đã giao' || ord.status === 'Giao thành công';
+      const isShipping = ord.status === 'Đang giao hàng' || ord.status === 'Đang vận chuyển';
+      const statusClass = isDelivered ? 'delivered' : isShipping ? 'shipping' : 'processing';
+
+      return `
+        <div class="order-card">
+          <div class="order-card-header">
+            <div>
+              <div class="order-code-title">Đơn hàng ${ord.code}</div>
+              <div style="font-size:12.5px; color:var(--apple-tertiary); margin-top:2px;">Đặt lúc: ${ord.date} • Giao tận nơi (COD)</div>
+            </div>
+            <span class="order-status-pill ${statusClass}">${ord.status || 'Đang xử lý'}</span>
+          </div>
+
+          <!-- Order Stepper -->
+          <div class="order-stepper">
+            <div class="order-step-node active">
+              <div class="order-step-dot">✓</div>
+              <div class="order-step-label">Đã đặt hàng</div>
+            </div>
+            <div class="order-step-node ${isShipping || isDelivered ? 'active' : ''}">
+              <div class="order-step-dot">${isShipping || isDelivered ? '✓' : '2'}</div>
+              <div class="order-step-label">Nếp Tóc xác nhận</div>
+            </div>
+            <div class="order-step-node ${isShipping || isDelivered ? 'active' : ''}">
+              <div class="order-step-dot">${isDelivered ? '✓' : isShipping ? '3' : '3'}</div>
+              <div class="order-step-label">Đang giao hàng</div>
+            </div>
+            <div class="order-step-node ${isDelivered ? 'active' : ''}">
+              <div class="order-step-dot">${isDelivered ? '✓' : '4'}</div>
+              <div class="order-step-label">Hoàn tất (COD)</div>
+            </div>
+          </div>
+
+          <!-- Items List -->
+          <div style="border-top:0.5px solid var(--apple-border-light); padding:16px 0 12px;">
+            ${(ord.items || []).map(item => `
+              <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; font-size:13.5px;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <div style="width:36px; height:36px; border-radius:8px; background:${item.cardBg || '#f5f5f7'}; display:flex; align-items:center; justify-content:center;">
+                    <svg width="22" height="22" viewBox="0 0 84 84" fill="none"><ellipse cx="42" cy="34" rx="30" ry="20" fill="${item.cardBg || '#ffffff'}" stroke="${item.cardAccent || '#1d1d1f'}" stroke-width="3"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-weight:600; color:var(--apple-black);">${item.name}</div>
+                    <div style="font-size:12px; color:var(--apple-tertiary);">${item.swatch ? 'Màu: ' + item.swatch + ' • ' : ''}Số lượng: ${item.qty}</div>
+                  </div>
+                </div>
+                <div style="font-weight:600; color:var(--apple-black);">${fmt(item.price * item.qty)}</div>
+              </div>
+            `).join('')}
+          </div>
+
+          ${ord.gift && ord.gift.enabled ? `
+            <div style="background:#fffaf0; border:1px solid #ffe8cc; border-radius:8px; padding:10px 14px; font-size:12.5px; color:#d97706; margin-bottom:12px;">
+              🎁 Đóng gói hộp quà nơ lụa & thiệp viết tay: "${ord.gift.note || 'Không có ghi chú'}"
+            </div>
+          ` : ''}
+
+          <!-- Order Summary Footer -->
+          <div style="display:flex; justify-content:space-between; align-items:center; border-top:0.5px solid var(--apple-border-light); padding-top:14px; margin-top:8px; flex-wrap:wrap; gap:12px;">
+            <div style="font-size:13px; color:var(--apple-secondary);">
+              Giao đến: <strong>${ord.customer ? ord.customer.address : ''}</strong> (${ord.customer ? ord.customer.phone : ''})
+            </div>
+            <div style="display:flex; align-items:center; gap:14px;">
+              <span style="font-size:13px; color:var(--apple-tertiary);">Tổng tiền COD:</span>
+              <span style="font-size:17px; font-weight:800; color:var(--accent-rose);">${fmt(ord.total || 0)}</span>
+              <button class="btn-outline" style="font-size:12px; padding:6px 14px;" onclick="reorder(${JSON.stringify(ord.items).replace(/"/g, '&quot;')})">Mua lại</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function reorder(items) {
+    if (!items || !items.length) return;
+    items.forEach(it => addToCart(it.id, it.qty, it.swatch));
+    showToast('Đã thêm các món vào giỏ hàng');
+  }
+
+  // Render Wishlist
+  function renderAccountWishlist(wishlistIds) {
+    const grid = document.getElementById('account-wishlist-grid');
+    if (!grid) return;
+
+    const prods = PRODUCTS.filter(p => wishlistIds.includes(p.id));
+    if (prods.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1; text-align:center; padding:48px 20px; background:var(--apple-surface); border:1px solid var(--apple-border-light); border-radius:var(--radius-lg);">
+          <div style="font-size:16px; font-weight:700; color:var(--apple-black); margin-bottom:6px;">Chưa có sản phẩm yêu thích nào</div>
+          <p style="font-size:13.5px; color:var(--apple-secondary); margin-bottom:20px;">Hãy bấm biểu tượng trái tim trên các mẫu kẹp bạn ưng ý nhé.</p>
+          <a href="products.html" class="btn-primary" style="display:inline-block; font-size:13.5px; padding:10px 24px;">Khám phá kẹp ngay</a>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = prods.map(p => productCardHTML(p)).join('');
+  }
+
+  // Form Submissions
+  document.getElementById('login-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const fullname = document.getElementById('auth-fullname').value.trim();
+    const phone = document.getElementById('auth-phone').value.trim();
+    const address = document.getElementById('auth-address').value.trim();
+
+    if (!fullname || !phone) return;
+
+    saveUser({ fullname, phone, address });
+    showToast('Đăng nhập thành công! Chào bạn ' + fullname);
+    renderAccountPage();
+  });
+
+  // Demo Login (1 chạm)
+  document.getElementById('btn-demo-login').addEventListener('click', () => {
+    const demoUser = {
+      fullname: 'Nguyễn Phương Linh',
+      phone: '0901 234 567',
+      address: '123 Nguyễn Thị Minh Khai, P. Bến Thành, Q.1, TP.HCM'
+    };
+    saveUser(demoUser);
+
+    // If no orders, add 1 demo order
+    const currentOrders = getOrders();
+    if (currentOrders.length === 0) {
+      const demoOrder = {
+        code: '#NT-8F2A1C',
+        date: new Date().toLocaleDateString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }),
+        items: [
+          { id: 1, name: 'Kẹp Càng Cua Hoa Sứ Pastel', price: 45000, qty: 1, swatch: 'Hồng Phấn' },
+          { id: 2, name: 'Kẹp Càng Cua Nâu Trà Hổ Phách', price: 50000, qty: 1, swatch: 'Nâu Trà' }
+        ],
+        subtotal: 95000,
+        ship: 25000,
+        gift: { enabled: true, note: 'Chúc em gái ngày càng xinh xắn và rạng ngời!' },
+        total: 135000,
+        customer: {
+          fullname: demoUser.fullname,
+          phone: demoUser.phone,
+          address: demoUser.address,
+          note: 'Giao giờ hành chính giúp em ạ'
+        },
+        status: 'Đang giao hàng'
+      };
+      saveOrder(demoOrder);
+    }
+
+    // Also add 1 demo wishlist if empty
+    if (getWishlist().length === 0) {
+      toggleWishlist(1);
+      toggleWishlist(3);
+    }
+
+    showToast('Đã đăng nhập tài khoản mẫu thành công!');
+    renderAccountPage();
+  });
+
+  // Profile Edit Form
+  document.getElementById('profile-edit-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const user = getUser() || {};
+    user.fullname = document.getElementById('edit-fullname').value.trim();
+    user.phone = document.getElementById('edit-phone').value.trim();
+    user.address = document.getElementById('edit-address').value.trim();
+
+    saveUser(user);
+    showToast('Đã lưu thông tin nhận hàng thành công!');
+    renderAccountPage();
+  });
+
+  // Logout
+  document.getElementById('btn-logout').addEventListener('click', () => {
+    if (confirm('Bạn có chắc muốn đăng xuất?')) {
+      logoutUser();
+      showToast('Đã đăng xuất tài khoản');
+      renderAccountPage();
+    }
+  });
+
+  // Initial load
+  renderAccountPage();
+</script>
+</body>
+</html>

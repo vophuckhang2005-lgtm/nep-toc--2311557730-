@@ -101,7 +101,10 @@
     <div class="modal-title">Đặt hàng thành công</div>
     <div class="modal-code" id="order-code">#NT-000000</div>
     <p class="modal-desc">Cảm ơn bạn đã lựa chọn <strong>Nếp Tóc</strong>.<br/>Tụi mình sẽ liên hệ xác nhận và giao hàng đến bạn trong vòng <strong>24 giờ</strong>.</p>
-    <a href="index.html" class="btn-primary" style="display:inline-block; margin-top:4px;">Về trang chủ</a>
+    <div style="display:flex; gap:10px; justify-content:center; margin-top:16px; flex-wrap:wrap;">
+      <a href="account.html" class="btn-primary" style="font-size:13.5px; padding:10px 22px;">Theo dõi trong Tài khoản →</a>
+      <a href="index.html" class="btn-outline" style="font-size:13.5px; padding:10px 20px;">Về trang chủ</a>
+    </div>
   </div>
 </div>
 
@@ -148,6 +151,14 @@
     }
 
     document.getElementById('co-total').textContent = fmt(getTotal());
+  }
+
+  // Auto-fill logged in user info if available
+  const loggedUser = getUser();
+  if (loggedUser) {
+    if (loggedUser.fullname) document.getElementById('fullname').value = loggedUser.fullname;
+    if (loggedUser.phone) document.getElementById('phone').value = loggedUser.phone;
+    if (loggedUser.address) document.getElementById('address').value = loggedUser.address;
   }
 
   // Validation
@@ -209,6 +220,38 @@
     // Generate order code
     const code = '#NT-' + Math.random().toString(36).substring(2,8).toUpperCase();
     document.getElementById('order-code').textContent = code;
+
+    // Save order to history
+    const fullname = document.getElementById('fullname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const address = document.getElementById('address').value.trim();
+    const note = document.getElementById('note').value.trim();
+    const sub = getSubtotal();
+    const ship = getShipFee();
+    const gift = getGiftOption();
+    const total = getTotal();
+
+    const orderRecord = {
+      code,
+      date: new Date().toLocaleDateString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }),
+      items: getCart(),
+      subtotal: sub,
+      ship: ship,
+      gift: gift,
+      total: total,
+      customer: { fullname, phone, address, note },
+      status: 'Đang xử lý'
+    };
+    saveOrder(orderRecord);
+
+    // If user is logged in without address, auto save address
+    if (loggedUser) {
+      if (!loggedUser.address) {
+        loggedUser.address = address;
+        saveUser(loggedUser);
+      }
+    }
+
     document.getElementById('success-modal').classList.add('show');
     clearCart();
   });
