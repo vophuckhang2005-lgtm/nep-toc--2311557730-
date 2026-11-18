@@ -3932,3 +3932,662 @@ body.has-sticky-atc .floating-contact {
     font-size: 13px;
   }
 }
+
+
+/* ── STUDIO THỬ KẸP & KHẮC TÊN LASER (BESPOKE STUDIO) ── */
+.nav-studio-link {
+  position: relative;
+  font-weight: 700 !important;
+  color: #b45309 !important;
+  background: rgba(245, 158, 11, 0.12) !important;
+  padding: 6px 14px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(245, 158, 11, 0.28) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.nav-studio-link:hover {
+  background: rgba(245, 158, 11, 0.22) !important;
+  transform: translateY(-1px);
+  color: #92400e !important;
+}
+
+.nav-studio-link.active {
+  background: #f59e0b !important;
+  color: #ffffff !important;
+  border-color: #d97706 !important;
+}
+
+.nav-studio-link.active .studio-sparkle {
+  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
+}
+
+.studio-sparkle {
+  display: inline-block;
+  animation: studioSparkle 2s infinite ease-in-out;
+}
+
+@keyframes studioSparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.25) rotate(15deg); }
+}
+
+/* Studio Page General */
+.studio-page {
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 30px 24px 80px;
+}
+
+.studio-hero {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.studio-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b45309;
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.studio-title {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--apple-black);
+  margin-bottom: 12px;
+}
+
+.studio-title em {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  color: var(--accent-rose);
+}
+
+.studio-subtitle {
+  font-size: clamp(15px, 1.8vw, 17px);
+  color: var(--apple-secondary);
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Studio Layout */
+.studio-layout {
+  display: grid;
+  grid-template-columns: 1.12fr 1fr;
+  gap: 36px;
+  align-items: start;
+}
+
+/* Studio Visualizer Stage */
+.studio-stage-card {
+  position: sticky;
+  top: 88px;
+  background: #ffffff;
+  border: 1px solid var(--apple-border);
+  border-radius: 28px;
+  padding: 20px;
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+}
+
+.studio-stage-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.mode-pills {
+  display: flex;
+  background: #f5f5f7;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.mode-btn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--apple-secondary);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.mode-btn.active {
+  background: #ffffff;
+  color: var(--apple-black);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #10b981;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  animation: pulseDot 1.8s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.6; }
+}
+
+.studio-canvas-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: radial-gradient(circle at 50% 35%, #ffffff 0%, #f6f6f9 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.studio-svg-viewport {
+  width: 100%;
+  height: 100%;
+  user-select: none;
+}
+
+.studio-stage-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.stage-btn-secondary {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 10px 16px;
+  background: #f5f5f7;
+  border: 1px solid var(--apple-border);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--apple-black);
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.stage-btn-secondary:hover {
+  background: #e8e8ed;
+  transform: translateY(-1px);
+}
+
+/* Studio Customizer Form */
+.studio-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.studio-step-card {
+  background: #ffffff;
+  border: 1px solid var(--apple-border);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  transition: border-color 0.2s ease;
+}
+
+.studio-step-card:hover {
+  border-color: rgba(0, 0, 0, 0.14);
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--apple-black);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--apple-black);
+  letter-spacing: -0.01em;
+}
+
+.step-desc {
+  font-size: 12.5px;
+  color: var(--apple-secondary);
+  margin-left: auto;
+}
+
+/* Hairstyle Picker */
+.hairstyles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.hair-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--apple-border);
+  border-radius: 14px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.hair-option:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.hair-option.active {
+  border-color: var(--apple-black);
+  background: #fbfbfd;
+  box-shadow: 0 0 0 1px var(--apple-black);
+}
+
+.hair-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: #f5f5f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hair-info {
+  text-align: left;
+}
+
+.hair-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--apple-black);
+}
+
+.hair-tag {
+  font-size: 11px;
+  color: var(--apple-secondary);
+}
+
+/* Hair Color Picker */
+.color-picker-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.hair-colors-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.hair-color-pill {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 0 1.5px var(--apple-border);
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+}
+
+.hair-color-pill:hover {
+  transform: scale(1.1);
+}
+
+.hair-color-pill.active {
+  box-shadow: 0 0 0 2.5px var(--apple-black);
+  transform: scale(1.12);
+}
+
+.hair-color-pill.active::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Clip Picker Cards */
+.clips-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.clip-card-option {
+  border: 1.5px solid var(--apple-border);
+  border-radius: 16px;
+  padding: 12px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.clip-card-option:hover {
+  border-color: rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.clip-card-option.active {
+  border-color: var(--apple-black);
+  background: #fafafc;
+  box-shadow: 0 0 0 1px var(--apple-black);
+}
+
+.clip-thumb-box {
+  width: 100%;
+  height: 70px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.clip-badge-rec {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: #000000;
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+  letter-spacing: 0.02em;
+}
+
+.clip-opt-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--apple-black);
+  line-height: 1.35;
+}
+
+.clip-opt-price {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-rose);
+}
+
+/* Clip Swatches Row */
+.clip-swatches-box {
+  padding-top: 10px;
+  border-top: 1px solid var(--apple-border);
+}
+
+/* Bespoke Engraving Section */
+.engraving-box {
+  background: #fafafc;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.engraving-input-wrap {
+  position: relative;
+}
+
+.engraving-input {
+  width: 100%;
+  padding: 14px 44px 14px 16px;
+  border: 1.5px solid var(--apple-border);
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--apple-black);
+  background: #ffffff;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.engraving-input:focus {
+  border-color: #b45309;
+  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
+}
+
+.char-counter {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--apple-tertiary);
+}
+
+.engraving-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.font-btn, .finish-btn {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--apple-border);
+  background: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--apple-secondary);
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.font-btn.active, .finish-btn.active {
+  border-color: #b45309;
+  background: #fef3c7;
+  color: #92400e;
+  font-weight: 700;
+}
+
+/* Order Summary & CTA in Studio */
+.studio-checkout-card {
+  background: #ffffff;
+  border: 1.5px solid var(--apple-black);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+}
+
+.summary-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.price-main {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--apple-black);
+  letter-spacing: -0.02em;
+}
+
+.engraving-free-badge {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #10b981;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-left: 6px;
+}
+
+.studio-atc-btn {
+  width: 100%;
+  background: var(--apple-black);
+  color: #ffffff;
+  border-radius: 14px;
+  padding: 15px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  margin-bottom: 10px;
+}
+
+.studio-atc-btn:hover {
+  background: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.studio-buy-btn {
+  width: 100%;
+  background: #f5f5f7;
+  color: var(--apple-black);
+  border: 1px solid var(--apple-border);
+  border-radius: 14px;
+  padding: 13px 24px;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.studio-buy-btn:hover {
+  background: #e5e5ea;
+}
+
+/* Studio Trust Features Grid */
+.studio-perks-section {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid var(--apple-border);
+}
+
+.studio-perks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.studio-perk-item {
+  background: #ffffff;
+  border: 1px solid var(--apple-border);
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.perk-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #fef3c7;
+  color: #b45309;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.perk-item-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--apple-black);
+}
+
+.perk-item-desc {
+  font-size: 13px;
+  color: var(--apple-secondary);
+  line-height: 1.5;
+}
+
+@media (max-width: 960px) {
+  .studio-layout {
+    grid-template-columns: 1fr;
+  }
+  .studio-stage-card {
+    position: static;
+  }
+  .studio-perks-grid {
+    grid-template-columns: 1fr;
+  }
+}

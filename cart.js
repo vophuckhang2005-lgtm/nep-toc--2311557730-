@@ -33,13 +33,16 @@ function setGiftOption(enabled, note = '') {
   }
 }
 
-function addToCart(productId, qty = 1, swatch = null) {
+function addToCart(productId, qty = 1, swatch = null, customEngraving = null) {
   const cleanSwatch = (swatch === 'null' || swatch === 'undefined' || !swatch) ? null : swatch;
   const pId = Number(productId);
   const cart = getCart();
+  const engText = (customEngraving && customEngraving.text) ? customEngraving.text.trim() : null;
+
   const existing = cart.find(i => {
     const itemSwatch = (i.swatch === 'null' || i.swatch === 'undefined' || !i.swatch) ? null : i.swatch;
-    return Number(i.id) === pId && itemSwatch === cleanSwatch;
+    const itemEngText = (i.customEngraving && i.customEngraving.text) ? i.customEngraving.text.trim() : null;
+    return Number(i.id) === pId && itemSwatch === cleanSwatch && itemEngText === engText;
   });
 
   if (existing) {
@@ -47,17 +50,29 @@ function addToCart(productId, qty = 1, swatch = null) {
   } else {
     const p = PRODUCTS.find(p => Number(p.id) === pId);
     if (!p) return;
-    cart.push({ id: pId, name: p.name, price: p.price, qty, swatch: cleanSwatch, cardBg: p.cardBg, cardAccent: p.cardAccent });
+    cart.push({ 
+      id: pId, 
+      name: p.name, 
+      price: p.price, 
+      qty, 
+      swatch: cleanSwatch, 
+      cardBg: p.cardBg, 
+      cardAccent: p.cardAccent,
+      customEngraving: customEngraving || null 
+    });
   }
   saveCart(cart);
 }
 
-function removeFromCart(productId, swatch = null) {
+function removeFromCart(productId, swatch = null, engravingText = null) {
   const cleanSwatch = (swatch === 'null' || swatch === 'undefined' || !swatch) ? null : swatch;
   const pId = Number(productId);
+  const engText = (engravingText === 'null' || engravingText === 'undefined' || !engravingText) ? null : engravingText.trim();
+
   const cart = getCart().filter(i => {
     const itemSwatch = (i.swatch === 'null' || i.swatch === 'undefined' || !i.swatch) ? null : i.swatch;
-    return !(Number(i.id) === pId && itemSwatch === cleanSwatch);
+    const itemEngText = (i.customEngraving && i.customEngraving.text) ? i.customEngraving.text.trim() : null;
+    return !(Number(i.id) === pId && itemSwatch === cleanSwatch && itemEngText === engText);
   });
   saveCart(cart);
   if (typeof showToast === 'function') {
@@ -68,18 +83,21 @@ function removeFromCart(productId, swatch = null) {
   }
 }
 
-function updateQty(productId, swatch, newQty) {
+function updateQty(productId, swatch, newQty, engravingText = null) {
   const cleanSwatch = (swatch === 'null' || swatch === 'undefined' || !swatch) ? null : swatch;
   const pId = Number(productId);
+  const engText = (engravingText === 'null' || engravingText === 'undefined' || !engravingText) ? null : engravingText.trim();
   const cart = getCart();
+
   const item = cart.find(i => {
     const itemSwatch = (i.swatch === 'null' || i.swatch === 'undefined' || !i.swatch) ? null : i.swatch;
-    return Number(i.id) === pId && itemSwatch === cleanSwatch;
+    const itemEngText = (i.customEngraving && i.customEngraving.text) ? i.customEngraving.text.trim() : null;
+    return Number(i.id) === pId && itemSwatch === cleanSwatch && itemEngText === engText;
   });
 
   if (item) {
     if (newQty < 1) {
-      removeFromCart(productId, swatch);
+      removeFromCart(productId, swatch, engravingText);
       return;
     }
     item.qty = Math.min(newQty, 99);

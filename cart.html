@@ -106,14 +106,20 @@
           <div>
             <div class="cart-item-name">${item.name}</div>
             ${item.swatch ? `<div class="cart-item-swatch">Màu: ${item.swatch}</div>` : ''}
-            <div class="cart-item-price">${fmt(item.price * item.qty)}</div>
+            ${item.customEngraving && item.customEngraving.text ? `
+              <div class="cart-item-engraving" style="margin-top:4px; font-size:12px; color:#b45309; background:#fef3c7; border:1px solid #fde68a; padding:3px 7px; border-radius:6px; display:inline-flex; align-items:center; gap:4px;">
+                <span>✨ Khắc tên:</span> <strong>"${item.customEngraving.text}"</strong>
+                <span style="font-size:11px; opacity:0.85;">(${item.customEngraving.finish || 'Gold Foil'})</span>
+              </div>
+            ` : ''}
+            <div class="cart-item-price" style="margin-top:4px;">${fmt(item.price * item.qty)}</div>
           </div>
           <div class="cart-item-right">
-            <button class="btn-remove" onclick="doRemove(${item.id},'${item.swatch}')" aria-label="Xóa">×</button>
+            <button class="btn-remove" onclick="doRemove(${item.id},'${item.swatch || ''}','${item.customEngraving?.text ? item.customEngraving.text.replace(/'/g, "\\'") : ''}')" aria-label="Xóa">×</button>
             <div class="cart-qty-ctrl">
-              <button onclick="doQty(${item.id},'${item.swatch}',${item.qty - 1})">−</button>
+              <button onclick="doQty(${item.id},'${item.swatch || ''}',${item.qty - 1},'${item.customEngraving?.text ? item.customEngraving.text.replace(/'/g, "\\'") : ''}')">−</button>
               <span>${item.qty}</span>
-              <button onclick="doQty(${item.id},'${item.swatch}',${item.qty + 1})">+</button>
+              <button onclick="doQty(${item.id},'${item.swatch || ''}',${item.qty + 1},'${item.customEngraving?.text ? item.customEngraving.text.replace(/'/g, "\\'") : ''}')">+</button>
             </div>
             <div style="font-size:12.5px; color:var(--apple-tertiary);">${fmt(item.price)} × ${item.qty}</div>
           </div>
@@ -180,14 +186,18 @@
     setGiftOption(true, val);
   }
 
-  function doRemove(id, swatch) {
-    removeFromCart(id, swatch === 'null' ? null : swatch);
+  function doRemove(id, swatch, engText) {
+    const cleanSwatch = (!swatch || swatch === 'null' || swatch === 'undefined') ? null : swatch;
+    const cleanEng = (!engText || engText === 'null' || engText === 'undefined') ? null : engText;
+    removeFromCart(id, cleanSwatch, cleanEng);
     showToast('Đã xóa khỏi giỏ hàng');
     renderCart();
   }
 
-  function doQty(id, swatch, newQty) {
-    updateQty(id, swatch === 'null' ? null : swatch, newQty);
+  function doQty(id, swatch, newQty, engText) {
+    const cleanSwatch = (!swatch || swatch === 'null' || swatch === 'undefined') ? null : swatch;
+    const cleanEng = (!engText || engText === 'null' || engText === 'undefined') ? null : engText;
+    updateQty(id, cleanSwatch, newQty, cleanEng);
     renderCart();
   }
 

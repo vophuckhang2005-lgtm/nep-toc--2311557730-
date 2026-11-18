@@ -409,6 +409,7 @@
                   <div>
                     <div style="font-weight:600; color:var(--apple-black);">${item.name}</div>
                     <div style="font-size:12px; color:var(--apple-tertiary);">${item.swatch ? 'Màu: ' + item.swatch + ' • ' : ''}Số lượng: ${item.qty}</div>
+                    ${item.customEngraving && item.customEngraving.text ? `<div style="font-size:12px; color:#b45309; font-weight:600; margin-top:2px;">✨ Khắc tên: "${item.customEngraving.text}" (${item.customEngraving.finish || 'Gold Foil'})</div>` : ''}
                   </div>
                 </div>
                 <div style="font-weight:600; color:var(--apple-black);">${fmt(item.price * item.qty)}</div>
