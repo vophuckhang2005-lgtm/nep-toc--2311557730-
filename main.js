@@ -1,4 +1,4 @@
-// main.js — shared nav, toast, cart badge, floating widget & Apple fluid interactions
+// main.js — shared nav, toast, cart badge, floating widget, wishlist & Apple fluid interactions
 
 function renderHeader() {
   const h = document.getElementById('site-header');
@@ -151,7 +151,41 @@ function showToast(msg, type = '') {
   setTimeout(() => t.remove(), 2600);
 }
 
-// Apple Minimalist Product Card SVG
+// ── Wishlist (Yêu thích) Logic ──
+const WISHLIST_KEY = 'nep_toc_wishlist';
+function getWishlist() {
+  try { return JSON.parse(localStorage.getItem(WISHLIST_KEY)) || []; }
+  catch { return []; }
+}
+
+function isWishlisted(id) {
+  return getWishlist().includes(id);
+}
+
+function toggleWishlist(id) {
+  let list = getWishlist();
+  const exists = list.includes(id);
+  if (exists) {
+    list = list.filter(x => x !== id);
+  } else {
+    list.push(id);
+  }
+  localStorage.setItem(WISHLIST_KEY, JSON.stringify(list));
+  return !exists;
+}
+
+function handleWishlist(id, btn) {
+  const added = toggleWishlist(id);
+  btn.classList.toggle('active', added);
+  const svg = btn.querySelector('svg');
+  if (svg) {
+    svg.setAttribute('fill', added ? '#d6336c' : 'none');
+    svg.setAttribute('stroke', added ? '#d6336c' : '#1d1d1f');
+  }
+  showToast(added ? 'Đã lưu vào danh sách Yêu thích ❤️' : 'Đã bỏ khỏi danh sách Yêu thích', 'success');
+}
+
+// ── Angle 1: Frontal Primary View ──
 function productVisualSVG(p) {
   if (p.category === 'claw') {
     return `<svg width="84" height="84" viewBox="0 0 84 84" fill="none">
@@ -173,15 +207,65 @@ function productVisualSVG(p) {
   }
 }
 
-// Product Card HTML
+// ── Angle 2: Secondary Side Profile (Cận cảnh răng kẹp & lò xo) ──
+function productVisualSecondarySVG(p) {
+  if (p.category === 'claw') {
+    return `<svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+      <path d="M22 28 C30 18, 58 18, 66 28 C70 34, 68 44, 62 48 L56 68 C54 74, 34 74, 32 68 L26 48 C20 44, 18 34, 22 28 Z" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2.5"/>
+      <!-- Lò xo titan chịu lực -->
+      <circle cx="44" cy="30" r="6" fill="none" stroke="${p.cardAccent}" stroke-width="2.5"/>
+      <path d="M40 30 L48 30 M44 26 L44 34" stroke="${p.cardAccent}" stroke-width="2"/>
+      <!-- Răng kẹp bám tóc -->
+      <line x1="28" y1="52" x2="38" y2="52" stroke="${p.cardAccent}" stroke-width="2" stroke-linecap="round"/>
+      <line x1="50" y1="52" x2="60" y2="52" stroke="${p.cardAccent}" stroke-width="2" stroke-linecap="round"/>
+      <line x1="30" y1="58" x2="40" y2="58" stroke="${p.cardAccent}" stroke-width="2" stroke-linecap="round"/>
+      <line x1="48" y1="58" x2="58" y2="58" stroke="${p.cardAccent}" stroke-width="2" stroke-linecap="round"/>
+      <line x1="33" y1="64" x2="43" y2="64" stroke="${p.cardAccent}" stroke-width="2" stroke-linecap="round"/>
+      <line x1="45" y1="64" x2="55" y2="64" stroke="${p.cardAccent}" stroke-width="2" stroke-linecap="round"/>
+    </svg>`;
+  } else {
+    return `<svg width="88" height="88" viewBox="0 0 88 88" fill="none">
+      <!-- Cận cảnh xương kẹp mỏ vịt & đính kết -->
+      <rect x="20" y="24" width="48" height="40" rx="14" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/>
+      <path d="M28 44 L60 44" stroke="${p.cardAccent}" stroke-width="3" stroke-linecap="round"/>
+      <path d="M30 40 L34 48 L38 40 L42 48 L46 40 L50 48 L54 40 L58 48" stroke="${p.cardAccent}" stroke-width="2"/>
+      <circle cx="44" cy="33" r="4" fill="${p.cardAccent}"/>
+      <text x="44" y="60" font-size="8" text-anchor="middle" fill="${p.cardAccent}" font-weight="bold">GRIP TEST</text>
+    </svg>`;
+  }
+}
+
+// Product Card HTML with Wishlist & Dual-Angle Hover Reveal
 function productCardHTML(p) {
   const tagClass = ['Bán chạy', 'Yêu thích', 'Độc quyền'].includes(p.tag) ? '' : 'yellow';
+  const wishlisted = isWishlisted(p.id);
+
   return `
     <div class="product-card" onclick="location.href='/product-detail.html?id=${p.id}'">
       <div class="product-card-img" style="background:${p.cardBg}; color:${p.cardAccent}">
-        ${productVisualSVG(p)}
+        <!-- Angle 1: Primary View -->
+        <div class="img-view-primary">
+          ${productVisualSVG(p)}
+        </div>
+        
+        <!-- Angle 2: Secondary View (Hover Reveal) -->
+        <div class="img-view-secondary">
+          ${productVisualSecondarySVG(p)}
+        </div>
+
         <div class="product-tag ${tagClass}">${p.tag}</div>
+
+        <!-- Wishlist Button -->
+        <button class="btn-wishlist ${wishlisted ? 'active' : ''}" onclick="event.stopPropagation(); handleWishlist(${p.id}, this)" title="Lưu vào danh sách yêu thích">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="${wishlisted ? '#d6336c' : 'none'}" stroke="${wishlisted ? '#d6336c' : '#1d1d1f'}" stroke-width="2">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </button>
+
+        <!-- Hover Hint -->
+        <span class="hover-hint-badge">Răng kẹp & lò xo</span>
       </div>
+
       <div class="product-info">
         <div class="product-category">${p.categoryName}</div>
         <div class="product-name">${p.name}</div>

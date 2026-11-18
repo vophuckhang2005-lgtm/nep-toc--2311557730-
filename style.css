@@ -2005,3 +2005,216 @@ footer {
     font-size: 20px;
   }
 }
+
+/* ── Wishlist Heart Button (Apple Spring Animation) ── */
+.btn-wishlist {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  z-index: 5;
+  transition: transform 0.25s var(--spring-bounce), background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-wishlist:hover {
+  transform: scale(1.1);
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.btn-wishlist.active {
+  background: #fff0f3;
+  border-color: rgba(214, 51, 108, 0.3);
+  animation: heartPop 0.4s var(--spring-bounce);
+}
+
+@keyframes heartPop {
+  0% { transform: scale(0.8); }
+  50% { transform: scale(1.3) rotate(-8deg); }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.btn-wishlist svg {
+  transition: transform 0.2s ease, fill 0.2s ease, stroke 0.2s ease;
+}
+
+.btn-wishlist.active svg {
+  fill: var(--accent-rose);
+  stroke: var(--accent-rose);
+}
+
+/* ── Hover Reveal (Secondary View Transition) ── */
+.product-card-img {
+  position: relative;
+  overflow: hidden;
+  height: 230px;
+}
+
+.img-view-primary,
+.img-view-secondary {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s var(--spring-snappy), transform 0.4s var(--spring-snappy);
+}
+
+.img-view-primary {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.img-view-secondary {
+  opacity: 0;
+  transform: scale(0.92);
+  pointer-events: none;
+}
+
+.product-card:hover .img-view-primary {
+  opacity: 0;
+  transform: scale(1.08);
+}
+
+.product-card:hover .img-view-secondary {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hover-hint-badge {
+  position: absolute;
+  bottom: 10px;
+  background: rgba(29, 29, 31, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.product-card:hover .hover-hint-badge {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Lookbook Grid (#GocNangNepToc) ── */
+.lookbook-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 28px;
+}
+
+.lookbook-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 48px;
+}
+
+.lookbook-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.lookbook-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--apple-border-light);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.35s var(--spring-snappy), box-shadow 0.35s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.lookbook-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.lookbook-img-box {
+  height: 280px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.lookbook-overlay-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(10px);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--apple-black);
+  border: 0.5px solid rgba(0, 0, 0, 0.08);
+}
+
+.lookbook-meta {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #ffffff;
+}
+
+.lookbook-style-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--apple-black);
+  line-height: 1.35;
+}
+
+.lookbook-clip-name {
+  font-size: 13px;
+  color: var(--accent-rose);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.lookbook-tip {
+  font-size: 12.5px;
+  color: var(--apple-secondary);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+
+.btn-shop-look {
+  margin-top: 10px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--apple-black);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+
+.btn-shop-look:hover {
+  color: var(--accent-rose);
+}
