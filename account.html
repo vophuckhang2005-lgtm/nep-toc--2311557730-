@@ -76,29 +76,17 @@
       <div id="auth-panel-register" style="display:none;">
         <h1 style="font-size:23px; font-weight:700; color:var(--apple-black); margin-bottom:6px; letter-spacing:-0.02em;">Tạo tài khoản</h1>
         <p style="font-size:13.5px; color:var(--apple-secondary); margin:0 auto 20px;">
-          Điền thông tin bên dưới để tạo tài khoản cá nhân tại Nếp Tóc
+          Chỉ cần số điện thoại hoặc email để bắt đầu
         </p>
 
         <form class="auth-form" id="form-register">
           <div class="form-group">
-            <label for="reg-fullname">Họ và tên *</label>
-            <input type="text" id="reg-fullname" placeholder="Ví dụ: Nguyễn Phương Linh" required/>
-          </div>
-          <div class="form-group">
-            <label for="reg-phone">Số điện thoại *</label>
-            <input type="tel" id="reg-phone" placeholder="Ví dụ: 0901234567" required pattern="0[35789][0-9]{8}"/>
-          </div>
-          <div class="form-group">
-            <label for="reg-email">Email *</label>
-            <input type="email" id="reg-email" placeholder="Ví dụ: linh@gmail.com" required/>
+            <label for="reg-account">Số điện thoại hoặc Email *</label>
+            <input type="text" id="reg-account" placeholder="Ví dụ: 0901234567 hoặc linh@gmail.com" required/>
           </div>
           <div class="form-group">
             <label for="reg-password">Mật khẩu *</label>
             <input type="password" id="reg-password" placeholder="Tối thiểu 6 ký tự" required minlength="6"/>
-          </div>
-          <div class="form-group">
-            <label for="reg-address">Địa chỉ nhận hàng (TP.HCM)</label>
-            <input type="text" id="reg-address" placeholder="Ví dụ: 123 Nguyễn Thị Minh Khai, P. Bến Thành, Q.1"/>
           </div>
 
           <button type="submit" class="btn-primary" style="width:100%; padding:13px; font-size:14.5px; margin-top:8px;">Tạo tài khoản</button>
@@ -291,16 +279,17 @@
     dashView.style.display = 'block';
 
     // Profile info
-    const names = user.fullname.trim().split(' ');
-    const initials = names.length > 1 ? (names[0][0] + names[names.length - 1][0]).toUpperCase() : user.fullname.substring(0, 2).toUpperCase();
+    const displayName = user.fullname || (user.phone ? 'Khách hàng ' + user.phone.slice(-4) : 'Nàng Nếp Tóc');
+    const names = displayName.trim().split(' ');
+    const initials = names.length > 1 ? (names[0][0] + names[names.length - 1][0]).toUpperCase() : displayName.substring(0, 2).toUpperCase();
     document.getElementById('profile-avatar').textContent = initials;
-    document.getElementById('profile-name').textContent = user.fullname;
-    document.getElementById('profile-phone').textContent = user.phone;
-    document.getElementById('profile-address').textContent = user.address || 'Chưa lưu địa chỉ mặc định';
+    document.getElementById('profile-name').textContent = displayName;
+    document.getElementById('profile-phone').textContent = user.phone || user.email || 'Thành viên mới';
+    document.getElementById('profile-address').textContent = user.address || 'Chưa lưu (sẽ tự động cập nhật khi bạn đặt hàng)';
 
     // Profile edit form
     document.getElementById('edit-fullname').value = user.fullname || '';
-    document.getElementById('edit-phone').value = user.phone || '';
+    document.getElementById('edit-phone').value = user.phone || user.email || '';
     document.getElementById('edit-address').value = user.address || '';
 
     // Stats
@@ -436,12 +425,13 @@
     e.preventDefault();
     const account = document.getElementById('login-account').value.trim();
     const isEmail = account.includes('@');
-    const nameFromAccount = isEmail ? account.split('@')[0] : 'Khách Hàng Nếp Tóc';
+    const nameFromAccount = isEmail ? account.split('@')[0] : ('Khách hàng ' + account.slice(-4));
 
     saveUser({
       fullname: nameFromAccount,
-      phone: isEmail ? '0901 234 567' : account,
-      address: '123 Nguyễn Thị Minh Khai, P. Bến Thành, Q.1, TP.HCM'
+      phone: isEmail ? '' : account,
+      email: isEmail ? account : '',
+      address: ''
     });
 
     showToast('Đăng nhập thành công! Chào bạn ' + nameFromAccount);
@@ -451,12 +441,17 @@
   // Handle Register Form
   document.getElementById('form-register').addEventListener('submit', e => {
     e.preventDefault();
-    const fullname = document.getElementById('reg-fullname').value.trim();
-    const phone = document.getElementById('reg-phone').value.trim();
-    const address = document.getElementById('reg-address').value.trim();
+    const account = document.getElementById('reg-account').value.trim();
+    const isEmail = account.includes('@');
+    const nameFromAccount = isEmail ? account.split('@')[0] : ('Khách hàng ' + account.slice(-4));
 
-    saveUser({ fullname, phone, address });
-    showToast('Tạo tài khoản thành công! Chào mừng ' + fullname);
+    saveUser({
+      fullname: nameFromAccount,
+      phone: isEmail ? '' : account,
+      email: isEmail ? account : '',
+      address: ''
+    });
+    showToast('Tạo tài khoản thành công! Chào mừng ' + nameFromAccount);
     renderAccountPage();
   });
 
