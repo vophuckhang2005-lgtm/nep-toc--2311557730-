@@ -78,15 +78,22 @@ function renderHeader() {
       a.classList.add('active');
     }
   });
-  // Mobile toggle re-bind
-  const toggle = h.querySelector('#nav-toggle');
-  const nav = h.querySelector('#main-nav');
-  if (toggle && nav) {
-    toggle.addEventListener('click', () => nav.classList.toggle('open'));
-    document.addEventListener('click', e => {
-      if (!toggle.contains(e.target) && !nav.contains(e.target)) nav.classList.remove('open');
-    });
-  }
+  // Mobile toggle — dùng event delegation để chắc chắn hoạt động
+  h.addEventListener('click', e => {
+    const btn = e.target.closest('#nav-toggle');
+    if (btn) {
+      e.stopPropagation();
+      const navEl = h.querySelector('#main-nav');
+      if (navEl) navEl.classList.toggle('open');
+    }
+  });
+  document.addEventListener('click', e => {
+    const navEl = h.querySelector('#main-nav');
+    const btn = h.querySelector('#nav-toggle');
+    if (navEl && btn && !btn.contains(e.target) && !navEl.contains(e.target)) {
+      navEl.classList.remove('open');
+    }
+  });
   updateCartBadge();
 }
 
