@@ -1,4 +1,4 @@
-// main.js — shared nav, toast, cart badge, floating widget, wishlist, Apple fluid interactions & Mini Cart Drawer
+// main.js — shared nav, toast, cart badge, wishlist drawer, floating widget & Apple fluid interactions
 
 function renderHeader() {
   const h = document.getElementById('site-header');
@@ -15,6 +15,15 @@ function renderHeader() {
           <a href="/contact.html">Liên hệ</a>
         </nav>
         <div class="nav-actions">
+          <!-- Wishlist Nav Button -->
+          <button class="wishlist-nav-btn" id="open-wishlist-btn" aria-label="Xem sản phẩm yêu thích" title="Danh sách yêu thích">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            <span id="wishlist-badge">0</span>
+          </button>
+
+          <!-- Cart Button -->
           <button class="cart-btn" id="open-cart-btn" aria-label="Mở giỏ hàng">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
@@ -24,6 +33,8 @@ function renderHeader() {
             <span>Giỏ hàng</span>
             <span id="cart-badge">0</span>
           </button>
+
+          <!-- Mobile Toggle -->
           <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
             <span></span>
             <span></span>
@@ -46,7 +57,7 @@ function renderHeader() {
     }
   });
 
-  // Mobile toggle handler — Apple direct response
+  // Mobile toggle handler
   const btn = h.querySelector('#nav-toggle');
   const navEl = h.querySelector('#main-nav');
 
@@ -72,7 +83,7 @@ function renderHeader() {
     });
   }
 
-  // Open Mini Cart Drawer on cart button click
+  // Open Mini Cart Drawer
   const openCartBtn = h.querySelector('#open-cart-btn');
   if (openCartBtn) {
     openCartBtn.addEventListener('click', (e) => {
@@ -81,9 +92,20 @@ function renderHeader() {
     });
   }
 
+  // Open Wishlist Drawer
+  const openWishlistBtn = h.querySelector('#open-wishlist-btn');
+  if (openWishlistBtn) {
+    openWishlistBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openWishlistDrawer();
+    });
+  }
+
   updateCartBadge();
+  updateWishlistBadge();
   renderFloatingHelp();
   initCartDrawer();
+  initWishlistDrawer();
 }
 
 function renderFooter() {
@@ -138,7 +160,7 @@ function renderFloatingHelp() {
   document.body.appendChild(wrap);
 }
 
-// ── Apple Slide-Out Mini Cart Drawer (Feature 1 & Feature 3) ──
+// ── Apple Slide-Out Mini Cart Drawer ──
 function initCartDrawer() {
   if (document.getElementById('cart-drawer-overlay')) return;
 
@@ -165,7 +187,6 @@ function initCartDrawer() {
 
   document.body.appendChild(drawerEl);
 
-  // Close handlers
   drawerEl.addEventListener('click', closeCartDrawer);
   document.getElementById('cart-drawer-close').addEventListener('click', closeCartDrawer);
 
@@ -173,6 +194,7 @@ function initCartDrawer() {
 }
 
 function openCartDrawer() {
+  closeWishlistDrawer();
   const overlay = document.getElementById('cart-drawer-overlay');
   if (overlay) {
     renderCartDrawerContent();
@@ -265,16 +287,16 @@ function renderCartDrawerContent() {
     <div class="gift-option-card ${gift.enabled ? 'checked' : ''}" id="drawer-gift-card">
       <label class="gift-option-header">
         <input type="checkbox" id="drawer-gift-check" ${gift.enabled ? 'checked' : ''} onchange="handleDrawerGiftToggle(this.checked)"/>
-        <span class="gift-option-title">Đóng gói hộp quà & thiệp viết tay</span>
+        <span class="gift-option-title">Đóng gói hộp quà nơ lụa & thiệp viết tay</span>
         <span class="gift-option-price">+15.000đ</span>
       </label>
       <div class="gift-note-box ${gift.enabled ? 'show' : ''}" id="drawer-gift-note-box">
-        <textarea id="drawer-gift-note" class="gift-note-input" rows="2" placeholder="Ghi lời chúc lên thiệp (ví dụ: Chúc em bé luôn xinh tươi rạng ngời...)" oninput="handleDrawerGiftNote(this.value)">${gift.note || ''}</textarea>
+        <textarea id="drawer-gift-note" class="gift-note-input" rows="2" placeholder="Ghi lời chúc lên thiệp (ví dụ: Chúc em luôn xinh đẹp rạng ngời...)" oninput="handleDrawerGiftNote(this.value)">${gift.note || ''}</textarea>
       </div>
     </div>
   `;
 
-  // 3. Footer with Total & Direct Checkout Button
+  // 3. Footer
   const total = getTotal();
   footerEl.innerHTML = `
     <div class="drawer-subtotal-row">
@@ -310,7 +332,121 @@ function handleDrawerGiftNote(val) {
   setGiftOption(true, val);
 }
 
-// Apple Fluid Toast Notification
+// ── Apple Slide-Out Wishlist Drawer (Xem lại danh sách Yêu thích) ──
+function initWishlistDrawer() {
+  if (document.getElementById('wishlist-drawer-overlay')) return;
+
+  const drawerEl = document.createElement('div');
+  drawerEl.id = 'wishlist-drawer-overlay';
+  drawerEl.className = 'wishlist-drawer-overlay';
+  drawerEl.innerHTML = `
+    <div class="wishlist-drawer" id="wishlist-drawer" onclick="event.stopPropagation()">
+      <div class="wishlist-drawer-header">
+        <div class="wishlist-drawer-title">Sản phẩm yêu thích</div>
+        <button class="cart-drawer-close" id="wishlist-drawer-close" aria-label="Đóng danh sách yêu thích">×</button>
+      </div>
+      <div class="wishlist-drawer-body" id="wishlist-drawer-body"></div>
+    </div>
+  `;
+
+  document.body.appendChild(drawerEl);
+
+  drawerEl.addEventListener('click', closeWishlistDrawer);
+  document.getElementById('wishlist-drawer-close').addEventListener('click', closeWishlistDrawer);
+
+  renderWishlistDrawerContent();
+}
+
+function openWishlistDrawer() {
+  closeCartDrawer();
+  const overlay = document.getElementById('wishlist-drawer-overlay');
+  if (overlay) {
+    renderWishlistDrawerContent();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeWishlistDrawer() {
+  const overlay = document.getElementById('wishlist-drawer-overlay');
+  if (overlay) {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+function renderWishlistDrawerContent() {
+  const bodyEl = document.getElementById('wishlist-drawer-body');
+  if (!bodyEl) return;
+
+  const wishlistIds = getWishlist();
+  const wishlistedProducts = PRODUCTS.filter(p => wishlistIds.includes(p.id));
+
+  if (wishlistedProducts.length === 0) {
+    bodyEl.innerHTML = `
+      <div class="drawer-empty-msg">
+        <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8" style="margin:0 auto 12px; color:var(--apple-tertiary);"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        <p style="font-size:15px; font-weight:600; color:var(--apple-black); margin-bottom:4px;">Chưa có sản phẩm yêu thích nào</p>
+        <p style="font-size:13px; color:var(--apple-secondary); margin-bottom:20px;">Hãy bấm biểu tượng trái tim trên các sản phẩm bạn ưng ý nhé.</p>
+        <a href="products.html" class="btn-primary" style="display:inline-block; font-size:13px; padding:10px 22px;" onclick="closeWishlistDrawer()">Khám phá ngay</a>
+      </div>
+    `;
+    return;
+  }
+
+  bodyEl.innerHTML = `
+    <div class="wishlist-drawer-list">
+      ${wishlistedProducts.map(p => `
+        <div class="wishlist-drawer-item">
+          <div class="drawer-item-thumb" style="background:${p.cardBg}">
+            ${productVisualSVG(p)}
+          </div>
+          <div class="drawer-item-info">
+            <div class="drawer-item-name" style="cursor:pointer;" onclick="location.href='/product-detail.html?id=${p.id}'">${p.name}</div>
+            <div class="drawer-item-swatch">${p.categoryName}</div>
+            <div class="drawer-item-price">${fmt(p.price)}</div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap:8px;">
+            <button class="btn-remove" onclick="removeWishlistItem(${p.id})" title="Bỏ thích">×</button>
+            <button class="wishlist-item-btn-add" onclick="quickAdd(${p.id})">Thêm vào giỏ</button>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function removeWishlistItem(id) {
+  toggleWishlist(id);
+  updateWishlistBadge();
+  renderWishlistDrawerContent();
+  // Also update heart state on page if visible
+  document.querySelectorAll(`.product-card[onclick*="id=${id}"] .btn-wishlist`).forEach(btn => {
+    btn.classList.remove('active');
+    const svg = btn.querySelector('svg');
+    if (svg) {
+      svg.setAttribute('fill', 'none');
+      svg.setAttribute('stroke', '#1d1d1f');
+    }
+  });
+  showToast('Đã xóa khỏi danh sách yêu thích');
+}
+
+function updateWishlistBadge() {
+  const badge = document.getElementById('wishlist-badge');
+  const navBtn = document.getElementById('open-wishlist-btn');
+  const count = getWishlist().length;
+
+  if (badge) {
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'flex' : 'none';
+  }
+  if (navBtn) {
+    navBtn.classList.toggle('has-items', count > 0);
+  }
+}
+
+// Apple Fluid Toast Notification (Sửa dứt điểm lỗi chữ trắng trên nền trắng)
 function showToast(msg, type = '') {
   let container = document.querySelector('.toast-container');
   if (!container) {
@@ -345,6 +481,7 @@ function toggleWishlist(id) {
     list.push(id);
   }
   localStorage.setItem(WISHLIST_KEY, JSON.stringify(list));
+  updateWishlistBadge();
   return !exists;
 }
 
@@ -356,7 +493,7 @@ function handleWishlist(id, btn) {
     svg.setAttribute('fill', added ? '#d6336c' : 'none');
     svg.setAttribute('stroke', added ? '#d6336c' : '#1d1d1f');
   }
-  showToast(added ? 'Đã lưu vào danh sách Yêu thích' : 'Đã bỏ khỏi danh sách Yêu thích', 'success');
+  showToast(added ? 'Đã lưu vào danh sách Yêu thích' : 'Đã bỏ khỏi danh sách Yêu thích');
 }
 
 // ── Angle 1: Frontal Primary View ──
