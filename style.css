@@ -1990,8 +1990,17 @@ footer {
 }
 
 .float-btn.phone-btn {
-  background: #25d366;
-  color: #fff;
+  background: #ffffff;
+  color: var(--apple-black);
+  border: 1px solid var(--apple-border);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.float-btn.phone-btn:hover {
+  background: #ffffff;
+  color: var(--pink);
+  border-color: var(--pink);
+  transform: translateY(-3px) scale(1.08);
 }
 
 .float-btn.chat-btn {
@@ -3593,46 +3602,62 @@ footer {
 }
 
 .scroll-reveal {
-  opacity: 0;
-  transform: translateY(32px) scale(0.985);
-  filter: blur(4px);
+  opacity: 1;
+  transform: translateY(0);
   transition: 
-    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-    filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform, filter;
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.scroll-reveal.revealed {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
+.scroll-reveal.scroll-init {
+  opacity: 0;
+  transform: translateY(24px) scale(0.985);
+}
+
+.scroll-reveal.revealed,
+.scroll-reveal.visible {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
 }
 
 .scroll-reveal-left {
-  opacity: 0;
-  transform: translateX(-32px);
-  filter: blur(4px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.scroll-reveal-left.revealed {
   opacity: 1;
   transform: translateX(0);
-  filter: blur(0);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-left.scroll-init {
+  opacity: 0;
+  transform: translateX(-24px);
+}
+
+.scroll-reveal-left.revealed,
+.scroll-reveal-left.visible {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
 }
 
 .scroll-reveal-right {
-  opacity: 0;
-  transform: translateX(32px);
-  filter: blur(4px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), filter 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.scroll-reveal-right.revealed {
   opacity: 1;
   transform: translateX(0);
-  filter: blur(0);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal-right.scroll-init {
+  opacity: 0;
+  transform: translateX(24px);
+}
+
+.scroll-reveal-right.revealed,
+.scroll-reveal-right.visible {
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+/* Nâng vị trí của cụm nút liên hệ nổi khi thanh Sticky Add-to-Cart xuất hiện */
+body.has-sticky-atc .floating-contact {
+  bottom: 88px !important;
+  transition: bottom 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Stagger Delay Classes */

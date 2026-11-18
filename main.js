@@ -565,51 +565,139 @@ function handleWishlist(id, btn) {
   showToast(added ? 'Đã lưu vào danh sách Yêu thích' : 'Đã bỏ khỏi danh sách Yêu thích');
 }
 
-// ── Angle 1: Frontal Primary View ──
-function productVisualSVG(p) {
-  if (p.category === 'claw') {
-    return `<svg width="84" height="84" viewBox="0 0 84 84" fill="none">
-      <ellipse cx="42" cy="34" rx="32" ry="22" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2.5"/>
-      <rect x="36" y="52" width="12" height="22" rx="6" fill="${p.cardAccent}"/>
-      <ellipse cx="42" cy="34" rx="20" ry="13" fill="${p.cardAccent}" opacity="0.18"/>
-      <line x1="22" y1="34" x2="62" y2="34" stroke="${p.cardAccent}" stroke-width="1.5" stroke-dasharray="4 3"/>
-    </svg>`;
-  } else {
-    return `<svg width="84" height="84" viewBox="0 0 84 84" fill="none">
-      <rect x="14" y="34" width="56" height="12" rx="6" fill="${p.cardAccent}" opacity="0.2" stroke="${p.cardAccent}" stroke-width="2"/>
-      <circle cx="26" cy="40" r="7" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/>
-      <circle cx="42" cy="40" r="7" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/>
-      <circle cx="58" cy="40" r="7" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/>
-      <line x1="26" y1="47" x2="26" y2="60" stroke="${p.cardAccent}" stroke-width="2"/>
-      <line x1="42" y1="47" x2="42" y2="60" stroke="${p.cardAccent}" stroke-width="2"/>
-      <line x1="58" y1="47" x2="58" y2="60" stroke="${p.cardAccent}" stroke-width="2"/>
-    </svg>`;
+// ── Angle 1: Unique High-Craft Product Illustrations (Impeccable Design) ──
+function productVisualSVG(p, size = 84) {
+  const id = Number(p.id);
+  const bg = p.cardBg || '#fefae0';
+  const ac = p.cardAccent || '#d6336c';
+
+  switch (id) {
+    case 1: // Kẹp Càng Cua Hoa Sứ Pastel
+      return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
+        <ellipse cx="50" cy="30" rx="14" ry="20" fill="#ffffff" stroke="${ac}" stroke-width="2.2"/>
+        <ellipse cx="68" cy="42" rx="14" ry="20" fill="#ffffff" stroke="${ac}" stroke-width="2.2" transform="rotate(72 68 42)"/>
+        <ellipse cx="62" cy="66" rx="14" ry="20" fill="#ffffff" stroke="${ac}" stroke-width="2.2" transform="rotate(144 62 66)"/>
+        <ellipse cx="38" cy="66" rx="14" ry="20" fill="#ffffff" stroke="${ac}" stroke-width="2.2" transform="rotate(216 38 66)"/>
+        <ellipse cx="32" cy="42" rx="14" ry="20" fill="#ffffff" stroke="${ac}" stroke-width="2.2" transform="rotate(288 32 42)"/>
+        <circle cx="50" cy="50" r="10" fill="#ffd166" opacity="0.85"/>
+        <circle cx="50" cy="50" r="5" fill="${ac}"/>
+        <path d="M38 78 Q50 88 62 78" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
+        <line x1="44" y1="78" x2="44" y2="84" stroke="${ac}" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="50" y1="79" x2="50" y2="85" stroke="${ac}" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="56" y1="78" x2="56" y2="84" stroke="${ac}" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>`;
+
+    case 2: // Kẹp Càng Cua Kim Loại Tối Giản
+      return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
+        <path d="M25 65 C25 35, 75 35, 75 65" stroke="${ac}" stroke-width="4.5" stroke-linecap="round"/>
+        <path d="M34 65 C34 44, 66 44, 66 65" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
+        <rect x="44" y="32" width="12" height="10" rx="3" fill="${ac}"/>
+        <line x1="47" y1="34" x2="47" y2="40" stroke="#ffffff" stroke-width="1.8"/>
+        <line x1="53" y1="34" x2="53" y2="40" stroke="#ffffff" stroke-width="1.8"/>
+        <path d="M30 68 L30 82 M40 68 L40 84 M50 68 L50 85 M60 68 L60 84 M70 68 L70 82" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="50" cy="37" r="2.5" fill="#ffffff"/>
+      </svg>`;
+
+    case 3: // Kẹp Càng Cua Lông Nhung Mịn
+      return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
+        <rect x="22" y="28" width="56" height="38" rx="19" fill="#fceef5" stroke="${ac}" stroke-width="3"/>
+        <path d="M24 47 Q50 36 76 47" stroke="${ac}" stroke-width="2" stroke-dasharray="3 3"/>
+        <path d="M32 30 Q50 56 68 30" stroke="${ac}" stroke-width="1.8" opacity="0.6"/>
+        <path d="M32 64 Q50 40 68 64" stroke="${ac}" stroke-width="1.8" opacity="0.6"/>
+        <path d="M30 66 C30 80, 36 82, 38 72 C40 82, 46 82, 48 72 C50 82, 56 82, 58 72 C60 82, 66 82, 68 66" fill="${ac}" opacity="0.85"/>
+      </svg>`;
+
+    case 4: // Kẹp Càng Cua Vân Đá Marble
+      return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
+        <path d="M22 40 C22 24, 78 24, 78 40 C78 52, 68 64, 60 68 L40 68 C32 64, 22 52, 22 40 Z" fill="#e0f2fe" stroke="${ac}" stroke-width="2.5"/>
+        <path d="M28 36 Q42 46 54 32 T74 42" stroke="${ac}" stroke-width="2" opacity="0.75" stroke-linecap="round"/>
+        <path d="M34 50 Q48 58 64 48" stroke="${ac}" stroke-width="1.5" opacity="0.5" stroke-linecap="round"/>
+        <path d="M32 68 L32 80 M42 68 L42 83 M50 68 L50 84 M58 68 L58 83 M66 68 L66 80" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="50" cy="27" r="4" fill="${ac}"/>
+      </svg>`;
+
+    case 5: // Set 5 Kẹp Tăm Ngọc Trai
+      return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
+        <path d="M20 70 L78 30" stroke="#e6a817" stroke-width="3" stroke-linecap="round"/>
+        <path d="M22 76 L82 46" stroke="#e6a817" stroke-width="3" stroke-linecap="round"/>
+        <path d="M26 84 L86 64" stroke="#e6a817" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="34" cy="60" r="7.5" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+        <circle cx="32" cy="58" r="2.5" fill="#f8fafc"/>
+        <circle cx="48" cy="51" r="6.5" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+        <circle cx="46" cy="49" r="2" fill="#f8fafc"/>
+        <circle cx="61" cy="42" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+        <circle cx="72" cy="34" r="4.5" fill="#ffffff" stroke="${ac}" stroke-width="1.8"/>
+        <circle cx="42" cy="72" r="6" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+        <circle cx="58" cy="60" r="6" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+      </svg>`;
+
+    case 6: // Set 3 Kẹp Nơ Lụa Satin
+      return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
+        <path d="M50 42 C40 24, 18 28, 22 46 C24 58, 42 50, 50 46 Z" fill="#ffe3ec" stroke="${ac}" stroke-width="2.5"/>
+        <path d="M50 42 C60 24, 82 28, 78 46 C76 58, 58 50, 50 46 Z" fill="#ffe3ec" stroke="${ac}" stroke-width="2.5"/>
+        <ellipse cx="50" cy="44" rx="6" ry="7" fill="${ac}"/>
+        <path d="M46 48 C42 62, 30 76, 26 84 C34 82, 44 72, 48 52 Z" fill="#ff8787" stroke="${ac}" stroke-width="2"/>
+        <path d="M54 48 C58 62, 70 76, 74 84 C66 82, 56 72, 52 52 Z" fill="#ff8787" stroke="${ac}" stroke-width="2"/>
+      </svg>`;
+
+    case 7: // Kẹp Bấm Giọt Nước Men Sứ
+      return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
+        <path d="M50 20 C68 20, 78 38, 74 65 C70 82, 56 86, 50 86 C44 86, 30 82, 26 65 C22 38, 32 20, 50 20 Z" fill="#e6fcf5" stroke="${ac}" stroke-width="3"/>
+        <path d="M50 35 C58 35, 62 44, 60 58 C58 68, 52 72, 50 72 C48 72, 42 68, 40 58 C38 44, 42 35, 50 35 Z" fill="#ffffff" stroke="${ac}" stroke-width="2.2"/>
+        <line x1="50" y1="28" x2="50" y2="76" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="50" cy="27" r="3.5" fill="${ac}"/>
+      </svg>`;
+
+    case 8: // Set 10 Kẹp Mini Hoa Cúc Nhí
+      return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
+        <g transform="translate(50, 42)">
+          <circle cx="0" cy="-14" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="1.8"/>
+          <circle cx="10" cy="-10" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="1.8"/>
+          <circle cx="14" cy="0" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="1.8"/>
+          <circle cx="10" cy="10" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="1.8"/>
+          <circle cx="0" cy="14" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="1.8"/>
+          <circle cx="-10" cy="10" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="1.8"/>
+          <circle cx="-14" cy="0" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="1.8"/>
+          <circle cx="-10" cy="-10" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="1.8"/>
+          <circle cx="0" cy="0" r="8" fill="#ffd43b" stroke="${ac}" stroke-width="2"/>
+        </g>
+        <g transform="translate(26, 68) scale(0.65)">
+          <circle cx="0" cy="-14" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+          <circle cx="14" cy="0" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+          <circle cx="0" cy="14" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+          <circle cx="-14" cy="0" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+          <circle cx="0" cy="0" r="8" fill="#ffd43b" stroke="${ac}" stroke-width="2"/>
+        </g>
+        <g transform="translate(74, 68) scale(0.65)">
+          <circle cx="0" cy="-14" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+          <circle cx="14" cy="0" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+          <circle cx="0" cy="14" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+          <circle cx="-14" cy="0" r="5.5" fill="#ffffff" stroke="${ac}" stroke-width="2"/>
+          <circle cx="0" cy="0" r="8" fill="#ffd43b" stroke="${ac}" stroke-width="2"/>
+        </g>
+        <path d="M44 60 L44 72 M50 60 L50 74 M56 60 L56 72" stroke="${ac}" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>`;
+
+    default:
+      return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
+        <circle cx="50" cy="50" r="30" fill="${bg}" stroke="${ac}" stroke-width="3"/>
+      </svg>`;
   }
 }
 
-// ── Angle 2: Secondary Side Profile ──
-function productVisualSecondarySVG(p) {
-  if (p.category === 'claw') {
-    return `<svg width="88" height="88" viewBox="0 0 88 88" fill="none">
-      <path d="M22 28 C30 18, 58 18, 66 28 C70 34, 68 44, 62 48 L56 68 C54 74, 34 74, 32 68 L26 48 C20 44, 18 34, 22 28 Z" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2.5"/>
-      <circle cx="44" cy="30" r="6" fill="none" stroke="${p.cardAccent}" stroke-width="2.5"/>
-      <path d="M40 30 L48 30 M44 26 L44 34" stroke="${p.cardAccent}" stroke-width="2"/>
-      <line x1="28" y1="52" x2="38" y2="52" stroke="${p.cardAccent}" stroke-width="2" stroke-linecap="round"/>
-      <line x1="50" y1="52" x2="60" y2="52" stroke="${p.cardAccent}" stroke-width="2" stroke-linecap="round"/>
-      <line x1="30" y1="58" x2="40" y2="58" stroke="${p.cardAccent}" stroke-width="2" stroke-linecap="round"/>
-      <line x1="48" y1="58" x2="58" y2="58" stroke="${p.cardAccent}" stroke-width="2" stroke-linecap="round"/>
-      <line x1="33" y1="64" x2="43" y2="64" stroke="${p.cardAccent}" stroke-width="2" stroke-linecap="round"/>
-      <line x1="45" y1="64" x2="55" y2="64" stroke="${p.cardAccent}" stroke-width="2" stroke-linecap="round"/>
-    </svg>`;
-  } else {
-    return `<svg width="88" height="88" viewBox="0 0 88 88" fill="none">
-      <rect x="20" y="24" width="48" height="40" rx="14" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/>
-      <path d="M28 44 L60 44" stroke="${p.cardAccent}" stroke-width="3" stroke-linecap="round"/>
-      <path d="M30 40 L34 48 L38 40 L42 48 L46 40 L50 48 L54 40 L58 48" stroke="${p.cardAccent}" stroke-width="2"/>
-      <circle cx="44" cy="33" r="4" fill="${p.cardAccent}"/>
-      <text x="44" y="60" font-size="8" text-anchor="middle" fill="${p.cardAccent}" font-weight="bold">GRIP TEST</text>
-    </svg>`;
-  }
+// ── Angle 2: Secondary View / Răng Kẹp & Chi Tiết Lò Xo ──
+function productVisualSecondarySVG(p, size = 88) {
+  const ac = p.cardAccent || '#d6336c';
+  return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
+    <rect x="24" y="24" width="52" height="52" rx="14" fill="#fafafc" stroke="${ac}" stroke-width="2.5"/>
+    <circle cx="50" cy="38" r="9" fill="none" stroke="${ac}" stroke-width="3"/>
+    <line x1="44" y1="38" x2="56" y2="38" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
+    <line x1="32" y1="54" x2="42" y2="54" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
+    <line x1="58" y1="54" x2="68" y2="54" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
+    <line x1="36" y1="62" x2="46" y2="62" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
+    <line x1="54" y1="62" x2="64" y2="62" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
+    <text x="50" y="76" font-size="7.5" text-anchor="middle" fill="${ac}" font-weight="700" letter-spacing="1">LÒ XO TITAN</text>
+  </svg>`;
 }
 
 // Product Card HTML with Wishlist & Dual-Angle Hover Reveal

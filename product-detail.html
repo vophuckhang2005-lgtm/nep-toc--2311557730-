@@ -65,24 +65,7 @@
     let qty = 1;
 
     function getVisualLarge() {
-      if (p.category === 'claw') {
-        return `<svg width="180" height="180" viewBox="0 0 180 180" fill="none">
-          <ellipse cx="90" cy="68" rx="66" ry="45" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="4"/>
-          <rect x="78" y="110" width="24" height="48" rx="12" fill="${p.cardAccent}"/>
-          <ellipse cx="90" cy="68" rx="44" ry="28" fill="${p.cardAccent}" opacity="0.25"/>
-          <line x1="36" y1="68" x2="144" y2="68" stroke="${p.cardAccent}" stroke-width="2.5" stroke-dasharray="10 6"/>
-        </svg>`;
-      } else {
-        return `<svg width="180" height="180" viewBox="0 0 180 180" fill="none">
-          <rect x="20" y="72" width="140" height="28" rx="14" fill="${p.cardAccent}" opacity="0.25" stroke="${p.cardAccent}" stroke-width="3"/>
-          <circle cx="50" cy="86" r="22" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="3"/>
-          <circle cx="90" cy="86" r="22" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="3"/>
-          <circle cx="130" cy="86" r="22" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="3"/>
-          <line x1="50" y1="108" x2="50" y2="140" stroke="${p.cardAccent}" stroke-width="4"/>
-          <line x1="90" y1="108" x2="90" y2="140" stroke="${p.cardAccent}" stroke-width="4"/>
-          <line x1="130" y1="108" x2="130" y2="140" stroke="${p.cardAccent}" stroke-width="4"/>
-        </svg>`;
-      }
+      return productVisualSVG(p, 200);
     }
 
     function renderDetail() {
@@ -285,8 +268,10 @@
             entries.forEach(entry => {
               if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
                 stickyBar.classList.add('visible');
+                document.body.classList.add('has-sticky-atc');
               } else {
                 stickyBar.classList.remove('visible');
+                document.body.classList.remove('has-sticky-atc');
               }
             });
           }, { threshold: 0 });
