@@ -5,6 +5,12 @@ function renderHeader() {
   if (!h) return;
   h.innerHTML = `
     <header id="app-header">
+      <div class="top-announcement-bar">
+        <span>Miễn phí giao hàng đơn từ 300.000đ</span>
+        <span class="bar-separator">•</span>
+        <span>Dịch vụ khắc laser cá nhân hóa miễn phí</span>
+        <a href="studio.html" class="top-bar-link">Khám phá ngay →</a>
+      </div>
       <div class="nav-inner">
         <a href="index.html" class="logo">Nếp <span>Tóc</span></a>
         <nav id="main-nav">
@@ -185,17 +191,21 @@ function renderFloatingHelp() {
       <div class="live-chat-body" id="live-chat-messages">
         <div class="chat-bubble-row bot">
           <div class="chat-bubble">
-            Chào bạn! Mình là Stylist của Nếp Tóc. Bạn cần tìm kẹp cho chất tóc dày hay mỏng, hoặc cần tư vấn kẹp giữ nếp đi làm, đi chơi thì nhắn mình nhé!
+            Xin chào! Mình là Stylist của Nếp Tóc. Bạn cần tư vấn chọn kẹp cho chất tóc, dịch vụ khắc tên laser hay phí giao hàng cứ nhắn mình nhé!
           </div>
           <span class="chat-timestamp">Vừa xong</span>
         </div>
 
-        <!-- Suggestion Chips -->
+        <!-- Suggestion Chips (Horizontal Scrollable) -->
         <div class="chat-suggestion-chips" id="chat-suggestion-chips">
-          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tóc dày & dài nên chọn kẹp nào?')">Tóc dày & dài</button>
-          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tóc mỏng kẹp mẫu nào không bị tuột?')">Tóc mỏng/ngắn</button>
-          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Màu kẹp nào tôn da sáng mặt nhất?')">Màu tôn da</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Khắc tên laser lên kẹp như thế nào?')">Khắc tên laser</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tóc dày & dài nên chọn kẹp nào?')">Tóc dày / Dài</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tóc mỏng kẹp mẫu nào không bị tuột?')">Tóc mỏng / Ngắn</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Phí giao hàng và thời gian nhận?')">Phí ship & Giao 24h</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Có được kiểm tra hàng trước khi thanh toán không?')">Đồng kiểm COD</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Chính sách bảo hành lò xo kẹp?')">Bảo hành 30 ngày</button>
           <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tư vấn đóng gói hộp quà nơ lụa')">Gói hộp quà</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Địa chỉ cửa hàng xem trực tiếp?')">Địa chỉ tiệm</button>
         </div>
       </div>
 
@@ -985,14 +995,96 @@ function updateAccountUI() {
   }
 }
 
-// ── Emi Jay Style Live Stylist Chat Logic ──
-const STYLIST_ANSWERS = {
-  'day': 'Với tóc dày hoặc uốn xoăn bồng bềnh, bạn nên chọn kẹp càng cua cỡ lớn 10.5cm – 11cm như mẫu **Kẹp Hoa Sứ Pastel (45k)** hoặc **Kẹp Càng Cua Nâu Trà Hổ Phách (50k)**. Cốt lò xo thép Titan chịu lực cao, ôm trọn tóc suốt ngày dài không bị tuột nha!',
-  'mong': 'Với tóc mỏng hoặc tóc tơ mềm, bạn nên chọn các mẫu kẹp kích cỡ vừa 8.5cm – 9cm như **Kẹp Bán Nguyệt Tối Giản (65k)** hoặc set kẹp mái mini. Răng kẹp ôm sát nhẹ nhàng, không gây nặng đầu hay gãy nếp tóc.',
-  'mau': 'Nếu bạn thích màu tôn da sáng mặt, gam màu **Nâu Trà Hổ Phách** và **Hồng Phấn Pastel** là 2 tông màu bán chạy nhất tại Nếp Tóc. Màu sắc trong trẻo tự nhiên, phối đồ công sở hay đi chơi đều rất thanh lịch!',
-  'qua': 'Khi đặt hàng, bạn chỉ cần tích chọn *"Đóng gói hộp quà nơ lụa & thiệp viết tay"* (+15.000đ). Tụi mình sẽ chuẩn bị hộp nơ lụa tinh tế và nắn nót viết lời chúc riêng của bạn gửi đến người thương nhé!',
-  'default': 'Cảm ơn bạn đã nhắn tin! Bạn có thể gọi Hotline hoặc nhắn Zalo **0901 234 567** để được Stylist Nếp Tóc tư vấn gửi video cận cảnh từng mẫu kẹp trên tóc nha!'
-};
+// ── Live Stylist Chat Knowledge Engine (14 Scenarios) ──
+const STYLIST_KNOWLEDGE = [
+  {
+    keys: ['khac', 'laser', 'ten', 'chu', 'chu ky', 'ky niem', 'ca nhan hoa', 'bespoke', 'studio'],
+    reply: 'Nếp Tóc tặng **miễn phí 100% dịch vụ khắc laser vi tính** lên kẹp càng cua cho mọi đơn hàng. Công nghệ laser độ sâu 0.15mm không phai mờ, bạn có thể khắc tên riêng, ngày kỷ niệm hoặc lời chúc ý nghĩa (tối đa 15 ký tự). Bạn có thể bấm vào mục **"Khắc tên laser"** trên trang chủ hoặc trang sản phẩm để xem trước mẫu khắc nhé!'
+  },
+  {
+    keys: ['day', 'nhieu', 'dai', 'xoan', 'lon', 'bong benh', 'bui to'],
+    reply: 'Với tóc dày, dài hoặc uốn xoăn bồng bềnh, bạn nên chọn kẹp càng cua cỡ lớn 11cm – 12cm như **Kẹp Càng Cua Kim Loại Tối Giản (65k)** hoặc **Kẹp Càng Cua Lông Nhung (55k)**. Cốt lò xo thép titan 8 vòng trợ lực sẽ ôm trọn và giữ chắc nếp tóc suốt ngày mà không tuột hay đau da đầu.'
+  },
+  {
+    keys: ['mong', 'ngan', 'it', 'to', 'yeu', 'tuot', 'nhe'],
+    reply: 'Với tóc mỏng, tóc ngắn ngang vai hoặc tóc tơ trơn mềm, gợi ý tốt nhất là **Kẹp Càng Cua Hoa Sứ Pastel (45k)** hoặc các **Set kẹp mái ngọc trai**. Thiết kế răng kẹp khít và chất liệu mài bóng mờ bám tóc rất êm, không gây nặng đầu hay để lại vết hằn gãy nếp.'
+  },
+  {
+    keys: ['ship', 'giao', 'freeship', 'phi', 'van chuyen', 'bao lau', 'nhanh', '24h'],
+    reply: 'Nếp Tóc **miễn phí giao hàng toàn TP.HCM cho đơn từ 300.000đ**. Với đơn dưới 300.000đ, phí ship đồng giá 25.000đ. Đơn nội thành TP.HCM được giao nhanh trong vòng **24h**, bạn đặt trước 12h trưa là có thể nhận ngay trong ngày ạ!'
+  },
+  {
+    keys: ['kiem tra', 'xem hang', 'dong kiem', 'cod', 'thanh toan', 'tien mat', 'chuyen khoan', 'tra tien'],
+    reply: 'Bạn hoàn toàn yên tâm vì Nếp Tóc áp dụng **Đồng kiểm 100%**: Khi shipper giao đến, bạn được mở hộp kiểm tra đúng mẫu, đúng màu sắc và đúng tên khắc laser rồi mới thanh toán tiền mặt (COD). Bạn hài lòng mới trả tiền nhé!'
+  },
+  {
+    keys: ['bao hanh', 'doi tra', 'gay', 'lo xo', 'hong', 'loi', 'ben', 'hu'],
+    reply: 'Nếp Tóc cam kết chất lượng chuẩn: **Bảo hành lò xo 30 ngày** (1 đổi 1 miễn phí nếu lò xo bị gãy) và **Đổi mới trong 7 ngày** nếu có lỗi từ nhà sản xuất hoặc khắc sai thông tin. Bạn chỉ cần nhắn tiệm là có shipper đổi tận nơi ngay!'
+  },
+  {
+    keys: ['hop', 'qua', 'tang', 'thiep', 'no', 'sinh nhat', 'ban gai', 'nguoi yeu', 'ky niem'],
+    reply: 'Khi đặt kẹp làm quà tặng sinh nhật hay kỷ niệm, bạn chỉ cần chọn gói *"Đóng gói hộp quà nơ lụa & thiệp viết tay"* (+15.000đ) trong giỏ hàng. Tiệm sẽ chuẩn bị hộp quà cao cấp, thắt nơ ruy-băng trang nhã và nắn nót viết thiệp tay theo lời chúc của bạn gửi đến người thương!'
+  },
+  {
+    keys: ['dia chi', 'o dau', 'tiem', 'cua hang', 'shop', 'gio', 'truc tiep', 'xem truc tiep'],
+    reply: 'Cửa hàng Nếp Tóc tọa lạc tại số **123 Nguyễn Thị Minh Khai, Quận 1, TP.HCM**. Giờ mở cửa từ **8:00 – 21:30** tất cả các ngày trong tuần. Mời bạn ghé tiệm để thử trực tiếp các mẫu kẹp xinh trên tóc nha!'
+  },
+  {
+    keys: ['chat lieu', 'nhua', 'kim loai', 'acetate', 'titan', 'gi', 'set', 'oxy hoa'],
+    reply: 'Kẹp Nếp Tóc được đúc từ **Cellulose Acetate sinh học** (chất liệu cao cấp chống va đập, bóng mịn) và **Hợp kim mạ Champagne Gold** phủ nano chống oxy hóa, không phai màu hay gỉ sét. Lò xo thép titan 8 vòng kẹp êm ái, độ bền trên 2 năm sử dụng thường xuyên.'
+  },
+  {
+    keys: ['mau', 'ton da', 'phoi', 'outfit', 'da ngam', 'da sang', 'hop da'],
+    reply: 'Gợi ý chọn màu tôn da: Tông **Vàng Champagne** và **Trắng sứ** hợp mọi làn da, giúp gương mặt sáng rạng rỡ. Tông **Hổ phách** và **Hồng phấn** mang nét thanh lịch, ngọt ngào rất dễ phối đồ đi làm công sở lẫn cafe cuối tuần.'
+  },
+  {
+    keys: ['cach kep', 'kieu toc', 'bui', 'bui cu toi', 'nua dau', 'tao kieu'],
+    reply: 'Để kẹp đẹp chuẩn phong cách Pháp: Gom tóc xoắn nhẹ 2 vòng rồi dùng kẹp càng cua giữ cố định bên hông búi tóc, sau đó rút vài lọn tóc mai buông lơi tự nhiên trước trán. Bạn có thể xem ảnh minh họa chi tiết tại mục **Lookbook Đời Thường** ở Trang chủ nhé!'
+  },
+  {
+    keys: ['khuyen mai', 'giam gia', 'voucher', 'ma', 'sale', 'uu dai', 'bot'],
+    reply: 'Hiện Nếp Tóc đang áp dụng các ưu đãi: Tặng 100% công khắc laser trị giá 50k, Miễn phí giao hàng đơn từ 300k, và Tặng kèm hộp bảo quản cho từng chiếc kẹp. Giá hiển thị trên web đã là giá ưu đãi tốt nhất rồi ạ!'
+  },
+  {
+    keys: ['chao', 'hello', 'hi', 'alo', 'oi', 'ad', 'shop oi'],
+    reply: 'Chào bạn! Mình có thể giúp gì cho bạn hôm nay ạ? Bạn cần tìm kẹp cho chất tóc nào hoặc cần tư vấn khắc tên laser, cứ nhắn mình nhé!'
+  },
+  {
+    keys: ['cam on', 'thank', 'tks', 'ok', 'oke', 'da', 'vang'],
+    reply: 'Dạ, không có chi ạ! Chúc bạn chọn được chiếc kẹp thật ưng ý cho mái tóc của mình. Nếu cần hỗ trợ thêm bất cứ điều gì, bạn cứ nhắn tiệm bất kỳ lúc nào nhé!'
+  }
+];
+
+function removeVietnameseTones(str) {
+  if (!str) return '';
+  str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+  str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+  str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+  str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+  str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+  str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+  str = str.replace(/đ/g, "d");
+  str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+  str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+  str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+  str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+  str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+  str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+  str = str.replace(/Đ/g, "D");
+  return str.toLowerCase();
+}
+
+function findStylistReply(query) {
+  const q = removeVietnameseTones(query);
+  for (const item of STYLIST_KNOWLEDGE) {
+    for (const key of item.keys) {
+      if (q.includes(key)) {
+        return item.reply;
+      }
+    }
+  }
+  return 'Cảm ơn bạn đã nhắn tin! Stylist Nếp Tóc luôn sẵn sàng hỗ trợ. Bạn có thể gọi Hotline hoặc Zalo **0901 234 567** để tiệm tư vấn gửi video cận cảnh từng mẫu kẹp trên tóc cho bạn nha!';
+}
 
 function handleLiveChatSend(e) {
   e.preventDefault();
@@ -1006,19 +1098,9 @@ function handleLiveChatSend(e) {
   showTypingIndicator();
   setTimeout(() => {
     removeTypingIndicator();
-    const lower = text.toLowerCase();
-    let reply = STYLIST_ANSWERS['default'];
-    if (lower.includes('dày') || lower.includes('nhiều') || lower.includes('dài')) {
-      reply = STYLIST_ANSWERS['day'];
-    } else if (lower.includes('mỏng') || lower.includes('ngắn') || lower.includes('ít')) {
-      reply = STYLIST_ANSWERS['mong'];
-    } else if (lower.includes('màu') || lower.includes('da')) {
-      reply = STYLIST_ANSWERS['mau'];
-    } else if (lower.includes('quà') || lower.includes('hộp') || lower.includes('thiệp')) {
-      reply = STYLIST_ANSWERS['qua'];
-    }
+    const reply = findStylistReply(text);
     postChatMessage(reply, 'bot');
-  }, 650);
+  }, 500);
 }
 
 function sendChatChip(text) {
@@ -1026,13 +1108,9 @@ function sendChatChip(text) {
   showTypingIndicator();
   setTimeout(() => {
     removeTypingIndicator();
-    let reply = STYLIST_ANSWERS['default'];
-    if (text.includes('dày')) reply = STYLIST_ANSWERS['day'];
-    else if (text.includes('mỏng')) reply = STYLIST_ANSWERS['mong'];
-    else if (text.includes('màu')) reply = STYLIST_ANSWERS['mau'];
-    else if (text.includes('quà')) reply = STYLIST_ANSWERS['qua'];
+    const reply = findStylistReply(text);
     postChatMessage(reply, 'bot');
-  }, 500);
+  }, 450);
 }
 
 function postChatMessage(text, sender) {
