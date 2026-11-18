@@ -12,3 +12,6 @@ server.js
 *.pem
 *.key
 *.cert
+
+.vercel
+.env*
