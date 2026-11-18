@@ -10,7 +10,6 @@ function renderHeader() {
         <nav id="main-nav">
           <a href="index.html">Trang chủ</a>
           <a href="products.html">Sản phẩm</a>
-          <a href="studio.html" class="nav-studio-link">Studio Thử Kẹp <span class="studio-sparkle">✨</span></a>
           <a href="about.html">Về chúng tôi</a>
           <a href="policy.html">Chính sách</a>
           <a href="contact.html">Liên hệ</a>
@@ -131,10 +130,10 @@ function renderFooter() {
           <h4>Khám phá</h4>
           <a href="index.html">Trang chủ</a>
           <a href="products.html">Tất cả sản phẩm</a>
-          <a href="studio.html">Studio Thử Kẹp & Khắc Laser ✨</a>
           <a href="about.html">Về chúng tôi</a>
           <a href="policy.html">Chính sách bảo hành</a>
           <a href="contact.html">Liên hệ cửa hàng</a>
+          <a href="studio.html">Khắc tên laser theo yêu cầu</a>
           <a href="account.html">Tài khoản & Đơn hàng</a>
         </div>
         <div class="footer-col">
@@ -341,9 +340,8 @@ function renderCartDrawerContent() {
             <div class="drawer-item-name">${item.name}</div>
             ${item.swatch ? `<div class="drawer-item-swatch">Màu: ${item.swatch}</div>` : ''}
             ${item.customEngraving && item.customEngraving.text ? `
-              <div class="drawer-item-engraving" style="margin-top:4px; font-size:12px; color:#b45309; background:#fef3c7; border:1px solid #fde68a; padding:3px 7px; border-radius:6px; display:inline-flex; align-items:center; gap:4px;">
-                <span>✨ Khắc:</span> <strong>"${item.customEngraving.text}"</strong>
-                <span style="font-size:11px; opacity:0.85;">(${item.customEngraving.finish || 'Gold Foil'})</span>
+              <div class="drawer-item-engraving" style="margin-top:4px; font-size:12px; color:var(--apple-secondary); background:var(--apple-surface-secondary); border:1px solid var(--apple-border); padding:2px 8px; border-radius:6px; display:inline-block;">
+                Khắc tên: <strong>${item.customEngraving.text}</strong> <span style="font-size:11px; color:var(--apple-tertiary);">(${item.customEngraving.finish || 'Tiêu chuẩn'})</span>
               </div>
             ` : ''}
             <div class="drawer-item-price" style="margin-top:4px;">${fmt(item.price * item.qty)}</div>

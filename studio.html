@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Studio Thử Kẹp & Khắc Tên Laser — Nếp Tóc</title>
+  <title>Khắc tên laser theo yêu cầu — Nếp Tóc</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
   <meta name="theme-color" content="#d6336c"/>
-  <meta name="description" content="Trải nghiệm thử kẹp càng cua lên 4 kiểu tóc thực tế, chọn màu tóc của bạn và khắc tên Laser ánh kim 18K độc bản theo yêu cầu."/>
-  <meta property="og:title" content="Hair Clip Virtual Studio & Khắc Tên Laser — Nếp Tóc"/>
-  <meta property="og:description" content="Mô phỏng kẹp tóc trực tiếp, chọn kiểu tóc, màu tóc và khắc tên laser ánh kim cá nhân hóa."/>
+  <meta name="description" content="Trải nghiệm mô phỏng kẹp tóc và khắc laser cá nhân hóa trên từng sản phẩm kẹp càng cua của Nếp Tóc."/>
+  <meta property="og:title" content="Khắc tên laser theo yêu cầu — Nếp Tóc"/>
+  <meta property="og:description" content="Dịch vụ khắc laser cá nhân hóa miễn phí trên từng sản phẩm kẹp càng cua cao cấp."/>
   <meta property="og:image" content="favicon.svg"/>
   
-  <!-- Typography & Google Fonts -->
+  <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Playfair+Display:ital,wght@0,600;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css?v=5"/>
+  <link rel="stylesheet" href="style.css?v=6"/>
 </head>
 <body>
 
@@ -25,12 +25,10 @@
 <main class="studio-page">
   <!-- Studio Hero Section -->
   <div class="studio-hero">
-    <div class="studio-badge">
-      <span class="studio-sparkle">✦</span> Nếp Tóc Bespoke Studio & Virtual Preview
-    </div>
-    <h1 class="studio-title">Phòng Thử Kẹp & Khắc Tên <em>Độc Bản</em></h1>
+    <div class="studio-badge">Dịch vụ cá nhân hóa</div>
+    <h1 class="studio-title">Khắc Tên Laser <em>Cá Nhân Hóa</em></h1>
     <p class="studio-subtitle">
-      Mô phỏng chiếc kẹp lên kiểu tóc và màu tóc của bạn trong không gian ảo. Nhập tên hoặc ngày kỷ niệm để xem chữ khắc laser ánh kim xuất hiện trực tiếp ngay trên thân kẹp.
+      Xem trước vị trí kẹp trên từng dáng tóc và màu tóc thực tế. Nhập tên hoặc ngày kỷ niệm để tạo nên chiếc kẹp độc bản dành riêng cho bạn hoặc người thân.
     </p>
   </div>
 
@@ -40,31 +38,31 @@
     <div class="studio-stage-card">
       <div class="studio-stage-topbar">
         <div class="mode-pills">
-          <button class="mode-btn active" id="btn-mode-hair" onclick="setStudioMode('hair')">💇‍♀️ Thử Trên Tóc</button>
-          <button class="mode-btn" id="btn-mode-macro" onclick="setStudioMode('macro')">🔍 Soi Cận Cảnh Laser</button>
+          <button class="mode-btn active" id="btn-mode-hair" onclick="setStudioMode('hair')">Mô phỏng tóc</button>
+          <button class="mode-btn" id="btn-mode-macro" onclick="setStudioMode('macro')">Chi tiết kẹp</button>
         </div>
         <div class="live-indicator">
           <span class="live-dot"></span>
-          <span>Live 3D Preview</span>
+          <span>Xem trước trực tiếp</span>
         </div>
       </div>
 
-      <!-- SVG / Canvas Stage -->
+      <!-- SVG Stage -->
       <div class="studio-canvas-box" id="studio-stage-box">
         <svg id="studio-svg" class="studio-svg-viewport" viewBox="0 0 600 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Will be dynamically injected by renderStage() -->
+          <!-- Dynamically injected by renderStage() -->
         </svg>
       </div>
 
       <!-- Stage Bottom Actions -->
       <div class="studio-stage-actions">
-        <button class="stage-btn-secondary" onclick="exportStudioImage()" title="Tải ảnh PNG độ nét cao">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Tải ảnh khoe bạn bè
+        <button class="stage-btn-secondary" onclick="exportStudioImage()" title="Tải ảnh PNG">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Lưu ảnh cấu hình
         </button>
-        <button class="stage-btn-secondary" onclick="randomizeStyle()" title="Gợi ý phối ngẫu nhiên">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-          Phối phong cách mới
+        <button class="stage-btn-secondary" onclick="randomizeStyle()" title="Phối thử kiểu khác">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+          Đổi mẫu thử
         </button>
       </div>
     </div>
@@ -75,7 +73,7 @@
       <div class="studio-step-card">
         <div class="step-header">
           <span class="step-num">1</span>
-          <span class="step-title">Kiểu Tóc & Màu Tóc Của Bạn</span>
+          <span class="step-title">Dáng Tóc & Màu Tóc</span>
           <span class="step-desc" id="step1-desc">Búi củ tỏi Pháp</span>
         </div>
 
@@ -84,20 +82,20 @@
         </div>
 
         <div class="color-picker-title">
-          <span>Tone màu tóc của bạn:</span>
-          <strong id="hair-color-label" style="color:var(--apple-black);">Đen Huyền Tự Nhiên</strong>
+          <span>Màu tóc:</span>
+          <strong id="hair-color-label" style="color:var(--apple-black);">Đen tự nhiên</strong>
         </div>
         <div class="hair-colors-row" id="hair-colors-container">
           <!-- Injected via JS -->
         </div>
       </div>
 
-      <!-- Step 2: Chọn Chiếc Kẹp Yêu Thích -->
+      <!-- Step 2: Chọn Chiếc Kẹp -->
       <div class="studio-step-card">
         <div class="step-header">
           <span class="step-num">2</span>
-          <span class="step-title">Chọn Mẫu Kẹp Thử Nghiệm</span>
-          <span class="step-desc" id="step2-desc">Kim Loại Tối Giản</span>
+          <span class="step-title">Chọn Mẫu Kẹp</span>
+          <span class="step-desc" id="step2-desc">Kim loại tối giản</span>
         </div>
 
         <div class="clips-grid" id="clips-container">
@@ -109,46 +107,46 @@
         </div>
       </div>
 
-      <!-- Step 3: Khắc Tên Laser Cá Nhân Hóa -->
+      <!-- Step 3: Khắc Tên Laser -->
       <div class="studio-step-card">
         <div class="step-header">
           <span class="step-num">3</span>
-          <span class="step-title">Khắc Tên Laser Cá Nhân Hóa</span>
-          <span class="engraving-free-badge">TẶNG 0đ</span>
+          <span class="step-title">Nội Dung Khắc Laser</span>
+          <span class="engraving-free-badge">Miễn phí</span>
         </div>
 
         <div class="engraving-box">
           <div class="engraving-input-wrap">
-            <input type="text" id="engraving-input" class="engraving-input" maxlength="15" placeholder="Nhập tên hoặc ngày kỷ niệm..." value="Khang & Vy ♡" oninput="handleEngravingInput(this.value)">
-            <span class="char-counter" id="char-counter">12/15</span>
+            <input type="text" id="engraving-input" class="engraving-input" maxlength="15" placeholder="Nhập tên hoặc ngày kỷ niệm..." value="Khang & Vy" oninput="handleEngravingInput(this.value)">
+            <span class="char-counter" id="char-counter">10/15</span>
           </div>
 
           <div>
-            <div style="font-size:12.5px; font-weight:600; color:var(--apple-secondary); margin-bottom:8px;">Chọn kiểu chữ khắc:</div>
+            <div style="font-size:12px; font-weight:600; color:var(--apple-secondary); margin-bottom:8px;">Kiểu chữ:</div>
             <div class="engraving-row">
               <button class="font-btn active" id="font-playfair" onclick="setEngravingFont('playfair')">
-                <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:14px;">Cursive Lãng Mạn</span>
-              </button>
-              <button class="font-btn" id="font-cinzel" onclick="setEngravingFont('cinzel')">
-                <span style="font-family:'Cinzel',serif; font-size:12px;">Classic Hoàng Gia</span>
+                <span style="font-family:'Playfair Display',serif; font-style:italic;">Nghệ thuật</span>
               </button>
               <button class="font-btn" id="font-sans" onclick="setEngravingFont('sans')">
-                <span style="font-family:'Plus Jakarta Sans',sans-serif; font-size:12.5px;">Tối Giản Hiện Đại</span>
+                <span style="font-family:'Plus Jakarta Sans',sans-serif;">Tối giản</span>
+              </button>
+              <button class="font-btn" id="font-cinzel" onclick="setEngravingFont('cinzel')">
+                <span style="font-family:Georgia, serif;">Cổ điển</span>
               </button>
             </div>
           </div>
 
           <div>
-            <div style="font-size:12.5px; font-weight:600; color:var(--apple-secondary); margin-bottom:8px;">Chất liệu ánh kim khắc:</div>
+            <div style="font-size:12px; font-weight:600; color:var(--apple-secondary); margin-bottom:8px;">Màu chữ khắc:</div>
             <div class="engraving-row">
               <button class="finish-btn active" id="finish-gold" onclick="setEngravingFinish('gold')">
-                🟡 Vàng 18K Gold Foil
+                Vàng Champagne
               </button>
               <button class="finish-btn" id="finish-silver" onclick="setEngravingFinish('silver')">
-                ⚪ Bạch Kim Platinum
+                Bạch kim
               </button>
               <button class="finish-btn" id="finish-dark" onclick="setEngravingFinish('dark')">
-                ⚫ Laser Khói Chìm
+                Khói mờ
               </button>
             </div>
           </div>
@@ -159,22 +157,21 @@
       <div class="studio-checkout-card">
         <div class="summary-flex">
           <div>
-            <div style="font-size:13px; color:var(--apple-secondary); margin-bottom:4px;">Tổng chi phí cho bản độc bản:</div>
+            <div style="font-size:12.5px; color:var(--apple-secondary); margin-bottom:4px;">Tổng chi phí:</div>
             <div class="price-main" id="studio-total-price">65.000đ</div>
           </div>
           <div style="text-align:right;">
-            <div style="font-size:12px; color:#10b981; font-weight:700;">✓ Miễn phí khắc tên Laser</div>
-            <div style="font-size:11.5px; color:var(--apple-tertiary); margin-top:2px;">Tặng kèm hộp bảo quản nơ lụa</div>
+            <div style="font-size:12px; color:var(--apple-black); font-weight:600;">Khắc laser miễn phí</div>
+            <div style="font-size:11.5px; color:var(--apple-tertiary); margin-top:2px;">Kèm hộp bảo quản tiêu chuẩn</div>
           </div>
         </div>
 
         <button class="studio-atc-btn" onclick="addBespokeToCart()">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          Thêm vào giỏ & Đặt làm chiếc này
+          Thêm vào giỏ hàng với thông tin khắc
         </button>
 
         <button class="studio-buy-btn" onclick="buyNowBespoke()">
-          Mua ngay chiếc kẹp này →
+          Tiến hành đặt hàng ngay →
         </button>
       </div>
     </div>
@@ -185,24 +182,24 @@
     <div class="studio-perks-grid">
       <div class="studio-perk-item">
         <div class="perk-icon-circle">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/></svg>
         </div>
-        <div class="perk-item-title">Công Nghệ Laser Fiber Vi Tính</div>
-        <div class="perk-item-desc">Độ sâu khắc 0.15mm chính xác tới từng micromet. Chữ khắc sắc sảo, bóng sáng vĩnh cửu và không bao giờ phai mờ theo năm tháng.</div>
+        <div class="perk-item-title">Khắc Laser Vi Tính</div>
+        <div class="perk-item-desc">Độ sâu 0.15mm chuẩn xác. Nét chữ sắc sảo, bền màu và không bong tróc theo thời gian sử dụng.</div>
       </div>
       <div class="studio-perk-item">
         <div class="perk-icon-circle">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
-        <div class="perk-item-title">Bảo Hành Khắc Tên 100%</div>
-        <div class="perk-item-desc">Cam kết khắc chuẩn xác từng ký tự bạn đã nhập. Nếu có bất kỳ sai sót nào dù là nhỏ nhất, Nếp Tóc sẽ làm lại chiếc mới hoàn toàn miễn phí.</div>
+        <div class="perk-item-title">Bảo Hành Chính Xác</div>
+        <div class="perk-item-desc">Đảm bảo đúng từng ký tự bạn đã nhập. Nếu có bất kỳ sai lệch nào, cửa hàng sẽ đổi chiếc mới ngay lập tức.</div>
       </div>
       <div class="studio-perk-item">
         <div class="perk-icon-circle">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 4.8 0 0 1 12 8a4.8 4.8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </div>
-        <div class="perk-item-title">Món Quà Ý Nghĩa Độc Nhất</div>
-        <div class="perk-item-desc">Mỗi chiếc kẹp mang thông điệp riêng là món quà kỷ niệm hoàn hảo cho sinh nhật, người yêu, bạn thân hoặc tự thưởng cho bản thân một nếp tóc xinh.</div>
+        <div class="perk-item-title">Dấu Ấn Kỷ Niệm</div>
+        <div class="perk-item-desc">Thích hợp làm quà tặng sinh nhật, kỷ niệm hoặc ghi dấu ấn cá nhân trên phụ kiện sử dụng hàng ngày.</div>
       </div>
     </div>
   </section>
@@ -212,22 +209,22 @@
 <div class="toast-container"></div>
 
 <!-- Offscreen Canvas for Snapshot Export -->
-<canvas id="export-canvas" width="1200" height="1200" style="display:none;"></canvas>
+<canvas id="export-canvas" width="1000" height="1000" style="display:none;"></canvas>
 
 <!-- Dependencies -->
 <script src="products.js"></script>
 <script src="cart.js"></script>
-<script src="main.js?v=5"></script>
+<script src="main.js?v=6"></script>
 
 <script>
   // ── 1. STUDIO STATE ──
   const studioState = {
-    mode: 'hair', // 'hair' or 'macro'
-    hairStyle: 'french-bun', // 'french-bun', 'half-up', 'beach-waves', 'sleek-layer'
-    hairColor: 'dark', // 'dark', 'chestnut', 'milktea', 'blonde', 'rose'
-    clipId: 2, // 2: Kim loại, 1: Hoa sứ, 4: Vân đá, 3: Lông nhung
+    mode: 'hair',
+    hairStyle: 'french-bun',
+    hairColor: 'dark',
+    clipId: 2,
     clipSwatch: 'Vàng Champagne',
-    engravingText: 'Khang & Vy ♡',
+    engravingText: 'Khang & Vy',
     font: 'playfair',
     finish: 'gold'
   };
@@ -236,69 +233,69 @@
   const HAIRSTYLES = [
     {
       id: 'french-bun',
-      name: 'Búi Củ Tỏi Pháp',
-      tag: 'Cổ điển & Thanh lịch',
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a6 6 0 0 1 12 0v2"/></svg>`
+      name: 'Búi củ tỏi Pháp',
+      tag: 'Gọn gàng & Thanh lịch',
+      icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a6 6 0 0 1 12 0v2"/></svg>`
     },
     {
       id: 'half-up',
-      name: 'Búi Kẹp Nửa Đầu',
-      tag: 'Hàn Quốc trẻ trung',
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 0 0-9 9c0 6 9 9 9 9s9-3 9-9a9 9 0 0 0-9-9z"/></svg>`
+      name: 'Búi kẹp nửa đầu',
+      tag: 'Tự nhiên & Trẻ trung',
+      icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 0 0-9 9c0 6 9 9 9 9s9-3 9-9a9 9 0 0 0-9-9z"/></svg>`
     },
     {
       id: 'beach-waves',
-      name: 'Xoăn Sóng Lơi',
-      tag: 'Bồng bềnh quyến rũ',
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12c3-4 6 4 9 0s6 4 9 0"/></svg>`
+      name: 'Xoăn sóng lơi',
+      tag: 'Bồng bềnh mềm mại',
+      icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12c3-4 6 4 9 0s6 4 9 0"/></svg>`
     },
     {
       id: 'sleek-layer',
-      name: 'Thẳng Tỉa Layer',
-      tag: 'Suôn mượt hiện đại',
-      icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="3" x2="8" y2="21"/><line x1="12" y1="3" x2="12" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg>`
+      name: 'Thẳng tỉa layer',
+      tag: 'Suôn mượt tối giản',
+      icon: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="3" x2="8" y2="21"/><line x1="12" y1="3" x2="12" y2="21"/><line x1="16" y1="3" x2="16" y2="21"/></svg>`
     }
   ];
 
   const HAIR_COLORS = [
     {
       id: 'dark',
-      name: 'Đen Huyền Tự Nhiên',
+      name: 'Đen tự nhiên',
       color: '#1a1919',
       gradStops: ['#141313', '#252323', '#3d3938'],
       highlight: '#524f4e'
     },
     {
       id: 'chestnut',
-      name: 'Nâu Hạt Dẻ Ấm',
+      name: 'Nâu hạt dẻ',
       color: '#3d2516',
       gradStops: ['#2e190d', '#52311c', '#754628'],
       highlight: '#99633e'
     },
     {
       id: 'milktea',
-      name: 'Nâu Trà Sữa Seoul',
+      name: 'Nâu trà sữa',
       color: '#7a5433',
       gradStops: ['#614124', '#8a5f3a', '#b08154'],
       highlight: '#d4a679'
     },
     {
       id: 'blonde',
-      name: 'Vàng Cát Ánh Khói',
+      name: 'Vàng cát',
       color: '#b08d48',
       gradStops: ['#8f6f32', '#c29d53', '#e0be75'],
       highlight: '#f5dda1'
     },
     {
       id: 'rose',
-      name: 'Hồng Pastel Khói',
+      name: 'Hồng khói',
       color: '#b86d78',
       gradStops: ['#9c5560', '#cc7e8a', '#e8a5af'],
       highlight: '#ffd1d8'
     }
   ];
 
-  const FEATURED_CLIPS = [2, 1, 4, 3]; // Product IDs
+  const FEATURED_CLIPS = [2, 1, 4, 3];
 
   // ── 3. INITIALIZATION ──
   document.addEventListener('DOMContentLoaded', () => {
@@ -309,7 +306,6 @@
   });
 
   function initCustomizerUI() {
-    // 1. Render Hairstyle Buttons
     const hairContainer = document.getElementById('hairstyles-container');
     hairContainer.innerHTML = HAIRSTYLES.map(h => `
       <div class="hair-option ${h.id === studioState.hairStyle ? 'active' : ''}" onclick="setHairstyle('${h.id}')">
@@ -321,7 +317,6 @@
       </div>
     `).join('');
 
-    // 2. Render Hair Color Swatches
     const colorContainer = document.getElementById('hair-colors-container');
     colorContainer.innerHTML = HAIR_COLORS.map(c => `
       <div class="hair-color-pill ${c.id === studioState.hairColor ? 'active' : ''}" 
@@ -330,7 +325,6 @@
            onclick="setHairColor('${c.id}')"></div>
     `).join('');
 
-    // 3. Render Clips
     renderClipsGrid();
     renderClipSwatches();
     updatePriceDisplay();
@@ -343,8 +337,7 @@
     clipsContainer.innerHTML = clips.map(clip => `
       <div class="clip-card-option ${clip.id === studioState.clipId ? 'active' : ''}" onclick="setClip(${clip.id})">
         <div class="clip-thumb-box" style="background:${clip.cardBg}">
-          ${clip.id === 2 ? '<span class="clip-badge-rec">Hot Khắc Tên</span>' : ''}
-          ${productVisualSVG(clip, 50)}
+          ${productVisualSVG(clip, 46)}
         </div>
         <div class="clip-opt-name">${clip.shortName || clip.name}</div>
         <div class="clip-opt-price">${fmt(clip.price)}</div>
@@ -361,14 +354,14 @@
     }
 
     swatchesContainer.innerHTML = `
-      <div style="font-size:12.5px; font-weight:600; color:var(--apple-secondary); margin-bottom:8px;">
-        Màu kẹp: <strong style="color:var(--apple-black);">${studioState.clipSwatch}</strong>
+      <div style="font-size:12px; font-weight:600; color:var(--apple-secondary); margin-bottom:8px;">
+        Màu sắc: <strong style="color:var(--apple-black);">${studioState.clipSwatch}</strong>
       </div>
       <div style="display:flex; gap:8px;">
         ${clip.swatches.map(s => `
-          <button style="display:flex; align-items:center; gap:6px; padding:5px 10px; border-radius:8px; border:1px solid ${s.name === studioState.clipSwatch ? 'var(--apple-black)' : 'var(--apple-border)'}; background:#ffffff; font-size:12px; font-weight:600;"
+          <button style="display:flex; align-items:center; gap:6px; padding:4px 10px; border-radius:8px; border:1px solid ${s.name === studioState.clipSwatch ? 'var(--apple-black)' : 'var(--apple-border)'}; background:#ffffff; font-size:12px; font-weight:600;"
                   onclick="setClipSwatch('${s.name}')">
-            <span style="width:12px; height:12px; border-radius:50%; background:${s.color}; border:1px solid rgba(0,0,0,0.1);"></span>
+            <span style="width:10px; height:10px; border-radius:50%; background:${s.color}; border:1px solid rgba(0,0,0,0.1);"></span>
             <span>${s.name}</span>
           </button>
         `).join('')}
@@ -456,7 +449,7 @@
     const randomHair = HAIRSTYLES[Math.floor(Math.random() * HAIRSTYLES.length)].id;
     const randomColor = HAIR_COLORS[Math.floor(Math.random() * HAIR_COLORS.length)].id;
     const randomClip = FEATURED_CLIPS[Math.floor(Math.random() * FEATURED_CLIPS.length)];
-    const sampleWords = ['Trâm Anh ♡', 'Khang & Vy', 'Sweet 20s', 'Be Kind ♡', 'Linh Đan', 'Glow Up'];
+    const sampleWords = ['Khang & Vy', 'Trâm Anh', 'Thùy Linh', 'Be Kind', 'Minimal'];
     const randomWord = sampleWords[Math.floor(Math.random() * sampleWords.length)];
 
     setHairstyle(randomHair);
@@ -464,8 +457,6 @@
     setClip(randomClip);
     document.getElementById('engraving-input').value = randomWord;
     handleEngravingInput(randomWord);
-
-    showToast('Đã đổi phong cách phối ngẫu nhiên ✨');
   }
 
   // ── 5. VECTOR RENDER ENGINE (SVG STAGE) ──
@@ -474,91 +465,54 @@
     if (!svg) return;
 
     const curColor = HAIR_COLORS.find(c => c.id === studioState.hairColor) || HAIR_COLORS[0];
-    const clip = PRODUCTS.find(p => p.id === studioState.clipId);
     const engText = studioState.engravingText || 'Nếp Tóc';
 
-    // Finish Gradients
-    let finishFill = 'url(#laserGoldFoil)';
-    let finishStroke = '#b45309';
-    let finishGlow = 'url(#foilGlow)';
+    let finishFill = '#b45309';
+    let finishStroke = 'none';
     if (studioState.finish === 'silver') {
-      finishFill = 'url(#laserSilver)';
-      finishStroke = '#6b7280';
-      finishGlow = 'url(#silverGlow)';
+      finishFill = '#475569';
     } else if (studioState.finish === 'dark') {
       finishFill = '#1c1917';
-      finishStroke = '#44403c';
-      finishGlow = 'none';
     }
 
-    // Font family definition
     let fontFamily = "'Playfair Display', Georgia, serif";
     let fontStyle = 'italic';
     let fontWeight = '600';
     if (studioState.font === 'cinzel') {
-      fontFamily = "'Cinzel', serif";
+      fontFamily = "Georgia, serif";
       fontStyle = 'normal';
-      fontWeight = '700';
+      fontWeight = '600';
     } else if (studioState.font === 'sans') {
       fontFamily = "'Plus Jakarta Sans', sans-serif";
       fontStyle = 'normal';
-      fontWeight = '800';
+      fontWeight = '700';
     }
 
     if (studioState.mode === 'hair') {
-      // ════ MODE 1: HAIR & SILHOUETTE VIEW ════
+      // MODE 1: HAIR & SILHOUETTE VIEW
       svg.innerHTML = `
         <defs>
-          <!-- Hair Gradient -->
           <linearGradient id="hairGrad" x1="20%" y1="0%" x2="80%" y2="100%">
             <stop offset="0%" stop-color="${curColor.gradStops[2]}"/>
             <stop offset="50%" stop-color="${curColor.color}"/>
             <stop offset="100%" stop-color="${curColor.gradStops[0]}"/>
           </linearGradient>
           <radialGradient id="hairHighlight" cx="45%" cy="30%" r="50%">
-            <stop offset="0%" stop-color="${curColor.highlight}" stop-opacity="0.6"/>
+            <stop offset="0%" stop-color="${curColor.highlight}" stop-opacity="0.5"/>
             <stop offset="70%" stop-color="${curColor.color}" stop-opacity="0"/>
           </radialGradient>
-
-          <!-- Skin Gradient -->
           <linearGradient id="skinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#fdf0eb"/>
             <stop offset="100%" stop-color="#f5d6ca"/>
           </linearGradient>
-
-          <!-- Laser Engraving Gradients -->
-          <linearGradient id="laserGoldFoil" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#f59e0b"/>
-            <stop offset="35%" stop-color="#fde047"/>
-            <stop offset="60%" stop-color="#d97706"/>
-            <stop offset="100%" stop-color="#fef08a"/>
-          </linearGradient>
-          <linearGradient id="laserSilver" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#94a3b8"/>
-            <stop offset="40%" stop-color="#f8fafc"/>
-            <stop offset="70%" stop-color="#64748b"/>
-            <stop offset="100%" stop-color="#e2e8f0"/>
-          </linearGradient>
-
-          <!-- Glow Filter -->
-          <filter id="foilGlow" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="1.5" result="blur"/>
-            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-          </filter>
-          <filter id="clipShadow" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="3" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.18"/>
-          </filter>
         </defs>
 
-        <!-- Studio Background Glow -->
-        <circle cx="300" cy="270" r="240" fill="#ffffff" opacity="0.8"/>
+        <circle cx="300" cy="270" r="230" fill="#ffffff" opacity="0.9"/>
         
         <!-- Silhouette: Neck and Shoulders -->
         <g id="body-silhouette">
-          <!-- Elegant bare shoulders & back -->
           <path d="M140 560 C160 490, 220 430, 260 410 L260 330 C275 332, 325 332, 340 330 L340 410 C380 430, 440 490, 460 560 Z" fill="url(#skinGrad)"/>
-          <!-- Subtle neck spine shadow -->
-          <path d="M298 340 L298 420" stroke="#ebd1c5" stroke-width="2" stroke-linecap="round"/>
+          <path d="M298 340 L298 420" stroke="#ebd1c5" stroke-width="1.8" stroke-linecap="round"/>
         </g>
 
         <!-- Dynamic Hairstyle Geometry -->
@@ -567,69 +521,34 @@
         </g>
 
         <!-- Clip Positioned on Hairstyle -->
-        <g id="clip-on-hair" filter="url(#clipShadow)" transform="${getClipTransform(studioState.hairStyle)}">
-          ${getClipRender(studioState.clipId, studioState.clipSwatch, engText, fontFamily, fontStyle, fontWeight, finishFill, finishStroke, finishGlow, false)}
+        <g id="clip-on-hair" transform="${getClipTransform(studioState.hairStyle)}">
+          ${getClipRender(studioState.clipId, studioState.clipSwatch, engText, fontFamily, fontStyle, fontWeight, finishFill, finishStroke)}
         </g>
 
-        <!-- Delicate Hair Strands over Clip for Realism -->
-        <path d="M245 230 Q255 260 250 290" stroke="${curColor.color}" stroke-width="1.8" opacity="0.5" fill="none"/>
-        <path d="M355 230 Q345 260 350 290" stroke="${curColor.color}" stroke-width="1.8" opacity="0.5" fill="none"/>
+        <!-- Subtle Hair Strands -->
+        <path d="M245 230 Q255 260 250 290" stroke="${curColor.color}" stroke-width="1.5" opacity="0.4" fill="none"/>
+        <path d="M355 230 Q345 260 350 290" stroke="${curColor.color}" stroke-width="1.5" opacity="0.4" fill="none"/>
       `;
     } else {
-      // ════ MODE 2: MACRO ZOOM CLOSE-UP VIEW ════
+      // MODE 2: CLOSE-UP CLIP VIEW
       svg.innerHTML = `
         <defs>
-          <linearGradient id="macroLaserGold" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#b45309"/>
-            <stop offset="25%" stop-color="#fde047"/>
-            <stop offset="50%" stop-color="#f59e0b"/>
-            <stop offset="75%" stop-color="#fef08a"/>
-            <stop offset="100%" stop-color="#92400e"/>
-          </linearGradient>
-          <linearGradient id="laserSilver" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#94a3b8"/>
-            <stop offset="40%" stop-color="#f8fafc"/>
-            <stop offset="70%" stop-color="#64748b"/>
-            <stop offset="100%" stop-color="#e2e8f0"/>
-          </linearGradient>
-          <filter id="macroGlow" x="-30%" y="-30%" width="160%" height="160%">
-            <feGaussianBlur stdDeviation="2.5" result="blur"/>
-            <feMerge>
-              <feMergeNode in="blur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-          <radialGradient id="marblePedestal" cx="50%" cy="50%" r="50%">
+          <radialGradient id="pedestalGrad" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stop-color="#ffffff"/>
-            <stop offset="85%" stop-color="#eae9f0"/>
-            <stop offset="100%" stop-color="#d8d7e0"/>
+            <stop offset="85%" stop-color="#f0f0f4"/>
+            <stop offset="100%" stop-color="#e5e5ea"/>
           </radialGradient>
         </defs>
 
-        <!-- Studio Light Spotlight -->
-        <ellipse cx="300" cy="460" rx="220" ry="60" fill="url(#marblePedestal)" opacity="0.9"/>
-        <ellipse cx="300" cy="460" rx="190" ry="48" fill="#ffffff" opacity="0.7"/>
+        <ellipse cx="300" cy="460" rx="200" ry="50" fill="url(#pedestalGrad)"/>
 
-        <!-- Zoomed-in Hair Clip with High Craftsmanship -->
+        <!-- Zoomed-in Hair Clip -->
         <g id="macro-clip" transform="translate(300, 270) scale(1.75)">
-          ${getMacroClipRender(studioState.clipId, studioState.clipSwatch, engText, fontFamily, fontStyle, fontWeight, finishFill, finishStroke, finishGlow)}
+          ${getMacroClipRender(studioState.clipId, studioState.clipSwatch, engText, fontFamily, fontStyle, fontWeight, finishFill)}
         </g>
 
-        <!-- Sparkle Star Accent Particles -->
-        <g id="laser-sparkles" transform="translate(370, 240)">
-          <path d="M0 -10 L2 -2 L10 0 L2 2 L0 10 L-2 2 L-10 0 L-2 -2 Z" fill="#fde047" opacity="0.9">
-            <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="8s" repeatCount="indefinite"/>
-          </path>
-        </g>
-        <g id="laser-sparkles-2" transform="translate(230, 310)">
-          <path d="M0 -7 L1.5 -1.5 L7 0 L1.5 1.5 L0 7 L-1.5 1.5 L-7 0 L-1.5 -1.5 Z" fill="#fde047" opacity="0.75">
-            <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="6s" repeatCount="indefinite"/>
-          </path>
-        </g>
-
-        <!-- Macro Inspection Watermark -->
-        <text x="300" y="550" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="#8e8e93" letter-spacing="2">
-          ✦ THỦ CÔNG VI TÍNH • ĐỘ SÂU KHẮC 0.15MM ✦
+        <text x="300" y="550" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="11.5" font-weight="600" fill="#86868b" letter-spacing="1">
+          KHẮC LASER VI TÍNH • ĐỘ SÂU 0.15MM
         </text>
       `;
     }
@@ -639,67 +558,33 @@
   function getHairstyleSVG(styleId) {
     switch (styleId) {
       case 'french-bun':
-        // French Top Knot Bun
         return `
-          <!-- Loose bottom hair base -->
           <path d="M220 330 C220 270, 240 220, 300 215 C360 220, 380 270, 380 330 C350 350, 250 350, 220 330 Z" fill="url(#hairGrad)"/>
-          
-          <!-- Crown Hair Waves -->
           <path d="M190 280 C190 190, 230 140, 300 135 C370 140, 410 190, 410 280 C390 310, 370 330, 300 330 C230 330, 210 310, 190 280 Z" fill="url(#hairGrad)"/>
           <ellipse cx="300" cy="220" rx="90" ry="70" fill="url(#hairHighlight)"/>
-
-          <!-- Top Bun Swirl -->
           <circle cx="300" cy="120" r="55" fill="url(#hairGrad)"/>
-          <path d="M270 115 C275 90, 325 90, 330 115 C335 140, 265 140, 270 115" stroke="rgba(255,255,255,0.2)" stroke-width="4" fill="none"/>
-          <circle cx="300" cy="115" r="30" fill="url(#hairHighlight)"/>
-
-          <!-- Wispy Strands -->
-          <path d="M210 290 Q195 330 200 360" stroke="url(#hairGrad)" stroke-width="3" stroke-linecap="round" fill="none"/>
-          <path d="M390 290 Q405 330 400 360" stroke="url(#hairGrad)" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M270 115 C275 90, 325 90, 330 115 C335 140, 265 140, 270 115" stroke="rgba(255,255,255,0.2)" stroke-width="3" fill="none"/>
         `;
-
       case 'half-up':
-        // Half-up Half-down
         return `
-          <!-- Flowing long hair background -->
           <path d="M170 300 C150 380, 140 470, 160 550 C210 565, 390 565, 440 550 C460 470, 450 380, 430 300 Z" fill="url(#hairGrad)"/>
-          <path d="M190 320 C180 400, 185 470, 210 540" stroke="rgba(255,255,255,0.15)" stroke-width="3" fill="none"/>
-          <path d="M410 320 C420 400, 415 470, 390 540" stroke="rgba(255,255,255,0.15)" stroke-width="3" fill="none"/>
-
-          <!-- Upper Crown Section -->
           <path d="M180 260 C180 160, 220 120, 300 115 C380 120, 420 160, 420 260 C400 300, 370 320, 300 320 C230 320, 200 300, 180 260 Z" fill="url(#hairGrad)"/>
           <ellipse cx="300" cy="200" rx="100" ry="70" fill="url(#hairHighlight)"/>
-
-          <!-- Half folded knot -->
           <ellipse cx="300" cy="245" rx="42" ry="26" fill="url(#hairGrad)"/>
-          <path d="M280 245 C285 230, 315 230, 320 245" stroke="rgba(255,255,255,0.25)" stroke-width="3" fill="none"/>
         `;
-
       case 'beach-waves':
-        // Soft Voluminous Beach Waves
         return `
-          <!-- Full cascading wave layers -->
           <path d="M160 280 C130 360, 140 440, 130 520 C160 555, 440 555, 470 520 C460 440, 470 360, 440 280 C410 160, 370 120, 300 115 C230 120, 190 160, 160 280 Z" fill="url(#hairGrad)"/>
           <ellipse cx="300" cy="210" rx="110" ry="80" fill="url(#hairHighlight)"/>
-
-          <!-- Natural undulating wave textures -->
-          <path d="M180 300 Q150 360 170 420 Q150 480 180 530" stroke="rgba(255,255,255,0.2)" stroke-width="3.5" fill="none"/>
-          <path d="M420 300 Q450 360 430 420 Q450 480 420 530" stroke="rgba(255,255,255,0.2)" stroke-width="3.5" fill="none"/>
-          <path d="M250 280 Q230 370 250 460" stroke="rgba(0,0,0,0.18)" stroke-width="3" fill="none"/>
-          <path d="M350 280 Q370 370 350 460" stroke="rgba(0,0,0,0.18)" stroke-width="3" fill="none"/>
+          <path d="M180 300 Q150 360 170 420 Q150 480 180 530" stroke="rgba(255,255,255,0.2)" stroke-width="2.5" fill="none"/>
+          <path d="M420 300 Q450 360 430 420 Q450 480 420 530" stroke="rgba(255,255,255,0.2)" stroke-width="2.5" fill="none"/>
         `;
-
       case 'sleek-layer':
-        // Sleek Layer Cut
         return `
-          <!-- Straight layered cut silhouette -->
           <path d="M185 260 C185 150, 225 120, 300 115 C375 120, 415 150, 415 260 L425 430 L395 520 L300 480 L205 520 L175 430 Z" fill="url(#hairGrad)"/>
           <ellipse cx="300" cy="210" rx="95" ry="70" fill="url(#hairHighlight)"/>
-
-          <!-- Sleek vertical glossy lines -->
-          <path d="M230 250 L230 460" stroke="rgba(255,255,255,0.18)" stroke-width="2.5" fill="none"/>
-          <path d="M300 250 L300 450" stroke="rgba(255,255,255,0.18)" stroke-width="2.5" fill="none"/>
-          <path d="M370 250 L370 460" stroke="rgba(255,255,255,0.18)" stroke-width="2.5" fill="none"/>
+          <path d="M230 250 L230 460" stroke="rgba(255,255,255,0.18)" stroke-width="2" fill="none"/>
+          <path d="M370 250 L370 460" stroke="rgba(255,255,255,0.18)" stroke-width="2" fill="none"/>
         `;
     }
   }
@@ -707,11 +592,11 @@
   function getClipTransform(styleId) {
     switch (styleId) {
       case 'french-bun':
-        return 'translate(300, 160) scale(1.15) rotate(-8)';
+        return 'translate(300, 160) scale(1.15) rotate(-6)';
       case 'half-up':
-        return 'translate(300, 255) scale(1.2) rotate(3)';
+        return 'translate(300, 255) scale(1.2) rotate(2)';
       case 'beach-waves':
-        return 'translate(305, 275) scale(1.22) rotate(-5)';
+        return 'translate(305, 275) scale(1.2) rotate(-4)';
       case 'sleek-layer':
         return 'translate(300, 280) scale(1.18) rotate(0)';
       default:
@@ -720,97 +605,66 @@
   }
 
   // ── 7. CLIP RENDERING (IN HAIR MODE) ──
-  function getClipRender(clipId, swatchName, text, fontFam, fontSty, fontWt, fillGrad, strokeColor, glowFilter, isMacro) {
-    let accent = '#b45309';
+  function getClipRender(clipId, swatchName, text, fontFam, fontSty, fontWt, fillGrad, strokeColor) {
+    let accent = '#1d1d1f';
     let baseBg = '#ffe066';
 
     if (clipId === 2) {
-      // Kim loại tối giản
       if (swatchName.includes('Bạc')) {
         baseBg = '#e2e8f0';
         accent = '#475569';
       } else if (swatchName.includes('Hồng')) {
         baseBg = '#fbcfe8';
-        accent = '#db2777';
+        accent = '#be185d';
       } else {
         baseBg = '#fef08a';
         accent = '#ca8a04';
       }
 
       return `
-        <!-- Minimal Metal Claw Body -->
         <g id="metal-clip-geom" transform="translate(-50, -40)">
-          <!-- Main Arch Bar -->
           <path d="M12 50 C12 18, 88 18, 88 50" stroke="${baseBg}" stroke-width="12" stroke-linecap="round" fill="none"/>
-          <path d="M12 50 C12 18, 88 18, 88 50" stroke="${accent}" stroke-width="2" stroke-linecap="round" fill="none"/>
-          
-          <!-- Spring Hinge -->
+          <path d="M12 50 C12 18, 88 18, 88 50" stroke="${accent}" stroke-width="1.5" stroke-linecap="round" fill="none"/>
           <rect x="42" y="16" width="16" height="12" rx="3" fill="${accent}"/>
-          <line x1="46" y1="18" x2="46" y2="26" stroke="#ffffff" stroke-width="1.5"/>
-          <line x1="54" y1="18" x2="54" y2="26" stroke="#ffffff" stroke-width="1.5"/>
-
-          <!-- Claw Teeth Clamping Hair -->
-          <path d="M20 54 L20 72 M34 54 L34 76 M50 54 L50 78 M66 54 L66 76 M80 54 L80 72" stroke="${baseBg}" stroke-width="4.5" stroke-linecap="round"/>
-          <path d="M20 54 L20 72 M34 54 L34 76 M50 54 L50 78 M66 54 L66 76 M80 54 L80 72" stroke="${accent}" stroke-width="1.2" stroke-linecap="round"/>
-
-          <!-- Live Laser Engraved Text on Clip Arch -->
-          <text x="50" y="32" text-anchor="middle" font-family="${fontFam}" font-style="${fontSty}" font-weight="${fontWt}" font-size="7.5" fill="${fillGrad}" stroke="${strokeColor}" stroke-width="0.3" filter="${glowFilter}" letter-spacing="0.5">
+          <path d="M20 54 L20 72 M34 54 L34 76 M50 54 L50 78 M66 54 L66 76 M80 54 L80 72" stroke="${baseBg}" stroke-width="4" stroke-linecap="round"/>
+          <path d="M20 54 L20 72 M34 54 L34 76 M50 54 L50 78 M66 54 L66 76 M80 54 L80 72" stroke="${accent}" stroke-width="1" stroke-linecap="round"/>
+          <text x="50" y="32" text-anchor="middle" font-family="${fontFam}" font-style="${fontSty}" font-weight="${fontWt}" font-size="7.5" fill="${fillGrad}">
             ${text}
           </text>
         </g>
       `;
     } else if (clipId === 1) {
-      // Hoa Sứ Pastel
       return `
         <g id="flower-clip-geom" transform="translate(-50, -40)">
-          <!-- Petals Base -->
-          <circle cx="50" cy="40" r="32" fill="#ffffff" stroke="#f472b6" stroke-width="2.5"/>
-          <circle cx="50" cy="40" r="14" fill="#fef08a" stroke="#eab308" stroke-width="1.5"/>
-          <circle cx="50" cy="40" r="7" fill="#f472b6"/>
-
-          <!-- Claw Teeth Behind -->
-          <path d="M30 65 L30 78 M42 65 L42 82 M58 65 L58 82 M70 65 L70 78" stroke="#f472b6" stroke-width="4" stroke-linecap="round"/>
-
-          <!-- Live Laser Engraved Text -->
-          <rect x="22" y="32" width="56" height="15" rx="7.5" fill="rgba(255,255,255,0.85)" stroke="#f472b6" stroke-width="1"/>
-          <text x="50" y="42.5" text-anchor="middle" font-family="${fontFam}" font-style="${fontSty}" font-weight="${fontWt}" font-size="7" fill="${fillGrad}" stroke="${strokeColor}" stroke-width="0.25" filter="${glowFilter}">
+          <circle cx="50" cy="40" r="30" fill="#ffffff" stroke="#f472b6" stroke-width="2"/>
+          <circle cx="50" cy="40" r="12" fill="#fef08a"/>
+          <path d="M30 65 L30 78 M42 65 L42 82 M58 65 L58 82 M70 65 L70 78" stroke="#f472b6" stroke-width="3.5" stroke-linecap="round"/>
+          <rect x="24" y="33" width="52" height="14" rx="7" fill="rgba(255,255,255,0.9)" stroke="#f472b6" stroke-width="0.8"/>
+          <text x="50" y="42.5" text-anchor="middle" font-family="${fontFam}" font-style="${fontSty}" font-weight="${fontWt}" font-size="7" fill="${fillGrad}">
             ${text}
           </text>
         </g>
       `;
     } else if (clipId === 4) {
-      // Vân đá Marble
       return `
         <g id="marble-clip-geom" transform="translate(-50, -40)">
-          <!-- Marble Body -->
-          <rect x="15" y="24" width="70" height="28" rx="14" fill="#84a98c" stroke="#52796f" stroke-width="2.5"/>
-          <!-- Marble Veins -->
-          <path d="M22 30 Q35 45 48 32 Q62 25 78 38" stroke="rgba(255,255,255,0.4)" stroke-width="2.5" fill="none"/>
-          <path d="M30 42 Q45 28 65 44" stroke="rgba(47,62,70,0.3)" stroke-width="2" fill="none"/>
-          
-          <!-- Hinge -->
+          <rect x="15" y="24" width="70" height="28" rx="14" fill="#84a98c" stroke="#52796f" stroke-width="2"/>
+          <path d="M22 30 Q35 45 48 32 Q62 25 78 38" stroke="rgba(255,255,255,0.4)" stroke-width="2" fill="none"/>
           <rect x="44" y="16" width="12" height="10" rx="3" fill="#52796f"/>
-          <!-- Teeth -->
-          <path d="M25 52 L25 72 M40 52 L40 76 M60 52 L60 76 M75 52 L75 72" stroke="#52796f" stroke-width="4" stroke-linecap="round"/>
-
-          <!-- Live Engraved Text -->
-          <text x="50" y="41" text-anchor="middle" font-family="${fontFam}" font-style="${fontSty}" font-weight="${fontWt}" font-size="7.5" fill="${fillGrad}" stroke="${strokeColor}" stroke-width="0.3" filter="${glowFilter}">
+          <path d="M25 52 L25 72 M40 52 L40 76 M60 52 L60 76 M75 52 L75 72" stroke="#52796f" stroke-width="3.5" stroke-linecap="round"/>
+          <text x="50" y="41" text-anchor="middle" font-family="${fontFam}" font-style="${fontSty}" font-weight="${fontWt}" font-size="7.5" fill="${fillGrad}">
             ${text}
           </text>
         </g>
       `;
     } else {
-      // Lông Nhung Mịn
       return `
         <g id="velvet-clip-geom" transform="translate(-50, -40)">
-          <!-- Soft Velvet Body -->
-          <rect x="14" y="22" width="72" height="30" rx="15" fill="#d4a373" stroke="#bc6c25" stroke-width="3"/>
+          <rect x="14" y="22" width="72" height="30" rx="15" fill="#d4a373" stroke="#bc6c25" stroke-width="2.5"/>
           <rect x="18" y="26" width="64" height="22" rx="11" fill="#ddb892"/>
-          <path d="M24 52 L24 70 M40 52 L40 74 M60 52 L60 74 M76 52 L76 70" stroke="#bc6c25" stroke-width="4" stroke-linecap="round"/>
-
-          <!-- Live Engraved Plaque -->
-          <rect x="25" y="31" width="50" height="13" rx="4" fill="#fefae0" stroke="#bc6c25" stroke-width="1"/>
-          <text x="50" y="40" text-anchor="middle" font-family="${fontFam}" font-style="${fontSty}" font-weight="${fontWt}" font-size="6.8" fill="${fillGrad}" stroke="${strokeColor}" stroke-width="0.25">
+          <path d="M24 52 L24 70 M40 52 L40 74 M60 52 L60 74 M76 52 L76 70" stroke="#bc6c25" stroke-width="3.5" stroke-linecap="round"/>
+          <rect x="25" y="31" width="50" height="13" rx="4" fill="#fefae0" stroke="#bc6c25" stroke-width="0.8"/>
+          <text x="50" y="40" text-anchor="middle" font-family="${fontFam}" font-style="${fontSty}" font-weight="${fontWt}" font-size="6.8" fill="${fillGrad}">
             ${text}
           </text>
         </g>
@@ -819,7 +673,7 @@
   }
 
   // ── 8. MACRO CLOSE-UP RENDERING ──
-  function getMacroClipRender(clipId, swatchName, text, fontFam, fontSty, fontWt, fillGrad, strokeColor, glowFilter) {
+  function getMacroClipRender(clipId, swatchName, text, fontFam, fontSty, fontWt, fillGrad) {
     let baseBg = '#fef08a';
     let accent = '#ca8a04';
     let shine = '#ffffff';
@@ -833,44 +687,26 @@
     }
 
     return `
-      <!-- High Craft Macro Geometry -->
       <g id="macro-clip-body" transform="translate(-80, -60)">
-        <!-- Shadow Base -->
-        <path d="M20 70 C20 20, 140 20, 140 70" stroke="rgba(0,0,0,0.08)" stroke-width="22" stroke-linecap="round" fill="none" transform="translate(4, 12)"/>
-
-        <!-- Main Claw Arch -->
         <path d="M20 70 C20 20, 140 20, 140 70" stroke="${baseBg}" stroke-width="18" stroke-linecap="round" fill="none"/>
-        <path d="M22 66 C22 24, 138 24, 138 66" stroke="${shine}" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.6"/>
-        <path d="M20 70 C20 20, 140 20, 140 70" stroke="${accent}" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+        <path d="M22 66 C22 24, 138 24, 138 66" stroke="${shine}" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+        <path d="M20 70 C20 20, 140 20, 140 70" stroke="${accent}" stroke-width="1.5" stroke-linecap="round" fill="none"/>
 
-        <!-- 8-Loop Heavy Duty Steel Hinge Core -->
         <g id="macro-hinge" transform="translate(68, 12)">
           <rect x="0" y="0" width="24" height="18" rx="4" fill="${accent}"/>
-          <line x1="4" y1="3" x2="4" y2="15" stroke="#ffffff" stroke-width="2"/>
-          <line x1="8" y1="3" x2="8" y2="15" stroke="#ffffff" stroke-width="2"/>
-          <line x1="12" y1="3" x2="12" y2="15" stroke="#ffffff" stroke-width="2"/>
-          <line x1="16" y1="3" x2="16" y2="15" stroke="#ffffff" stroke-width="2"/>
-          <line x1="20" y1="3" x2="20" y2="15" stroke="#ffffff" stroke-width="2"/>
-          <circle cx="12" cy="9" r="3.5" fill="#ffffff"/>
+          <line x1="6" y1="3" x2="6" y2="15" stroke="#ffffff" stroke-width="1.8"/>
+          <line x1="12" y1="3" x2="12" y2="15" stroke="#ffffff" stroke-width="1.8"/>
+          <line x1="18" y1="3" x2="18" y2="15" stroke="#ffffff" stroke-width="1.8"/>
         </g>
 
-        <!-- Strong Claw Teeth -->
         <g id="macro-teeth">
-          <path d="M30 76 L30 110 M50 76 L50 115 M70 76 L70 118 M90 76 L90 118 M110 76 L110 115 M130 76 L130 110" stroke="${baseBg}" stroke-width="7" stroke-linecap="round"/>
-          <path d="M30 76 L30 110 M50 76 L50 115 M70 76 L70 118 M90 76 L90 118 M110 76 L110 115 M130 76 L130 110" stroke="${accent}" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M30 76 L30 110 M50 76 L50 115 M70 76 L70 118 M90 76 L90 118 M110 76 L110 115 M130 76 L130 110" stroke="${baseBg}" stroke-width="6.5" stroke-linecap="round"/>
+          <path d="M30 76 L30 110 M50 76 L50 115 M70 76 L70 118 M90 76 L90 118 M110 76 L110 115 M130 76 L130 110" stroke="${accent}" stroke-width="1.2" stroke-linecap="round"/>
         </g>
 
-        <!-- High-Resolution Laser Engraved Typography -->
-        <g id="macro-laser-text">
-          <!-- Subtle recessed engraved depth shadow -->
-          <text x="80" y="44" text-anchor="middle" font-family="${fontFam}" font-style="${fontSty}" font-weight="${fontWt}" font-size="11.5" fill="rgba(0,0,0,0.25)" letter-spacing="1">
-            ${text}
-          </text>
-          <!-- Gilded foil surface with laser flare -->
-          <text x="80" y="42.5" text-anchor="middle" font-family="${fontFam}" font-style="${fontSty}" font-weight="${fontWt}" font-size="11.5" fill="${fillGrad}" stroke="${strokeColor}" stroke-width="0.3" filter="url(#macroGlow)" letter-spacing="1">
-            ${text}
-          </text>
-        </g>
+        <text x="80" y="43" text-anchor="middle" font-family="${fontFam}" font-style="${fontSty}" font-weight="${fontWt}" font-size="11" fill="${fillGrad}" letter-spacing="0.5">
+          ${text}
+        </text>
       </g>
     `;
   }
@@ -883,13 +719,13 @@
     const bespokeOption = {
       text: studioState.engravingText,
       font: studioState.font,
-      finish: studioState.finish === 'gold' ? 'Vàng Gold Foil 18K' : (studioState.finish === 'silver' ? 'Bạch Kim Platinum' : 'Laser Khói Chìm'),
+      finish: studioState.finish === 'gold' ? 'Vàng Champagne' : (studioState.finish === 'silver' ? 'Bạch kim' : 'Khói mờ'),
       hairStyle: studioState.hairStyle,
       hairColor: studioState.hairColor
     };
 
     addToCart(clip.id, 1, studioState.clipSwatch, bespokeOption);
-    showToast(`Đã thêm kẹp khắc tên "${studioState.engravingText}" vào giỏ hàng ✨`);
+    showToast(`Đã thêm kẹp khắc tên "${studioState.engravingText}" vào giỏ hàng`);
     openCartDrawer();
   }
 
@@ -900,7 +736,7 @@
     const bespokeOption = {
       text: studioState.engravingText,
       font: studioState.font,
-      finish: studioState.finish === 'gold' ? 'Vàng Gold Foil 18K' : (studioState.finish === 'silver' ? 'Bạch Kim Platinum' : 'Laser Khói Chìm'),
+      finish: studioState.finish === 'gold' ? 'Vàng Champagne' : (studioState.finish === 'silver' ? 'Bạch kim' : 'Khói mờ'),
       hairStyle: studioState.hairStyle,
       hairColor: studioState.hairColor
     };
@@ -915,33 +751,18 @@
     const ctx = canvas.getContext('2d');
     const svgEl = document.getElementById('studio-svg');
 
-    // 1. Draw High Craft Background
-    const bgGrad = ctx.createRadialGradient(600, 500, 50, 600, 600, 700);
-    bgGrad.addColorStop(0, '#ffffff');
-    bgGrad.addColorStop(0.7, '#f7f7fa');
-    bgGrad.addColorStop(1, '#ebebf0');
-    ctx.fillStyle = bgGrad;
-    ctx.fillRect(0, 0, 1200, 1200);
+    ctx.fillStyle = '#f5f5f7';
+    ctx.fillRect(0, 0, 1000, 1000);
 
-    // Decorative luxury border
-    ctx.strokeStyle = '#d4af37';
-    ctx.lineWidth = 4;
-    ctx.strokeRect(36, 36, 1128, 1128);
-    ctx.strokeStyle = 'rgba(212, 175, 55, 0.4)';
+    ctx.strokeStyle = 'rgba(0,0,0,0.08)';
     ctx.lineWidth = 1;
-    ctx.strokeRect(44, 44, 1112, 1112);
+    ctx.strokeRect(30, 30, 940, 940);
 
-    // Header Branding
     ctx.textAlign = 'center';
-    ctx.fillStyle = '#b45309';
-    ctx.font = '700 24px "Plus Jakarta Sans", sans-serif';
-    ctx.fillText('✦ NẾP TÓC BESPOKE STUDIO ✦', 600, 110);
-
     ctx.fillStyle = '#1d1d1f';
-    ctx.font = '800 36px "Plus Jakarta Sans", sans-serif';
-    ctx.fillText('Bản Phối Kẹp Tóc & Khắc Tên Độc Bản', 600, 160);
+    ctx.font = '700 22px -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif';
+    ctx.fillText('Nếp Tóc — Dịch vụ khắc laser', 500, 80);
 
-    // Serialize SVG and Draw
     const xml = new XMLSerializer().serializeToString(svgEl);
     const svgBlob = new Blob([xml], { type: 'image/svg+xml;charset=utf-8' });
     const URL = window.URL || window.webkitURL || window;
@@ -949,28 +770,20 @@
     const img = new Image();
 
     img.onload = function() {
-      ctx.drawImage(img, 150, 200, 900, 900);
+      ctx.drawImage(img, 100, 120, 800, 800);
       URL.revokeObjectURL(blobURL);
 
-      // Bottom Watermark & Details
       const clip = PRODUCTS.find(p => p.id === studioState.clipId);
-      const hair = HAIRSTYLES.find(h => h.id === studioState.hairStyle);
-
       ctx.fillStyle = '#1d1d1f';
-      ctx.font = '700 24px "Plus Jakarta Sans", sans-serif';
-      ctx.fillText(`Khắc tên: "${studioState.engravingText}" • ${clip?.shortName || clip?.name}`, 600, 1100);
+      ctx.font = '600 18px -apple-system, BlinkMacSystemFont, "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(`Khắc tên: "${studioState.engravingText}" • ${clip?.shortName || clip?.name}`, 500, 930);
 
-      ctx.fillStyle = '#86868b';
-      ctx.font = '500 18px "Plus Jakarta Sans", sans-serif';
-      ctx.fillText(`Mẫu tóc: ${hair?.name} • Thiết kế độc quyền tại neptoc.vn`, 600, 1135);
-
-      // Trigger Download
       const link = document.createElement('a');
-      link.download = `NepToc-Bespoke-${studioState.engravingText.replace(/[^a-zA-Z0-9]/g, '_') || 'Studio'}.png`;
+      link.download = `NepToc-KhacTen-${studioState.engravingText.replace(/[^a-zA-Z0-9]/g, '_') || 'Custom'}.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
 
-      showToast('Đã tải ảnh HD kẹp độc bản về máy 📸');
+      showToast('Đã lưu ảnh cấu hình');
     };
     img.src = blobURL;
   }

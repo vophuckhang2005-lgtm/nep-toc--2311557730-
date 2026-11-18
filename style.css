@@ -3934,78 +3934,36 @@ body.has-sticky-atc .floating-contact {
 }
 
 
-/* ── STUDIO THỬ KẸP & KHẮC TÊN LASER (BESPOKE STUDIO) ── */
-.nav-studio-link {
-  position: relative;
-  font-weight: 700 !important;
-  color: #b45309 !important;
-  background: rgba(245, 158, 11, 0.12) !important;
-  padding: 6px 14px !important;
-  border-radius: 999px !important;
-  border: 1px solid rgba(245, 158, 11, 0.28) !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 5px !important;
-  transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
-}
-
-.nav-studio-link:hover {
-  background: rgba(245, 158, 11, 0.22) !important;
-  transform: translateY(-1px);
-  color: #92400e !important;
-}
-
-.nav-studio-link.active {
-  background: #f59e0b !important;
-  color: #ffffff !important;
-  border-color: #d97706 !important;
-}
-
-.nav-studio-link.active .studio-sparkle {
-  filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.8));
-}
-
-.studio-sparkle {
-  display: inline-block;
-  animation: studioSparkle 2s infinite ease-in-out;
-}
-
-@keyframes studioSparkle {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.25) rotate(15deg); }
-}
-
-/* Studio Page General */
+/* ── DỊCH VỤ KHẮC TÊN LASER CÁ NHÂN HÓA (APPLE BESPOKE STUDIO) ── */
 .studio-page {
-  max-width: 1260px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 30px 24px 80px;
+  padding: 40px 24px 80px;
 }
 
 .studio-hero {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 44px;
 }
 
 .studio-badge {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #b45309;
-  background: #fef3c7;
-  border: 1px solid #fde68a;
-  padding: 6px 14px;
+  color: var(--apple-secondary);
+  background: var(--apple-surface-secondary);
+  border: 1px solid var(--apple-border);
+  padding: 5px 14px;
   border-radius: 999px;
   margin-bottom: 12px;
 }
 
 .studio-title {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Plus Jakarta Sans", sans-serif;
-  font-size: clamp(28px, 4vw, 42px);
+  font-size: clamp(28px, 3.8vw, 40px);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--apple-black);
@@ -4020,9 +3978,9 @@ body.has-sticky-atc .floating-contact {
 }
 
 .studio-subtitle {
-  font-size: clamp(15px, 1.8vw, 17px);
+  font-size: clamp(15px, 1.8vw, 16.5px);
   color: var(--apple-secondary);
-  max-width: 680px;
+  max-width: 640px;
   margin: 0 auto;
   line-height: 1.6;
 }
@@ -4030,7 +3988,7 @@ body.has-sticky-atc .floating-contact {
 /* Studio Layout */
 .studio-layout {
   display: grid;
-  grid-template-columns: 1.12fr 1fr;
+  grid-template-columns: 1.08fr 1fr;
   gap: 36px;
   align-items: start;
 }
@@ -4041,9 +3999,9 @@ body.has-sticky-atc .floating-contact {
   top: 88px;
   background: #ffffff;
   border: 1px solid var(--apple-border);
-  border-radius: 28px;
+  border-radius: 24px;
   padding: 20px;
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
 }
@@ -4060,7 +4018,7 @@ body.has-sticky-atc .floating-contact {
 .mode-pills {
   display: flex;
   background: #f5f5f7;
-  padding: 4px;
+  padding: 3px;
   border-radius: 999px;
   border: 1px solid rgba(0, 0, 0, 0.06);
 }
@@ -4068,7 +4026,7 @@ body.has-sticky-atc .floating-contact {
 .mode-btn {
   padding: 6px 14px;
   border-radius: 999px;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--apple-secondary);
   transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -4077,46 +4035,38 @@ body.has-sticky-atc .floating-contact {
 .mode-btn.active {
   background: #ffffff;
   color: var(--apple-black);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .live-indicator {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 11.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: #10b981;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--apple-secondary);
 }
 
 .live-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
-  animation: pulseDot 1.8s infinite;
-}
-
-@keyframes pulseDot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.6; }
+  background: var(--apple-black);
+  opacity: 0.85;
 }
 
 .studio-canvas-box {
   width: 100%;
   aspect-ratio: 1 / 1;
-  background: radial-gradient(circle at 50% 35%, #ffffff 0%, #f6f6f9 100%);
-  border-radius: 20px;
+  background: radial-gradient(circle at 50% 35%, #ffffff 0%, #f6f6f8 100%);
+  border-radius: 18px;
   border: 1px solid rgba(0, 0, 0, 0.04);
   position: relative;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 
 .studio-svg-viewport {
@@ -4137,11 +4087,11 @@ body.has-sticky-atc .floating-contact {
   align-items: center;
   justify-content: center;
   gap: 7px;
-  padding: 10px 16px;
+  padding: 10px 14px;
   background: #f5f5f7;
   border: 1px solid var(--apple-border);
   border-radius: 12px;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--apple-black);
   transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -4149,22 +4099,21 @@ body.has-sticky-atc .floating-contact {
 
 .stage-btn-secondary:hover {
   background: #e8e8ed;
-  transform: translateY(-1px);
 }
 
 /* Studio Customizer Form */
 .studio-panel {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 20px;
 }
 
 .studio-step-card {
   background: #ffffff;
   border: 1px solid var(--apple-border);
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
   transition: border-color 0.2s ease;
 }
 
@@ -4176,16 +4125,16 @@ body.has-sticky-atc .floating-contact {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .step-num {
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: var(--apple-black);
   color: #ffffff;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -4193,14 +4142,14 @@ body.has-sticky-atc .floating-contact {
 }
 
 .step-title {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--apple-black);
   letter-spacing: -0.01em;
 }
 
 .step-desc {
-  font-size: 12.5px;
+  font-size: 12px;
   color: var(--apple-secondary);
   margin-left: auto;
 }
@@ -4210,16 +4159,16 @@ body.has-sticky-atc .floating-contact {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
-  margin-bottom: 18px;
+  margin-bottom: 16px;
 }
 
 .hair-option {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 14px;
+  padding: 10px 12px;
   border: 1.5px solid var(--apple-border);
-  border-radius: 14px;
+  border-radius: 12px;
   background: #ffffff;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -4227,24 +4176,24 @@ body.has-sticky-atc .floating-contact {
 
 .hair-option:hover {
   border-color: rgba(0, 0, 0, 0.2);
-  transform: translateY(-1px);
 }
 
 .hair-option.active {
   border-color: var(--apple-black);
-  background: #fbfbfd;
+  background: #fafafc;
   box-shadow: 0 0 0 1px var(--apple-black);
 }
 
 .hair-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
   background: #f5f5f7;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  color: var(--apple-black);
 }
 
 .hair-info {
@@ -4252,7 +4201,7 @@ body.has-sticky-atc .floating-contact {
 }
 
 .hair-name {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--apple-black);
 }
@@ -4264,7 +4213,7 @@ body.has-sticky-atc .floating-contact {
 
 /* Hair Color Picker */
 .color-picker-title {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: var(--apple-black);
   margin-bottom: 10px;
@@ -4279,10 +4228,10 @@ body.has-sticky-atc .floating-contact {
 }
 
 .hair-color-pill {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 3px solid #ffffff;
+  border: 2px solid #ffffff;
   box-shadow: 0 0 0 1.5px var(--apple-border);
   cursor: pointer;
   position: relative;
@@ -4294,46 +4243,32 @@ body.has-sticky-atc .floating-contact {
 }
 
 .hair-color-pill.active {
-  box-shadow: 0 0 0 2.5px var(--apple-black);
-  transform: scale(1.12);
-}
-
-.hair-color-pill.active::after {
-  content: '✓';
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 800;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 2px var(--apple-black);
+  transform: scale(1.1);
 }
 
 /* Clip Picker Cards */
 .clips-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
 .clip-card-option {
   border: 1.5px solid var(--apple-border);
-  border-radius: 16px;
+  border-radius: 14px;
   padding: 12px;
   background: #ffffff;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .clip-card-option:hover {
   border-color: rgba(0, 0, 0, 0.2);
-  transform: translateY(-1px);
 }
 
 .clip-card-option.active {
@@ -4344,29 +4279,16 @@ body.has-sticky-atc .floating-contact {
 
 .clip-thumb-box {
   width: 100%;
-  height: 70px;
-  border-radius: 12px;
+  height: 64px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
 
-.clip-badge-rec {
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  background: #000000;
-  color: #ffffff;
-  font-size: 9.5px;
-  font-weight: 700;
-  padding: 2px 6px;
-  border-radius: 6px;
-  letter-spacing: 0.02em;
-}
-
 .clip-opt-name {
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
   color: var(--apple-black);
   line-height: 1.35;
@@ -4374,8 +4296,8 @@ body.has-sticky-atc .floating-contact {
 
 .clip-opt-price {
   font-size: 12px;
-  font-weight: 700;
-  color: var(--accent-rose);
+  font-weight: 600;
+  color: var(--apple-secondary);
 }
 
 /* Clip Swatches Row */
@@ -4388,11 +4310,11 @@ body.has-sticky-atc .floating-contact {
 .engraving-box {
   background: #fafafc;
   border: 1px solid rgba(0, 0, 0, 0.06);
-  border-radius: 18px;
-  padding: 18px;
+  border-radius: 16px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
 }
 
 .engraving-input-wrap {
@@ -4401,10 +4323,10 @@ body.has-sticky-atc .floating-contact {
 
 .engraving-input {
   width: 100%;
-  padding: 14px 44px 14px 16px;
+  padding: 12px 42px 12px 14px;
   border: 1.5px solid var(--apple-border);
-  border-radius: 14px;
-  font-size: 15px;
+  border-radius: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--apple-black);
   background: #ffffff;
@@ -4413,17 +4335,17 @@ body.has-sticky-atc .floating-contact {
 }
 
 .engraving-input:focus {
-  border-color: #b45309;
-  box-shadow: 0 0 0 4px rgba(245, 158, 11, 0.15);
+  border-color: var(--apple-black);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
 }
 
 .char-counter {
   position: absolute;
-  right: 14px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 11.5px;
-  font-weight: 600;
+  font-size: 11px;
+  font-weight: 500;
   color: var(--apple-tertiary);
 }
 
@@ -4438,39 +4360,38 @@ body.has-sticky-atc .floating-contact {
   border-radius: 10px;
   border: 1px solid var(--apple-border);
   background: #ffffff;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 600;
   color: var(--apple-secondary);
   cursor: pointer;
   text-align: center;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .font-btn.active, .finish-btn.active {
-  border-color: #b45309;
-  background: #fef3c7;
-  color: #92400e;
-  font-weight: 700;
+  border-color: var(--apple-black);
+  background: var(--apple-black);
+  color: #ffffff;
 }
 
 /* Order Summary & CTA in Studio */
 .studio-checkout-card {
   background: #ffffff;
-  border: 1.5px solid var(--apple-black);
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--apple-border);
+  border-radius: 20px;
+  padding: 22px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 
 .summary-flex {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .price-main {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 800;
   color: var(--apple-black);
   letter-spacing: -0.02em;
@@ -4478,10 +4399,10 @@ body.has-sticky-atc .floating-contact {
 
 .engraving-free-badge {
   font-size: 11.5px;
-  font-weight: 700;
-  color: #10b981;
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
+  font-weight: 600;
+  color: var(--apple-secondary);
+  background: var(--apple-surface-secondary);
+  border: 1px solid var(--apple-border);
   padding: 2px 8px;
   border-radius: 6px;
   margin-left: 6px;
@@ -4491,9 +4412,9 @@ body.has-sticky-atc .floating-contact {
   width: 100%;
   background: var(--apple-black);
   color: #ffffff;
-  border-radius: 14px;
-  padding: 15px 24px;
-  font-size: 15px;
+  border-radius: 12px;
+  padding: 14px 22px;
+  font-size: 14px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -4501,14 +4422,13 @@ body.has-sticky-atc .floating-contact {
   gap: 8px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
   margin-bottom: 10px;
 }
 
 .studio-atc-btn:hover {
   background: #000000;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
 }
 
 .studio-buy-btn {
@@ -4516,10 +4436,10 @@ body.has-sticky-atc .floating-contact {
   background: #f5f5f7;
   color: var(--apple-black);
   border: 1px solid var(--apple-border);
-  border-radius: 14px;
-  padding: 13px 24px;
-  font-size: 14px;
-  font-weight: 700;
+  border-radius: 12px;
+  padding: 12px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -4534,48 +4454,48 @@ body.has-sticky-atc .floating-contact {
 
 /* Studio Trust Features Grid */
 .studio-perks-section {
-  margin-top: 60px;
-  padding-top: 40px;
+  margin-top: 56px;
+  padding-top: 36px;
   border-top: 1px solid var(--apple-border);
 }
 
 .studio-perks-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
 .studio-perk-item {
   background: #ffffff;
   border: 1px solid var(--apple-border);
-  border-radius: 20px;
-  padding: 24px;
+  border-radius: 18px;
+  padding: 22px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .perk-icon-circle {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: #fef3c7;
-  color: #b45309;
+  background: var(--apple-surface-secondary);
+  color: var(--apple-black);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .perk-item-title {
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 700;
   color: var(--apple-black);
 }
 
 .perk-item-desc {
-  font-size: 13px;
+  font-size: 12.5px;
   color: var(--apple-secondary);
   line-height: 1.5;
 }
