@@ -111,15 +111,24 @@ button:active,
   gap: 8px;
 }
 
+#site-header {
+  min-height: 64px;
+}
+
+#app-header,
 header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 999;
-  background: rgba(255, 255, 255, 0.82);
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 64px;
+  z-index: 9999;
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 0.5px solid var(--apple-border);
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .nav-inner {
@@ -2304,6 +2313,202 @@ footer {
   margin-bottom: 18px;
   padding-bottom: 12px;
   border-bottom: 0.5px solid var(--apple-border);
+}
+
+/* ── Policy Bento & Interactive Elements ── */
+.policy-bento {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.policy-bento-card {
+  background: #fafafc;
+  border: 1px solid var(--apple-border-light);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  transition: transform 0.25s var(--spring-snappy), box-shadow 0.25s var(--spring-snappy), border-color 0.2s ease;
+}
+
+.policy-bento-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.policy-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  border: 1px solid var(--apple-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  color: var(--apple-black);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+}
+
+.policy-bento-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--apple-black);
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.policy-bento-desc {
+  font-size: 13.5px;
+  color: var(--apple-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Feature Spotlight Card */
+.policy-spotlight {
+  background: linear-gradient(135deg, #fafafc 0%, #f4f4f7 100%);
+  border: 1px solid var(--apple-border);
+  border-radius: var(--radius-md);
+  padding: 26px;
+  margin: 22px 0;
+}
+
+.policy-spotlight-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.policy-spotlight-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background: var(--apple-black);
+  color: #ffffff;
+  border-radius: var(--radius-pill);
+}
+
+.policy-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.policy-spec-item {
+  background: #ffffff;
+  border: 1px solid var(--apple-border-light);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+
+.policy-spec-label {
+  font-size: 11.5px;
+  color: var(--apple-tertiary);
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.policy-spec-val {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--apple-black);
+}
+
+/* 3-Step Flow */
+.policy-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 24px 0;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .policy-steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+.policy-step-card {
+  background: #fafafc;
+  border: 1px solid var(--apple-border-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  position: relative;
+}
+
+.policy-step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--apple-black);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.policy-step-title {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--apple-black);
+  margin-bottom: 6px;
+}
+
+.policy-step-desc {
+  font-size: 13px;
+  color: var(--apple-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Quick Problem Solver */
+.solver-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.solver-chip-btn {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background: #ffffff;
+  border: 1px solid var(--apple-border);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--apple-black);
+  cursor: pointer;
+  transition: all 0.2s var(--spring-snappy);
+}
+
+.solver-chip-btn:hover {
+  border-color: var(--apple-black);
+}
+
+.solver-chip-btn.active {
+  background: var(--apple-black);
+  color: #ffffff;
+  border-color: var(--apple-black);
+}
+
+.solver-answer-box {
+  background: #fafafc;
+  border: 1px solid var(--apple-border-light);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  margin-top: 12px;
+  animation: appleTabFadeIn 0.25s var(--spring-snappy);
 }
 
 /* ── Apple Slide-Out Mini Cart Drawer (Feature 1) ── */
