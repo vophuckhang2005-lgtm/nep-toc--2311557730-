@@ -52,14 +52,22 @@ function renderHeader() {
     </header>
   `;
 
-  // Active link detection
-  const currentPath = location.pathname;
+  // Bulletproof Active Link Detection
+  const currentPath = (location.pathname || '').toLowerCase();
+  const pageFile = currentPath.split('/').pop() || 'index.html';
+  const cleanPageName = pageFile.replace(/\.html$/, '') || 'index';
+
   const links = h.querySelectorAll('nav a');
   links.forEach(a => {
-    const href = a.getAttribute('href');
-    if (currentPath === '/' || currentPath.endsWith('index.html')) {
-      if (href.endsWith('index.html')) a.classList.add('active');
-    } else if (href !== '/index.html' && currentPath.includes(href.replace('/', ''))) {
+    a.classList.remove('active');
+    const href = (a.getAttribute('href') || '').toLowerCase();
+    const hrefClean = href.replace(/\.html$/, '').replace(/^\//, '');
+
+    if (cleanPageName === 'index' || cleanPageName === '') {
+      if (hrefClean === 'index') a.classList.add('active');
+    } else if (hrefClean === 'products' && (cleanPageName.includes('product') || cleanPageName.includes('detail'))) {
+      a.classList.add('active');
+    } else if (hrefClean === cleanPageName) {
       a.classList.add('active');
     }
   });
