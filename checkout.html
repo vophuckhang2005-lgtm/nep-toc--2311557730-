@@ -15,8 +15,10 @@
   <p class="section-sub" style="margin-bottom:36px;">Điền thông tin để chúng mình giao hàng đến bạn nhé!</p>
 
   <div id="empty-checkout" style="display:none; text-align:center; padding:60px 0;">
-    <div style="font-size:64px; margin-bottom:16px;">🛒</div>
-    <h2 style="font-family:'Syne',sans-serif; font-size:22px; margin-bottom:8px;">Giỏ hàng đang trống</h2>
+    <div style="margin-bottom:16px;">
+      <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" style="margin:0 auto; color:var(--apple-tertiary);"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+    </div>
+    <h2 style="font-size:22px; margin-bottom:8px;">Giỏ hàng đang trống</h2>
     <a href="products.html" class="btn-primary" style="display:inline-block; margin-top:16px;">Mua sắm ngay</a>
   </div>
 
@@ -48,10 +50,12 @@
         <div class="form-group">
           <label>Phương thức thanh toán</label>
           <div class="payment-box">
-            <div class="payment-icon">💵</div>
+            <div class="payment-icon">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+            </div>
             <div>
               <div style="font-weight:700;">Thanh toán khi nhận hàng (COD)</div>
-              <div style="font-size:13px; color:#666; margin-top:2px;">Trả tiền mặt khi shipper giao hàng — an toàn & tiện lợi</div>
+              <div style="font-size:13px; color:#666; margin-top:2px;">Kiểm tra hàng và thanh toán tiền mặt cho shipper</div>
             </div>
           </div>
         </div>
@@ -80,8 +84,8 @@
           <span style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--pink);" id="co-total"></span>
         </div>
       </div>
-      <div style="margin-top:16px; background:var(--yellow); border:1.5px solid var(--black); border-radius:8px; padding:10px 14px; font-size:13px; font-weight:600;">
-        🚚 Giao hàng 1–2 ngày tại TP.HCM
+      <div style="margin-top:16px; background:var(--apple-surface-secondary); border:1px solid var(--apple-border); border-radius:8px; padding:10px 14px; font-size:13px; font-weight:600;">
+        Giao hàng 24h nội thành TP.HCM
       </div>
     </div>
   </div>
@@ -90,10 +94,12 @@
 <!-- Success modal -->
 <div class="modal-overlay" id="success-modal">
   <div class="modal-box">
-    <div class="modal-icon">🎉</div>
-    <div class="modal-title">Đặt hàng thành công!</div>
+    <div class="modal-icon">
+      <svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="#28a745" stroke-width="2" style="margin:0 auto 12px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <div class="modal-title">Đặt hàng thành công</div>
     <div class="modal-code" id="order-code">#NT-000000</div>
-    <p class="modal-desc">Cảm ơn bạn đã mua hàng tại <strong>Nếp Tóc</strong>!<br/>Chúng mình sẽ gọi điện xác nhận và giao hàng trong <strong>1–2 ngày</strong> nhé. 🛍️</p>
+    <p class="modal-desc">Cảm ơn bạn đã lựa chọn <strong>Nếp Tóc</strong>.<br/>Tụi mình sẽ liên hệ xác nhận và giao hàng đến bạn trong vòng <strong>24 giờ</strong>.</p>
     <a href="index.html" class="btn-primary" style="display:inline-block; margin-top:4px;">Về trang chủ</a>
   </div>
 </div>
