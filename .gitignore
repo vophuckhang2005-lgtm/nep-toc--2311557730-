@@ -1,0 +1,6 @@
+# Hệ thống và trình soạn thảo
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
