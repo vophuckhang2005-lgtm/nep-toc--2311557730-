@@ -34,30 +34,59 @@ function setGiftOption(enabled, note = '') {
 }
 
 function addToCart(productId, qty = 1, swatch = null) {
+  const cleanSwatch = (swatch === 'null' || swatch === 'undefined' || !swatch) ? null : swatch;
+  const pId = Number(productId);
   const cart = getCart();
-  const existing = cart.find(i => i.id === productId && i.swatch === swatch);
+  const existing = cart.find(i => {
+    const itemSwatch = (i.swatch === 'null' || i.swatch === 'undefined' || !i.swatch) ? null : i.swatch;
+    return Number(i.id) === pId && itemSwatch === cleanSwatch;
+  });
+
   if (existing) {
     existing.qty = Math.min(existing.qty + qty, 99);
   } else {
-    const p = PRODUCTS.find(p => p.id === productId);
+    const p = PRODUCTS.find(p => Number(p.id) === pId);
     if (!p) return;
-    cart.push({ id: productId, name: p.name, price: p.price, qty, swatch, cardBg: p.cardBg, cardAccent: p.cardAccent });
+    cart.push({ id: pId, name: p.name, price: p.price, qty, swatch: cleanSwatch, cardBg: p.cardBg, cardAccent: p.cardAccent });
   }
   saveCart(cart);
 }
 
 function removeFromCart(productId, swatch = null) {
-  const cart = getCart().filter(i => !(i.id === productId && i.swatch === swatch));
+  const cleanSwatch = (swatch === 'null' || swatch === 'undefined' || !swatch) ? null : swatch;
+  const pId = Number(productId);
+  const cart = getCart().filter(i => {
+    const itemSwatch = (i.swatch === 'null' || i.swatch === 'undefined' || !i.swatch) ? null : i.swatch;
+    return !(Number(i.id) === pId && itemSwatch === cleanSwatch);
+  });
   saveCart(cart);
+  if (typeof showToast === 'function') {
+    showToast('Đã xóa khỏi giỏ hàng');
+  }
+  if (typeof renderCart === 'function') {
+    renderCart();
+  }
 }
 
 function updateQty(productId, swatch, newQty) {
+  const cleanSwatch = (swatch === 'null' || swatch === 'undefined' || !swatch) ? null : swatch;
+  const pId = Number(productId);
   const cart = getCart();
-  const item = cart.find(i => i.id === productId && i.swatch === swatch);
+  const item = cart.find(i => {
+    const itemSwatch = (i.swatch === 'null' || i.swatch === 'undefined' || !i.swatch) ? null : i.swatch;
+    return Number(i.id) === pId && itemSwatch === cleanSwatch;
+  });
+
   if (item) {
-    if (newQty < 1) { removeFromCart(productId, swatch); return; }
+    if (newQty < 1) {
+      removeFromCart(productId, swatch);
+      return;
+    }
     item.qty = Math.min(newQty, 99);
     saveCart(cart);
+    if (typeof renderCart === 'function') {
+      renderCart();
+    }
   }
 }
 
@@ -67,6 +96,9 @@ function clearCart() {
   updateCartBadge();
   if (typeof renderCartDrawerContent === 'function') {
     renderCartDrawerContent();
+  }
+  if (typeof renderCart === 'function') {
+    renderCart();
   }
 }
 
@@ -95,10 +127,19 @@ function fmt(n) {
 
 function updateCartBadge() {
   const badge = document.getElementById('cart-badge');
-  if (!badge) return;
+  const cartBtn = document.getElementById('open-cart-btn') || document.querySelector('.cart-btn');
   const count = getCartCount();
-  badge.textContent = count;
-  badge.style.display = count > 0 ? 'flex' : 'none';
+
+  if (badge) {
+    badge.textContent = count;
+    badge.style.display = count > 0 ? 'flex' : 'none';
+  }
+
+  if (cartBtn && count > 0) {
+    cartBtn.classList.remove('cart-bump');
+    void cartBtn.offsetWidth;
+    cartBtn.classList.add('cart-bump');
+  }
 }
 
 document.addEventListener('DOMContentLoaded', updateCartBadge);

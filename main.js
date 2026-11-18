@@ -272,11 +272,11 @@ function renderCartDrawerContent() {
             <div class="drawer-item-price">${fmt(item.price * item.qty)}</div>
           </div>
           <div class="drawer-item-actions">
-            <button class="btn-remove" onclick="removeFromCart(${item.id}, '${item.swatch}')" aria-label="Xóa">×</button>
+            <button class="btn-remove" onclick="removeFromCart(${item.id}, ${item.swatch ? `'${item.swatch.replace(/'/g, "\\'")}'` : 'null'})" aria-label="Xóa">×</button>
             <div class="cart-qty-ctrl">
-              <button onclick="updateQty(${item.id}, '${item.swatch}', ${item.qty - 1})">−</button>
+              <button onclick="updateQty(${item.id}, ${item.swatch ? `'${item.swatch.replace(/'/g, "\\'")}'` : 'null'}, ${item.qty - 1})">−</button>
               <span>${item.qty}</span>
-              <button onclick="updateQty(${item.id}, '${item.swatch}', ${item.qty + 1})">+</button>
+              <button onclick="updateQty(${item.id}, ${item.swatch ? `'${item.swatch.replace(/'/g, "\\'")}'` : 'null'}, ${item.qty + 1})">+</button>
             </div>
           </div>
         </div>
@@ -583,8 +583,8 @@ function productCardHTML(p) {
   `;
 }
 
-// Quick Add to Cart: Adds to cart and smoothly opens Mini Cart Drawer
+// Quick Add to Cart: Adds to cart quietly without intrusive drawer opening
 function quickAdd(id) {
   addToCart(id, 1, null);
-  openCartDrawer();
+  showToast('Đã thêm vào giỏ hàng');
 }
