@@ -58,3 +58,52 @@ async function placeOrderFirestore(orderData) {
   await firestoreDb.collection('donhang').doc(firestorePayload.maDon).set(firestorePayload);
   return firestorePayload.maDon;
 }
+
+
+/**
+ * Đăng nhập thật bằng tài khoản Google qua Firebase Authentication
+ * Hỗ trợ chuyển hướng trực tiếp (Redirect) sang accounts.google.com
+ */
+async function signInWithGoogleRedirect() {
+  if (typeof firebase === 'undefined' || !firebase.auth) {
+    throw new Error('Firebase Authentication SDK chưa được tải.');
+  }
+
+  const provider = new firebase.auth.GoogleAuthProvider();
+  provider.addScope('profile');
+  provider.addScope('email');
+  provider.setCustomParameters({ prompt: 'select_account' });
+
+  // Chuyển hướng trực tiếp trang web sang accounts.google.com
+  await firebase.auth().signInWithRedirect(provider);
+}
+
+/**
+ * Kiểm tra kết quả sau khi Google chuyển hướng người dùng trở lại website
+ */
+async function checkGoogleRedirectResult() {
+  if (typeof firebase === 'undefined' || !firebase.auth) return null;
+  try {
+    const result = await firebase.auth().getRedirectResult();
+    if (result && result.user) {
+      return result.user;
+    }
+  } catch (err) {
+    console.error('Lỗi nhận kết quả từ Google Redirect:', err);
+    throw err;
+  }
+  return null;
+}
+
+/**
+ * Đăng xuất khỏi Firebase Auth
+ */
+async function signOutFirebase() {
+  if (typeof firebase !== 'undefined' && firebase.auth) {
+    try {
+      await firebase.auth().signOut();
+    } catch (e) {
+      console.warn('Lỗi khi đăng xuất Firebase Auth:', e);
+    }
+  }
+}

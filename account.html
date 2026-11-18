@@ -242,6 +242,10 @@
 <script src="products.js"></script>
 <script src="cart.js"></script>
 <script src="main.js?v=3"></script>
+<!-- Firebase JS SDK qua CDN -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="script.js"></script>
 <script>
   renderHeader();
   renderFooter();
@@ -304,10 +308,17 @@
     dashView.style.display = 'block';
 
     // Profile info
-    const displayName = user.fullname || (user.phone ? 'Khách hàng ' + user.phone.slice(-4) : 'Nàng Nếp Tóc');
+    const displayName = user.fullname || (user.phone ? 'Khách hàng ' + user.phone.slice(-4) : (user.email ? user.email.split('@')[0] : 'Nàng Nếp Tóc'));
     const names = displayName.trim().split(' ');
     const initials = names.length > 1 ? (names[0][0] + names[names.length - 1][0]).toUpperCase() : displayName.substring(0, 2).toUpperCase();
-    document.getElementById('profile-avatar').textContent = initials;
+    
+    const avatarEl = document.getElementById('profile-avatar');
+    if (user.photoURL) {
+      avatarEl.innerHTML = `<img src="${user.photoURL}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" alt="Avatar" referrerpolicy="no-referrer"/>`;
+    } else {
+      avatarEl.textContent = initials;
+    }
+
     document.getElementById('profile-name').textContent = displayName;
     document.getElementById('profile-phone').textContent = user.phone || user.email || 'Thành viên mới';
     document.getElementById('profile-address').textContent = user.fullAddress || user.address || 'Chưa lưu (hãy cập nhật tại tab Sổ địa chỉ)';
@@ -486,13 +497,39 @@
   });
 
   // Handle Social Login (Google / Apple)
-  function handleSocialAuth(provider) {
-    const demoNames = {
-      Google: 'Linh Nguyễn (Google)',
-      Apple: 'Phương Linh (Apple ID)'
-    };
+  async function handleSocialAuth(provider) {
+    if (provider === 'Google') {
+      const googleBtns = document.querySelectorAll('.social-login-btn.google-btn');
+      googleBtns.forEach(b => {
+        b.disabled = true;
+        b.style.opacity = '0.7';
+        b.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg><span>Đang chuyển sang Google...</span>`;
+      });
+
+      try {
+        // Chuyển hướng trực tiếp sang trang đăng nhập chính thức của Google (accounts.google.com)
+        await signInWithGoogleRedirect();
+      } catch (err) {
+        console.error('Lỗi xác thực Google Redirect:', err);
+        if (err.code === 'auth/operation-not-allowed' || err.code === 'auth/configuration-not-found') {
+          showToast('Vui lòng kích hoạt Google Provider trong Firebase Console!', 'error');
+        } else if (err.code === 'auth/unauthorized-domain') {
+          showToast('Tên miền này cần được thêm vào Authorized Domains trong Firebase Auth.', 'error');
+        } else {
+          showToast('Không thể kết nối Google: ' + (err.message || 'Vui lòng thử lại sau.'), 'error');
+        }
+        googleBtns.forEach(b => {
+          b.disabled = false;
+          b.style.opacity = '1';
+          b.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg><span>Tiếp tục với Google</span>`;
+        });
+      }
+      return;
+    }
+
+    // Provider Apple ID
     saveUser({
-      fullname: demoNames[provider] || 'Phương Linh',
+      fullname: 'Phương Linh (Apple ID)',
       phone: '0901 234 567',
       city: 'TP. Hồ Chí Minh',
       district: 'Quận 1',
@@ -525,15 +562,50 @@
   });
 
   // Logout
-  document.getElementById('btn-logout').addEventListener('click', () => {
+  document.getElementById('btn-logout').addEventListener('click', async () => {
     if (confirm('Bạn có chắc muốn đăng xuất?')) {
+      if (typeof signOutFirebase === 'function') {
+        await signOutFirebase();
+      }
       logoutUser();
       showToast('Đã đăng xuất tài khoản');
       renderAccountPage();
     }
   });
 
-  // Initial load
+  // Initial load: Kiểm tra nếu vừa hoàn tất đăng nhập chuyển hướng từ Google về
+  if (typeof checkGoogleRedirectResult === 'function') {
+    checkGoogleRedirectResult().then(user => {
+      if (user) {
+        const fullname = user.displayName || (user.email ? user.email.split('@')[0] : 'Khách hàng Google');
+        const email = user.email || '';
+        const photo = user.photoURL || '';
+
+        saveUser({
+          fullname: fullname,
+          email: email,
+          photoURL: photo,
+          phone: user.phoneNumber || '',
+          city: 'TP. Hồ Chí Minh',
+          district: 'Quận 1',
+          ward: 'Phường Bến Thành',
+          street: '123 Nguyễn Thị Minh Khai',
+          fullAddress: '123 Nguyễn Thị Minh Khai, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh'
+        });
+
+        showToast(`Đăng nhập Google thành công! Chào mừng ${fullname}`);
+        renderAccountPage();
+      }
+    }).catch(err => {
+      console.error('Lỗi sau khi nhận kết quả từ Google Redirect:', err);
+      if (err.code === 'auth/operation-not-allowed' || err.code === 'auth/configuration-not-found') {
+        showToast('Vui lòng kích hoạt Google Provider trong Firebase Console!', 'error');
+      } else if (err.code === 'auth/unauthorized-domain') {
+        showToast('Tên miền này cần được thêm vào Authorized Domains trong Firebase Console!', 'error');
+      }
+    });
+  }
+
   renderAccountPage();
 </script>
 </body>
