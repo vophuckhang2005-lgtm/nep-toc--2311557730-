@@ -304,10 +304,10 @@
     const lb = document.getElementById('image-lightbox');
     const lbVisual = document.getElementById('lightbox-visual');
     const lbTitle = document.getElementById('lightbox-title');
-    const p = PRODUCTS.find(x => x.id === pid);
-    if (lb && lbVisual && p) {
-      if (lbTitle) lbTitle.textContent = p.name;
-      lbVisual.innerHTML = productVisualSVG(p, 260);
+    const prod = PRODUCTS.find(x => x.id === id);
+    if (lb && lbVisual && prod) {
+      if (lbTitle) lbTitle.textContent = prod.name;
+      lbVisual.innerHTML = productVisualSVG(prod, 260);
       lb.classList.add('active');
     }
   }
