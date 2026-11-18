@@ -12,68 +12,73 @@
 <div id="site-header"></div>
 
 <div class="page-sm">
-  <h1 class="section-title" style="margin-bottom:8px;">Chính <em>sách</em></h1>
-  <p class="section-sub" style="margin-bottom:32px;">Thông tin minh bạch giúp bạn an tâm trải nghiệm mua sắm</p>
-
-  <!-- TOC -->
-  <div class="policy-toc">
-    <a href="#ship">Giao hàng</a>
-    <a href="#return">Đổi trả</a>
-    <a href="#privacy">Bảo mật</a>
-    <a href="#contact">Liên hệ</a>
+  <div style="text-align:center; margin-bottom:32px;">
+    <h1 class="section-title" style="margin-bottom:8px;">Chính <em>sách</em></h1>
+    <p class="section-sub">Chọn từng danh mục bên dưới để xem chi tiết chính sách tương ứng</p>
   </div>
 
-  <!-- Giao hàng -->
-  <div class="policy-section" id="ship">
+  <!-- Apple Segmented Control Tabs -->
+  <div class="policy-tabs-wrap" id="policy-tabs">
+    <button class="policy-tab-btn active" data-target="panel-ship">Giao hàng</button>
+    <button class="policy-tab-btn" data-target="panel-return">Đổi trả & Bảo hành</button>
+    <button class="policy-tab-btn" data-target="panel-privacy">Bảo mật</button>
+    <button class="policy-tab-btn" data-target="panel-contact">Hỗ trợ</button>
+  </div>
+
+  <!-- Panel 1: Giao hàng -->
+  <div class="policy-card-panel active" id="panel-ship">
     <h2>Chính sách giao hàng</h2>
-    <p style="margin-bottom:12px;">Nếp Tóc phục vụ giao hàng tận nơi trên toàn địa bàn TP. Hồ Chí Minh.</p>
+    <p style="margin-bottom:16px; font-size:15px; color:var(--apple-secondary);">Nếp Tóc phục vụ giao hàng tận nơi trên toàn địa bàn TP. Hồ Chí Minh với cam kết an toàn, nhanh chóng và hỗ trợ đồng kiểm trực tiếp.</p>
     <ul>
-      <li><strong>Thời gian giao:</strong> 24 giờ đối với khu vực nội thành (tối đa 48 giờ đối với ngoại thành).</li>
-      <li><strong>Phí giao hàng tiêu chuẩn:</strong> 25.000đ/đơn.</li>
-      <li><strong>Miễn phí giao hàng:</strong> Áp dụng tự động cho mọi đơn hàng từ 300.000đ trở lên.</li>
-      <li><strong>Phương thức:</strong> Giao tận tay qua shipper, hỗ trợ đồng kiểm và thanh toán tiền mặt khi nhận (COD).</li>
-      <li><strong>Khung giờ giao hàng:</strong> 8:00 – 20:00 từ Thứ 2 đến Chủ nhật (shipper sẽ liên hệ trước khi đến).</li>
+      <li><strong>Thời gian giao:</strong> 24 giờ đối với khu vực nội thành (tối đa 48 giờ đối với khu vực ngoại thành).</li>
+      <li><strong>Phí giao hàng tiêu chuẩn:</strong> 25.000đ cho mỗi đơn hàng.</li>
+      <li><strong>Miễn phí giao hàng:</strong> Tự động áp dụng cho tất cả đơn hàng từ 300.000đ trở lên.</li>
+      <li><strong>Hình thức thanh toán:</strong> Giao hàng tận tay (COD) — bạn được kiểm tra kẹp đúng mẫu và ưng ý trước khi thanh toán tiền mặt cho shipper.</li>
+      <li><strong>Khung giờ giao nhận:</strong> 8:00 – 20:00 từ Thứ Hai đến Chủ nhật (shipper luôn gọi điện hẹn trước khi đến).</li>
     </ul>
-    <p style="margin-top:12px;">Sau khi đơn hàng được ghi nhận, nhân viên chăm sóc khách hàng sẽ liên hệ xác nhận thông tin trong vòng 60 phút.</p>
+    <p style="margin-top:16px; font-size:14px; color:var(--apple-tertiary);">Lưu ý: Sau khi bạn hoàn tất đặt đơn trên website, nhân viên chăm sóc khách hàng của Nếp Tóc sẽ liên hệ xác nhận trong vòng 60 phút.</p>
   </div>
 
-  <!-- Đổi trả -->
-  <div class="policy-section" id="return">
+  <!-- Panel 2: Đổi trả & Bảo hành -->
+  <div class="policy-card-panel" id="panel-return">
     <h2>Chính sách đổi trả & bảo hành</h2>
-    <p style="margin-bottom:12px;">Nếp Tóc áp dụng chính sách đổi trả trong vòng <strong>7 ngày</strong> kể từ khi nhận hàng cho các trường hợp:</p>
+    <p style="margin-bottom:16px; font-size:15px; color:var(--apple-secondary);">Nếp Tóc áp dụng chính sách đổi trả minh bạch trong vòng <strong>7 ngày</strong> kể từ khi bạn nhận hàng:</p>
     <ul>
-      <li>Sản phẩm có lỗi từ nhà sản xuất (hỏng chốt, nứt vỡ, lò xo yếu hoặc không đúng màu).</li>
-      <li>Giao nhầm mã sản phẩm hoặc thiếu số lượng theo đơn đặt.</li>
-      <li>Hư hỏng phát sinh trong quá trình vận chuyển.</li>
+      <li>Sản phẩm có lỗi từ nhà sản xuất (hỏng chốt, nứt vỡ, lò xo yếu hoặc không đúng màu sắc đã chọn).</li>
+      <li>Giao nhầm mã sản phẩm hoặc thiếu số lượng theo đơn đặt hàng.</li>
+      <li>Hư hỏng phát sinh trong quá trình vận chuyển đến tay bạn.</li>
     </ul>
-    <p style="margin-top:12px;"><strong>Bảo hành lò xo 30 ngày:</strong> Toàn bộ kẹp càng cua sử dụng cốt lò xo thép Titan được bảo hành 1 đổi 1 miễn phí nếu lò xo bị biến dạng hoặc gãy trong 30 ngày đầu sử dụng.</p>
-    <p style="margin-top:12px;">Để yêu cầu bảo hành hoặc đổi sản phẩm, bạn chỉ cần liên hệ Hotline/Zalo hoặc gửi tin nhắn tại trang Liên hệ. Đội ngũ Nếp Tóc sẽ tiếp nhận và xử lý nhanh chóng.</p>
+    <div style="background:#fafafc; border:1px solid var(--apple-border-light); border-radius:12px; padding:18px; margin:20px 0;">
+      <strong style="color:var(--apple-black); display:block; margin-bottom:6px;">Chính sách bảo hành lò xo 30 ngày:</strong>
+      <p style="font-size:14px; color:var(--apple-secondary); margin:0;">Toàn bộ kẹp càng cua sử dụng cốt lò xo thép Titan cao cấp. Trong 30 ngày đầu sử dụng, nếu lò xo bị lỏng, biến dạng hoặc gãy, tụi mình đổi mới 1-1 miễn phí tận nhà mà không tính thêm bất kỳ khoản phí nào.</p>
+    </div>
+    <p style="font-size:14px; color:var(--apple-tertiary);">Để yêu cầu đổi hàng hoặc bảo hành, bạn chỉ cần liên hệ Hotline/Zalo hoặc gửi tin nhắn tại trang Liên hệ. Đội ngũ Nếp Tóc sẽ xử lý trong vòng 24 giờ.</p>
   </div>
 
-  <!-- Bảo mật -->
-  <div class="policy-section" id="privacy">
+  <!-- Panel 3: Bảo mật thông tin -->
+  <div class="policy-card-panel" id="panel-privacy">
     <h2>Bảo mật thông tin</h2>
-    <p style="margin-bottom:12px;">Thông tin cá nhân (họ tên, số điện thoại, địa chỉ nhận hàng) chỉ được sử dụng cho mục đích:</p>
+    <p style="margin-bottom:16px; font-size:15px; color:var(--apple-secondary);">Chúng mình tôn trọng và bảo vệ quyền riêng tư của từng khách hàng. Thông tin cá nhân bạn cung cấp (họ tên, số điện thoại, địa chỉ nhận hàng) chỉ phục vụ cho:</p>
     <ul>
-      <li>Xử lý, đóng gói và điều phối giao nhận đơn hàng.</li>
-      <li>Liên hệ hỗ trợ kỹ thuật hoặc bảo hành khi có yêu cầu từ quý khách.</li>
+      <li>Xử lý, đóng gói và điều phối shipper giao hàng tận nơi.</li>
+      <li>Liên hệ xác nhận đơn hoặc hỗ trợ kỹ thuật khi có yêu cầu từ bạn.</li>
     </ul>
-    <p style="margin-top:12px;">Nếp Tóc cam kết bảo mật tuyệt đối, không chia sẻ hay sử dụng dữ liệu của khách hàng cho bất kỳ bên thứ ba nào khác. Website không thu thập hay lưu giữ thông tin thẻ thanh toán trực tuyến.</p>
+    <p style="margin-top:16px; font-size:14.5px; color:var(--apple-secondary); line-height:1.7;">Nếp Tóc cam kết bảo mật tuyệt đối, không chia sẻ hay cung cấp dữ liệu khách hàng cho bất kỳ bên thứ ba nào khác. Website không thu thập, không xử lý và không lưu giữ bất kỳ thông tin tài khoản ngân hàng hoặc thẻ tín dụng nào.</p>
   </div>
 
-  <!-- Liên hệ -->
-  <div class="policy-section" id="contact">
+  <!-- Panel 4: Hỗ trợ liên hệ -->
+  <div class="policy-card-panel" id="panel-contact">
     <h2>Thông tin hỗ trợ</h2>
-    <div class="policy-contact">
-      <strong>Nếp Tóc — Phụ kiện tóc cao cấp TP.HCM</strong>
-      <p>Địa chỉ: 123 Nguyễn Thị Minh Khai, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh</p>
-      <p>Hotline: <a href="tel:0901234567" style="color:var(--apple-black); font-weight:700;">0901 234 567</a></p>
-      <p>Email: <a href="mailto:hello@neptoc.vn" style="color:var(--accent-rose); font-weight:600;">hello@neptoc.vn</a></p>
-      <p>Thời gian làm việc: 8:00 – 21:30 hàng ngày</p>
+    <div class="policy-contact" style="background:#fafafc; border:1px solid var(--apple-border-light); border-radius:14px; padding:24px;">
+      <strong style="font-size:17px; color:var(--apple-black); display:block; margin-bottom:10px;">Nếp Tóc — Phụ kiện tóc cao cấp TP.HCM</strong>
+      <p style="margin-bottom:8px;">Địa chỉ: 123 Nguyễn Thị Minh Khai, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh</p>
+      <p style="margin-bottom:8px;">Hotline / Zalo: <a href="tel:0901234567" style="color:var(--apple-black); font-weight:700;">0901 234 567</a></p>
+      <p style="margin-bottom:8px;">Email hỗ trợ: <a href="mailto:hello@neptoc.vn" style="color:var(--accent-rose); font-weight:600;">hello@neptoc.vn</a></p>
+      <p style="margin-bottom:0;">Thời gian phục vụ: 8:00 – 21:30 mỗi ngày (kể cả Thứ Bảy & Chủ nhật)</p>
     </div>
   </div>
 
-  <div style="text-align:center; padding:40px 0;">
+  <div style="text-align:center; padding:44px 0 0;">
     <a href="products.html" class="btn-primary">Xem bộ sưu tập sản phẩm →</a>
   </div>
 </div>
@@ -87,6 +92,28 @@
 <script>
   renderHeader();
   renderFooter();
+
+  // Interactive Segmented Tabs
+  const tabBtns = document.querySelectorAll('.policy-tab-btn');
+  const panels = document.querySelectorAll('.policy-card-panel');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.dataset.target;
+
+      // Update button active states
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      // Update panel visibility (Only show target panel)
+      panels.forEach(p => {
+        p.classList.remove('active');
+        if (p.id === targetId) {
+          p.classList.add('active');
+        }
+      });
+    });
+  });
 </script>
 </body>
 </html>
