@@ -16,16 +16,15 @@ function renderHeader() {
           <a href="account.html">Tài khoản</a>
         </nav>
         <div class="nav-actions">
-          <!-- Account Nav Button -->
+          <!-- Account Nav Button (Icon Only) -->
           <a href="account.html" class="account-nav-btn" id="open-account-btn" aria-label="Tài khoản cá nhân" title="Tài khoản">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
               <circle cx="12" cy="7" r="4"/>
             </svg>
-            <span id="account-name-label">Tài khoản</span>
           </a>
 
-          <!-- Wishlist Nav Button -->
+          <!-- Wishlist Nav Button (Icon Only) -->
           <button class="wishlist-nav-btn" id="open-wishlist-btn" aria-label="Xem sản phẩm yêu thích" title="Danh sách yêu thích">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -33,14 +32,13 @@ function renderHeader() {
             <span id="wishlist-badge">0</span>
           </button>
 
-          <!-- Cart Button -->
-          <button class="cart-btn" id="open-cart-btn" aria-label="Mở giỏ hàng">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <!-- Cart Button (Icon Only) -->
+          <button class="cart-btn" id="open-cart-btn" aria-label="Mở giỏ hàng" title="Giỏ hàng">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
               <line x1="3" y1="6" x2="21" y2="6"/>
               <path d="M16 10a4 4 0 01-8 0"/>
             </svg>
-            <span>Giỏ hàng</span>
             <span id="cart-badge">0</span>
           </button>
 
@@ -154,22 +152,82 @@ function renderFooter() {
   `;
 }
 
-// Floating Quick Contact Widget
+// Floating Quick Contact & Emi Jay Live Chat Widget (Icon Only)
 function renderFloatingHelp() {
   if (document.getElementById('floating-contact-btn')) return;
   const wrap = document.createElement('div');
   wrap.id = 'floating-contact-btn';
   wrap.innerHTML = `
+    <!-- Floating Action Buttons (Icon Only) -->
     <div class="floating-contact">
-      <a href="tel:0901234567" class="float-btn phone-btn" title="Hotline">
+      <a href="tel:0901234567" class="float-btn phone-btn" title="Hotline 0901 234 567" aria-label="Hotline">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       </a>
-      <a href="contact.html" class="float-btn chat-btn" title="Tư vấn">
-        <span class="float-label">Tư vấn chọn kẹp</span>
-      </a>
+      <button class="float-btn chat-btn" id="btn-toggle-chat" title="Tư vấn chọn kẹp tóc" aria-label="Khung chat tư vấn">
+        <span class="chat-online-dot"></span>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      </button>
+    </div>
+
+    <!-- Emi Jay Live Chat Box -->
+    <div class="live-chat-box" id="live-chat-box">
+      <div class="live-chat-header">
+        <div class="live-chat-stylist-info">
+          <div class="live-chat-avatar">NT</div>
+          <div>
+            <div class="live-chat-name">Stylist Nếp Tóc</div>
+            <div class="live-chat-status"><span class="chat-status-green"></span>Trực tuyến • Phản hồi ngay</div>
+          </div>
+        </div>
+        <button class="live-chat-close" id="btn-close-chat" aria-label="Đóng chat">×</button>
+      </div>
+
+      <div class="live-chat-body" id="live-chat-messages">
+        <div class="chat-bubble-row bot">
+          <div class="chat-bubble">
+            Chào bạn! Mình là Stylist của Nếp Tóc. Bạn cần tìm kẹp cho chất tóc dày hay mỏng, hoặc cần tư vấn kẹp giữ nếp đi làm, đi chơi thì nhắn mình nhé!
+          </div>
+          <span class="chat-timestamp">Vừa xong</span>
+        </div>
+
+        <!-- Suggestion Chips -->
+        <div class="chat-suggestion-chips" id="chat-suggestion-chips">
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tóc dày & dài nên chọn kẹp nào?')">Tóc dày & dài</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tóc mỏng kẹp mẫu nào không bị tuột?')">Tóc mỏng/ngắn</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Màu kẹp nào tôn da sáng mặt nhất?')">Màu tôn da</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tư vấn đóng gói hộp quà nơ lụa')">Gói hộp quà</button>
+        </div>
+      </div>
+
+      <form class="live-chat-footer" id="live-chat-form" onsubmit="handleLiveChatSend(event)">
+        <input type="text" id="live-chat-input" placeholder="Hỏi về chất tóc, size kẹp..." autocomplete="off"/>
+        <button type="submit" class="live-chat-send-btn" aria-label="Gửi">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
     </div>
   `;
   document.body.appendChild(wrap);
+
+  const toggleBtn = document.getElementById('btn-toggle-chat');
+  const closeBtn = document.getElementById('btn-close-chat');
+  const chatBox = document.getElementById('live-chat-box');
+
+  if (toggleBtn && chatBox) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      chatBox.classList.toggle('open');
+      if (chatBox.classList.contains('open')) {
+        document.getElementById('live-chat-input')?.focus();
+      }
+    });
+  }
+
+  if (closeBtn && chatBox) {
+    closeBtn.addEventListener('click', () => {
+      chatBox.classList.remove('open');
+    });
+  }
 }
 
 // ── Apple Slide-Out Mini Cart Drawer ──
@@ -638,15 +696,98 @@ function saveOrder(order) {
 }
 
 function updateAccountUI() {
-  const label = document.getElementById('account-name-label');
+  const btn = document.getElementById('open-account-btn');
   const user = getUser();
-  if (label) {
+  if (btn) {
     if (user && user.fullname) {
-      const parts = user.fullname.trim().split(' ');
-      const shortName = parts[parts.length - 1];
-      label.textContent = shortName;
+      btn.classList.add('logged-in');
+      btn.title = `Tài khoản: ${user.fullname}`;
     } else {
-      label.textContent = 'Tài khoản';
+      btn.classList.remove('logged-in');
+      btn.title = 'Tài khoản';
     }
   }
+}
+
+// ── Emi Jay Style Live Stylist Chat Logic ──
+const STYLIST_ANSWERS = {
+  'day': 'Với tóc dày hoặc uốn xoăn bồng bềnh, bạn nên chọn kẹp càng cua cỡ lớn 10.5cm – 11cm như mẫu **Kẹp Hoa Sứ Pastel (45k)** hoặc **Kẹp Càng Cua Nâu Trà Hổ Phách (50k)**. Cốt lò xo thép Titan chịu lực cao, ôm trọn tóc suốt ngày dài không bị tuột nha!',
+  'mong': 'Với tóc mỏng hoặc tóc tơ mềm, bạn nên chọn các mẫu kẹp kích cỡ vừa 8.5cm – 9cm như **Kẹp Bán Nguyệt Tối Giản (65k)** hoặc set kẹp mái mini. Răng kẹp ôm sát nhẹ nhàng, không gây nặng đầu hay gãy nếp tóc.',
+  'mau': 'Nếu bạn thích màu tôn da sáng mặt, gam màu **Nâu Trà Hổ Phách** và **Hồng Phấn Pastel** là 2 tông màu bán chạy nhất tại Nếp Tóc. Màu sắc trong trẻo tự nhiên, phối đồ công sở hay đi chơi đều rất thanh lịch!',
+  'qua': 'Khi đặt hàng, bạn chỉ cần tích chọn *"Đóng gói hộp quà nơ lụa & thiệp viết tay"* (+15.000đ). Tụi mình sẽ chuẩn bị hộp nơ lụa tinh tế và nắn nót viết lời chúc riêng của bạn gửi đến người thương nhé!',
+  'default': 'Cảm ơn bạn đã nhắn tin! Bạn có thể gọi Hotline hoặc nhắn Zalo **0901 234 567** để được Stylist Nếp Tóc tư vấn gửi video cận cảnh từng mẫu kẹp trên tóc nha!'
+};
+
+function handleLiveChatSend(e) {
+  e.preventDefault();
+  const input = document.getElementById('live-chat-input');
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  postChatMessage(text, 'user');
+
+  showTypingIndicator();
+  setTimeout(() => {
+    removeTypingIndicator();
+    const lower = text.toLowerCase();
+    let reply = STYLIST_ANSWERS['default'];
+    if (lower.includes('dày') || lower.includes('nhiều') || lower.includes('dài')) {
+      reply = STYLIST_ANSWERS['day'];
+    } else if (lower.includes('mỏng') || lower.includes('ngắn') || lower.includes('ít')) {
+      reply = STYLIST_ANSWERS['mong'];
+    } else if (lower.includes('màu') || lower.includes('da')) {
+      reply = STYLIST_ANSWERS['mau'];
+    } else if (lower.includes('quà') || lower.includes('hộp') || lower.includes('thiệp')) {
+      reply = STYLIST_ANSWERS['qua'];
+    }
+    postChatMessage(reply, 'bot');
+  }, 650);
+}
+
+function sendChatChip(text) {
+  postChatMessage(text, 'user');
+  showTypingIndicator();
+  setTimeout(() => {
+    removeTypingIndicator();
+    let reply = STYLIST_ANSWERS['default'];
+    if (text.includes('dày')) reply = STYLIST_ANSWERS['day'];
+    else if (text.includes('mỏng')) reply = STYLIST_ANSWERS['mong'];
+    else if (text.includes('màu')) reply = STYLIST_ANSWERS['mau'];
+    else if (text.includes('quà')) reply = STYLIST_ANSWERS['qua'];
+    postChatMessage(reply, 'bot');
+  }, 500);
+}
+
+function postChatMessage(text, sender) {
+  const container = document.getElementById('live-chat-messages');
+  if (!container) return;
+  const msgRow = document.createElement('div');
+  msgRow.className = `chat-bubble-row ${sender}`;
+  msgRow.innerHTML = `
+    <div class="chat-bubble">${text}</div>
+    <span class="chat-timestamp">${new Date().toLocaleTimeString('vi-VN', {hour:'2-digit', minute:'2-digit'})}</span>
+  `;
+  container.appendChild(msgRow);
+  container.scrollTop = container.scrollHeight;
+}
+
+function showTypingIndicator() {
+  const container = document.getElementById('live-chat-messages');
+  if (!container || document.getElementById('chat-typing')) return;
+  const ind = document.createElement('div');
+  ind.id = 'chat-typing';
+  ind.className = 'chat-bubble-row bot';
+  ind.innerHTML = `
+    <div class="chat-bubble typing-bubble">
+      <span></span><span></span><span></span>
+    </div>
+  `;
+  container.appendChild(ind);
+  container.scrollTop = container.scrollHeight;
+}
+
+function removeTypingIndicator() {
+  const ind = document.getElementById('chat-typing');
+  if (ind) ind.remove();
 }
