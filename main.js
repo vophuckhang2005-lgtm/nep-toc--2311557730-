@@ -5,12 +5,6 @@ function renderHeader() {
   if (!h) return;
   h.innerHTML = `
     <header id="app-header">
-      <div class="top-announcement-bar">
-        <span>Miễn phí giao hàng đơn từ 300.000đ</span>
-        <span class="bar-separator">•</span>
-        <span>Dịch vụ khắc laser cá nhân hóa miễn phí</span>
-        <a href="studio.html" class="top-bar-link">Khám phá ngay →</a>
-      </div>
       <div class="nav-inner">
         <a href="index.html" class="logo">Nếp <span>Tóc</span></a>
         <nav id="main-nav">
@@ -307,7 +301,7 @@ function renderCartDrawerContent() {
 
   if (subtotal === 0) {
     shipWrap.innerHTML = `
-      <div class="drawer-freeship-text">Miễn phí giao hàng cho đơn từ <span>300.000đ</span></div>
+      <div class="drawer-freeship-text">Miễn phí giao hàng cho đơn từ <span>${fmt(FREE_SHIP_THRESHOLD)}</span></div>
       <div class="drawer-progress-track"><div class="drawer-progress-fill" style="width:0%"></div></div>
     `;
   } else if (diff > 0) {
@@ -1011,7 +1005,7 @@ const STYLIST_KNOWLEDGE = [
   },
   {
     keys: ['ship', 'giao', 'freeship', 'phi', 'van chuyen', 'bao lau', 'nhanh', '24h'],
-    reply: 'Nếp Tóc **miễn phí giao hàng toàn TP.HCM cho đơn từ 300.000đ**. Với đơn dưới 300.000đ, phí ship đồng giá 25.000đ. Đơn nội thành TP.HCM được giao nhanh trong vòng **24h**, bạn đặt trước 12h trưa là có thể nhận ngay trong ngày ạ!'
+    reply: 'Nếp Tóc **miễn phí giao hàng toàn TP.HCM cho đơn từ 99.000đ**. Với đơn dưới 99.000đ, phí ship đồng giá 20.000đ. Đơn nội thành TP.HCM được giao nhanh trong vòng **24h**, bạn đặt trước 12h trưa là có thể nhận ngay trong ngày ạ!'
   },
   {
     keys: ['kiem tra', 'xem hang', 'dong kiem', 'cod', 'thanh toan', 'tien mat', 'chuyen khoan', 'tra tien'],
@@ -1043,7 +1037,7 @@ const STYLIST_KNOWLEDGE = [
   },
   {
     keys: ['khuyen mai', 'giam gia', 'voucher', 'ma', 'sale', 'uu dai', 'bot'],
-    reply: 'Hiện Nếp Tóc đang áp dụng các ưu đãi: Tặng 100% công khắc laser trị giá 50k, Miễn phí giao hàng đơn từ 300k, và Tặng kèm hộp bảo quản cho từng chiếc kẹp. Giá hiển thị trên web đã là giá ưu đãi tốt nhất rồi ạ!'
+    reply: 'Hiện Nếp Tóc đang áp dụng các ưu đãi: Tặng 100% công khắc laser trị giá 50k, Miễn phí giao hàng đơn từ 99k, và Tặng kèm hộp bảo quản cho từng chiếc kẹp. Giá hiển thị trên web đã là giá ưu đãi tốt nhất rồi ạ!'
   },
   {
     keys: ['chao', 'hello', 'hi', 'alo', 'oi', 'ad', 'shop oi'],

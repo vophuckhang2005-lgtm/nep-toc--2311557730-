@@ -1,8 +1,8 @@
 // cart.js — shared cart logic & gift packaging, dùng localStorage
 const CART_KEY = 'nep_toc_cart';
 const GIFT_KEY = 'nep_toc_gift_option';
-const FREE_SHIP_THRESHOLD = 300000;
-const SHIP_FEE = 25000;
+const FREE_SHIP_THRESHOLD = 99000;
+const SHIP_FEE = 20000;
 const GIFT_FEE = 15000;
 
 function getCart() {

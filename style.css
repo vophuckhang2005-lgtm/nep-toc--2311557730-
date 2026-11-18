@@ -112,7 +112,7 @@ button:active,
 }
 
 #site-header {
-  min-height: 98px;
+  min-height: 64px;
 }
 
 #app-header,
@@ -122,55 +122,13 @@ header {
   left: 0;
   right: 0;
   width: 100%;
-  height: auto;
+  height: 64px;
   z-index: 9999;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 0.5px solid var(--apple-border);
   transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.top-announcement-bar {
-  background: var(--apple-surface-secondary);
-  border-bottom: 0.5px solid var(--apple-border);
-  padding: 6px 16px;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--apple-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  text-align: center;
-  letter-spacing: -0.01em;
-}
-
-.top-announcement-bar a {
-  color: var(--apple-black);
-  font-weight: 600;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.15s ease;
-}
-
-.top-announcement-bar a:hover {
-  color: var(--accent-rose);
-}
-
-.top-announcement-bar .bar-separator {
-  color: var(--apple-tertiary);
-}
-
-@media (max-width: 600px) {
-  #site-header {
-    min-height: 94px;
-  }
-  .top-announcement-bar {
-    font-size: 11px;
-    padding: 5px 12px;
-    gap: 6px;
-  }
 }
 
 .nav-inner {
