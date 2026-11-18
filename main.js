@@ -13,7 +13,6 @@ function renderHeader() {
           <a href="about.html">Về chúng tôi</a>
           <a href="policy.html">Chính sách</a>
           <a href="contact.html">Liên hệ</a>
-          <a href="account.html">Tài khoản</a>
         </nav>
         <div class="nav-actions">
           <!-- Account Nav Button (Icon Only) -->
