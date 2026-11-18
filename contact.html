@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Liên hệ — Nếp Tóc</title>
+  <meta name="description" content="Liên hệ Nếp Tóc TP.HCM - Hỗ trợ đặt hàng, tư vấn chọn phụ kiện tóc và chính sách bảo hành."/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="page">
+  <div style="text-align:center; max-width:640px; margin:0 auto 48px;">
+    <div class="hero-eyebrow" style="margin-bottom:14px;">💬 Hỗ trợ 24/7</div>
+    <h1 class="section-title">Liên hệ <em>Nếp Tóc</em></h1>
+    <p class="section-sub">Bạn có thắc mắc về sản phẩm, chọn size kẹp hay cần hỗ trợ đơn hàng? Đừng ngần ngại nhắn tin cho tụi mình nhé!</p>
+  </div>
+
+  <div class="contact-grid">
+    <!-- Contact Info Cards -->
+    <div class="contact-info-wrap">
+      <div class="contact-card">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-card-title">Địa chỉ cửa hàng</div>
+          <p class="contact-card-desc">123 Nguyễn Thị Minh Khai, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh</p>
+          <span class="contact-card-note">Mở cửa 8:30 – 21:30 (Thứ 2 – Chủ nhật)</span>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">📱</div>
+        <div>
+          <div class="contact-card-title">Hotline & Zalo tư vấn</div>
+          <p class="contact-card-desc">
+            <a href="tel:0901234567" style="color:var(--apple-black); font-weight:700; font-size:16px;">0901 234 567</a>
+          </p>
+          <span class="contact-card-note">Tư vấn chọn kẹp theo độ dày tóc & tạo kiểu</span>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-card-title">Email hỗ trợ</div>
+          <p class="contact-card-desc">
+            <a href="mailto:hello@neptoc.vn" style="color:var(--accent-rose); font-weight:600;">hello@neptoc.vn</a>
+          </p>
+          <span class="contact-card-note">Phản hồi thư trong vòng 60 phút làm việc</span>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <div class="contact-icon">⚡</div>
+        <div>
+          <div class="contact-card-title">Kênh mạng xã hội</div>
+          <div class="social-links-row">
+            <a href="https://instagram.com" target="_blank" class="social-pill">📷 Instagram</a>
+            <a href="https://facebook.com" target="_blank" class="social-pill">📘 Facebook</a>
+            <a href="https://tiktok.com" target="_blank" class="social-pill">🎵 TikTok Shop</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Form (Apple Glass Surface) -->
+    <div class="contact-form-box">
+      <h2 style="font-size:22px; font-weight:700; letter-spacing:-0.02em; margin-bottom:8px;">Gửi tin nhắn cho chúng mình</h2>
+      <p style="font-size:14px; color:var(--apple-secondary); margin-bottom:24px;">Điền thông tin bên dưới, tụi mình sẽ liên hệ lại ngay qua Zalo hoặc điện thoại nhé.</p>
+
+      <form id="contact-form" novalidate>
+        <div class="form-group">
+          <label for="contact-name">Họ và tên <span>*</span></label>
+          <input type="text" id="contact-name" class="form-control" placeholder="Ví dụ: Hoàng Mai Linh" required/>
+          <div class="error-msg" id="err-cname">Vui lòng nhập họ và tên của bạn</div>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-phone">Số điện thoại / Zalo <span>*</span></label>
+          <input type="tel" id="contact-phone" class="form-control" placeholder="Ví dụ: 0908 123 456" required/>
+          <div class="error-msg" id="err-cphone">Vui lòng nhập số điện thoại hợp lệ</div>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-topic">Chủ đề cần hỗ trợ</label>
+          <select id="contact-topic" class="form-control">
+            <option value="tuvan">Tư vấn chọn mẫu kẹp hợp với tóc</option>
+            <option value="donhang">Kiểm tra tình trạng đơn hàng</option>
+            <option value="doitra">Yêu cầu đổi hàng / Bảo hành lỗi</option>
+            <option value="khac">Ý kiến đóng góp khác</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="contact-message">Nội dung tin nhắn <span>*</span></label>
+          <textarea id="contact-message" class="form-control" rows="4" placeholder="Nhập nội dung bạn cần hỗ trợ..." required></textarea>
+          <div class="error-msg" id="err-cmessage">Vui lòng nhập nội dung tin nhắn</div>
+        </div>
+
+        <button type="submit" class="btn-primary" style="width:100%; padding:14px; margin-top:8px;">Gửi tin nhắn ngay →</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FAQ Section (Giải tỏa vướng bận trong lòng khách) -->
+  <div style="margin-top:80px; padding-top:48px; border-top:0.5px solid var(--apple-border);">
+    <div style="text-align:center; max-width:600px; margin:0 auto 36px;">
+      <h2 class="section-title" style="font-size:30px;">Câu hỏi <em>thường gặp</em></h2>
+      <p class="section-sub">Những điều các nàng thường hay băn khoăn khi mua kẹp tóc online</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-question">Tóc mình rất dày (hoặc rất mỏng) thì kẹp càng cua có giữ chắc không?</div>
+        <div class="faq-answer">Hoàn toàn giữ chắc! Với tóc dày, bạn nên chọn dòng <strong>Kẹp Kim Loại Tối Giản (11cm)</strong> hoặc <strong>Kẹp Hoa Sứ Pastel (11.5cm)</strong> trang bị lò xo thép 8 vòng lực kẹp sâu. Với tóc mỏng/ngắn, dòng <strong>Set Kẹp Mini</strong> hoặc <strong>Kẹp Giọt Nước</strong> sẽ ôm sát mà không bị tuột.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Đặt hàng bao lâu thì nhận được tại TP.HCM?</div>
+        <div class="faq-answer">Đơn nội thành TP.HCM thường được giao trong <strong>24 giờ</strong> (tối đa 48 giờ đối với khu vực ngoại thành). Shipper sẽ gọi điện trước khi giao để bạn chủ động nhận hàng.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Mình có được kiểm tra hàng trước khi trả tiền không?</div>
+        <div class="faq-answer"><strong>Được 100%!</strong> Bạn được mở hộp kiểm tra đúng mẫu mã, màu sắc và độ hoàn thiện của kẹp trước khi thanh toán tiền mặt cho shipper (COD).</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">Lò xo kẹp có bị gỉ sét hay gãy sau một thời gian dùng không?</div>
+        <div class="faq-answer">Nếp Tóc sử dụng cốt lò xo thép Titan chống oxy hóa, được kiểm định bật mở hơn 10.000 lần. Nếu lò xo bị lỏng hoặc gãy trong <strong>30 ngày đầu</strong>, tụi mình đổi mới 1-1 miễn phí tận nhà.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<div class="toast-container"></div>
+
+<script src="products.js"></script>
+<script src="cart.js"></script>
+<script src="main.js"></script>
+<script>
+  renderHeader();
+  renderFooter();
+
+  // Contact form submission
+  document.getElementById('contact-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('contact-name').value.trim();
+    const phone = document.getElementById('contact-phone').value.trim();
+    const msg = document.getElementById('contact-message').value.trim();
+
+    let valid = true;
+
+    if (name.length < 2) {
+      document.getElementById('err-cname').classList.add('show');
+      valid = false;
+    } else {
+      document.getElementById('err-cname').classList.remove('show');
+    }
+
+    if (!/^0[35789]\d{8}$/.test(phone.replace(/\s/g,''))) {
+      document.getElementById('err-cphone').classList.add('show');
+      valid = false;
+    } else {
+      document.getElementById('err-cphone').classList.remove('show');
+    }
+
+    if (msg.length < 5) {
+      document.getElementById('err-cmessage').classList.add('show');
+      valid = false;
+    } else {
+      document.getElementById('err-cmessage').classList.remove('show');
+    }
+
+    if (valid) {
+      showToast('Đã gửi tin nhắn! Nếp Tóc sẽ liên hệ lại trong ít phút 💌', 'success');
+      document.getElementById('contact-form').reset();
+    }
+  });
+
+  // Accordion FAQ interaction
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-question').addEventListener('click', () => {
+      const isOpen = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      if (!isOpen) item.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

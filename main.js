@@ -1,4 +1,4 @@
-// main.js — shared nav, toast, cart badge & Apple fluid interactions
+// main.js — shared nav, toast, cart badge, floating widget & Apple fluid interactions
 
 function renderHeader() {
   const h = document.getElementById('site-header');
@@ -7,7 +7,7 @@ function renderHeader() {
     <div class="topbar">
       <span>🚚 Miễn phí ship đơn từ 300.000đ</span>
       <span>•</span>
-      <span>Giao nhanh nội thành TP.HCM</span>
+      <span>Giao nhanh 24h nội thành TP.HCM</span>
     </div>
     <header id="app-header">
       <div class="nav-inner">
@@ -17,6 +17,7 @@ function renderHeader() {
           <a href="/products.html">Sản phẩm</a>
           <a href="/about.html">Về chúng tôi</a>
           <a href="/policy.html">Chính sách</a>
+          <a href="/contact.html">Liên hệ</a>
         </nav>
         <div class="nav-actions">
           <a href="/cart.html" class="cart-btn">
@@ -79,6 +80,7 @@ function renderHeader() {
   }
 
   updateCartBadge();
+  renderFloatingHelp();
 }
 
 function renderFooter() {
@@ -89,7 +91,7 @@ function renderFooter() {
       <div class="footer-inner">
         <div>
           <div class="footer-logo">Nếp <span>Tóc</span></div>
-          <p class="footer-desc">Phụ kiện tóc & kẹp càng cua thiết kế tối giản, chất liệu cao cấp. Tinh tế trên từng nếp tóc của bạn.</p>
+          <p class="footer-desc">Phụ kiện tóc & kẹp càng cua thiết kế tối giản, vật liệu cao cấp. Tinh tế trên từng nếp tóc của bạn.</p>
         </div>
         <div class="footer-col">
           <h4>Khám phá</h4>
@@ -97,21 +99,41 @@ function renderFooter() {
           <a href="/products.html">Tất cả sản phẩm</a>
           <a href="/about.html">Về chúng tôi</a>
           <a href="/policy.html">Chính sách bảo hành</a>
+          <a href="/contact.html">Liên hệ cửa hàng</a>
         </div>
         <div class="footer-col">
-          <h4>Hỗ trợ</h4>
-          <p>📍 TP. Hồ Chí Minh</p>
-          <p>📱 Hotline: 0901 234 567</p>
+          <h4>Hỗ trợ & Liên hệ</h4>
+          <p>📍 123 Nguyễn Thị Minh Khai, Q.1, TP.HCM</p>
+          <p>📱 Hotline / Zalo: 0901 234 567</p>
           <p>✉️ Email: hello@neptoc.vn</p>
-          <p>⏰ Hỗ trợ: 8:00 – 21:00 hàng ngày</p>
+          <p>⏰ Hỗ trợ: 8:00 – 21:30 hàng ngày</p>
         </div>
       </div>
       <div class="footer-bottom">
         <p>© 2026 Nếp Tóc. Thiết kế theo tiêu chuẩn Apple Human Interface.</p>
-        <p>Thanh toán COD toàn TP.HCM</p>
+        <p>Thanh toán khi nhận hàng (COD) toàn TP.HCM</p>
       </div>
     </footer>
   `;
+}
+
+// Floating Quick Contact Widget (Bong bóng hỗ trợ nhanh Zalo / Hotline)
+function renderFloatingHelp() {
+  if (document.getElementById('floating-contact-btn')) return;
+  const wrap = document.createElement('div');
+  wrap.id = 'floating-contact-btn';
+  wrap.innerHTML = `
+    <div class="floating-contact">
+      <a href="tel:0901234567" class="float-btn phone-btn" title="Gọi Hotline tư vấn">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+      <a href="/contact.html" class="float-btn chat-btn" title="Nhắn tin tư vấn / Zalo">
+        <span>💬</span>
+        <span class="float-label">Tư vấn chọn kẹp</span>
+      </a>
+    </div>
+  `;
+  document.body.appendChild(wrap);
 }
 
 // Apple Fluid Toast Notification

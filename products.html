@@ -4,6 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Sản phẩm — Nếp Tóc</title>
+  <meta name="description" content="Danh mục kẹp càng cua, kẹp mái và set phụ kiện tóc cao cấp tại TP.HCM. Bảo hành 30 ngày, đổi mới 7 ngày."/>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
@@ -11,20 +12,71 @@
 <div id="site-header"></div>
 
 <div class="page">
-  <div style="margin-bottom:36px;">
+  <div style="margin-bottom:32px;">
     <h1 class="section-title">Tất cả <em>sản phẩm</em></h1>
-    <p class="section-sub">Chọn theo mood hôm nay của bạn — ngon hết á</p>
+    <p class="section-sub">Thiết kế tối giản, chất liệu cao cấp và cảm giác kẹp êm ái trên từng lọn tóc</p>
   </div>
 
-  <!-- Filter -->
-  <div class="filter-bar" id="filter-bar">
-    <button class="filter-btn active" data-cat="all">Tất cả</button>
-    <button class="filter-btn" data-cat="claw">Kẹp Càng Cua</button>
-    <button class="filter-btn" data-cat="clip-set">Kẹp Mái & Set</button>
+  <!-- Trust Bar (Cam kết an tâm mua hàng) -->
+  <div class="trust-bar">
+    <div class="trust-item">
+      <div class="trust-icon">📦</div>
+      <div>
+        <div class="trust-text">Đồng kiểm khi nhận</div>
+        <div class="trust-sub">Xem kẹp ưng ý mới thanh toán COD</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🔄</div>
+      <div>
+        <div class="trust-text">Đổi mới trong 7 ngày</div>
+        <div class="trust-sub">Lỗi nhà sản xuất đổi 1-1 miễn phí</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🛡️</div>
+      <div>
+        <div class="trust-text">Bảo hành lò xo 30 ngày</div>
+        <div class="trust-sub">Cốt lò xo thép Titan chịu lực cao</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🚚</div>
+      <div>
+        <div class="trust-text">Miễn phí ship từ 300k</div>
+        <div class="trust-sub">Giao nhanh 24h nội thành TP.HCM</div>
+      </div>
+    </div>
   </div>
+
+  <!-- Search & Filter Toolbar -->
+  <div class="products-toolbar">
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active" data-cat="all">Tất cả (8)</button>
+      <button class="filter-btn" data-cat="claw">Kẹp Càng Cua</button>
+      <button class="filter-btn" data-cat="clip-set">Kẹp Mái & Set</button>
+    </div>
+
+    <!-- Instant Search Bar -->
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" class="search-input" placeholder="Tìm kẹp hoa sứ, ngọc trai, lông nhung..."/>
+    </div>
+  </div>
+
+  <!-- Products Count & Status -->
+  <div id="filter-status" style="font-size:13px; color:var(--apple-tertiary); margin-bottom:20px; font-weight:500;"></div>
 
   <!-- Grid -->
   <div class="product-grid" id="product-grid"></div>
+
+  <!-- Empty Search Result -->
+  <div id="empty-search" style="display:none; text-align:center; padding:64px 20px;">
+    <div style="font-size:52px; margin-bottom:12px;">🔍</div>
+    <h3 style="font-size:20px; font-weight:700; color:var(--apple-black); margin-bottom:6px;">Không tìm thấy sản phẩm phù hợp</h3>
+    <p style="color:var(--apple-secondary); font-size:14px; margin-bottom:20px;">Thử tìm với từ khóa khác như "hoa sứ", "ngọc trai", "càng cua" hoặc xem tất cả sản phẩm.</p>
+    <button class="btn-primary" onclick="resetFilter()">Xem tất cả sản phẩm</button>
+  </div>
 </div>
 
 <div id="site-footer"></div>
@@ -38,27 +90,79 @@
   renderFooter();
 
   let currentCat = 'all';
+  let searchTerm = '';
 
-  // Đọc query param ?cat=
   const urlParams = new URLSearchParams(location.search);
   const catParam = urlParams.get('cat');
   if (catParam) currentCat = catParam;
 
+  const searchInput = document.getElementById('search-input');
+  const gridEl = document.getElementById('product-grid');
+  const emptyEl = document.getElementById('empty-search');
+  const statusEl = document.getElementById('filter-status');
+
   function renderGrid() {
-    const filtered = currentCat === 'all' ? PRODUCTS : PRODUCTS.filter(p => p.category === currentCat);
-    document.getElementById('product-grid').innerHTML = filtered.map(productCardHTML).join('');
-    // Update active filter
+    let filtered = PRODUCTS;
+
+    // Filter by Category
+    if (currentCat !== 'all') {
+      filtered = filtered.filter(p => p.category === currentCat);
+    }
+
+    // Filter by Search Keyword
+    if (searchTerm.trim() !== '') {
+      const term = searchTerm.toLowerCase();
+      filtered = filtered.filter(p => 
+        p.name.toLowerCase().includes(term) ||
+        p.description.toLowerCase().includes(term) ||
+        p.categoryName.toLowerCase().includes(term) ||
+        (p.material && p.material.toLowerCase().includes(term))
+      );
+    }
+
+    // Update Status
+    if (searchTerm.trim() !== '') {
+      statusEl.textContent = `Tìm thấy ${filtered.length} kết quả cho "${searchTerm}"`;
+    } else {
+      statusEl.textContent = `Đang hiển thị ${filtered.length} sản phẩm`;
+    }
+
+    // Handle Empty
+    if (filtered.length === 0) {
+      gridEl.style.display = 'none';
+      emptyEl.style.display = 'block';
+    } else {
+      gridEl.style.display = 'grid';
+      emptyEl.style.display = 'none';
+      gridEl.innerHTML = filtered.map(productCardHTML).join('');
+    }
+
+    // Update active filter pill
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.cat === currentCat);
     });
   }
 
+  // Instant Search with direct response
+  searchInput.addEventListener('input', (e) => {
+    searchTerm = e.target.value;
+    renderGrid();
+  });
+
+  // Category filter
   document.getElementById('filter-bar').addEventListener('click', e => {
     const btn = e.target.closest('.filter-btn');
     if (!btn) return;
     currentCat = btn.dataset.cat;
     renderGrid();
   });
+
+  function resetFilter() {
+    currentCat = 'all';
+    searchTerm = '';
+    searchInput.value = '';
+    renderGrid();
+  }
 
   renderGrid();
 </script>
