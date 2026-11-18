@@ -1,28 +1,120 @@
-// main.js — shared nav, toast, và cart badge
-document.addEventListener('DOMContentLoaded', () => {
-  // Active nav link
-  const links = document.querySelectorAll('nav a');
+// main.js — shared nav, toast, cart badge & Apple fluid interactions
+
+function renderHeader() {
+  const h = document.getElementById('site-header');
+  if (!h) return;
+  h.innerHTML = `
+    <div class="topbar">
+      <span>🚚 Miễn phí ship đơn từ 300.000đ</span>
+      <span>•</span>
+      <span>Giao nhanh nội thành TP.HCM</span>
+    </div>
+    <header id="app-header">
+      <div class="nav-inner">
+        <a href="/index.html" class="logo">Nếp <span>Tóc</span></a>
+        <nav id="main-nav">
+          <a href="/index.html">Trang chủ</a>
+          <a href="/products.html">Sản phẩm</a>
+          <a href="/about.html">Về chúng tôi</a>
+          <a href="/policy.html">Chính sách</a>
+        </nav>
+        <div class="nav-actions">
+          <a href="/cart.html" class="cart-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 01-8 0"/>
+            </svg>
+            <span>Giỏ hàng</span>
+            <span id="cart-badge">0</span>
+          </a>
+          <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+  `;
+
+  // Active link detection
+  const currentPath = location.pathname;
+  const links = h.querySelectorAll('nav a');
   links.forEach(a => {
-    if (a.href === location.href || (a.pathname !== '/' && location.pathname.endsWith(a.pathname))) {
+    const href = a.getAttribute('href');
+    if (currentPath === '/' || currentPath.endsWith('index.html')) {
+      if (href.endsWith('index.html')) a.classList.add('active');
+    } else if (href !== '/index.html' && currentPath.includes(href.replace('/', ''))) {
       a.classList.add('active');
     }
   });
 
-  // Mobile nav toggle
-  const toggle = document.getElementById('nav-toggle');
-  const nav = document.getElementById('main-nav');
-  if (toggle && nav) {
-    toggle.addEventListener('click', () => nav.classList.toggle('open'));
-    document.addEventListener('click', e => {
-      if (!toggle.contains(e.target) && !nav.contains(e.target)) nav.classList.remove('open');
+  // Mobile toggle handler — Apple direct response
+  const btn = h.querySelector('#nav-toggle');
+  const navEl = h.querySelector('#main-nav');
+
+  if (btn && navEl) {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navEl.classList.toggle('open');
+      btn.classList.toggle('open', isOpen);
+    });
+
+    // Close when clicking nav link
+    navEl.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navEl.classList.remove('open');
+        btn.classList.remove('open');
+      });
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!btn.contains(e.target) && !navEl.contains(e.target)) {
+        navEl.classList.remove('open');
+        btn.classList.remove('open');
+      }
     });
   }
 
-  // Cart badge
   updateCartBadge();
-});
+}
 
-// Toast notification
+function renderFooter() {
+  const f = document.getElementById('site-footer');
+  if (!f) return;
+  f.innerHTML = `
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">Nếp <span>Tóc</span></div>
+          <p class="footer-desc">Phụ kiện tóc & kẹp càng cua thiết kế tối giản, chất liệu cao cấp. Tinh tế trên từng nếp tóc của bạn.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Khám phá</h4>
+          <a href="/index.html">Trang chủ</a>
+          <a href="/products.html">Tất cả sản phẩm</a>
+          <a href="/about.html">Về chúng tôi</a>
+          <a href="/policy.html">Chính sách bảo hành</a>
+        </div>
+        <div class="footer-col">
+          <h4>Hỗ trợ</h4>
+          <p>📍 TP. Hồ Chí Minh</p>
+          <p>📱 Hotline: 0901 234 567</p>
+          <p>✉️ Email: hello@neptoc.vn</p>
+          <p>⏰ Hỗ trợ: 8:00 – 21:00 hàng ngày</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Nếp Tóc. Thiết kế theo tiêu chuẩn Apple Human Interface.</p>
+        <p>Thanh toán COD toàn TP.HCM</p>
+      </div>
+    </footer>
+  `;
+}
+
+// Apple Fluid Toast Notification
 function showToast(msg, type = '') {
   let container = document.querySelector('.toast-container');
   if (!container) {
@@ -37,102 +129,31 @@ function showToast(msg, type = '') {
   setTimeout(() => t.remove(), 2600);
 }
 
-// Header HTML được inject bằng component
-function renderHeader() {
-  const h = document.getElementById('site-header');
-  if (!h) return;
-  h.innerHTML = `
-    <div class="topbar">🚚 Miễn phí ship đơn từ 300.000đ — Giao hàng toàn TP.HCM</div>
-    <header>
-      <div class="nav-inner">
-        <a href="/index.html" class="logo">Nếp <span>Tóc</span></a>
-        <nav id="main-nav">
-          <a href="/index.html">Trang chủ</a>
-          <a href="/products.html">Sản phẩm</a>
-          <a href="/about.html">Về chúng tôi</a>
-          <a href="/policy.html">Chính sách</a>
-        </nav>
-        <div class="nav-actions">
-          <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
-            <span></span><span></span><span></span>
-          </button>
-          <a href="/cart.html" class="cart-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-              <line x1="3" y1="6" x2="21" y2="6"/>
-              <path d="M16 10a4 4 0 01-8 0"/>
-            </svg>
-            Giỏ hàng
-            <span id="cart-badge">0</span>
-          </a>
-        </div>
-      </div>
-    </header>
-  `;
-  // Re-run active link detection after inject
-  const links = h.querySelectorAll('nav a');
-  links.forEach(a => {
-    if (location.pathname === '/' || location.pathname === '/index.html') {
-      if (a.getAttribute('href') === '/index.html') a.classList.add('active');
-    } else if (location.pathname.includes(a.getAttribute('href').replace('/', ''))) {
-      a.classList.add('active');
-    }
-  });
-  // Mobile toggle — dùng event delegation để chắc chắn hoạt động
-  h.addEventListener('click', e => {
-    const btn = e.target.closest('#nav-toggle');
-    if (btn) {
-      e.stopPropagation();
-      const navEl = h.querySelector('#main-nav');
-      if (navEl) navEl.classList.toggle('open');
-    }
-  });
-  document.addEventListener('click', e => {
-    const navEl = h.querySelector('#main-nav');
-    const btn = h.querySelector('#nav-toggle');
-    if (navEl && btn && !btn.contains(e.target) && !navEl.contains(e.target)) {
-      navEl.classList.remove('open');
-    }
-  });
-  updateCartBadge();
+// Apple Minimalist Product Card SVG
+function productVisualSVG(p) {
+  if (p.category === 'claw') {
+    return `<svg width="84" height="84" viewBox="0 0 84 84" fill="none">
+      <ellipse cx="42" cy="34" rx="32" ry="22" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2.5"/>
+      <rect x="36" y="52" width="12" height="22" rx="6" fill="${p.cardAccent}"/>
+      <ellipse cx="42" cy="34" rx="20" ry="13" fill="${p.cardAccent}" opacity="0.18"/>
+      <line x1="22" y1="34" x2="62" y2="34" stroke="${p.cardAccent}" stroke-width="1.5" stroke-dasharray="4 3"/>
+    </svg>`;
+  } else {
+    return `<svg width="84" height="84" viewBox="0 0 84 84" fill="none">
+      <rect x="14" y="34" width="56" height="12" rx="6" fill="${p.cardAccent}" opacity="0.2" stroke="${p.cardAccent}" stroke-width="2"/>
+      <circle cx="26" cy="40" r="7" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/>
+      <circle cx="42" cy="40" r="7" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/>
+      <circle cx="58" cy="40" r="7" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/>
+      <line x1="26" y1="47" x2="26" y2="60" stroke="${p.cardAccent}" stroke-width="2"/>
+      <line x1="42" y1="47" x2="42" y2="60" stroke="${p.cardAccent}" stroke-width="2"/>
+      <line x1="58" y1="47" x2="58" y2="60" stroke="${p.cardAccent}" stroke-width="2"/>
+    </svg>`;
+  }
 }
 
-function renderFooter() {
-  const f = document.getElementById('site-footer');
-  if (!f) return;
-  f.innerHTML = `
-    <footer>
-      <div class="footer-inner">
-        <div>
-          <div class="footer-logo">Nếp <span>Tóc</span></div>
-          <p class="footer-desc">Kẹp tóc & phụ kiện tóc chất lượng cao cho các nàng TP.HCM. Nhỏ nhưng sang — cài vào là khác.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Liên kết</h4>
-          <a href="/index.html">Trang chủ</a>
-          <a href="/products.html">Sản phẩm</a>
-          <a href="/about.html">Về chúng tôi</a>
-          <a href="/policy.html">Chính sách</a>
-        </div>
-        <div class="footer-col">
-          <h4>Liên hệ</h4>
-          <p>📍 TP. Hồ Chí Minh</p>
-          <p>📱 0901 234 567</p>
-          <p>✉️ hello@neptoc.vn</p>
-          <p>⏰ 8:00–21:00 mỗi ngày</p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2026 Nếp Tóc. All rights reserved.</p>
-        <p>Thiết kế với 🩷 tại TP.HCM</p>
-      </div>
-    </footer>
-  `;
-}
-
-// Render product card HTML
+// Product Card HTML
 function productCardHTML(p) {
-  const tagClass = ['Bán chạy','Yêu thích','Độc quyền'].includes(p.tag) ? '' : 'yellow';
+  const tagClass = ['Bán chạy', 'Yêu thích', 'Độc quyền'].includes(p.tag) ? '' : 'yellow';
   return `
     <div class="product-card" onclick="location.href='/product-detail.html?id=${p.id}'">
       <div class="product-card-img" style="background:${p.cardBg}; color:${p.cardAccent}">
@@ -156,29 +177,7 @@ function productCardHTML(p) {
   `;
 }
 
-function productVisualSVG(p) {
-  // CSS art placeholder — không dùng emoji
-  if (p.category === 'claw') {
-    return `<svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-      <ellipse cx="40" cy="30" rx="30" ry="20" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="3"/>
-      <rect x="34" y="48" width="12" height="22" rx="6" fill="${p.cardAccent}"/>
-      <ellipse cx="40" cy="30" rx="20" ry="12" fill="${p.cardAccent}" opacity="0.3"/>
-      <line x1="20" y1="30" x2="60" y2="30" stroke="${p.cardAccent}" stroke-width="2" stroke-dasharray="5 3"/>
-    </svg>`;
-  } else {
-    return `<svg width="80" height="80" viewBox="0 0 80 80" fill="none">
-      <rect x="10" y="30" width="60" height="12" rx="6" fill="${p.cardAccent}" opacity="0.3" stroke="${p.cardAccent}" stroke-width="2"/>
-      <circle cx="20" cy="36" r="8" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/>
-      <circle cx="40" cy="36" r="8" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/>
-      <circle cx="60" cy="36" r="8" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/>
-      <line x1="20" y1="44" x2="20" y2="58" stroke="${p.cardAccent}" stroke-width="2.5"/>
-      <line x1="40" y1="44" x2="40" y2="58" stroke="${p.cardAccent}" stroke-width="2.5"/>
-      <line x1="60" y1="44" x2="60" y2="58" stroke="${p.cardAccent}" stroke-width="2.5"/>
-    </svg>`;
-  }
-}
-
 function quickAdd(id) {
   addToCart(id, 1, null);
-  showToast('Đã thêm vào giỏ hàng! 🛍️', 'success');
+  showToast('Đã thêm vào giỏ hàng', 'success');
 }
