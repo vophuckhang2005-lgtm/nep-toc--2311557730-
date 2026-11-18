@@ -131,6 +131,10 @@
 <script src="products.js"></script>
 <script src="cart.js"></script>
 <script src="main.js?v=3"></script>
+<!-- Firebase JS SDK qua CDN -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="script.js"></script>
 <script>
   renderHeader();
   renderFooter();
@@ -244,19 +248,26 @@
     return ok;
   }
 
-  document.getElementById('checkout-form').addEventListener('submit', e => {
+  document.getElementById('checkout-form').addEventListener('submit', async e => {
     e.preventDefault();
     if (!validate()) {
       showToast('Vui lòng kiểm tra lại thông tin nhận hàng!', 'error');
       return;
     }
-    // Generate order code
-    const code = '#NT-' + Math.random().toString(36).substring(2,8).toUpperCase();
-    document.getElementById('order-code').textContent = code;
 
-    // Save order to history
+    const submitBtn = document.querySelector('.btn-submit');
+    const originalBtnText = submitBtn ? submitBtn.textContent : 'Xác nhận đặt hàng →';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Đang lưu đơn hàng vào hệ thống...';
+    }
+
+    // Mã đơn hàng độc nhất
+    const code = 'NT-' + Math.random().toString(36).substring(2,8).toUpperCase();
+
+    // Lấy thông tin khách hàng
     const fullname = document.getElementById('fullname').value.trim();
-    const phone = document.getElementById('phone').value.trim();
+    const phone = document.getElementById('phone').value.trim().replace(/\s/g,'');
     const city = document.getElementById('co-city').value;
     const district = document.getElementById('co-district').value;
     const ward = document.getElementById('co-ward').value;
@@ -268,26 +279,56 @@
     const gift = getGiftOption();
     const total = getTotal();
 
-    const orderRecord = {
-      code,
-      date: new Date().toLocaleDateString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }),
-      items: getCart(),
-      subtotal: sub,
-      ship: ship,
-      gift: gift,
-      total: total,
-      customer: { fullname, phone, address, note },
-      status: 'Đang xử lý'
-    };
-    saveOrder(orderRecord);
+    try {
+      // 1. Lưu đơn vào Cloud Firestore
+      await placeOrderFirestore({
+        maDon: code,
+        khachHang: {
+          hoTen: fullname,
+          soDienThoai: phone,
+          diaChi: address,
+          ghiChu: note
+        },
+        sanPham: getCart(),
+        tamTinh: sub,
+        phiGiao: ship + (gift && gift.enabled ? GIFT_FEE : 0),
+        tongTien: total
+      });
 
-    // Save or update address for logged-in user
-    if (loggedUser) {
-      updateUserProfile({ fullname, phone, city, district, ward, street });
+      // 2. Lưu vào lịch sử đơn hàng của trình duyệt
+      const orderRecord = {
+        code: '#' + code,
+        date: new Date().toLocaleDateString('vi-VN', { hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit', year: 'numeric' }),
+        items: getCart(),
+        subtotal: sub,
+        ship: ship,
+        gift: gift,
+        total: total,
+        customer: { fullname, phone, address, note },
+        status: 'Đang xử lý'
+      };
+      saveOrder(orderRecord);
+
+      // 3. Cập nhật hồ sơ người dùng nếu đã đăng nhập
+      if (loggedUser) {
+        updateUserProfile({ fullname, phone, city, district, ward, street });
+      }
+
+      // 4. Hiển thị thông báo thành công và mã đơn hàng
+      document.getElementById('order-code').textContent = '#' + code;
+      document.getElementById('success-modal').classList.add('show');
+
+      // 5. Xóa giỏ hàng
+      clearCart();
+    } catch (err) {
+      console.error('Lỗi khi ghi đơn hàng Firestore:', err);
+      showToast('Không thể lưu đơn hàng vào hệ thống: ' + (err.message || 'Vui lòng kiểm tra kết nối mạng và thử lại!'), 'error');
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
     }
-
-    document.getElementById('success-modal').classList.add('show');
-    clearCart();
   });
 </script>
 </body>

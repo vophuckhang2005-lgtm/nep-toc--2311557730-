@@ -1,0 +1,51 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /donhang/{orderId} {
+      // Cấm mọi thao tác đọc, sửa, xóa từ trình duyệt
+      allow read, update, delete: if false;
+
+      // Chỉ cho phép TẠO tài liệu mới trong collection "donhang"
+      allow create: if request.resource.data.keys().hasAll([
+          'maDon', 'khachHang', 'sanPham', 'tamTinh', 'phiGiao', 'tongTien', 'thanhToan', 'trangThai', 'thoiGian'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'maDon', 'khachHang', 'sanPham', 'tamTinh', 'phiGiao', 'tongTien', 'thanhToan', 'trangThai', 'thoiGian'
+        ])
+        && request.resource.data.maDon is string
+        && request.resource.data.maDon.size() > 0
+        && request.resource.data.maDon.size() <= 50
+
+        // khachHang (hoTen, soDienThoai, diaChi, ghiChu – chuỗi, giới hạn độ dài)
+        && request.resource.data.khachHang is map
+        && request.resource.data.khachHang.keys().hasAll(['hoTen', 'soDienThoai', 'diaChi', 'ghiChu'])
+        && request.resource.data.khachHang.hoTen is string && request.resource.data.khachHang.hoTen.size() > 0 && request.resource.data.khachHang.hoTen.size() <= 100
+        && request.resource.data.khachHang.soDienThoai is string && request.resource.data.khachHang.soDienThoai.size() >= 9 && request.resource.data.khachHang.soDienThoai.size() <= 15
+        && request.resource.data.khachHang.diaChi is string && request.resource.data.khachHang.diaChi.size() > 0 && request.resource.data.khachHang.diaChi.size() <= 255
+        && request.resource.data.khachHang.ghiChu is string && request.resource.data.khachHang.ghiChu.size() <= 500
+
+        // sanPham (danh sách tối đa 20 món)
+        && request.resource.data.sanPham is list
+        && request.resource.data.sanPham.size() > 0
+        && request.resource.data.sanPham.size() <= 20
+
+        // tamTinh, phiGiao, tongTien (số không âm)
+        && request.resource.data.tamTinh is number && request.resource.data.tamTinh >= 0
+        && request.resource.data.phiGiao is number && request.resource.data.phiGiao >= 0
+        && request.resource.data.tongTien is number && request.resource.data.tongTien >= 0
+
+        // thanhToan bằng "COD"
+        && request.resource.data.thanhToan == 'COD'
+
+        // trangThai bằng "moi"
+        && request.resource.data.trangThai == 'moi'
+
+        // thoiGian bằng thời điểm máy chủ
+        && request.resource.data.thoiGian == request.time;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
