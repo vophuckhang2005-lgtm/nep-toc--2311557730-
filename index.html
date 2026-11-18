@@ -3,53 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nếp Tóc - Phụ Kiện Tóc Xinh TP.HCM</title>
-  <meta name="description" content="Cửa hàng kẹp tóc, kẹp càng cua, phụ kiện tóc nữ tính, thanh lịch tại TP.HCM. Giao hàng COD toàn quốc.">
+  <title>Nếp Tóc • Phụ Kiện Tóc Cao Cấp TP.HCM</title>
+  <meta name="description" content="Thương hiệu phụ kiện kẹp tóc càng cua, kẹp mái phong cách Hàn Quốc thanh lịch tại TP.HCM. Giao hàng COD toàn quốc.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- Hiệu ứng vầng sáng nghệ thuật nền (Ambient Glows) -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
   <!-- 1. DÒNG THÔNG BÁO THỰC HÀNH CỐ ĐỊNH -->
   <div class="practice-notice-bar">
     <span>⚠️</span>
-    <span><strong>Website thực hành – không bán hàng thật</strong></span>
+    <span>Website thực hành – không bán hàng thật</span>
     <span>⚠️</span>
   </div>
 
-  <!-- 2. ĐẦU TRANG (HEADER) -->
+  <!-- 2. ĐẦU TRANG BOUTIQUE (HEADER) -->
   <header class="site-header">
     <div class="header-container">
       <a href="#" class="brand-logo">
-        <span class="brand-name">Nếp Tóc 🎀</span>
-        <span class="brand-slogan">Phụ kiện tóc xinh TP.HCM</span>
+        <span class="brand-name">
+          Nếp Tóc <span class="sparkle-icon">✨</span>
+        </span>
+        <span class="brand-slogan">Hair Accessories Boutique</span>
       </a>
 
       <nav>
         <ul class="nav-menu">
-          <li><a href="#san-pham" class="nav-link">Sản phẩm</a></li>
-          <li><a href="#chinh-sach" class="nav-link">Chính sách</a></li>
-          <li><a href="#lien-he" class="nav-link">Liên hệ</a></li>
+          <li><a href="#san-pham" class="nav-link">Bộ Sưu Tập</a></li>
+          <li><a href="#chinh-sach" class="nav-link">Chính Sách</a></li>
+          <li><a href="#dat-hang" class="nav-link">Đặt Hàng COD</a></li>
+          <li><a href="#lien-he" class="nav-link">Liên Hệ</a></li>
         </ul>
       </nav>
 
       <button id="open-cart-btn" class="cart-btn" aria-label="Mở giỏ hàng">
-        <span>🛒 Giỏ hàng</span>
+        <span>🛍️ Giỏ hàng</span>
         <span id="cart-badge" class="cart-badge">0</span>
       </button>
     </div>
   </header>
 
-  <!-- 3. BANNER KHUYẾN MÃI (HERO BANNER) -->
+  <!-- 3. BANNER KHUYẾN MÃI BIÊN TẬP (HERO BANNER) -->
   <section class="hero-banner">
     <div class="hero-container">
-      <span class="hero-chip">✨ Bộ sưu tập thu đông 2026</span>
-      <h1 class="hero-title">Nâng Niu Từng Nếp Tóc Xinh</h1>
-      <p class="hero-subtitle">Bộ sưu tập kẹp càng cua, kẹp mái và set phụ kiện cao cấp, nhẹ nhàng cho mái tóc bồng bềnh.</p>
+      <div class="hero-pill-badge">
+        <span>💎</span> BST Thu Đông 2026 • Exclusive Edition
+      </div>
+      
+      <h1 class="hero-title">
+        Nâng Niu Từng <em>Nếp Tóc Xinh</em>
+      </h1>
+      
+      <p class="hero-subtitle">
+        Khám phá bộ sưu tập kẹp càng cua và phụ kiện tóc chế tác tinh xảo. Lò xo titan chịu lực êm ái, bảo vệ mái tóc nàng bồng bềnh suốt cả ngày.
+      </p>
+
+      <div class="hero-stats-row">
+        <div class="stat-item">
+          <span class="stat-num">5.000+</span>
+          <span class="stat-label">Khách hàng yêu thích</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Acrylic nguyên sinh cao cấp</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">24 Giờ</span>
+          <span class="stat-label">Giao hỏa tốc nội thành</span>
+        </div>
+      </div>
       
       <div class="promo-highlight-card">
-        <span class="promo-icon">🚚</span>
+        <span class="promo-gift-icon">🎁</span>
         <div class="promo-text">
-          <strong>Ưu đãi giao hàng:</strong> Phí ship chỉ <strong>25.000đ</strong> – <strong>MIỄN PHÍ SHIP</strong> cho đơn hàng từ <strong>300.000đ</strong>!
+          <strong>Đặc quyền tháng này:</strong> Phí ship toàn quốc chỉ <strong>25.000đ</strong> — <strong>MIỄN PHÍ VẬN CHUYỂN</strong> cho mọi đơn hàng từ <strong>300.000đ</strong>!
         </div>
       </div>
     </div>
@@ -58,8 +88,9 @@
   <!-- 4. DANH MỤC VÀ DANH SÁCH SẢN PHẨM -->
   <main class="container" id="san-pham">
     <div class="section-header">
-      <h2 class="section-title">Danh Mục Phụ Kiện Tóc</h2>
-      <p class="section-desc">Thiết kế tinh xảo, chất liệu êm ái bảo vệ tóc không gãy rụng</p>
+      <span class="section-pretitle">Selected Collection</span>
+      <h2 class="section-title">Bộ Sưu Tập Phụ Kiện Tóc</h2>
+      <p class="section-desc">Mỗi sản phẩm là một tác phẩm được chăm chút tỉ mỉ từ màu sắc đến độ ôm sát của xương kẹp</p>
     </div>
 
     <!-- Bộ lọc theo nhóm -->
@@ -71,14 +102,47 @@
 
     <!-- Lưới sản phẩm (render động từ products.js) -->
     <div id="products-grid" class="products-grid">
-      <!-- JavaScript sẽ chèn 8 thẻ sản phẩm vào đây -->
+      <!-- JavaScript sẽ chèn 8 thẻ sản phẩm cao cấp vào đây -->
+    </div>
+
+    <!-- Dải cam kết niềm tin (Trust Badges Strip) -->
+    <div class="trust-badges-strip">
+      <div class="trust-item">
+        <span class="trust-icon">🎀</span>
+        <div>
+          <div class="trust-title">Đóng Gói Hộp Quà Sang</div>
+          <div class="trust-subtitle">Hộp nơ thơm tho bảo vệ kẹp</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🚚</span>
+        <div>
+          <div class="trust-title">Ship COD Toàn Quốc</div>
+          <div class="trust-subtitle">Được đồng kiểm trước khi trả tiền</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🔄</span>
+        <div>
+          <div class="trust-title">Đổi Mới Trong 7 Ngày</div>
+          <div class="trust-subtitle">1 đổi 1 nếu gãy vỡ do vận chuyển</div>
+        </div>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🌿</span>
+        <div>
+          <div class="trust-title">Chất Liệu An Toàn</div>
+          <div class="trust-subtitle">Không gây đứt gãy hay xơ tóc</div>
+        </div>
+      </div>
     </div>
 
     <!-- 5. KHU VỰC ĐẶT HÀNG (CHECKOUT) -->
     <section class="checkout-section" id="dat-hang">
-      <div class="section-header" style="text-align: left; margin-bottom: 20px;">
+      <div class="section-header" style="text-align: left; margin-bottom: 16px;">
+        <span class="section-pretitle">Thanh toán an tâm</span>
         <h2 class="section-title" style="display: block;">Đặt Hàng Nhanh (Giao Hàng COD)</h2>
-        <p class="section-desc">Nhận hàng trước – Kiểm tra đúng mẫu – Thanh toán tiền mặt tại nhà</p>
+        <p class="section-desc">Kiểm tra đúng mẫu, đúng chất lượng mới thanh toán tiền mặt cho nhân viên giao hàng</p>
       </div>
 
       <div class="checkout-grid">
@@ -99,7 +163,7 @@
 
           <div class="form-group">
             <label for="customer-phone" class="form-label">
-              Số điện thoại <span class="required-star">*</span>
+              Số điện thoại người nhận <span class="required-star">*</span>
             </label>
             <input 
               type="tel" 
@@ -123,12 +187,12 @@
           </div>
 
           <div class="form-group">
-            <label for="customer-notes" class="form-label">Ghi chú đơn hàng (nếu có)</label>
+            <label for="customer-notes" class="form-label">Ghi chú giao hàng (nếu có)</label>
             <textarea 
               id="customer-notes" 
               class="form-textarea" 
-              style="min-height: 60px;"
-              placeholder="Ví dụ: Giao vào giờ hành chính, gọi trước khi giao..."
+              style="min-height: 65px;"
+              placeholder="Ví dụ: Giao vào giờ hành chính, gọi trước 15 phút..."
             ></textarea>
           </div>
 
@@ -138,8 +202,8 @@
             <div class="payment-method-box">
               <input type="radio" id="payment-cod" name="payment-method" class="payment-radio" checked disabled>
               <div>
-                <label for="payment-cod" class="payment-title">💵 Thanh toán khi nhận hàng (COD)</label>
-                <div class="payment-desc">Bạn được kiểm tra hàng thoải mái trước khi thanh toán tiền mặt cho bưu tá. Không rủi ro, không cần thẻ.</div>
+                <label for="payment-cod" class="payment-title">💵 Thanh toán tiền mặt khi nhận hàng (COD)</label>
+                <div class="payment-desc">An tâm tuyệt đối: Bạn mở hộp kiểm tra đúng mẫu kẹp rồi mới gửi tiền cho shipper. Không cần thẻ ngân hàng, không rủi ro.</div>
               </div>
             </div>
           </div>
@@ -165,7 +229,7 @@
             <!-- Render danh sách sản phẩm tóm tắt -->
           </div>
 
-          <div style="border-top: 1px dashed var(--border-color); margin-top: 14px; padding-top: 14px;">
+          <div style="border-top: 1px dashed var(--border-delicate); margin-top: 16px; padding-top: 16px;">
             <div class="summary-row">
               <span>Tạm tính tiền hàng:</span>
               <span id="checkout-subtotal">0đ</span>
@@ -179,8 +243,8 @@
               <span id="checkout-total" class="total-amount">0đ</span>
             </div>
           </div>
-          <div style="margin-top: 12px; font-size: 12.5px; color: var(--text-muted);">
-            💡 <em>Miễn phí vận chuyển khi tổng tiền hàng đạt từ 300.000đ trở lên.</em>
+          <div style="margin-top: 14px; font-size: 13px; color: var(--text-muted); line-height: 1.5;">
+            ✨ <em>Đơn hàng trên 300.000đ được hệ thống tự động miễn phí vận chuyển 100%.</em>
           </div>
         </aside>
       </div>
@@ -189,37 +253,40 @@
     <!-- 6. CHÍNH SÁCH BÁN HÀNG -->
     <section class="policies-section" id="chinh-sach">
       <div class="section-header">
+        <span class="section-pretitle">An tâm mua sắm</span>
         <h2 class="section-title">Chính Sách &amp; Cam Kết</h2>
-        <p class="section-desc">Trải nghiệm mua sắm an tâm tuyệt đối tại Nếp Tóc</p>
+        <p class="section-desc">Mọi đơn hàng tại Nếp Tóc đều được đảm bảo quyền lợi tối đa</p>
       </div>
 
       <div class="policies-grid">
         <div class="policy-card">
-          <div class="policy-icon">🚚</div>
-          <h3 class="policy-card-title">Giao Hàng Toàn Quốc (COD)</h3>
-          <p class="policy-card-desc">Giao hỏa tốc 1 - 2 ngày tại khu vực TP.HCM và 2 - 4 ngày với các tỉnh thành khác. Khách hàng được quyền đồng kiểm trước khi nhận.</p>
+          <span class="policy-icon">🚚</span>
+          <h3 class="policy-card-title">Giao Hàng Đồng Kiểm (COD)</h3>
+          <p class="policy-card-desc">Giao hỏa tốc 1 - 2 ngày tại TP.HCM và 2 - 4 ngày trên toàn quốc. Quý khách luôn có quyền kiểm tra hàng trước khi nhận.</p>
         </div>
 
         <div class="policy-card">
-          <div class="policy-icon">🔄</div>
+          <span class="policy-icon">🔄</span>
           <h3 class="policy-card-title">Đổi Trả Dễ Dàng Trong 7 Ngày</h3>
-          <p class="policy-card-desc">Hỗ trợ 1 đổi 1 miễn phí trong vòng 7 ngày kể từ ngày nhận hàng nếu sản phẩm bị gãy, hỏng lò xo hoặc lỗi do vận chuyển.</p>
+          <p class="policy-card-desc">Hỗ trợ 1 đổi 1 tận nhà hoàn toàn miễn phí nếu sản phẩm có bất kỳ lỗi nào từ lò xo, khung kẹp hay do va đập vận chuyển.</p>
         </div>
 
         <div class="policy-card" id="lien-he">
-          <div class="policy-icon">💬</div>
+          <span class="policy-icon">💬</span>
           <h3 class="policy-card-title">Tư Vấn Tận Tâm 24/7</h3>
-          <p class="policy-card-desc">Đội ngũ luôn sẵn sàng tư vấn mẫu kẹp phù hợp với độ dày của tóc và trang phục qua Zalo / Hotline: <strong>0908.123.456</strong>.</p>
+          <p class="policy-card-desc">Đội ngũ stylist tóc sẵn sàng tư vấn mẫu kẹp tôn dáng khuôn mặt và phong cách trang phục qua Zalo / Hotline: <strong>0908.123.456</strong>.</p>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- 7. GIỎ HÀNG TRƯỢT (CART DRAWER / OVERLAY) -->
+  <!-- 7. GIỎ HÀNG TRƯỢT SANG TRỌNG (CART DRAWER) -->
   <div id="cart-overlay" class="cart-overlay">
     <div class="cart-drawer">
       <div class="cart-header">
-        <h3 class="cart-title">Giỏ Hàng Của Bạn</h3>
+        <h3 class="cart-title">
+          <span>🛍️ Giỏ Hàng Của Bạn</span>
+        </h3>
         <button id="close-cart-btn" class="close-cart-btn" aria-label="Đóng giỏ hàng">&times;</button>
       </div>
 
@@ -259,12 +326,13 @@
     </div>
   </div>
 
-  <!-- 8. MODAL THÔNG BÁO ĐẶT HÀNG THÀNH CÔNG -->
+  <!-- 8. MODAL THÔNG BÁO ĐẶT HÀNG THÀNH CÔNG (KÈM PHÁO GIẤY CONFETTI) -->
   <div id="success-modal" class="success-modal-overlay">
     <div class="success-modal-card">
-      <div class="success-icon">🎉</div>
+      <canvas id="confetti-canvas" class="confetti-canvas"></canvas>
+      <div class="success-icon-wrap">🎉</div>
       <h3 class="success-title">Đặt Hàng Thành Công!</h3>
-      <p class="success-desc">Cảm ơn bạn đã tin tưởng ủng hộ Nếp Tóc. Đơn hàng của bạn đã được ghi nhận và đang được chuẩn bị đóng gói!</p>
+      <p class="success-desc">Nếp Tóc xin chân thành cảm ơn bạn. Đơn hàng của bạn đã được ghi nhận và tiệm đang chuẩn bị đóng gói hộp quà thật xinh!</p>
 
       <div class="order-receipt-box">
         <div class="receipt-row order-code-row">
@@ -280,65 +348,79 @@
           <span id="receipt-phone">0901234567</span>
         </div>
         <div class="receipt-row">
-          <span>Địa chỉ giao:</span>
+          <span>Địa chỉ giao hàng:</span>
           <span id="receipt-address" style="text-align: right; max-width: 60%;">TP.HCM</span>
         </div>
         <div class="receipt-row">
-          <span>Hình thức thanh toán:</span>
+          <span>Phương thức thanh toán:</span>
           <strong>Thanh toán khi nhận hàng (COD)</strong>
         </div>
-        <div class="receipt-row" style="margin-top: 8px; border-top: 1px dashed var(--border-color); padding-top: 8px;">
+        <div class="receipt-row" style="margin-top: 10px; border-top: 1px dashed var(--border-delicate); padding-top: 10px;">
           <span>Tổng thanh toán khi nhận:</span>
-          <strong id="receipt-total" style="color: var(--primary); font-size: 15px;">0đ</strong>
+          <strong id="receipt-total" style="color: var(--primary-deep); font-size: 16px;">0đ</strong>
         </div>
       </div>
 
-      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
-        <em>Lưu ý: Đây là đơn hàng mô phỏng từ website thực hành. Bạn không phải trả bất kỳ chi phí thực tế nào.</em>
+      <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 24px;">
+        <em>Lưu ý: Đây là đơn hàng mô phỏng từ website thực hành. Bạn không phải thanh toán bất kỳ chi phí thực tế nào.</em>
       </p>
 
       <button id="close-success-btn" class="success-close-btn">
-        Tiếp Tục Xem Sản Phẩm
+        Tiếp Tục Khám Phá Sản Phẩm
       </button>
     </div>
   </div>
 
-  <!-- 9. CHÂN TRANG (FOOTER) -->
+  <!-- 9. THÔNG BÁO NỔI TOAST (TOAST NOTIFICATION) -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- 10. THÔNG BÁO ĐƠN HÀNG TRỰC TIẾP (LIVE SOCIAL PROOF TOAST) -->
+  <div id="social-proof-toast" class="social-proof-toast">
+    <div class="social-proof-icon" id="sp-icon">🌸</div>
+    <div>
+      <div class="social-proof-text" id="sp-text">
+        <strong>Chị Mai (Q.1, TP.HCM)</strong> vừa đặt mua Kẹp Càng Cua Hoa Sứ
+      </div>
+      <span class="social-proof-time" id="sp-time">2 phút trước</span>
+    </div>
+  </div>
+
+  <!-- 11. CHÂN TRANG CAO CẤP (FOOTER) -->
   <footer class="site-footer">
     <div class="footer-container">
       <div>
-        <h4 class="footer-title">Cửa Hàng Phụ Kiện Nếp Tóc</h4>
+        <h4 class="footer-brand-title">Nếp Tóc 🎀</h4>
         <p class="footer-text">
-          Chuyên cung cấp các mẫu kẹp tóc càng cua, kẹp mái thời trang phong cách Hàn Quốc thanh lịch, tôn vinh nét dịu dàng của mái tóc Việt.
+          Thương hiệu phụ kiện tóc mang đến sự tinh tế, thanh nhã cho mái tóc phụ nữ Việt. Tỉ mỉ từ đường nét, nhẹ êm trong từng trải nghiệm.
         </p>
       </div>
 
       <div>
-        <h4 class="footer-title">Thông Tin Liên Hệ (TP.HCM)</h4>
+        <h4 class="footer-title">Cửa Hàng TP.HCM</h4>
         <p class="footer-text">
           📍 Địa chỉ: 45 Đường Số 7, Phường Linh Chiểu, TP. Thủ Đức, TP. Hồ Chí Minh<br>
           📞 Hotline / Zalo: 0908.123.456<br>
-          ⏰ Giờ mở cửa: 08:30 - 21:30 hàng ngày
+          ⏰ Giờ phục vụ: 08:30 - 21:30 (Thứ 2 - Chủ Nhật)
         </p>
       </div>
 
       <div>
-        <h4 class="footer-title">Quy Định Mua Sắm</h4>
+        <h4 class="footer-title">Cam Kết Bán Hàng</h4>
         <p class="footer-text">
-          • Kiểm tra hàng trước khi thanh toán COD<br>
-          • Đổi mới 100% trong 7 ngày nếu lỗi bể vỡ<br>
-          • Miễn phí giao hàng cho đơn từ 300.000đ
+          • Kiểm tra hàng thoải mái trước khi thanh toán COD<br>
+          • 1 đổi 1 trong 7 ngày nếu lỗi bể vỡ<br>
+          • Miễn phí vận chuyển cho đơn hàng từ 300.000đ
         </p>
       </div>
     </div>
 
     <div class="footer-bottom">
-      <p>© 2026 Nếp Tóc - Phụ Kiện Tóc TP.HCM. Bản quyền thuộc về cửa hàng thực hành.</p>
-      <p style="margin-top: 4px; color: #d9480f; font-weight: 600;">⚠️ Website thực hành – không bán hàng thật.</p>
+      <p>© 2026 Nếp Tóc Hair Accessories Boutique. Tất cả các quyền được bảo lưu.</p>
+      <p style="margin-top: 6px; color: #ff8787; font-weight: 600;">⚠️ Website thực hành – không bán hàng thật.</p>
     </div>
   </footer>
 
-  <!-- Tải scripts theo thứ tự: dữ liệu sản phẩm trước, logic xử lý sau -->
+  <!-- Scripts -->
   <script src="products.js"></script>
   <script src="script.js"></script>
 </body>
