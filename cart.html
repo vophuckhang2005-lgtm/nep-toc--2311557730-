@@ -12,7 +12,7 @@
 
 <div class="page">
   <h1 class="section-title" style="margin-bottom:8px;">Giỏ <em>hàng</em></h1>
-  <p class="section-sub" style="margin-bottom:36px;">Kiểm tra lại trước khi đặt nhé!</p>
+  <p class="section-sub" style="margin-bottom:36px;">Kiểm tra lại danh sách kẹp trước khi thanh toán nhé</p>
 
   <!-- Empty state -->
   <div class="empty-cart" id="empty-cart" style="display:none;">
@@ -28,9 +28,22 @@
     <!-- Items -->
     <div>
       <div id="cart-items-list"></div>
+
+      <!-- Feature 3: Gift Packaging Option in Cart Page -->
+      <div class="gift-option-card" id="cart-gift-card">
+        <label class="gift-option-header">
+          <input type="checkbox" id="cart-gift-check" onchange="handleCartPageGiftToggle(this.checked)"/>
+          <span class="gift-option-title">Đóng gói hộp quà nơ lụa & thiệp viết tay</span>
+          <span class="gift-option-price">+15.000đ</span>
+        </label>
+        <div class="gift-note-box" id="cart-gift-note-box">
+          <textarea id="cart-gift-note" class="gift-note-input" rows="2" placeholder="Ghi lời chúc lên thiệp (ví dụ: Chúc em luôn xinh đẹp, tự tin...)" oninput="handleCartPageGiftNote(this.value)"></textarea>
+        </div>
+      </div>
+
       <div style="margin-top:16px; display:flex; gap:12px; flex-wrap:wrap;">
-        <a href="products.html" style="font-size:14px; font-weight:600; color:var(--pink); display:flex; align-items:center; gap:4px;">← Tiếp tục mua sắm</a>
-        <button id="clear-cart-btn" style="font-size:14px; font-weight:600; color:var(--text-muted); margin-left:auto;" onclick="confirmClear()">Xóa giỏ hàng</button>
+        <a href="products.html" style="font-size:14px; font-weight:600; color:var(--accent-rose); display:flex; align-items:center; gap:4px;">← Tiếp tục mua sắm</a>
+        <button id="clear-cart-btn" style="font-size:14px; font-weight:600; color:var(--apple-tertiary); margin-left:auto;" onclick="confirmClear()">Xóa toàn bộ</button>
       </div>
     </div>
 
@@ -38,6 +51,7 @@
     <div class="cart-summary-box">
       <div class="summary-title">Tóm tắt đơn hàng</div>
       <div class="summary-row"><span>Tạm tính</span><span id="sum-subtotal">—</span></div>
+      <div class="summary-row" id="sum-gift-row" style="display:none; color:var(--accent-rose);"><span>Hộp quà & thiệp</span><span id="sum-gift">—</span></div>
       <div class="summary-row" id="sum-ship-row"><span>Phí giao hàng</span><span id="sum-ship">—</span></div>
       <div id="free-ship-banner" class="free-ship-notice" style="display:none;">Bạn được miễn phí giao hàng</div>
       <div id="near-free-ship" class="free-ship-notice" style="display:none; background:#555;"></div>
@@ -45,8 +59,8 @@
         <span class="summary-total-label">Tổng cộng</span>
         <span class="summary-total-price" id="sum-total">—</span>
       </div>
-      <a href="checkout.html" class="btn-checkout" id="checkout-btn">Đặt hàng →</a>
-      <p style="font-size:12px; color:#aaa; text-align:center; margin-top:12px;">Thanh toán khi nhận hàng (COD) · Giao 1–2 ngày</p>
+      <a href="checkout.html" class="btn-checkout" id="checkout-btn">Tiến hành đặt hàng COD →</a>
+      <p style="font-size:12px; color:#aaa; text-align:center; margin-top:12px;">Thanh toán khi nhận hàng (COD) · Giao nhanh 24h</p>
     </div>
   </div>
 </div>
@@ -63,12 +77,8 @@
 
   function getItemVisual(item) {
     const p = PRODUCTS.find(x => x.id === item.id);
-    if (!p) return '<div style="font-size:28px;">📦</div>';
-    if (p.category === 'claw') {
-      return `<svg width="36" height="36" viewBox="0 0 80 80" fill="none"><ellipse cx="40" cy="30" rx="30" ry="20" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="4"/><rect x="34" y="48" width="12" height="22" rx="6" fill="${p.cardAccent}"/></svg>`;
-    } else {
-      return `<svg width="36" height="36" viewBox="0 0 80 80" fill="none"><rect x="10" y="30" width="60" height="12" rx="6" fill="${p.cardAccent}" opacity="0.3" stroke="${p.cardAccent}" stroke-width="2"/><circle cx="40" cy="36" r="8" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="2"/></svg>`;
-    }
+    if (!p) return '';
+    return `<svg width="36" height="36" viewBox="0 0 80 80" fill="none"><ellipse cx="40" cy="30" rx="30" ry="20" fill="${p.cardBg}" stroke="${p.cardAccent}" stroke-width="3"/><rect x="34" y="48" width="12" height="22" rx="6" fill="${p.cardAccent}"/></svg>`;
   }
 
   function renderCart() {
@@ -94,13 +104,13 @@
             <div class="cart-item-price">${fmt(item.price * item.qty)}</div>
           </div>
           <div class="cart-item-right">
-            <button class="btn-remove" onclick="doRemove(${item.id},'${item.swatch}')">×</button>
+            <button class="btn-remove" onclick="doRemove(${item.id},'${item.swatch}')" aria-label="Xóa">×</button>
             <div class="cart-qty-ctrl">
               <button onclick="doQty(${item.id},'${item.swatch}',${item.qty - 1})">−</button>
               <span>${item.qty}</span>
               <button onclick="doQty(${item.id},'${item.swatch}',${item.qty + 1})">+</button>
             </div>
-            <div style="font-size:13px; color:var(--text-muted);">${fmt(item.price)} × ${item.qty}</div>
+            <div style="font-size:12.5px; color:var(--apple-tertiary);">${fmt(item.price)} × ${item.qty}</div>
           </div>
         </div>
       `;
@@ -109,7 +119,32 @@
     // Summary
     const sub = getSubtotal();
     const ship = getShipFee();
+    const gift = getGiftOption();
     const total = getTotal();
+
+    // Gift Checkbox Sync
+    const giftCheck = document.getElementById('cart-gift-check');
+    const giftCard = document.getElementById('cart-gift-card');
+    const giftNoteBox = document.getElementById('cart-gift-note-box');
+    const giftNote = document.getElementById('cart-gift-note');
+    const giftRow = document.getElementById('sum-gift-row');
+
+    if (giftCheck && giftCard && giftNoteBox && giftNote) {
+      giftCheck.checked = gift.enabled;
+      giftCard.classList.toggle('checked', gift.enabled);
+      giftNoteBox.classList.toggle('show', gift.enabled);
+      if (document.activeElement !== giftNote) {
+        giftNote.value = gift.note || '';
+      }
+    }
+
+    if (gift.enabled) {
+      giftRow.style.display = 'flex';
+      document.getElementById('sum-gift').textContent = '+' + fmt(GIFT_FEE);
+    } else {
+      giftRow.style.display = 'none';
+    }
+
     document.getElementById('sum-subtotal').textContent = fmt(sub);
     document.getElementById('sum-ship').textContent = ship === 0 ? 'Miễn phí' : fmt(ship);
     document.getElementById('sum-total').textContent = fmt(total);
@@ -122,11 +157,22 @@
       const remaining = FREE_SHIP_THRESHOLD - sub;
       if (remaining > 0 && remaining < FREE_SHIP_THRESHOLD) {
         document.getElementById('near-free-ship').style.display = 'block';
-        document.getElementById('near-free-ship').textContent = `Mua thêm ${fmt(remaining)} để được miễn phí ship!`;
+        document.getElementById('near-free-ship').textContent = `Mua thêm ${fmt(remaining)} để được miễn phí giao hàng!`;
       } else {
         document.getElementById('near-free-ship').style.display = 'none';
       }
     }
+  }
+
+  function handleCartPageGiftToggle(checked) {
+    const noteEl = document.getElementById('cart-gift-note');
+    const note = noteEl ? noteEl.value : '';
+    setGiftOption(checked, note);
+    renderCart();
+  }
+
+  function handleCartPageGiftNote(val) {
+    setGiftOption(true, val);
   }
 
   function doRemove(id, swatch) {

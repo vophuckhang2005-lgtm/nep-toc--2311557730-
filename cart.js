@@ -1,7 +1,9 @@
-// cart.js — shared cart logic, dùng localStorage
+// cart.js — shared cart logic & gift packaging, dùng localStorage
 const CART_KEY = 'nep_toc_cart';
+const GIFT_KEY = 'nep_toc_gift_option';
 const FREE_SHIP_THRESHOLD = 300000;
 const SHIP_FEE = 25000;
+const GIFT_FEE = 15000;
 
 function getCart() {
   try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
@@ -11,6 +13,24 @@ function getCart() {
 function saveCart(cart) {
   localStorage.setItem(CART_KEY, JSON.stringify(cart));
   updateCartBadge();
+  if (typeof renderCartDrawerContent === 'function') {
+    renderCartDrawerContent();
+  }
+}
+
+function getGiftOption() {
+  try {
+    return JSON.parse(localStorage.getItem(GIFT_KEY)) || { enabled: false, note: '' };
+  } catch {
+    return { enabled: false, note: '' };
+  }
+}
+
+function setGiftOption(enabled, note = '') {
+  localStorage.setItem(GIFT_KEY, JSON.stringify({ enabled, note }));
+  if (typeof renderCartDrawerContent === 'function') {
+    renderCartDrawerContent();
+  }
 }
 
 function addToCart(productId, qty = 1, swatch = null) {
@@ -43,7 +63,11 @@ function updateQty(productId, swatch, newQty) {
 
 function clearCart() {
   localStorage.removeItem(CART_KEY);
+  localStorage.removeItem(GIFT_KEY);
   updateCartBadge();
+  if (typeof renderCartDrawerContent === 'function') {
+    renderCartDrawerContent();
+  }
 }
 
 function getCartCount() {
@@ -60,7 +84,9 @@ function getShipFee() {
 }
 
 function getTotal() {
-  return getSubtotal() + getShipFee();
+  const gift = getGiftOption();
+  const giftCost = (gift.enabled && getCart().length > 0) ? GIFT_FEE : 0;
+  return getSubtotal() + getShipFee() + giftCost;
 }
 
 function fmt(n) {
@@ -75,5 +101,4 @@ function updateCartBadge() {
   badge.style.display = count > 0 ? 'flex' : 'none';
 }
 
-// Chạy ngay khi load
 document.addEventListener('DOMContentLoaded', updateCartBadge);

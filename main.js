@@ -1,4 +1,4 @@
-// main.js — shared nav, toast, cart badge, floating widget, wishlist & Apple fluid interactions
+// main.js — shared nav, toast, cart badge, floating widget, wishlist, Apple fluid interactions & Mini Cart Drawer
 
 function renderHeader() {
   const h = document.getElementById('site-header');
@@ -15,7 +15,7 @@ function renderHeader() {
           <a href="/contact.html">Liên hệ</a>
         </nav>
         <div class="nav-actions">
-          <a href="/cart.html" class="cart-btn">
+          <button class="cart-btn" id="open-cart-btn" aria-label="Mở giỏ hàng">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
               <line x1="3" y1="6" x2="21" y2="6"/>
@@ -23,7 +23,7 @@ function renderHeader() {
             </svg>
             <span>Giỏ hàng</span>
             <span id="cart-badge">0</span>
-          </a>
+          </button>
           <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu">
             <span></span>
             <span></span>
@@ -57,7 +57,6 @@ function renderHeader() {
       btn.classList.toggle('open', isOpen);
     });
 
-    // Close when clicking nav link
     navEl.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => {
         navEl.classList.remove('open');
@@ -65,7 +64,6 @@ function renderHeader() {
       });
     });
 
-    // Close on click outside
     document.addEventListener('click', (e) => {
       if (!btn.contains(e.target) && !navEl.contains(e.target)) {
         navEl.classList.remove('open');
@@ -74,8 +72,18 @@ function renderHeader() {
     });
   }
 
+  // Open Mini Cart Drawer on cart button click
+  const openCartBtn = h.querySelector('#open-cart-btn');
+  if (openCartBtn) {
+    openCartBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openCartDrawer();
+    });
+  }
+
   updateCartBadge();
   renderFloatingHelp();
+  initCartDrawer();
 }
 
 function renderFooter() {
@@ -112,7 +120,7 @@ function renderFooter() {
   `;
 }
 
-// Floating Quick Contact Widget (Minimalist Phone & Chat)
+// Floating Quick Contact Widget
 function renderFloatingHelp() {
   if (document.getElementById('floating-contact-btn')) return;
   const wrap = document.createElement('div');
@@ -128,6 +136,178 @@ function renderFloatingHelp() {
     </div>
   `;
   document.body.appendChild(wrap);
+}
+
+// ── Apple Slide-Out Mini Cart Drawer (Feature 1 & Feature 3) ──
+function initCartDrawer() {
+  if (document.getElementById('cart-drawer-overlay')) return;
+
+  const drawerEl = document.createElement('div');
+  drawerEl.id = 'cart-drawer-overlay';
+  drawerEl.className = 'cart-drawer-overlay';
+  drawerEl.innerHTML = `
+    <div class="cart-drawer" id="cart-drawer" onclick="event.stopPropagation()">
+      <div class="cart-drawer-header">
+        <div class="cart-drawer-title">Giỏ hàng của bạn</div>
+        <button class="cart-drawer-close" id="cart-drawer-close" aria-label="Đóng giỏ hàng">×</button>
+      </div>
+
+      <!-- Free Shipping Progress Bar -->
+      <div class="drawer-freeship-wrap" id="drawer-freeship-wrap"></div>
+
+      <!-- Drawer Body Items -->
+      <div class="cart-drawer-body" id="cart-drawer-body"></div>
+
+      <!-- Drawer Footer -->
+      <div class="cart-drawer-footer" id="cart-drawer-footer"></div>
+    </div>
+  `;
+
+  document.body.appendChild(drawerEl);
+
+  // Close handlers
+  drawerEl.addEventListener('click', closeCartDrawer);
+  document.getElementById('cart-drawer-close').addEventListener('click', closeCartDrawer);
+
+  renderCartDrawerContent();
+}
+
+function openCartDrawer() {
+  const overlay = document.getElementById('cart-drawer-overlay');
+  if (overlay) {
+    renderCartDrawerContent();
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeCartDrawer() {
+  const overlay = document.getElementById('cart-drawer-overlay');
+  if (overlay) {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+function renderCartDrawerContent() {
+  const bodyEl = document.getElementById('cart-drawer-body');
+  const footerEl = document.getElementById('cart-drawer-footer');
+  const shipWrap = document.getElementById('drawer-freeship-wrap');
+  if (!bodyEl || !footerEl || !shipWrap) return;
+
+  const cart = getCart();
+  const subtotal = getSubtotal();
+  const gift = getGiftOption();
+
+  // 1. Free Shipping Progress Bar
+  const diff = FREE_SHIP_THRESHOLD - subtotal;
+  const pct = Math.min(100, Math.round((subtotal / FREE_SHIP_THRESHOLD) * 100));
+
+  if (subtotal === 0) {
+    shipWrap.innerHTML = `
+      <div class="drawer-freeship-text">Miễn phí giao hàng cho đơn từ <span>300.000đ</span></div>
+      <div class="drawer-progress-track"><div class="drawer-progress-fill" style="width:0%"></div></div>
+    `;
+  } else if (diff > 0) {
+    shipWrap.innerHTML = `
+      <div class="drawer-freeship-text">Mua thêm <span>${fmt(diff)}</span> để được miễn phí giao hàng</div>
+      <div class="drawer-progress-track"><div class="drawer-progress-fill" style="width:${pct}%"></div></div>
+    `;
+  } else {
+    shipWrap.innerHTML = `
+      <div class="drawer-freeship-text" style="color:#28a745;">Đơn hàng của bạn đã được Miễn phí giao hàng</div>
+      <div class="drawer-progress-track"><div class="drawer-progress-fill complete" style="width:100%"></div></div>
+    `;
+  }
+
+  // 2. Cart Items
+  if (cart.length === 0) {
+    bodyEl.innerHTML = `
+      <div class="drawer-empty-msg">
+        <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8" style="margin:0 auto 12px; color:var(--apple-tertiary);"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <p style="font-size:15px; font-weight:600; color:var(--apple-black); margin-bottom:4px;">Túi đồ của bạn đang trống</p>
+        <p style="font-size:13px; color:var(--apple-secondary); margin-bottom:20px;">Hãy dạo một vòng và chọn chiếc kẹp bạn yêu thích nhé.</p>
+        <a href="products.html" class="btn-primary" style="display:inline-block; font-size:13px; padding:10px 22px;" onclick="closeCartDrawer()">Khám phá ngay</a>
+      </div>
+    `;
+    footerEl.innerHTML = '';
+    return;
+  }
+
+  bodyEl.innerHTML = `
+    <div class="drawer-items-list">
+      ${cart.map(item => `
+        <div class="drawer-item">
+          <div class="drawer-item-thumb" style="background:${item.cardBg || '#fafafc'}">
+            <svg width="34" height="34" viewBox="0 0 84 84" fill="none">
+              <ellipse cx="42" cy="34" rx="30" ry="20" fill="${item.cardBg || '#ffffff'}" stroke="${item.cardAccent || '#1d1d1f'}" stroke-width="2.5"/>
+              <rect x="36" y="50" width="12" height="20" rx="6" fill="${item.cardAccent || '#1d1d1f'}"/>
+            </svg>
+          </div>
+          <div class="drawer-item-info">
+            <div class="drawer-item-name">${item.name}</div>
+            ${item.swatch ? `<div class="drawer-item-swatch">Màu: ${item.swatch}</div>` : ''}
+            <div class="drawer-item-price">${fmt(item.price * item.qty)}</div>
+          </div>
+          <div class="drawer-item-actions">
+            <button class="btn-remove" onclick="removeFromCart(${item.id}, '${item.swatch}')" aria-label="Xóa">×</button>
+            <div class="cart-qty-ctrl">
+              <button onclick="updateQty(${item.id}, '${item.swatch}', ${item.qty - 1})">−</button>
+              <span>${item.qty}</span>
+              <button onclick="updateQty(${item.id}, '${item.swatch}', ${item.qty + 1})">+</button>
+            </div>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <!-- Feature 3: Gift Packaging Option in Drawer -->
+    <div class="gift-option-card ${gift.enabled ? 'checked' : ''}" id="drawer-gift-card">
+      <label class="gift-option-header">
+        <input type="checkbox" id="drawer-gift-check" ${gift.enabled ? 'checked' : ''} onchange="handleDrawerGiftToggle(this.checked)"/>
+        <span class="gift-option-title">Đóng gói hộp quà & thiệp viết tay</span>
+        <span class="gift-option-price">+15.000đ</span>
+      </label>
+      <div class="gift-note-box ${gift.enabled ? 'show' : ''}" id="drawer-gift-note-box">
+        <textarea id="drawer-gift-note" class="gift-note-input" rows="2" placeholder="Ghi lời chúc lên thiệp (ví dụ: Chúc em bé luôn xinh tươi rạng ngời...)" oninput="handleDrawerGiftNote(this.value)">${gift.note || ''}</textarea>
+      </div>
+    </div>
+  `;
+
+  // 3. Footer with Total & Direct Checkout Button
+  const total = getTotal();
+  footerEl.innerHTML = `
+    <div class="drawer-subtotal-row">
+      <span>Tạm tính</span>
+      <span style="font-weight:600; color:var(--apple-black);">${fmt(subtotal)}</span>
+    </div>
+    ${gift.enabled ? `
+      <div class="drawer-subtotal-row">
+        <span>Hộp quà & thiệp</span>
+        <span style="font-weight:600; color:var(--accent-rose);">+${fmt(GIFT_FEE)}</span>
+      </div>
+    ` : ''}
+    <div class="drawer-subtotal-row">
+      <span>Phí giao hàng</span>
+      <span style="font-weight:600; color:var(--apple-black);">${getShipFee() === 0 ? 'Miễn phí' : fmt(getShipFee())}</span>
+    </div>
+    <div class="drawer-total-row">
+      <span class="drawer-total-label">Tổng thanh toán</span>
+      <span class="drawer-total-num">${fmt(total)}</span>
+    </div>
+    <a href="/checkout.html" class="btn-drawer-checkout" onclick="closeCartDrawer()">Đặt hàng COD ngay →</a>
+    <a href="/cart.html" class="drawer-view-cart-link" onclick="closeCartDrawer()">Xem trang giỏ hàng chi tiết</a>
+  `;
+}
+
+function handleDrawerGiftToggle(checked) {
+  const noteEl = document.getElementById('drawer-gift-note');
+  const note = noteEl ? noteEl.value : '';
+  setGiftOption(checked, note);
+}
+
+function handleDrawerGiftNote(val) {
+  setGiftOption(true, val);
 }
 
 // Apple Fluid Toast Notification
@@ -201,7 +381,7 @@ function productVisualSVG(p) {
   }
 }
 
-// ── Angle 2: Secondary Side Profile (Cận cảnh răng kẹp & lò xo) ──
+// ── Angle 2: Secondary Side Profile ──
 function productVisualSecondarySVG(p) {
   if (p.category === 'claw') {
     return `<svg width="88" height="88" viewBox="0 0 88 88" fill="none">
@@ -226,7 +406,7 @@ function productVisualSecondarySVG(p) {
   }
 }
 
-// Clean Product Card HTML (Loại bỏ rating sao phèn, tập trung vào visual & giá)
+// Product Card HTML with Wishlist & Dual-Angle Hover Reveal
 function productCardHTML(p) {
   const tagClass = ['Bán chạy', 'Yêu thích', 'Độc quyền'].includes(p.tag) ? '' : 'yellow';
   const wishlisted = isWishlisted(p.id);
@@ -266,7 +446,8 @@ function productCardHTML(p) {
   `;
 }
 
+// Quick Add to Cart: Adds to cart and smoothly opens Mini Cart Drawer
 function quickAdd(id) {
   addToCart(id, 1, null);
-  showToast('Đã thêm vào giỏ hàng', 'success');
+  openCartDrawer();
 }

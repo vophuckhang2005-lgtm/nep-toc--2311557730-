@@ -182,7 +182,7 @@
       // Add to cart
       document.getElementById('btn-add-detail').addEventListener('click', () => {
         addToCart(p.id, qty, selectedSwatch);
-        showToast('Đã thêm vào giỏ hàng! 🛍️', 'success');
+        openCartDrawer();
       });
 
       // Buy now

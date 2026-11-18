@@ -76,8 +76,9 @@
     <div class="order-summary-box">
       <div style="font-family:'Syne',sans-serif; font-size:18px; font-weight:800; margin-bottom:20px;">Đơn hàng của bạn</div>
       <div id="order-items-list" style="margin-bottom:16px;"></div>
-      <div style="border-top:2px solid var(--black); padding-top:14px;">
+      <div style="border-top:1px solid var(--apple-border); padding-top:14px;">
         <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span>Tạm tính</span><span id="co-subtotal"></span></div>
+        <div id="co-gift-row" style="display:none;justify-content:space-between;margin-bottom:8px;font-size:14px;color:var(--accent-rose);"><span>Hộp quà & thiệp</span><span id="co-gift"></span></div>
         <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span>Phí giao hàng</span><span id="co-ship"></span></div>
         <div style="display:flex;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid #ccc;">
           <span style="font-weight:700; font-size:16px;">Tổng cộng</span>
@@ -133,8 +134,19 @@
 
     const sub = getSubtotal();
     const ship = getShipFee();
+    const gift = getGiftOption();
+
     document.getElementById('co-subtotal').textContent = fmt(sub);
     document.getElementById('co-ship').textContent = ship === 0 ? 'Miễn phí' : fmt(ship);
+
+    const giftRow = document.getElementById('co-gift-row');
+    if (gift.enabled) {
+      giftRow.style.display = 'flex';
+      document.getElementById('co-gift').textContent = '+' + fmt(GIFT_FEE);
+    } else {
+      giftRow.style.display = 'none';
+    }
+
     document.getElementById('co-total').textContent = fmt(getTotal());
   }
 
