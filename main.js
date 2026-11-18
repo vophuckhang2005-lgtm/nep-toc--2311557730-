@@ -658,9 +658,192 @@ function quickAdd(id) {
   showToast('Đã thêm vào giỏ hàng');
 }
 
+// ── Administrative Locations & Cascading Select ──
+const VN_CITIES = {
+  "TP. Hồ Chí Minh": {
+    "Quận 1": ["Phường Bến Nghé", "Phường Bến Thành", "Phường Đa Kao", "Phường Tân Định", "Phường Phạm Ngũ Lão", "Phường Cầu Kho"],
+    "Quận 3": ["Phường Võ Thị Sáu", "Phường 1", "Phường 2", "Phường 3", "Phường 4", "Phường 5", "Phường 9", "Phường 11"],
+    "Quận 5": ["Phường 1", "Phường 2", "Phường 4", "Phường 5", "Phường 7", "Phường 9", "Phường 11", "Phường 12"],
+    "Quận 7": ["Phường Tân Thuận Đông", "Phường Tân Phong", "Phường Tân Quy", "Phường Phú Thuận", "Phường Phú Mỹ"],
+    "Quận 10": ["Phường 1", "Phường 2", "Phường 4", "Phường 6", "Phường 10", "Phường 12", "Phường 14"],
+    "TP. Thủ Đức": ["Phường Thảo Điền", "Phường An Phú", "Phường Hiệp Phú", "Phường Linh Trung", "Phường Linh Chiểu", "Phường Tam Phú"],
+    "Quận Bình Thạnh": ["Phường 1", "Phường 2", "Phường 12", "Phường 15", "Phường 19", "Phường 21", "Phường 25", "Phường 26"],
+    "Quận Phú Nhuận": ["Phường 1", "Phường 2", "Phường 3", "Phường 7", "Phường 9", "Phường 11", "Phường 15"],
+    "Quận Gò Vấp": ["Phường 1", "Phường 3", "Phường 5", "Phường 8", "Phường 10", "Phường 11", "Phường 16"],
+    "Quận Tân Bình": ["Phường 1", "Phường 2", "Phường 4", "Phường 10", "Phường 12", "Phường 13", "Phường 15"],
+    "Huyện Hóc Môn": ["Thị trấn Hóc Môn", "Xã Bà Điểm", "Xã Đông Thạnh", "Xã Tân Xuân", "Xã Thới Tam Thôn"],
+    "Huyện Bình Chánh": ["Thị trấn Tân Túc", "Xã Bình Hưng", "Xã Phong Phú", "Xã Vĩnh Lộc A", "Xã Vĩnh Lộc B"]
+  },
+  "Hà Nội": {
+    "Quận Hoàn Kiếm": ["Phường Hàng Bạc", "Phường Hàng Bồ", "Phường Hàng Đào", "Phường Tràng Tiền", "Phường Cửa Đông"],
+    "Quận Ba Đình": ["Phường Cống Vị", "Phường Điện Biên", "Phường Đội Cấn", "Phường Giảng Võ", "Phường Kim Mã"],
+    "Quận Cầu Giấy": ["Phường Dịch Vọng", "Phường Dịch Vọng Hậu", "Phường Mai Dịch", "Phường Nghĩa Đô", "Phường Trung Hòa"],
+    "Quận Đống Đa": ["Phường Cát Linh", "Phường Kim Liên", "Phường Láng Hạ", "Phường Ô Chợ Dừa", "Phường Văn Miếu"]
+  },
+  "Đà Nẵng": {
+    "Quận Hải Châu": ["Phường Hải Châu I", "Phường Thạch Thang", "Phường Thanh Bình", "Phường Hòa Cường Bắc"],
+    "Quận Thanh Khê": ["Phường Tam Thuận", "Phường Thanh Khê Tây", "Phường Vĩnh Trung", "Phường Thạc Gián"],
+    "Quận Sơn Trà": ["Phường An Hải Bắc", "Phường Phước Mỹ", "Phường Thọ Quang", "Phường Nại Hiên Đông"]
+  },
+  "Bình Dương": {
+    "TP. Thủ Dầu Một": ["Phường Phú Cường", "Phường Phú Hòa", "Phường Hiệp Thành", "Phường Chánh Nghĩa"],
+    "TP. Thuận An": ["Phường Lái Thiêu", "Phường An Phú", "Phường Thuận Giao", "Phường Bình Hòa"]
+  },
+  "Đồng Nai": {
+    "TP. Biên Hòa": ["Phường Quyết Thắng", "Phường Thống Nhất", "Phường Tân Phong", "Phường Trảng Dài", "Phường Tam Hiệp"]
+  },
+  "Cần Thơ": {
+    "Quận Ninh Kiều": ["Phường Tân An", "Phường An Cư", "Phường An Khánh", "Phường Cái Khế", "Phường Xuân Khánh"]
+  }
+};
+
+function setupAddressCascading(cityEl, districtEl, wardEl, initial = {}) {
+  if (!cityEl || !districtEl || !wardEl) return;
+
+  cityEl.innerHTML = '<option value="">-- Chọn Tỉnh / Thành phố --</option>' + 
+    Object.keys(VN_CITIES).map(c => `<option value="${c}">${c}</option>`).join('');
+
+  function updateDistricts(selectedCity, selectedDist = '') {
+    districtEl.innerHTML = '<option value="">-- Chọn Quận / Huyện --</option>';
+    wardEl.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>';
+
+    if (!selectedCity || !VN_CITIES[selectedCity]) return;
+    const districts = Object.keys(VN_CITIES[selectedCity]);
+    districtEl.innerHTML += districts.map(d => `<option value="${d}">${d}</option>`).join('');
+
+    if (selectedDist && districts.includes(selectedDist)) {
+      districtEl.value = selectedDist;
+      updateWards(selectedCity, selectedDist, initial.ward || '');
+    }
+  }
+
+  function updateWards(selectedCity, selectedDist, selectedWard = '') {
+    wardEl.innerHTML = '<option value="">-- Chọn Phường / Xã --</option>';
+    if (!selectedCity || !selectedDist || !VN_CITIES[selectedCity] || !VN_CITIES[selectedCity][selectedDist]) return;
+
+    const wards = VN_CITIES[selectedCity][selectedDist];
+    wardEl.innerHTML += wards.map(w => `<option value="${w}">${w}</option>`).join('');
+
+    if (selectedWard && wards.includes(selectedWard)) {
+      wardEl.value = selectedWard;
+    }
+  }
+
+  cityEl.addEventListener('change', () => {
+    updateDistricts(cityEl.value);
+  });
+
+  districtEl.addEventListener('change', () => {
+    updateWards(cityEl.value, districtEl.value);
+  });
+
+  if (initial.city) {
+    cityEl.value = initial.city;
+    updateDistricts(initial.city, initial.district || '');
+  }
+}
+
 // ── Account / User Profile & Orders Logic ──
+const USERS_DB_KEY = 'nep_toc_users_db';
 const USER_KEY = 'nep_toc_user';
 const ORDERS_KEY = 'nep_toc_orders';
+
+function getAllUsers() {
+  try {
+    const list = JSON.parse(localStorage.getItem(USERS_DB_KEY));
+    if (Array.isArray(list) && list.length > 0) return list;
+  } catch {}
+  const defaultUsers = [
+    {
+      account: '0901234567',
+      password: 'password123',
+      fullname: 'Phương Linh',
+      phone: '0901234567',
+      email: 'linh@gmail.com',
+      city: 'TP. Hồ Chí Minh',
+      district: 'Quận 1',
+      ward: 'Phường Bến Thành',
+      street: '123 Nguyễn Thị Minh Khai',
+      fullAddress: '123 Nguyễn Thị Minh Khai, Phường Bến Thành, Quận 1, TP. Hồ Chí Minh'
+    }
+  ];
+  localStorage.setItem(USERS_DB_KEY, JSON.stringify(defaultUsers));
+  return defaultUsers;
+}
+
+function registerUser(account, password) {
+  account = account.trim();
+  password = password.trim();
+  if (password.length < 6) {
+    return { success: false, message: 'Mật khẩu phải có tối thiểu 6 ký tự.' };
+  }
+  const users = getAllUsers();
+  const existing = users.find(u => u.account.toLowerCase() === account.toLowerCase());
+  if (existing) {
+    return { success: false, message: 'Số điện thoại hoặc Email này đã được đăng ký. Vui lòng chuyển sang Đăng nhập!' };
+  }
+
+  const isEmail = account.includes('@');
+  const nameFromAcc = isEmail ? account.split('@')[0] : ('Khách hàng ' + account.slice(-4));
+  const newUser = {
+    account,
+    password,
+    fullname: nameFromAcc,
+    phone: isEmail ? '' : account,
+    email: isEmail ? account : '',
+    city: 'TP. Hồ Chí Minh',
+    district: 'Quận 1',
+    ward: '',
+    street: '',
+    fullAddress: '',
+    createdAt: new Date().toISOString()
+  };
+
+  users.push(newUser);
+  localStorage.setItem(USERS_DB_KEY, JSON.stringify(users));
+  saveUser(newUser);
+  return { success: true, user: newUser };
+}
+
+function loginUser(account, password) {
+  account = account.trim();
+  password = password.trim();
+  const users = getAllUsers();
+  const found = users.find(u => u.account.toLowerCase() === account.toLowerCase());
+
+  if (!found) {
+    return { success: false, message: 'Tài khoản không tồn tại. Vui lòng kiểm tra lại hoặc tạo tài khoản mới.' };
+  }
+  if (found.password !== password) {
+    return { success: false, message: 'Mật khẩu không chính xác. Vui lòng thử lại!' };
+  }
+
+  saveUser(found);
+  return { success: true, user: found };
+}
+
+function updateUserProfile(updated) {
+  const current = getUser();
+  if (!current) return;
+  const merged = { ...current, ...updated };
+
+  const parts = [];
+  if (merged.street) parts.push(merged.street);
+  if (merged.ward) parts.push(merged.ward);
+  if (merged.district) parts.push(merged.district);
+  if (merged.city) parts.push(merged.city);
+  merged.fullAddress = parts.join(', ');
+  merged.address = merged.fullAddress;
+
+  saveUser(merged);
+
+  const users = getAllUsers();
+  const idx = users.findIndex(u => u.account.toLowerCase() === (merged.account || '').toLowerCase());
+  if (idx !== -1) {
+    users[idx] = merged;
+    localStorage.setItem(USERS_DB_KEY, JSON.stringify(users));
+  }
+}
 
 function getUser() {
   try {

@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Đặt hàng — Nếp Tóc</title>
-  <link rel="stylesheet" href="style.css?v=2"/>
+  <link rel="stylesheet" href="style.css?v=3"/>
 </head>
 <body>
 
@@ -37,11 +37,28 @@
           <input type="tel" id="phone" class="form-control" placeholder="0901 234 567"/>
           <div class="error-msg" id="err-phone">Số điện thoại không hợp lệ (VD: 0901234567)</div>
         </div>
-        <div class="form-group">
-          <label for="address">Địa chỉ giao hàng <span>*</span></label>
-          <textarea id="address" class="form-control" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, TP.HCM" rows="3"></textarea>
-          <div class="error-msg" id="err-address">Vui lòng nhập địa chỉ giao hàng đầy đủ</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Tỉnh / Thành phố <span>*</span></label>
+            <select id="co-city" class="form-control" required></select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Quận / Huyện <span>*</span></label>
+            <select id="co-district" class="form-control" required></select>
+          </div>
         </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label>Phường / Xã <span>*</span></label>
+            <select id="co-ward" class="form-control" required></select>
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label for="co-street">Số nhà, tên đường <span>*</span></label>
+            <input type="text" id="co-street" class="form-control" placeholder="Ví dụ: 123 Nguyễn Thị Minh Khai..." required/>
+          </div>
+        </div>
+        <div class="error-msg" id="err-address" style="margin-bottom:12px;">Vui lòng chọn đầy đủ Tỉnh/Thành, Quận/Huyện, Phường/Xã và nhập số nhà tên đường</div>
         <div class="form-group">
           <label for="note">Ghi chú (không bắt buộc)</label>
           <textarea id="note" class="form-control" placeholder="Giao giờ hành chính, để hàng trước cửa, v.v." rows="2"></textarea>
@@ -113,7 +130,7 @@
 
 <script src="products.js"></script>
 <script src="cart.js"></script>
-<script src="main.js?v=2"></script>
+<script src="main.js?v=3"></script>
 <script>
   renderHeader();
   renderFooter();
@@ -158,8 +175,20 @@
   if (loggedUser) {
     if (loggedUser.fullname) document.getElementById('fullname').value = loggedUser.fullname;
     if (loggedUser.phone) document.getElementById('phone').value = loggedUser.phone;
-    if (loggedUser.address) document.getElementById('address').value = loggedUser.address;
+    if (loggedUser.street) document.getElementById('co-street').value = loggedUser.street;
   }
+
+  // Setup Cascaded Administrative Selectors
+  setupAddressCascading(
+    document.getElementById('co-city'),
+    document.getElementById('co-district'),
+    document.getElementById('co-ward'),
+    {
+      city: (loggedUser && loggedUser.city) ? loggedUser.city : 'TP. Hồ Chí Minh',
+      district: (loggedUser && loggedUser.district) ? loggedUser.district : 'Quận 1',
+      ward: (loggedUser && loggedUser.ward) ? loggedUser.ward : ''
+    }
+  );
 
   // Validation
   function validate() {
@@ -188,14 +217,18 @@
       errPhone.classList.remove('show');
     }
 
-    const address = document.getElementById('address').value.trim();
+    const city = document.getElementById('co-city').value;
+    const district = document.getElementById('co-district').value;
+    const ward = document.getElementById('co-ward').value;
+    const street = document.getElementById('co-street').value.trim();
     const errAddr = document.getElementById('err-address');
-    if (address.length < 10) {
-      document.getElementById('address').classList.add('error');
+
+    if (!city || !district || !ward || street.length < 3) {
+      document.getElementById('co-street').classList.add('error');
       errAddr.classList.add('show');
       ok = false;
     } else {
-      document.getElementById('address').classList.remove('error');
+      document.getElementById('co-street').classList.remove('error');
       errAddr.classList.remove('show');
     }
 
@@ -214,7 +247,7 @@
   document.getElementById('checkout-form').addEventListener('submit', e => {
     e.preventDefault();
     if (!validate()) {
-      showToast('Vui lòng kiểm tra lại thông tin!', 'error');
+      showToast('Vui lòng kiểm tra lại thông tin nhận hàng!', 'error');
       return;
     }
     // Generate order code
@@ -224,7 +257,11 @@
     // Save order to history
     const fullname = document.getElementById('fullname').value.trim();
     const phone = document.getElementById('phone').value.trim();
-    const address = document.getElementById('address').value.trim();
+    const city = document.getElementById('co-city').value;
+    const district = document.getElementById('co-district').value;
+    const ward = document.getElementById('co-ward').value;
+    const street = document.getElementById('co-street').value.trim();
+    const address = [street, ward, district, city].filter(Boolean).join(', ');
     const note = document.getElementById('note').value.trim();
     const sub = getSubtotal();
     const ship = getShipFee();
@@ -244,12 +281,9 @@
     };
     saveOrder(orderRecord);
 
-    // If user is logged in without address, auto save address
+    // Save or update address for logged-in user
     if (loggedUser) {
-      if (!loggedUser.address) {
-        loggedUser.address = address;
-        saveUser(loggedUser);
-      }
+      updateUserProfile({ fullname, phone, city, district, ward, street });
     }
 
     document.getElementById('success-modal').classList.add('show');
