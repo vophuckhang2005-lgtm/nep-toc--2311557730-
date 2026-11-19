@@ -589,7 +589,7 @@ function handleWishlist(id, btn) {
 // ── Angle 1: Unique High-Craft Product Illustrations or Real Photos ──
 function productVisualSVG(p, size = 84) {
   if (p && p.image) {
-    return `<img src="${p.image}" alt="${p.name}" class="product-real-img" loading="lazy" style="width:100%; height:100%; object-fit:cover; border-radius:inherit; display:block;" />`;
+    return `<img src="${p.image}" alt="${p.name}" class="product-real-img" loading="lazy" style="width:100%; height:100%; object-fit:contain; padding:12px; box-sizing:border-box; border-radius:inherit; display:block;" />`;
   }
   const id = Number(p.id);
   const bg = p.cardBg || '#fefae0';
@@ -712,7 +712,7 @@ function productVisualSVG(p, size = 84) {
 // ── Angle 2: Secondary View / Răng Kẹp & Chi Tiết Lò Xo or Real Photo Angle ──
 function productVisualSecondarySVG(p, size = 88) {
   if (p && p.hoverImage) {
-    return `<img src="${p.hoverImage}" alt="${p.name} chi tiết" class="product-real-img" loading="lazy" style="width:100%; height:100%; object-fit:cover; border-radius:inherit; display:block;" />`;
+    return `<img src="${p.hoverImage}" alt="${p.name} chi tiết" class="product-real-img" loading="lazy" style="width:100%; height:100%; object-fit:contain; padding:12px; box-sizing:border-box; border-radius:inherit; display:block;" />`;
   }
   const ac = p.cardAccent || '#d6336c';
   return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">

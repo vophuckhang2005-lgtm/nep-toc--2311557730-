@@ -10,7 +10,7 @@
   <meta property="og:title" content="Chi tiết sản phẩm — Nếp Tóc"/>
   <meta property="og:description" content="Phụ kiện tóc cao cấp TP.HCM — Kẹp càng cua, kẹp mái thiết kế tối giản, vật liệu an toàn không gãy rụng nếp tóc."/>
   <meta property="og:image" content="favicon.svg"/>
-  <link rel="stylesheet" href="style.css?v=11"/>
+  <link rel="stylesheet" href="style.css?v=12"/>
 </head>
 <body>
 
@@ -45,9 +45,9 @@
 <div id="site-footer"></div>
 <div class="toast-container"></div>
 
-<script src="products.js?v=11"></script>
-<script src="cart.js?v=11"></script>
-<script src="main.js?v=11"></script>
+<script src="products.js?v=12"></script>
+<script src="cart.js?v=12"></script>
+<script src="main.js?v=12"></script>
 <script>
   // Safe helper fallbacks in case of script delay or partial load
   function safeFmt(n) {
@@ -87,7 +87,7 @@
     function getVisualLarge() {
       try {
         if (p && p.image) {
-          return '<img src="' + p.image + '" id="detail-main-img" alt="' + p.name + '" style="width:100%; height:100%; object-fit:cover; border-radius:inherit; display:block; transition:opacity 0.2s ease;" />';
+          return '<img src="' + p.image + '" id="detail-main-img" alt="' + p.name + '" style="width:100%; height:100%; object-fit:contain; padding:16px; box-sizing:border-box; border-radius:inherit; display:block; transition:opacity 0.2s ease;" />';
         }
         if (typeof productVisualSVG === 'function') {
           return productVisualSVG(p, 200);
