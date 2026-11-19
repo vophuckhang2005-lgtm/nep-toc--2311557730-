@@ -4394,48 +4394,87 @@ body.has-sticky-atc .floating-contact {
 }
 
 
-/* ── Trust Badges & Guarantees (Apple & Emi Jay standard) ── */
-.trust-badges-box {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+/* ── Minimalist Product Disclosures (Accordion — Apple standard) ── */
+.product-disclosures {
   margin-top: 24px;
-  padding: 18px;
-  background: var(--apple-surface-secondary);
-  border: 1px solid var(--apple-border-light);
-  border-radius: var(--radius-md);
+  border-top: 1px solid var(--apple-border-light, #E5E5EA);
+  border-bottom: 1px solid var(--apple-border-light, #E5E5EA);
 }
 
-.trust-badge-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
+.disclosure-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.trust-badge-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: #ffffff;
+.disclosure-item:last-child {
+  border-bottom: none;
+}
+
+.disclosure-header {
+  width: 100%;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding: 13px 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--apple-black, #1D1D1F);
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+.disclosure-header:hover {
+  color: var(--accent-rose, #d6336c);
+}
+
+.disclosure-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: -0.01em;
+}
+
+.disclosure-chevron {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
+  width: 22px;
+  height: 22px;
+  color: var(--apple-secondary, #86868B);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
   flex-shrink: 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
-  color: var(--apple-black);
 }
 
-.trust-badge-title {
+.disclosure-item.open .disclosure-chevron {
+  transform: rotate(180deg);
+  color: var(--apple-black, #1D1D1F);
+}
+
+.disclosure-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+  opacity: 0;
+}
+
+.disclosure-item.open .disclosure-body {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.disclosure-inner {
+  overflow: hidden;
+}
+
+.disclosure-content {
+  padding: 0 0 14px 0;
   font-size: 13px;
-  font-weight: 700;
-  color: var(--apple-black);
-  margin-bottom: 2px;
-}
-
-.trust-badge-sub {
-  font-size: 11.5px;
-  color: var(--apple-secondary);
-  line-height: 1.35;
+  line-height: 1.65;
+  color: var(--apple-secondary, #666668);
 }
 
 /* Hair Fit Badge */
@@ -4535,10 +4574,6 @@ body.has-sticky-atc .floating-contact {
 }
 
 @media (max-width: 600px) {
-  .trust-badges-box {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
   .sticky-atc-bar {
     padding: 10px 16px;
   }

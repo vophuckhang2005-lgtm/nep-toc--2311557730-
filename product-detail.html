@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8"/>
@@ -10,7 +10,7 @@
   <meta property="og:title" content="Chi tiết sản phẩm — Nếp Tóc"/>
   <meta property="og:description" content="Phụ kiện tóc cao cấp TP.HCM — Kẹp càng cua, kẹp mái thiết kế tối giản, vật liệu an toàn không gãy rụng nếp tóc."/>
   <meta property="og:image" content="favicon.svg"/>
-  <link rel="stylesheet" href="style.css?v=20"/>
+  <link rel="stylesheet" href="style.css?v=22"/>
 </head>
 <body>
 
@@ -45,9 +45,9 @@
 <div id="site-footer"></div>
 <div class="toast-container"></div>
 
-<script src="products.js?v=20"></script>
-<script src="cart.js?v=20"></script>
-<script src="main.js?v=20"></script>
+<script src="products.js?v=22"></script>
+<script src="cart.js?v=22"></script>
+<script src="main.js?v=22"></script>
 <script>
   // Safe helper fallbacks in case of script delay or partial load
   function safeFmt(n) {
@@ -251,51 +251,76 @@
               <button class="btn-add-detail" id="btn-add-detail">Thêm vào giỏ hàng</button>
             </div>
 
-            <div class="trust-badges-box">
-              <div class="trust-badge-item">
-                <div class="trust-badge-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                </div>
-                <div>
-                  <div class="trust-badge-title">Lò xo thép Titan trợ lực</div>
-                  <div class="trust-badge-sub">Bảo hành 1 đổi 1 trong 30 ngày nếu gãy lò xo</div>
-                </div>
-              </div>
-              <div class="trust-badge-item">
-                <div class="trust-badge-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-                </div>
-                <div>
-                  <div class="trust-badge-title">Cellulose Acetate bóng mịn</div>
-                  <div class="trust-badge-sub">Chất liệu tự nhiên cao cấp, không gây đứt nếp tóc</div>
+            <div class="product-disclosures">
+              <div class="disclosure-item">
+                <button class="disclosure-header" onclick="toggleDisclosure(this)" aria-expanded="false">
+                  <span class="disclosure-title">Đồng kiểm tận tay khi nhận hàng</span>
+                  <span class="disclosure-chevron">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </button>
+                <div class="disclosure-body">
+                  <div class="disclosure-inner">
+                    <div class="disclosure-content">
+                      Khi shipper giao đến, bạn luôn được mở gói hàng kiểm tra màu sắc, ngắm độ bóng và kẹp thử lên tóc ưng ý mới thanh toán tiền mặt (COD). Nếu chưa vừa ý, bạn chỉ cần gửi lại shipper 0đ mà không mất bất kỳ khoản phí nào.
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="trust-badge-item">
-                <div class="trust-badge-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                </div>
-                <div>
-                  <div class="trust-badge-title">Giao nhanh 24h TP.HCM</div>
-                  <div class="trust-badge-sub">Nội thành TP.HCM • Miễn phí đơn từ 99.000đ</div>
+
+              <div class="disclosure-item">
+                <button class="disclosure-header" onclick="toggleDisclosure(this)" aria-expanded="false">
+                  <span class="disclosure-title">Đổi mới dịu êm trong 07 ngày</span>
+                  <span class="disclosure-chevron">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </button>
+                <div class="disclosure-body">
+                  <div class="disclosure-inner">
+                    <div class="disclosure-content">
+                      Nếu chiếc kẹp chưa thật sự vừa với độ dày tóc của bạn hoặc bạn muốn đổi sang một gam màu khác, Nếp Tóc sẵn sàng đổi mới trong 7 ngày. Shipper giao mẫu mới tận nhà và nhận lại kẹp cũ, bạn không cần phải ra bưu cục.
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="trust-badge-item">
-                <div class="trust-badge-icon">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+
+              <div class="disclosure-item">
+                <button class="disclosure-header" onclick="toggleDisclosure(this)" aria-expanded="false">
+                  <span class="disclosure-title">Cốt lò xo trợ lực — Bảo hành 30 ngày</span>
+                  <span class="disclosure-chevron">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </button>
+                <div class="disclosure-body">
+                  <div class="disclosure-inner">
+                    <div class="disclosure-content">
+                      Cốt lò xo trợ lực được gia công bền bỉ trên 10.000 lần gập mở. Trong 30 ngày sử dụng, nếu lò xo bị lỏng, bật chốt hoặc giảm độ bám, Nếp Tóc đổi ngay 1 chiếc kẹp mới 100% hoàn toàn miễn phí.
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <div class="trust-badge-title">Đồng kiểm & Đổi trả 7 ngày</div>
-                  <div class="trust-badge-sub">Kiểm tra ưng ý mới thanh toán tiền mặt (COD)</div>
+              </div>
+
+              <div class="disclosure-item">
+                <button class="disclosure-header" onclick="toggleDisclosure(this)" aria-expanded="false">
+                  <span class="disclosure-title">Đóng gói quà tặng & Giao nhanh 24h</span>
+                  <span class="disclosure-chevron">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                  </span>
+                </button>
+                <div class="disclosure-body">
+                  <div class="disclosure-inner">
+                    <div class="disclosure-content">
+                      Mỗi chiếc kẹp đều được bọc giấy nến lụa chống trầy và đặt trong hộp cứng bảo vệ. Giao nhanh 1–2 ngày tại TP.HCM và miễn phí toàn bộ phí vận chuyển cho đơn hàng từ 99.000₫.
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="detail-specs" style="margin-top:24px;">
+            <div class="detail-specs" style="margin-top:20px;">
               <p><strong>Chất liệu:</strong> ${p.material}</p>
               <p><strong>Thông số:</strong> ${p.spec}</p>
               <p><strong>Nhóm:</strong> ${p.categoryName}</p>
-              <p><strong>Giao hàng:</strong> 1–2 ngày tại TP.HCM • Miễn ship đơn 99k</p>
-              <p><strong>Đổi trả:</strong> 7 ngày nếu lỗi từ nhà sản xuất</p>
             </div>
           </div>
         </div>
@@ -512,6 +537,26 @@
   } else {
     initDetailPage();
   }
+
+  window.toggleDisclosure = function(btn) {
+    const item = btn.closest('.disclosure-item');
+    if (!item) return;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.disclosure-item').forEach(function(el) {
+      if (el !== item) {
+        el.classList.remove('open');
+        const b = el.querySelector('.disclosure-header');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      }
+    });
+    if (wasOpen) {
+      item.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  };
 
   function openImageLightbox() {
     const lb = document.getElementById('image-lightbox');
