@@ -26,7 +26,7 @@
   <!-- Search & Filter Toolbar -->
   <div class="products-toolbar">
     <div class="filter-bar" id="filter-bar">
-      <button class="filter-btn active" data-cat="all">Tất cả (10)</button>
+      <button class="filter-btn active" data-cat="all" id="btn-all">Tất cả</button>
       <button class="filter-btn" data-cat="claw">Kẹp Càng Cua</button>
       <button class="filter-btn" data-cat="clip-set">Kẹp Mái & Set</button>
     </div>
@@ -36,7 +36,7 @@
       <span class="search-icon">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </span>
-      <input type="text" id="search-input" class="search-input" placeholder="Tìm kẹp hoa sứ, ngọc trai, lông nhung..."/>
+      <input type="text" id="search-input" class="search-input" placeholder="Tìm kiếm kẹp xà cừ, hologram, jelly hoa nhí..."/>
     </div>
   </div>
 
@@ -63,6 +63,11 @@
 <script>
   renderHeader();
   renderFooter();
+
+  const allBtn = document.getElementById('btn-all');
+  if (allBtn && typeof PRODUCTS !== 'undefined') {
+    allBtn.textContent = `Tất cả (${PRODUCTS.length})`;
+  }
 
   let currentCat = 'all';
   let searchTerm = '';
