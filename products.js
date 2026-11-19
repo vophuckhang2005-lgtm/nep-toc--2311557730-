@@ -1,191 +1,7 @@
-// products.js — Nếp Tóc data store
+// products.js — Nếp Tóc data store (Chỉ bao gồm các sản phẩm thật từ Shopee)
 const PRODUCTS = [
   {
     id: 1,
-    name: "Kẹp Càng Cua Hoa Sứ Pastel",
-    shortName: "Hoa Sứ Pastel",
-    category: "claw",
-    categoryName: "Kẹp Càng Cua",
-    price: 29000,
-    originalPrice: 45000,
-    rating: 4.9,
-    reviewsCount: 142,
-    tag: "Bán chạy",
-    description: "Chất liệu Acrylic bóng mờ cao cấp, lò xo thép không gỉ 8 vòng chịu lực. Kẹp chắc mọi độ dày tóc mà không đau da đầu — xài cả ngày không lo tuột.",
-    longDesc: "Được thiết kế theo phong cách hoa sứ Pháp, từng đường nét đều toát lên sự dịu dàng nhưng không kém phần nổi bật. Chất liệu Acrylic mờ chống xước, giữ màu bền theo thời gian. Lò xo thép titan 8 vòng cho độ kẹp vừa đủ — không kéo đau, không để lại vết hằn.",
-    spec: "Chiều dài: 11.5cm • Trọng lượng: 28g",
-    material: "Acrylic mờ & Thép titan",
-    cardBg: "#FFE4EC",
-    cardAccent: "#FF3D7F",
-    swatches: [
-      { name: "Hồng phấn", color: "#ffccd5" },
-      { name: "Kem sữa", color: "#fff3bf" },
-      { name: "Trắng sứ", color: "#f1f3f5" }
-    ]
-  },
-  {
-    id: 2,
-    name: "Kẹp Càng Cua Kim Loại Tối Giản",
-    shortName: "Kim Loại Tối Giản",
-    category: "claw",
-    categoryName: "Kẹp Càng Cua",
-    price: 49000,
-    originalPrice: 75000,
-    rating: 5.0,
-    reviewsCount: 98,
-    tag: "Xu hướng",
-    description: "Đúc rỗng từ hợp kim mạ vàng champagne chống oxy hóa. Nhẹ, chắc, mặc được đủ kiểu — đi làm, đi chơi, đi date đều chill.",
-    longDesc: "Phong cách tối giản Hàn Quốc — ít chi tiết thừa, nhiều điểm nhấn thật. Hợp kim được đúc bằng khuôn nhiệt độ cao, bề mặt mạ champagne gold phủ bóng chống oxy hóa, giữ màu không xỉn trong 12 tháng. Phù hợp tóc dày đến 5cm.",
-    spec: "Chiều dài: 11.0cm • Trọng lượng: 35g",
-    material: "Hợp kim mạ Champagne Gold",
-    cardBg: "#FFF3CD",
-    cardAccent: "#E6A817",
-    swatches: [
-      { name: "Vàng Champagne", color: "#ffe066" },
-      { name: "Bạc Ánh Kim", color: "#ced4da" },
-      { name: "Vàng Hồng", color: "#fcc2d7" }
-    ]
-  },
-  {
-    id: 3,
-    name: "Kẹp Càng Cua Lông Nhung",
-    shortName: "Lông Nhung Mịn",
-    category: "claw",
-    categoryName: "Kẹp Càng Cua",
-    price: 39000,
-    originalPrice: 60000,
-    rating: 4.8,
-    reviewsCount: 76,
-    tag: "BST Mới",
-    description: "Bọc vải nhung lông cừu siêu mịn, ôm trọn lọn tóc dịu êm. Mùa lạnh hay phòng máy lạnh — chiếc kẹp giúp outfit nhìn sang xịn hẳn.",
-    longDesc: "Làm từ vải nhung lông cừu nhập khẩu, mịn tới mức chạm vào là mê. Khung bên trong là ABS cứng cáp, lò xo thép cao cấp giữ form kẹp bền. Màu nhuộm đạt chuẩn an toàn, không phai ra tóc. Phù hợp cho tóc dài uốn xoăn hoặc tóc thẳng dày.",
-    spec: "Chiều dài: 12.0cm • Trọng lượng: 30g",
-    material: "Lông nhung mịn & Khung ABS",
-    cardBg: "#FCEEF5",
-    cardAccent: "#C2255C",
-    swatches: [
-      { name: "Nâu Mocha", color: "#d4a373" },
-      { name: "Trắng Kem", color: "#fefae0" },
-      { name: "Hồng Khói", color: "#e8b4b8" }
-    ]
-  },
-  {
-    id: 4,
-    name: "Kẹp Càng Cua Vân Đá Marble",
-    shortName: "Vân Đá Marble",
-    category: "claw",
-    categoryName: "Kẹp Càng Cua",
-    price: 59000,
-    originalPrice: 89000,
-    rating: 5.0,
-    reviewsCount: 165,
-    tag: "Limited",
-    description: "Vân đá cẩm thạch thủ công — mỗi chiếc một vân khác nhau, không có cái nào giống cái nào. Hiếm. Đẹp. Chất.",
-    longDesc: "Làm từ Cellulose Acetate sinh học — loại nguyên liệu cao cấp nhất trong ngành phụ kiện tóc, bền gấp 3 lần nhựa thông thường và thân thiện với môi trường hơn. Vân đá được tạo thủ công trong quá trình ép nóng, đảm bảo mỗi chiếc là một bản độc bản. Không có hai chiếc giống nhau.",
-    spec: "Chiều dài: 10.5cm • Trọng lượng: 32g",
-    material: "Cellulose Acetate sinh học",
-    cardBg: "#E8F4FD",
-    cardAccent: "#2563EB",
-    swatches: [
-      { name: "Hổ phách", color: "#c08552" },
-      { name: "Cẩm thạch ngọc", color: "#84a98c" },
-      { name: "Đá mắt mèo", color: "#6c757d" }
-    ]
-  },
-  {
-    id: 5,
-    name: "Set 5 Kẹp Tăm Ngọc Trai",
-    shortName: "Set Ngọc Trai",
-    category: "clip-set",
-    categoryName: "Kẹp Mái & Set",
-    price: 49000,
-    originalPrice: 69000,
-    rating: 4.9,
-    reviewsCount: 210,
-    tag: "Yêu thích",
-    description: "Set 5 kẹp tăm đính hạt ngọc ánh xà cừ. Nhỏ nhưng sang — cài vào tóc bím hay búi đều lên hình triệu triệu.",
-    longDesc: "Mỗi hạt ngọc được đính tay từng chiếc, ánh xà cừ tự nhiên dưới ánh sáng flash. Thân kẹp bằng hợp kim mạ vàng 18K siêu mỏng (1.5mm), dễ cài vào từng lọn tóc nhỏ. Set đi kèm túi organza xinh để tặng bạn bè hay bảo quản.",
-    spec: "Bộ gồm 5 chiếc • Chiều dài: 7.0cm",
-    material: "Ngọc trai nhân tạo & Hợp kim mạ vàng",
-    cardBg: "#F3EEFF",
-    cardAccent: "#7950F2",
-    swatches: [
-      { name: "Ngọc trai trắng", color: "#f8f9fa" },
-      { name: "Ngọc ánh kim", color: "#ffe066" },
-      { name: "Xà cừ tím nhạt", color: "#eebefa" }
-    ]
-  },
-  {
-    id: 6,
-    name: "Set 3 Kẹp Nơ Lụa Satin",
-    shortName: "Nơ Lụa Satin",
-    category: "clip-set",
-    categoryName: "Kẹp Mái & Set",
-    price: 45000,
-    originalPrice: 65000,
-    rating: 4.9,
-    reviewsCount: 115,
-    tag: "Độc quyền",
-    description: "Lụa Satin mềm mịn, nơ phồng tự nhiên, đuôi nơ rũ chuyển động từng bước chân. Set 3 màu mix được hết — cài sáng, cài tối, cài đi học đi chơi.",
-    longDesc: "Dải lụa được cắt theo góc 45° để nơ phồng đều và không bị xẹp theo thời gian. Khung kẹp mỏ vịt bằng thép lò xo giữ nơ cố định suốt ngày dài. Có thể giặt tay nhẹ nhàng với nước lạnh, phơi khô tự nhiên — tóc đẹp, nơ cũng bền.",
-    spec: "Bộ gồm 3 chiếc nơ • Bản rộng: 8.0cm",
-    material: "Lụa Satin dệt kim & Xương kẹp mỏ vịt",
-    cardBg: "#FFF0F6",
-    cardAccent: "#C2255C",
-    swatches: [
-      { name: "Đỏ Rượu Vang", color: "#9c36b5" },
-      { name: "Đen Huyền Bí", color: "#343a40" },
-      { name: "Hồng Pastel", color: "#f783ac" }
-    ]
-  },
-  {
-    id: 7,
-    name: "Kẹp Bấm Giọt Nước Men Sứ",
-    shortName: "Men Sứ Giọt Nước",
-    category: "clip-set",
-    categoryName: "Kẹp Mái & Set",
-    price: 25000,
-    originalPrice: 39000,
-    rating: 4.8,
-    reviewsCount: 64,
-    tag: "Thiết yếu",
-    description: "Hình giọt nước phủ men sứ mịn lì, cài mái đẹp cả ngày không lo tuột. Giá ngon, chất tốt — staple piece trong hộp kẹp của mọi nàng.",
-    longDesc: "Men sứ được nung ở nhiệt độ cao, chống trầy xước và chống phai màu vượt trội so với sơn thông thường. Thép lò xo bên trong đạt độ cứng Rockwell 45HRC, kẹp mái giữ chắc dù tóc dày đến 3cm. Mỗi chiếc được kiểm tra độ bền bật đóng mở 10.000 lần trước khi xuất xưởng.",
-    spec: "Chiều dài: 6.8cm • Trọng lượng: 12g",
-    material: "Thép lò xo tráng men cao cấp",
-    cardBg: "#E6FCF5",
-    cardAccent: "#0CA678",
-    swatches: [
-      { name: "Xanh Mint", color: "#63e6be" },
-      { name: "Vàng Bơ", color: "#ffe066" },
-      { name: "Tím Oải Hương", color: "#d0bfff" }
-    ]
-  },
-  {
-    id: 8,
-    name: "Set 10 Kẹp Mini Hoa Cúc Nhí",
-    shortName: "Hoa Cúc Nhí",
-    category: "clip-set",
-    categoryName: "Kẹp Mái & Set",
-    price: 39000,
-    originalPrice: 55000,
-    rating: 5.0,
-    reviewsCount: 189,
-    tag: "Set tiết kiệm",
-    description: "10 đóa hoa cúc nhí 10 màu pastel — tha hồ cài bím, cài búi, cài nửa đầu. Nhiều màu cài mỗi ngày một kiểu, không bao giờ chán.",
-    longDesc: "Nhựa resin hoa nổi 3D tạo chiều sâu cho từng cánh hoa — chụp ảnh flat lay hay selfie đều lên hình siêu đẹp. Màu pastel được pha trộn theo bảng màu mùa hè Hàn Quốc 2026. Hộp mica trong suốt đi kèm vừa để đựng vừa để trưng bày. Phù hợp tóc dày từ 1–3cm.",
-    spec: "Hộp mica 10 chiếc • Kích thước: 2.2cm/chiếc",
-    material: "Nhựa resin hoa nổi 3D",
-    cardBg: "#F4FCE3",
-    cardAccent: "#74B816",
-    swatches: [
-      { name: "Pastel Mix", color: "#ffc9c9" },
-      { name: "Hoa Cúc Trắng", color: "#ffffff" },
-      { name: "Vàng Hướng Dương", color: "#ffe066" }
-    ]
-  },
-  {
-    id: 9,
     name: "Kẹp Càng Cua Cá Mập Acetate Vân Xà Cừ Phong Cách Pháp (8cm)",
     shortName: "Cá Mập Xà Cừ Pháp",
     category: "claw",
@@ -197,7 +13,6 @@ const PRODUCTS = [
     tag: "Pháp Vintage",
     variantType: "color",
     variantLabel: "Màu sắc ánh xà cừ",
-    hoverHint: "Chuyển màu ánh xà cừ tự nhiên",
     description: "Kẹp càng cua cá mập vòm tròn phong cách Pháp thanh lịch. Chế tác từ Cellulose Acetate cao cấp ánh xà cừ ngọc trai đa sắc, ôm giữ tóc êm ái suốt ngày dài.",
     longDesc: "Dáng kẹp cá mập vòm tròn kinh điển phong cách tiểu thư Pháp, chế tác từ vật liệu Cellulose Acetate nguyên bản cao cấp. Bề mặt phủ vân xà cừ ngọc trai chuyển màu quang học tự nhiên lấp lánh dưới ánh nắng. Lò xo kim loại mạ vàng chống gỉ trợ lực êm ái, bám giữ chắc chắn tóc dày (kẹp nửa đầu) hoặc tóc vừa và mỏng (kẹp trọn nếp) mà không gây cộm, gãy nếp hay đau chân tóc.",
     spec: "Chiều dài: 8.0cm • Trọng lượng: 24g • Độ mở ngàm: 5.5cm",
@@ -205,7 +20,7 @@ const PRODUCTS = [
     cardBg: "#FAF8F5",
     cardAccent: "#C59B6D",
     image: "images/products/kep-ca-map-phap-trang.jpg",
-    hoverImage: "images/products/kep-ca-map-phap-hong.jpg",
+    hoverImage: "images/products/kep-ca-map-phap-trang-angle.jpg",
     swatches: [
       { name: "Trắng Sữa Xà Cừ", image: "images/products/kep-ca-map-phap-trang.jpg", color: "#f8f9fa" },
       { name: "Hồng Thạch Anh", image: "images/products/kep-ca-map-phap-hong.jpg", color: "#f7cad0" },
@@ -216,7 +31,7 @@ const PRODUCTS = [
     ]
   },
   {
-    id: 10,
+    id: 2,
     name: "Kẹp Càng Cua Dáng Sóng Mây Hologram Phantom JOJO COCO (9cm)",
     shortName: "Sóng Mây JOJO COCO",
     category: "claw",
@@ -228,7 +43,6 @@ const PRODUCTS = [
     tag: "Bán chạy",
     variantType: "color",
     variantLabel: "Màu sắc Phantom Hologram",
-    hoverHint: "Vân sóng mây loang màu đa chiều",
     description: "Dáng kẹp lượn sóng viền mây phong cách Hàn Quốc của JOJO COCO. Bề mặt phủ men bóng vân Phantom Hologram đổi màu ngũ sắc độc bản, ôm giữ lọn tóc êm ái.",
     longDesc: "Dòng kẹp càng cua dáng sóng mây Cloud Wavy đặc trưng từ thương hiệu JOJO COCO, chế tác từ Acrylic Resin tráng men ngọc giả Acetate cao cấp. Bề mặt sở hữu hiệu ứng Phantom Hologram đổi màu theo từng góc nghiêng của ánh sáng tự nhiên. Răng kẹp bo tròn nhẵn mịn, lò xo thép trợ lực đàn hồi cao, giữ chắc mái tóc từ tóc vừa đến tóc dày mà không gây đau da đầu hay gấp gãy nếp tóc.",
     spec: "Chiều dài: ~8.8cm • Bản cao: ~4.8cm • Trọng lượng: 26g",
@@ -236,13 +50,42 @@ const PRODUCTS = [
     cardBg: "#F6F7F9",
     cardAccent: "#4A6FA5",
     image: "images/products/kep-song-jojo-hong.jpg",
-    hoverImage: "images/products/kep-song-jojo-xanh.jpg",
+    hoverImage: "images/products/kep-song-jojo-hong-angle.jpg",
     swatches: [
       { name: "Hồng Thạch Anh", image: "images/products/kep-song-jojo-hong.jpg", color: "#f7cad0" },
       { name: "Trắng Ánh Ngọc Trai", image: "images/products/kep-song-jojo-trang.jpg", color: "#f8f9fa" },
       { name: "Xanh Biển Nguyệt Quang", image: "images/products/kep-song-jojo-xanh.jpg", color: "#cbe3fb" },
       { name: "Xanh Bơ Matcha", image: "images/products/kep-song-jojo-xanh-bo.jpg", color: "#d8f3dc" },
       { name: "Tím Khói Lilac", image: "images/products/kep-song-jojo-tim.jpg", color: "#e3d5ff" }
+    ]
+  },
+  {
+    id: 3,
+    name: "Kẹp Mái Bấm Clear Jelly Hoa Nhí Hình Bầu Dục Phong Cách Pháp (6cm)",
+    shortName: "Clear Jelly Hoa Nhí",
+    category: "clip-set",
+    categoryName: "Kẹp Mái & Kẹp Bấm",
+    price: 15700,
+    originalPrice: 24000,
+    rating: 5.0,
+    reviewsCount: 158,
+    tag: "BST Mới",
+    variantType: "color",
+    variantLabel: "Màu sắc hoa nhí Jelly",
+    description: "Kẹp mái bấm oval trong suốt Clear Jelly in hoa nhí Pháp xinh xắn. Khung kẹp mỏ vịt kim loại chống gỉ bám chắc tóc mái nhẹ nhàng không để lại vết hằn.",
+    longDesc: "Thiết kế kẹp bấm dáng bầu dục thon gọn chuẩn phong cách Ins Hàn Quốc & Pháp ngọt ngào. Lớp vỏ Acrylic Jelly trong suốt cao cấp bọc họa tiết hoa nhí vintage sắc nét, chống ố vàng và chống trầy xước. Khung bấm bằng hợp kim đàn hồi cao cấp, bấm êm ái, bám giữ tóc con và tóc mái suốt ngày dài mà không làm đau da đầu hay xẹp nếp tóc.",
+    spec: "Chiều dài: 6.0cm • Chiều rộng: 2.2cm • Trọng lượng: 12g",
+    material: "Clear Jelly Resin trong suốt hoa nhí & Hợp kim mạ chống gỉ",
+    cardBg: "#FFF9FA",
+    cardAccent: "#F27D9B",
+    image: "images/products/kep-jelly-hoa-hong.jpg",
+    hoverImage: "images/products/kep-jelly-hoa-hong-angle.jpg",
+    swatches: [
+      { name: "Hồng Pastel Thạch Anh", image: "images/products/kep-jelly-hoa-hong.jpg", color: "#f7cad0" },
+      { name: "Trắng Trong Suốt", image: "images/products/kep-jelly-hoa-trang.jpg", color: "#f8f9fa" },
+      { name: "Tím Mộng Mơ Lilac", image: "images/products/kep-jelly-hoa-tim.jpg", color: "#e3d5ff" },
+      { name: "Xanh Biển Pastel", image: "images/products/kep-jelly-hoa-xanh.jpg", color: "#cbe3fb" },
+      { name: "Xanh Bơ Matcha", image: "images/products/kep-jelly-hoa-vang.jpg", color: "#d8f3dc" }
     ]
   }
 ];
