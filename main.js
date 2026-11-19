@@ -1008,15 +1008,15 @@ function updateAccountUI() {
 const STYLIST_KNOWLEDGE = [
   {
     keys: ['khac', 'laser', 'ten', 'chu', 'chu ky', 'ky niem', 'ca nhan hoa', 'bespoke', 'studio'],
-    reply: 'Nếp Tóc tặng **miễn phí 100% dịch vụ khắc laser vi tính** lên kẹp càng cua cho mọi đơn hàng. Công nghệ laser độ sâu 0.15mm không phai mờ, bạn có thể khắc tên riêng, ngày kỷ niệm hoặc lời chúc ý nghĩa (tối đa 15 ký tự). Bạn có thể bấm vào mục **"Khắc tên laser"** trên trang chủ hoặc trang sản phẩm để xem trước mẫu khắc nhé!'
+    reply: 'Nếp Tóc hiện tập trung toàn bộ vào chất lượng gia công cao cấp của phôi kẹp Cellulose Acetate nguyên bản và cốt lò xo trợ lực bền bỉ trên 10.000 lần mở. Tiệm không triển khai khắc laser để giữ trọn vẹn độ bóng mịn và cấu trúc vật liệu hữu cơ của phôi kẹp ạ.'
   },
   {
     keys: ['day', 'nhieu', 'dai', 'xoan', 'lon', 'bong benh', 'bui to'],
-    reply: 'Với tóc dày, dài hoặc uốn xoăn bồng bềnh, bạn nên chọn kẹp càng cua cỡ lớn 11cm – 12cm như **Kẹp Càng Cua Kim Loại Tối Giản (65k)** hoặc **Kẹp Càng Cua Lông Nhung (55k)**. Cốt lò xo thép titan 8 vòng trợ lực sẽ ôm trọn và giữ chắc nếp tóc suốt ngày mà không tuột hay đau da đầu.'
+    reply: 'Với tóc dày, dài hoặc búi củ tỏi lớn, bạn nên chọn kẹp càng cua cỡ đại như **Kẹp Càng Cua Đại Acetate Đồi Mồi Parisian Chic (10.5cm - 38k)** hoặc **Kẹp Càng Cua Sóng Mây JOJO COCO (9cm - 32.5k)**. Cốt lò xo thép trợ lực đàn hồi cao sẽ ôm trọn và giữ chắc nếp tóc suốt ngày dài mà không đau chân tóc.'
   },
   {
     keys: ['mong', 'ngan', 'it', 'to', 'yeu', 'tuot', 'nhe'],
-    reply: 'Với tóc mỏng, tóc ngắn ngang vai hoặc tóc tơ trơn mềm, gợi ý tốt nhất là **Kẹp Càng Cua Hoa Sứ Pastel (45k)** hoặc các **Set kẹp mái ngọc trai**. Thiết kế răng kẹp khít và chất liệu mài bóng mờ bám tóc rất êm, không gây nặng đầu hay để lại vết hằn gãy nếp.'
+    reply: 'Với tóc mỏng, tóc ngắn hoặc kẹp mái tạo kiểu, gợi ý tốt nhất là **Kẹp Cá Mập Acetate Xà Cừ Phong Cách Pháp (8cm - 18.5k)** hoặc **Kẹp Mái Bấm Clear Jelly Hoa Nhí (15.7k)**. Thiết kế nhẹ tênh và răng kẹp bo tròn bám tóc rất êm, không gây tuột hay hằn nếp tóc.'
   },
   {
     keys: ['ship', 'giao', 'freeship', 'phi', 'van chuyen', 'bao lau', 'nhanh', '24h'],
@@ -1024,11 +1024,11 @@ const STYLIST_KNOWLEDGE = [
   },
   {
     keys: ['kiem tra', 'xem hang', 'dong kiem', 'cod', 'thanh toan', 'tien mat', 'chuyen khoan', 'tra tien'],
-    reply: 'Bạn hoàn toàn yên tâm vì Nếp Tóc áp dụng **Đồng kiểm 100%**: Khi shipper giao đến, bạn được mở hộp kiểm tra đúng mẫu, đúng màu sắc và đúng tên khắc laser rồi mới thanh toán tiền mặt (COD). Bạn hài lòng mới trả tiền nhé!'
+    reply: 'Bạn hoàn toàn yên tâm vì Nếp Tóc áp dụng **Đồng kiểm 100%**: Khi shipper giao đến, bạn được mở hộp kiểm tra đúng mẫu mã, màu sắc và kẹp thử lên tóc ưng ý mới thanh toán tiền mặt (COD). Nếu chưa vừa ý, bạn gửi lại shipper 0đ mà không mất bất kỳ khoản phí nào!'
   },
   {
     keys: ['bao hanh', 'doi tra', 'gay', 'lo xo', 'hong', 'loi', 'ben', 'hu'],
-    reply: 'Nếp Tóc cam kết chất lượng chuẩn: **Bảo hành lò xo 30 ngày** (1 đổi 1 miễn phí nếu lò xo bị gãy) và **Đổi mới trong 7 ngày** nếu có lỗi từ nhà sản xuất hoặc khắc sai thông tin. Bạn chỉ cần nhắn tiệm là có shipper đổi tận nơi ngay!'
+    reply: 'Nếp Tóc cam kết: **Bảo hành lò xo 30 ngày** (đổi mới 1-1 miễn phí nếu lò xo bị lỏng hay gãy) và **Đổi mới dịu êm trong 7 ngày tận nhà** nếu muốn đổi size hay đổi màu khác. Shipper giao kẹp mới tận nơi và nhận lại kẹp cũ, bạn không cần ra bưu cục.'
   },
   {
     keys: ['hop', 'qua', 'tang', 'thiep', 'no', 'sinh nhat', 'ban gai', 'nguoi yeu', 'ky niem'],
@@ -1040,11 +1040,11 @@ const STYLIST_KNOWLEDGE = [
   },
   {
     keys: ['chat lieu', 'nhua', 'kim loai', 'acetate', 'titan', 'gi', 'set', 'oxy hoa'],
-    reply: 'Kẹp Nếp Tóc được đúc từ **Cellulose Acetate sinh học** (chất liệu cao cấp chống va đập, bóng mịn) và **Hợp kim mạ Champagne Gold** phủ nano chống oxy hóa, không phai màu hay gỉ sét. Lò xo thép titan 8 vòng kẹp êm ái, độ bền trên 2 năm sử dụng thường xuyên.'
+    reply: 'Kẹp Nếp Tóc được chế tác từ **Cellulose Acetate sinh học** (chất liệu cao cấp chống va đập, bóng mịn nguồn gốc sợi thực vật) và **Hợp kim / thép trợ lực** phủ nano chống oxy hóa, không phai màu hay gỉ sét. Lò xo đàn hồi êm ái, độ bền trên 10.000 lần gập mở.'
   },
   {
     keys: ['mau', 'ton da', 'phoi', 'outfit', 'da ngam', 'da sang', 'hop da'],
-    reply: 'Gợi ý chọn màu tôn da: Tông **Vàng Champagne** và **Trắng sứ** hợp mọi làn da, giúp gương mặt sáng rạng rỡ. Tông **Hổ phách** và **Hồng phấn** mang nét thanh lịch, ngọt ngào rất dễ phối đồ đi làm công sở lẫn cafe cuối tuần.'
+    reply: 'Gợi ý chọn màu tôn da: Tông **Trắng Sữa Xà Cừ** và **Đồi Mồi Classic** hợp mọi màu da và outfit công sở. Tông **Hồng Thạch Anh**, **Xanh Pastel** và **Sweetheart Pha Lê** mang nét ngọt ngào chuẩn tiểu thư Pháp đi cafe cuối tuần.'
   },
   {
     keys: ['cach kep', 'kieu toc', 'bui', 'bui cu toi', 'nua dau', 'tao kieu'],
@@ -1052,11 +1052,11 @@ const STYLIST_KNOWLEDGE = [
   },
   {
     keys: ['khuyen mai', 'giam gia', 'voucher', 'ma', 'sale', 'uu dai', 'bot'],
-    reply: 'Hiện Nếp Tóc đang áp dụng các ưu đãi: Tặng 100% công khắc laser trị giá 50k, Miễn phí giao hàng đơn từ 99k, và Tặng kèm hộp bảo quản cho từng chiếc kẹp. Giá hiển thị trên web đã là giá ưu đãi tốt nhất rồi ạ!'
+    reply: 'Hiện Nếp Tóc đang áp dụng các ưu đãi: Miễn phí giao hàng đơn từ 99k, Đồng kiểm tận tay trước khi trả tiền COD, và Đổi mới tận nhà 7 ngày. Từng chiếc kẹp đều được bọc giấy nến lụa và đóng trong hộp cứng kraft như một món quà.'
   },
   {
     keys: ['chao', 'hello', 'hi', 'alo', 'oi', 'ad', 'shop oi'],
-    reply: 'Chào bạn! Mình có thể giúp gì cho bạn hôm nay ạ? Bạn cần tìm kẹp cho chất tóc nào hoặc cần tư vấn khắc tên laser, cứ nhắn mình nhé!'
+    reply: 'Chào bạn! Mình là Stylist Nếp Tóc. Bạn cần tìm kẹp cho độ dày tóc nào hay phối cùng trang phục gì, cứ nhắn mình tư vấn ngay nhé!'
   },
   {
     keys: ['cam on', 'thank', 'tks', 'ok', 'oke', 'da', 'vang'],
