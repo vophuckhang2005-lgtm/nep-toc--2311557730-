@@ -141,7 +141,6 @@ function renderFooter() {
           <a href="about.html">Về chúng tôi</a>
           <a href="policy.html">Chính sách bảo hành</a>
           <a href="contact.html">Liên hệ cửa hàng</a>
-          <a href="studio.html">Khắc tên laser theo yêu cầu</a>
           <a href="account.html">Tài khoản & Đơn hàng</a>
         </div>
         <div class="footer-col">
@@ -193,14 +192,13 @@ function renderFloatingHelp() {
       <div class="live-chat-body" id="live-chat-messages">
         <div class="chat-bubble-row bot">
           <div class="chat-bubble">
-            Xin chào! Mình là Stylist của Nếp Tóc. Bạn cần tư vấn chọn kẹp cho chất tóc, dịch vụ khắc tên laser hay phí giao hàng cứ nhắn mình nhé!
+            Xin chào! Mình là Stylist của Nếp Tóc. Bạn cần tư vấn chọn kẹp cho chất tóc, độ dài hay phí giao hàng cứ nhắn mình nhé!
           </div>
           <span class="chat-timestamp">Vừa xong</span>
         </div>
 
         <!-- Suggestion Chips (Horizontal Scrollable) -->
         <div class="chat-suggestion-chips" id="chat-suggestion-chips">
-          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Khắc tên laser lên kẹp như thế nào?')">Khắc tên laser</button>
           <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tóc dày & dài nên chọn kẹp nào?')">Tóc dày / Dài</button>
           <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tóc mỏng kẹp mẫu nào không bị tuột?')">Tóc mỏng / Ngắn</button>
           <button type="button" class="chat-chip-btn" onclick="sendChatChip('Phí giao hàng và thời gian nhận?')">Phí ship & Giao 24h</button>

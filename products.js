@@ -87,5 +87,60 @@ const PRODUCTS = [
       { name: "Xanh Biển Pastel", image: "images/products/kep-jelly-hoa-xanh.jpg", color: "#cbe3fb" },
       { name: "Xanh Bơ Matcha", image: "images/products/kep-jelly-hoa-vang.jpg", color: "#d8f3dc" }
     ]
+  },
+  {
+    id: 4,
+    name: "Kẹp Càng Cua Đại Acetate Đồi Mồi Parisian Chic (10.5cm) — Emi Jay Inspired",
+    shortName: "Càng Cua Đại Đồi Mồi",
+    category: "claw",
+    categoryName: "Kẹp Càng Cua",
+    price: 38000,
+    originalPrice: 55000,
+    rating: 5.0,
+    reviewsCount: 194,
+    tag: "Bán chạy",
+    variantType: "color",
+    variantLabel: "Họa tiết Acetate",
+    description: "Dáng kẹp đại 10.5cm kinh điển từ Emi Jay. Chế tác từ Cellulose Acetate vân đồi mồi Pháp hữu cơ, bản ngàm rộng ôm giữ trọn vẹn tóc dày và dài suốt ngày dài.",
+    longDesc: "Thiết kế kinh điển lấy cảm hứng từ dòng Big Effing Clip đình đám của Emi Jay (Los Angeles). Sản phẩm được chế tác thủ công từ chất liệu Cellulose Acetate nguồn gốc sợi thực vật sinh học thân thiện với môi trường, sở hữu độ dẻo dai cao, không giòn gãy như nhựa tái chế. Bản kẹp đại 10.5cm với 14 răng so le bo tròn nhẵn mịn kết hợp cùng lò xo thép mạ vàng trợ lực cao cấp, mang lại khả năng kẹp trọn vẹn búi tóc dày hoặc kẹp nửa đầu chuẩn phong cách Parisian Chic thanh lịch mà không làm đau chân tóc hay xẹp nếp.",
+    spec: "Chiều dài: 10.5cm • Bản cao: 5.0cm • Độ mở ngàm: 6.5cm • Trọng lượng: 38g • 14 răng kẹp",
+    material: "Cellulose Acetate vân đồi mồi Pháp & Lò xo thép mạ vàng chống gỉ",
+    cardBg: "#F9F6F0",
+    cardAccent: "#8B5A2B",
+    image: "images/products/kep-dai-doi-moi.jpg",
+    hoverImage: "images/products/kep-dai-doi-moi-angle.jpg",
+    swatches: [
+      { name: "Đồi Mồi Classic Tortoise", image: "images/products/kep-dai-doi-moi.jpg", color: "#8B5A2B" },
+      { name: "Đỏ Mận Bordeaux", image: "images/products/kep-dai-bordeaux.jpg", color: "#5E1924" },
+      { name: "Kem Bơ Buttercream", image: "images/products/kep-dai-buttercream.jpg", color: "#F5F2EB" }
+    ]
+  },
+  {
+    id: 5,
+    name: "Kẹp Càng Cua Sweetheart Đính Hoa & Pha Lê Thủ Công (8.5cm) — Emi Jay Inspired",
+    shortName: "Sweetheart Hoa & Pha Lê",
+    category: "claw",
+    categoryName: "Kẹp Càng Cua",
+    price: 42000,
+    originalPrice: 62000,
+    rating: 5.0,
+    reviewsCount: 215,
+    tag: "Bestseller Emi Jay",
+    variantType: "color",
+    variantLabel: "Màu sắc Sweetheart",
+    description: "Dáng kẹp vòm cánh bướm trái tim Emi Jay đình đám. Đính hoa 3D và pha lê nhũ thủ công lấp lánh, tôn vinh búi tóc lơi chuẩn tiểu thư Pháp.",
+    longDesc: "Mẫu kẹp càng cua Sweetheart Clip lừng danh làm mưa làm gió trong giới thời trang, xuất hiện cùng các nàng thơ phong cách Quiet Luxury. Thân kẹp uốn lượn hình trái tim mềm mại, bề mặt được đính hoa nổi 3D cùng những viên đá pha lê nhũ phản quang bắt sáng rạng rỡ. Ngàm kẹp 12 răng ôm vừa vặn búi củ tỏi Pháp lơi hay kẹp nửa đầu, lò xo trợ lực dịu êm giữ nếp chắc chắn mà không gây áp lực lên da đầu.",
+    spec: "Chiều dài: 8.5cm • Bản cao: 4.8cm • Độ mở ngàm: 5.5cm • Trọng lượng: 34g • 12 răng kẹp đính pha lê",
+    material: "Cellulose Acetate tráng men cao cấp, đính hoa 3D & Pha lê Swarovski nhân tạo",
+    cardBg: "#FFF7F9",
+    cardAccent: "#E28292",
+    image: "images/products/kep-sweetheart-pink.jpg",
+    hoverImage: "images/products/kep-sweetheart-pink-angle.jpg",
+    swatches: [
+      { name: "Hồng Angel Food", image: "images/products/kep-sweetheart-pink.jpg", color: "#FAD2E1" },
+      { name: "Kem Vani Vanilla Chai", image: "images/products/kep-sweetheart-vanilla.jpg", color: "#FDFBF7" },
+      { name: "Xanh Mây Dream Cloud", image: "images/products/kep-sweetheart-blue.jpg", color: "#CBE3FB" },
+      { name: "Nâu Socola Cocoa", image: "images/products/kep-sweetheart-cocoa.jpg", color: "#6F4E37" }
+    ]
   }
 ];
