@@ -183,5 +183,60 @@ const PRODUCTS = [
       { name: "Hoa Cúc Trắng", color: "#ffffff" },
       { name: "Vàng Hướng Dương", color: "#ffe066" }
     ]
+  },
+  {
+    id: 9,
+    name: "Set 8 Món Kẹp Tóc Cỡ Lớn Thời Trang Hàn Quốc",
+    shortName: "Set 8 Món Cỡ Lớn",
+    category: "clip-set",
+    categoryName: "Kẹp Mái & Set",
+    price: 70000,
+    originalPrice: 99000,
+    rating: 4.9,
+    reviewsCount: 682,
+    tag: "Bán chạy",
+    description: "Set 8 món kẹp tóc cỡ lớn thời trang Hàn Quốc (10.0–11.5cm). Lò xo trợ lực ôm chắc tóc dày, đa dạng kiểu dáng kẹp nơ, kẹp vuông và kẹp búi thời thượng.",
+    longDesc: "Bộ sưu tập 8 món kẹp tóc cỡ lớn thiết kế theo xu hướng phụ kiện Hàn Quốc thịnh hành. Với kích thước lớn 10–11.5cm, set kẹp giữ nếp trọn vẹn cả mái tóc dày suốt ngày dài mà không gây nặng đầu hay đau tóc. Các phân loại phong phú từ ánh bạc kim loại sang trọng, tone pastel nhã nhặn đến lông cừu ấm áp mùa đông.",
+    spec: "Set gồm 8 món • Chiều dài kẹp: 10.0cm – 11.5cm",
+    material: "Hợp kim xi mạ bạc, Acrylic cao cấp & Vải lông cừu",
+    cardBg: "#F1F3F5",
+    cardAccent: "#495057",
+    image: "images/products/set-8-mon-silver.jpg",
+    hoverImage: "images/products/set-8-mon-nude.jpg",
+    swatches: [
+      { name: "Set Bạc Kim Loại", color: "#ced4da", image: "images/products/set-8-mon-silver.jpg" },
+      { name: "Set Pastel Nude Be", color: "#d7ccc8", image: "images/products/set-8-mon-nude.jpg" },
+      { name: "Set Lông Xù Mùa Đông", color: "#8d6e63", image: "images/products/set-8-mon-plush.jpg" },
+      { name: "Set Hồng Gradient Đào", color: "#f8bbd0", image: "images/products/set-8-mon-pink.jpg" },
+      { name: "Set Xanh Bơ Hàn Quốc", color: "#c8e6c9", image: "images/products/set-8-mon-green.jpg" },
+      { name: "Set Len Hoa Đỏ Vintage", color: "#ef9a9a", image: "images/products/set-8-mon-red.jpg" }
+    ]
+  },
+  {
+    id: 10,
+    name: "Kẹp Càng Cua Cá Mập Vân Đá Mực Hồng Thạch Anh",
+    shortName: "Càng Cua Vân Đá Hồng",
+    category: "claw",
+    categoryName: "Kẹp Càng Cua",
+    price: 17900,
+    originalPrice: 29000,
+    rating: 5.0,
+    reviewsCount: 267,
+    tag: "Xu hướng",
+    description: "Họa tiết vân đá mực hồng thạch anh cẩm thạch sáng bóng, phong cách Hàn Quốc mới. Lò xo thép titan mạ vàng chống gỉ, kẹp êm ái tôn sáng mái tóc.",
+    longDesc: "Dáng kẹp cá mập kinh điển được chế tác từ Cellulose Acetate cao cấp với các đường vân đá mực hồng thạch anh cẩm thạch tự nhiên độc bản. Bề mặt phủ bóng gương bắt sáng lung linh dưới nắng và ánh đèn tiệc. Lò xo thép titan mạ vàng mở rộng góc kẹp, giữ chắc từng lọn tóc mà không tạo vết gấp nếp rụng tóc.",
+    spec: "Chiều dài: 8.5cm – 10.5cm • Trọng lượng: 26g",
+    material: "Cellulose Acetate bóng & Lò xo thép mạ vàng",
+    cardBg: "#FCE4EC",
+    cardAccent: "#D81B60",
+    image: "images/products/kep-van-da-rect.jpg",
+    hoverImage: "images/products/kep-van-da-detail.jpg",
+    swatches: [
+      { name: "Dáng Chữ Nhật (10.5cm)", color: "#f48fb1", image: "images/products/kep-van-da-rect.jpg" },
+      { name: "Dáng Nơ Cánh Bướm (8.5cm)", color: "#f8bbd0", image: "images/products/kep-van-da-bow.jpg" },
+      { name: "Dáng Bán Nguyệt Sóng (10cm)", color: "#f06292", image: "images/products/kep-van-da-wave.jpg" },
+      { name: "Dáng Càng Cua Thẳng (10cm)", color: "#ec407a", image: "images/products/kep-van-da-straight.jpg" },
+      { name: "Dáng Vuông Vát Cạnh (9.5cm)", color: "#e91e63", image: "images/products/kep-van-da-square.jpg" }
+    ]
   }
 ];

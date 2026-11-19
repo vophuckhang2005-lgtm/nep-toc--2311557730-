@@ -50,12 +50,15 @@ function addToCart(productId, qty = 1, swatch = null, customEngraving = null) {
   } else {
     const p = PRODUCTS.find(p => Number(p.id) === pId);
     if (!p) return;
+    const swatchObj = (p.swatches && cleanSwatch) ? p.swatches.find(s => s.name === cleanSwatch) : null;
+    const itemImg = (swatchObj && swatchObj.image) ? swatchObj.image : (p.image || '');
     cart.push({ 
       id: pId, 
       name: p.name, 
       price: p.price, 
       qty, 
       swatch: cleanSwatch, 
+      image: itemImg,
       cardBg: p.cardBg, 
       cardAccent: p.cardAccent,
       customEngraving: customEngraving || null 

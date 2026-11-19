@@ -344,10 +344,12 @@ function renderCartDrawerContent() {
       ${cart.map(item => `
         <div class="drawer-item">
           <div class="drawer-item-thumb" style="background:${item.cardBg || '#fafafc'}">
-            <svg width="34" height="34" viewBox="0 0 84 84" fill="none">
-              <ellipse cx="42" cy="34" rx="30" ry="20" fill="${item.cardBg || '#ffffff'}" stroke="${item.cardAccent || '#1d1d1f'}" stroke-width="2.5"/>
-              <rect x="36" y="50" width="12" height="20" rx="6" fill="${item.cardAccent || '#1d1d1f'}"/>
-            </svg>
+            ${item.image ? `<img src="${item.image}" alt="${item.name}" style="width:100%; height:100%; object-fit:cover; border-radius:inherit; display:block;" />` : `
+              <svg width="34" height="34" viewBox="0 0 84 84" fill="none">
+                <ellipse cx="42" cy="34" rx="30" ry="20" fill="${item.cardBg || '#ffffff'}" stroke="${item.cardAccent || '#1d1d1f'}" stroke-width="2.5"/>
+                <rect x="36" y="50" width="12" height="20" rx="6" fill="${item.cardAccent || '#1d1d1f'}"/>
+              </svg>
+            `}
           </div>
           <div class="drawer-item-info">
             <div class="drawer-item-name">${item.name}</div>
@@ -584,8 +586,11 @@ function handleWishlist(id, btn) {
   showToast(added ? 'Đã lưu vào danh sách Yêu thích' : 'Đã bỏ khỏi danh sách Yêu thích');
 }
 
-// ── Angle 1: Unique High-Craft Product Illustrations (Impeccable Design) ──
+// ── Angle 1: Unique High-Craft Product Illustrations or Real Photos ──
 function productVisualSVG(p, size = 84) {
+  if (p && p.image) {
+    return `<img src="${p.image}" alt="${p.name}" class="product-real-img" loading="lazy" style="width:100%; height:100%; object-fit:cover; border-radius:inherit; display:block;" />`;
+  }
   const id = Number(p.id);
   const bg = p.cardBg || '#fefae0';
   const ac = p.cardAccent || '#d6336c';
@@ -704,8 +709,11 @@ function productVisualSVG(p, size = 84) {
   }
 }
 
-// ── Angle 2: Secondary View / Răng Kẹp & Chi Tiết Lò Xo ──
+// ── Angle 2: Secondary View / Răng Kẹp & Chi Tiết Lò Xo or Real Photo Angle ──
 function productVisualSecondarySVG(p, size = 88) {
+  if (p && p.hoverImage) {
+    return `<img src="${p.hoverImage}" alt="${p.name} chi tiết" class="product-real-img" loading="lazy" style="width:100%; height:100%; object-fit:cover; border-radius:inherit; display:block;" />`;
+  }
   const ac = p.cardAccent || '#d6336c';
   return `<svg width="${size}" height="${size}" viewBox="0 0 100 100" fill="none">
     <rect x="24" y="24" width="52" height="52" rx="14" fill="#fafafc" stroke="${ac}" stroke-width="2.5"/>

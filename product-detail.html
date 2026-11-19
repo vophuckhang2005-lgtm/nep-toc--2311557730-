@@ -10,7 +10,7 @@
   <meta property="og:title" content="Chi tiết sản phẩm — Nếp Tóc"/>
   <meta property="og:description" content="Phụ kiện tóc cao cấp TP.HCM — Kẹp càng cua, kẹp mái thiết kế tối giản, vật liệu an toàn không gãy rụng nếp tóc."/>
   <meta property="og:image" content="favicon.svg"/>
-  <link rel="stylesheet" href="style.css?v=8"/>
+  <link rel="stylesheet" href="style.css?v=9"/>
 </head>
 <body>
 
@@ -45,9 +45,9 @@
 <div id="site-footer"></div>
 <div class="toast-container"></div>
 
-<script src="products.js?v=8"></script>
-<script src="cart.js?v=8"></script>
-<script src="main.js?v=8"></script>
+<script src="products.js?v=9"></script>
+<script src="cart.js?v=9"></script>
+<script src="main.js?v=9"></script>
 <script>
   // Safe helper fallbacks in case of script delay or partial load
   function safeFmt(n) {
@@ -86,6 +86,9 @@
 
     function getVisualLarge() {
       try {
+        if (p && p.image) {
+          return '<img src="' + p.image + '" id="detail-main-img" alt="' + p.name + '" style="width:100%; height:100%; object-fit:cover; border-radius:inherit; display:block; transition:opacity 0.2s ease;" />';
+        }
         if (typeof productVisualSVG === 'function') {
           return productVisualSVG(p, 200);
         }
@@ -250,6 +253,17 @@
           document.querySelectorAll('.swatch-preview').forEach(function(d, i) {
             d.style.borderColor = (i === idx) ? 'var(--black)' : '#ddd';
           });
+          // Update photo if swatch has its own photo
+          if (p.swatches && p.swatches[idx] && p.swatches[idx].image) {
+            const mainImg = document.getElementById('detail-main-img');
+            if (mainImg) {
+              mainImg.style.opacity = '0.4';
+              setTimeout(function() {
+                mainImg.src = p.swatches[idx].image;
+                mainImg.style.opacity = '1';
+              }, 120);
+            }
+          }
         });
       });
 
@@ -416,7 +430,11 @@
     const prod = prodList.find(function(x) { return Number(x.id) === Number(id); });
     if (lb && lbVisual && prod) {
       if (lbTitle) lbTitle.textContent = prod.name;
-      if (typeof productVisualSVG === 'function') {
+      if (prod.image) {
+        const curImg = document.getElementById('detail-main-img');
+        const curSrc = (curImg && curImg.src) ? curImg.src : prod.image;
+        lbVisual.innerHTML = '<img src="' + curSrc + '" alt="' + prod.name + '" style="max-width:92vw; max-height:72vh; object-fit:contain; border-radius:12px; display:block; margin:0 auto; box-shadow:0 10px 30px rgba(0,0,0,0.15);" />';
+      } else if (typeof productVisualSVG === 'function') {
         lbVisual.innerHTML = productVisualSVG(prod, 260);
       }
       lb.classList.add('active');
