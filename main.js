@@ -727,21 +727,25 @@ function productVisualSecondarySVG(p, size = 88) {
   </svg>`;
 }
 
-// Product Card HTML with Wishlist & Dual-Angle Hover Reveal
+// Product Card HTML with Wishlist & Contextual Hover Action
 function productCardHTML(p) {
   const tagClass = ['Bán chạy', 'Yêu thích', 'Độc quyền'].includes(p.tag) ? '' : 'yellow';
   const wishlisted = isWishlisted(p.id);
+  const hasSecondary = !!p.hoverImage || (!p.image);
+  const hoverHint = p.hoverHint || (p.hoverImage ? 'Chi tiết kẹp & lò xo' : (p.image ? 'Xem trọn bộ' : 'Răng kẹp & lò xo'));
 
   return `
-    <a href="product-detail.html?id=${p.id}" class="product-card">
+    <a href="product-detail.html?id=${p.id}" class="product-card ${!hasSecondary ? 'no-hover-swap' : ''}">
       <div class="product-card-img" style="background:${p.cardBg}; color:${p.cardAccent}">
         <div class="img-view-primary">
           ${productVisualSVG(p)}
         </div>
         
-        <div class="img-view-secondary">
-          ${productVisualSecondarySVG(p)}
-        </div>
+        ${hasSecondary ? `
+          <div class="img-view-secondary">
+            ${productVisualSecondarySVG(p)}
+          </div>
+        ` : ''}
 
         <div class="product-tag ${tagClass}">${p.tag}</div>
 
@@ -751,7 +755,7 @@ function productCardHTML(p) {
           </svg>
         </button>
 
-        <span class="hover-hint-badge">Răng kẹp & lò xo</span>
+        <span class="hover-hint-badge">${hoverHint}</span>
       </div>
 
       <div class="product-info">

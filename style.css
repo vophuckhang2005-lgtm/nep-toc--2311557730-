@@ -1068,6 +1068,244 @@ nav a.active::after {
   width: 14px;
   height: 14px;
   border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Contextual Variant Selectors (Non-rigid Apple E-commerce UX) ── */
+
+/* 1. Combo Selector Grid (For Multi-item Bundles / Sets) */
+.combo-selector-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 640px) {
+  .combo-selector-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.combo-opt-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--apple-border);
+  background: var(--apple-surface);
+  cursor: pointer;
+  transition: all 0.2s var(--spring-snappy);
+  position: relative;
+  text-align: left;
+}
+
+.combo-opt-card:hover {
+  border-color: var(--apple-border-dark);
+  background: var(--apple-surface-secondary);
+}
+
+.combo-opt-card.selected {
+  border-color: var(--apple-black);
+  background: #ffffff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.combo-thumb-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f5f5f7;
+  flex-shrink: 0;
+}
+
+.combo-thumb-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.combo-info-box {
+  flex: 1;
+  min-width: 0;
+}
+
+.combo-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--apple-black);
+  line-height: 1.3;
+}
+
+.combo-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+}
+
+.combo-tag {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #f1f3f5;
+  color: #495057;
+}
+
+.combo-sub {
+  font-size: 11px;
+  color: var(--apple-tertiary);
+}
+
+.combo-check-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--apple-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.combo-opt-card.selected .combo-check-icon {
+  background: var(--apple-black);
+  border-color: var(--apple-black);
+  color: #ffffff;
+}
+
+/* Bundle Includes Callout Box */
+.bundle-includes-box {
+  margin: 0 0 24px;
+  padding: 14px 16px;
+  background: var(--apple-surface-secondary);
+  border: 1px solid var(--apple-border);
+  border-radius: var(--radius-md);
+}
+
+.bundle-includes-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--apple-black);
+  margin-bottom: 8px;
+}
+
+.bundle-includes-list {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 12.5px;
+  color: var(--apple-secondary);
+  line-height: 1.6;
+}
+
+/* 2. Shape Selector Row (For Individual clips with different shapes & sizes) */
+.shape-selector-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.shape-opt-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px 6px 6px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--apple-border);
+  background: var(--apple-surface);
+  cursor: pointer;
+  transition: all 0.2s var(--spring-snappy);
+}
+
+.shape-opt-pill:hover {
+  border-color: var(--apple-border-dark);
+  background: var(--apple-surface-secondary);
+}
+
+.shape-opt-pill.selected {
+  border-color: var(--apple-black);
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.shape-thumb-mini {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f8bbd0;
+  flex-shrink: 0;
+}
+
+.shape-thumb-mini img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.shape-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--apple-black);
+}
+
+.shape-size-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  background: #fce4ec;
+  color: #c2185b;
+}
+
+/* 3. Gallery Thumbnail Slider / Row */
+.gallery-thumbnail-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gallery-thumb-item {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  border: 2px solid #e5e5ea;
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  background: #fafafc;
+}
+
+.gallery-thumb-item:hover {
+  border-color: #8e8e93;
+}
+
+.gallery-thumb-item.active {
+  border-color: var(--apple-black);
+  box-shadow: 0 0 0 1px var(--apple-black);
+}
+
+.gallery-thumb-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
   border: 1px solid rgba(0,0,0,0.15);
 }
 
@@ -2715,14 +2953,19 @@ footer {
   pointer-events: none;
 }
 
-.product-card:hover .img-view-primary {
+.product-card:not(.no-hover-swap):hover .img-view-primary {
   opacity: 0;
   transform: scale(1.08);
 }
 
-.product-card:hover .img-view-secondary {
+.product-card:not(.no-hover-swap):hover .img-view-secondary {
   opacity: 1;
   transform: scale(1);
+}
+
+.product-card.no-hover-swap:hover .img-view-primary {
+  opacity: 1;
+  transform: scale(1.05);
 }
 
 .hover-hint-badge {
