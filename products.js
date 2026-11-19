@@ -112,7 +112,8 @@ const PRODUCTS = [
     swatches: [
       { name: "Đồi Mồi Classic Tortoise", image: "images/products/kep-dai-doi-moi.jpg", color: "#8B5A2B" },
       { name: "Đỏ Mận Bordeaux", image: "images/products/kep-dai-bordeaux.jpg", color: "#5E1924" },
-      { name: "Kem Bơ Buttercream", image: "images/products/kep-dai-buttercream.jpg", color: "#F5F2EB" }
+      { name: "Kem Bơ Buttercream", image: "images/products/kep-dai-buttercream.jpg", color: "#F5F2EB" },
+      { name: "Đen Bóng Classic Noir", image: "images/products/kep-dai-noir.jpg", color: "#1D1D1F" }
     ]
   },
   {
