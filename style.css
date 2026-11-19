@@ -3194,8 +3194,14 @@ footer {
   border-radius: var(--radius-pill);
   gap: 4px;
   margin: 0 auto 36px;
-  max-width: 640px;
+  max-width: 880px;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.policy-tabs-wrap::-webkit-scrollbar {
+  display: none;
 }
 
 .policy-tab-btn {
