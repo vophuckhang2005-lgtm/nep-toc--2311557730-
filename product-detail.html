@@ -10,7 +10,7 @@
   <meta property="og:title" content="Chi tiết sản phẩm — Nếp Tóc"/>
   <meta property="og:description" content="Phụ kiện tóc cao cấp TP.HCM — Kẹp càng cua, kẹp mái thiết kế tối giản, vật liệu an toàn không gãy rụng nếp tóc."/>
   <meta property="og:image" content="favicon.svg"/>
-  <link rel="stylesheet" href="style.css?v=22"/>
+  <link rel="stylesheet" href="style.css?v=23"/>
 </head>
 <body>
 
@@ -45,9 +45,9 @@
 <div id="site-footer"></div>
 <div class="toast-container"></div>
 
-<script src="products.js?v=22"></script>
-<script src="cart.js?v=22"></script>
-<script src="main.js?v=22"></script>
+<script src="products.js?v=23"></script>
+<script src="cart.js?v=23"></script>
+<script src="main.js?v=23"></script>
 <script>
   // Safe helper fallbacks in case of script delay or partial load
   function safeFmt(n) {
@@ -66,8 +66,11 @@
     }
 
     const params = new URLSearchParams(location.search);
-    const id = parseInt(params.get('id'), 10);
+    let id = parseInt(params.get('id'), 10);
     const prodList = (typeof PRODUCTS !== 'undefined' && Array.isArray(PRODUCTS)) ? PRODUCTS : [];
+    if (isNaN(id) && prodList.length > 0) {
+      id = 3; // Default to product 3 if no id in query string
+    }
     const p = prodList.find(function(x) { return Number(x.id) === Number(id); });
 
     if (!p) {

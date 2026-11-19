@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#d6336c"/>
   <meta property="og:title" content="Chính sách & Lời hứa dịu êm — Nếp Tóc"/>
   <meta property="og:description" content="Mọi trải nghiệm tại Nếp Tóc đều được nâng niu bằng sự chân thành, minh bạch và an tâm tuyệt đối."/>
-  <link rel="stylesheet" href="style.css?v=22"/>
+  <link rel="stylesheet" href="style.css?v=23"/>
 </head>
 <body>
 
@@ -30,62 +30,70 @@
     </p>
   </div>
 
-  <!-- 4 Soft & Caring Pillar Cards -->
-  <div class="soft-policy-grid">
-    <!-- Card 1: Đồng kiểm tận tay -->
-    <div class="soft-card scroll-reveal delay-1" style="background:#FAF8F5;">
-      <div class="soft-card-top">
-        <div class="soft-card-icon" style="background:#FFFFFF; color:#C59B6D;">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+  <!-- 4 Minimalist Disclosure Rows (Apple-style Harmonized) -->
+  <div class="policy-disclosures-box scroll-reveal">
+    <div class="policy-disclosure-item">
+      <button class="policy-disclosure-header" onclick="togglePolicyDisclosure(this)" aria-expanded="false">
+        <span class="policy-disclosure-title">Đồng kiểm tận tay khi nhận hàng (100% An tâm)</span>
+        <span class="policy-disclosure-chevron">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </span>
+      </button>
+      <div class="policy-disclosure-body">
+        <div class="policy-disclosure-inner">
+          <div class="policy-disclosure-content">
+            Khi shipper giao đến, bạn luôn được mở gói hàng ngắm nhìn, kiểm tra màu sắc thực tế và kẹp thử lên tóc ưng ý mới thanh toán tiền mặt (COD). Nếu sản phẩm chưa đúng như bạn kỳ vọng, bạn chỉ cần gửi lại shipper mà không mất bất kỳ khoản phí nào (0đ phụ phí).
+          </div>
         </div>
-        <span class="soft-card-pill" style="background:rgba(197, 155, 109, 0.12); color:#996D3B;">100% An Tâm</span>
       </div>
-      <div class="soft-card-title">Đồng kiểm tận tay khi nhận hàng</div>
-      <p class="soft-card-desc">
-        Khi shipper giao đến, bạn luôn được mở gói hàng ngắm nhìn, kiểm tra màu sắc thực tế và bấm thử độ êm của lò xo. Hoàn toàn ưng ý mới thanh toán tiền mặt (COD). Nếu sản phẩm chưa đúng như bạn kỳ vọng, bạn chỉ cần gửi lại shipper mà không mất bất kỳ khoản phí nào.
-      </p>
     </div>
 
-    <!-- Card 2: Đổi mới 7 ngày -->
-    <div class="soft-card scroll-reveal delay-2" style="background:#FFF6F8;">
-      <div class="soft-card-top">
-        <div class="soft-card-icon" style="background:#FFFFFF; color:var(--accent-rose);">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+    <div class="policy-disclosure-item">
+      <button class="policy-disclosure-header" onclick="togglePolicyDisclosure(this)" aria-expanded="false">
+        <span class="policy-disclosure-title">Đổi mới dịu êm trong 07 ngày tận nhà</span>
+        <span class="policy-disclosure-chevron">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </span>
+      </button>
+      <div class="policy-disclosure-body">
+        <div class="policy-disclosure-inner">
+          <div class="policy-disclosure-content">
+            Nếu chiếc kẹp chưa thật sự vừa với độ dày tóc của bạn hoặc bạn muốn đổi sang một gam màu khác cho hợp phong cách, Nếp Tóc sẵn sàng đổi mới cho bạn trong 7 ngày. Shipper sẽ giao kẹp mới tận nhà và nhận lại kẹp cũ, bạn không cần phải ra bưu cục gửi hàng.
+          </div>
         </div>
-        <span class="soft-card-pill" style="background:rgba(214, 51, 108, 0.12); color:var(--accent-rose);">Đổi Trả Tận Cửa</span>
       </div>
-      <div class="soft-card-title">Đổi mới dịu êm trong 07 ngày</div>
-      <p class="soft-card-desc">
-        Nếu chiếc kẹp chưa thật sự vừa với độ dày tóc của bạn hoặc bạn muốn đổi sang một gam màu khác cho hợp phong cách, Nếp Tóc sẵn sàng đổi mới cho bạn trong 7 ngày. Shipper sẽ giao kẹp mới tận nhà và nhận lại kẹp cũ, bạn không cần phải ra bưu cục gửi hàng.
-      </p>
     </div>
 
-    <!-- Card 3: Bảo hành lò xo 30 ngày -->
-    <div class="soft-card scroll-reveal delay-3" style="background:#F6F7FA;">
-      <div class="soft-card-top">
-        <div class="soft-card-icon" style="background:#FFFFFF; color:#4A6FA5;">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    <div class="policy-disclosure-item">
+      <button class="policy-disclosure-header" onclick="togglePolicyDisclosure(this)" aria-expanded="false">
+        <span class="policy-disclosure-title">Cốt lò xo trợ lực — Bảo hành 30 ngày</span>
+        <span class="policy-disclosure-chevron">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </span>
+      </button>
+      <div class="policy-disclosure-body">
+        <div class="policy-disclosure-inner">
+          <div class="policy-disclosure-content">
+            Tất cả lò xo thép mạ của Nếp Tóc được gia công trợ lực dịu êm và thử nghiệm bền bỉ trên 10.000 lần gập mở. Trong vòng 30 ngày sử dụng, nếu lò xo bị lỏng, bật chốt hoặc giảm độ bám, tiệm cam kết đổi ngay 1 chiếc kẹp mới 100% hoàn toàn miễn phí.
+          </div>
         </div>
-        <span class="soft-card-pill" style="background:rgba(74, 111, 165, 0.12); color:#2E5284;">Bảo Hành 30 Ngày</span>
       </div>
-      <div class="soft-card-title">Cốt lò xo trợ lực — Bền bỉ êm ái</div>
-      <p class="soft-card-desc">
-        Tất cả lò xo thép mạ của Nếp Tóc được gia công trợ lực dịu êm và thử nghiệm bền bỉ trên 10.000 lần gập mở. Trong vòng 30 ngày sử dụng, nếu lò xo bị lỏng, bật chốt hoặc giảm độ bám, tiệm cam kết đổi ngay 1 chiếc kẹp mới 100% hoàn toàn miễn phí.
-      </p>
     </div>
 
-    <!-- Card 4: Tôn trọng riêng tư -->
-    <div class="soft-card scroll-reveal delay-4" style="background:#F4FAF6;">
-      <div class="soft-card-top">
-        <div class="soft-card-icon" style="background:#FFFFFF; color:#2B8A3E;">
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <div class="policy-disclosure-item">
+      <button class="policy-disclosure-header" onclick="togglePolicyDisclosure(this)" aria-expanded="false">
+        <span class="policy-disclosure-title">Tôn trọng quyền riêng tư & Bảo mật thông tin</span>
+        <span class="policy-disclosure-chevron">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </span>
+      </button>
+      <div class="policy-disclosure-body">
+        <div class="policy-disclosure-inner">
+          <div class="policy-disclosure-content">
+            Website sử dụng phương thức thanh toán tiền mặt khi nhận hàng (COD), tuyệt đối không lưu trữ hay yêu cầu thông tin thẻ ngân hàng. Số điện thoại và địa chỉ nhận hàng của bạn chỉ được dùng duy nhất để giao hàng. Nếp Tóc cam kết không bao giờ làm phiền bạn bằng tin nhắn rác hay chia sẻ dữ liệu với bên thứ ba.
+          </div>
         </div>
-        <span class="soft-card-pill" style="background:rgba(43, 138, 62, 0.12); color:#1E642B;">Riêng Tư Tuyệt Đối</span>
       </div>
-      <div class="soft-card-title">Tôn trọng quyền riêng tư của bạn</div>
-      <p class="soft-card-desc">
-        Website sử dụng thanh toán tiền mặt khi nhận hàng (COD), tuyệt đối không yêu cầu thông tin thẻ ngân hàng. Số điện thoại và địa chỉ nhận hàng của bạn chỉ được dùng duy nhất để giao hàng. Nếp Tóc cam kết không bao giờ làm phiền bạn bằng tin nhắn rác.
-      </p>
     </div>
   </div>
 
@@ -205,12 +213,36 @@
 <div id="site-footer"></div>
 <div class="toast-container"></div>
 
-<script src="products.js?v=22"></script>
-<script src="cart.js?v=22"></script>
-<script src="main.js?v=22"></script>
+<script src="products.js?v=23"></script>
+<script src="cart.js?v=23"></script>
+<script src="main.js?v=23"></script>
 <script>
   renderHeader();
   renderFooter();
+
+  // Policy Disclosure Toggle Function
+  function togglePolicyDisclosure(btn) {
+    const item = btn.closest('.policy-disclosure-item');
+    if (!item) return;
+    const wasOpen = item.classList.contains('open');
+    
+    // Close other policy disclosures for a clean accordion effect
+    document.querySelectorAll('.policy-disclosure-item').forEach(el => {
+      if (el !== item) {
+        el.classList.remove('open');
+        const b = el.querySelector('.policy-disclosure-header');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      }
+    });
+    
+    if (wasOpen) {
+      item.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    } else {
+      item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  }
 
   // Accordion Toggle Function
   function toggleFaq(el) {

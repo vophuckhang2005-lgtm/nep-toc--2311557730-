@@ -5183,6 +5183,92 @@ body.has-sticky-atc .floating-contact {
   letter-spacing: 0.02em;
 }
 
+/* ── Minimalist Policy Disclosures (Harmonized with Product Detail) ── */
+.policy-disclosures-box {
+  margin: 32px 0 48px;
+  background: #ffffff;
+  border: 1px solid var(--apple-border-light, #E5E5EA);
+  border-radius: 20px;
+  padding: 8px 28px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.policy-disclosure-item {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.policy-disclosure-item:last-child {
+  border-bottom: none;
+}
+
+.policy-disclosure-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 15.5px;
+  font-weight: 600;
+  color: var(--apple-black, #1D1D1F);
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+.policy-disclosure-header:hover {
+  color: var(--accent-rose, #d6336c);
+}
+
+.policy-disclosure-title {
+  letter-spacing: -0.01em;
+}
+
+.policy-disclosure-chevron {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--apple-surface-secondary, #F5F5F7);
+  color: var(--apple-secondary, #86868B);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.policy-disclosure-item.open .policy-disclosure-chevron {
+  transform: rotate(180deg);
+  background: #1D1D1F;
+  color: #ffffff;
+}
+
+.policy-disclosure-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  opacity: 0;
+}
+
+.policy-disclosure-item.open .policy-disclosure-body {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.policy-disclosure-inner {
+  overflow: hidden;
+}
+
+.policy-disclosure-content {
+  padding: 0 0 18px 0;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--apple-secondary, #666668);
+}
+
 .soft-policy-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
