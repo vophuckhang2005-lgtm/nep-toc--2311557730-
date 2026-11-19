@@ -210,11 +210,39 @@ const PRODUCTS = [
       { name: "Trắng Sữa Xà Cừ", image: "images/products/kep-ca-map-phap-trang.jpg", color: "#f8f9fa" },
       { name: "Hồng Thạch Anh", image: "images/products/kep-ca-map-phap-hong.jpg", color: "#f7cad0" },
       { name: "Xanh Biển Pastel", image: "images/products/kep-ca-map-phap-xanh.jpg", color: "#cbe3fb" },
+      { name: "Xanh Bơ Mint", image: "images/products/kep-ca-map-phap-xanh-bo.jpg", color: "#d8f3dc" },
       { name: "Tím Mộng Mơ Lilac", image: "images/products/kep-ca-map-phap-tim.jpg", color: "#e3d5ff" },
-      { name: "Xanh Bơ Mint", image: "images/products/kep-ca-map-phap-trang.jpg", color: "#d8f3dc" },
-      { name: "Vàng Champagne", image: "images/products/kep-ca-map-phap-trang.jpg", color: "#faedcd" },
-      { name: "Hồng Đào San Hô", image: "images/products/kep-ca-map-phap-hong.jpg", color: "#ffccd5" },
-      { name: "Trắng Trong Xà Cừ", image: "images/products/kep-ca-map-phap-trang.jpg", color: "#edf2f4" }
+      { name: "Vàng Champagne", image: "images/products/kep-ca-map-phap-vang.jpg", color: "#faedcd" }
+    ]
+  },
+  {
+    id: 10,
+    name: "Kẹp Càng Cua Dáng Sóng Mây Hologram Phantom JOJO COCO (9cm)",
+    shortName: "Sóng Mây JOJO COCO",
+    category: "claw",
+    categoryName: "Kẹp Càng Cua",
+    price: 32500,
+    originalPrice: 35100,
+    rating: 4.9,
+    reviewsCount: 312,
+    tag: "Bán chạy",
+    variantType: "color",
+    variantLabel: "Màu sắc Phantom Hologram",
+    hoverHint: "Vân sóng mây loang màu đa chiều",
+    description: "Dáng kẹp lượn sóng viền mây phong cách Hàn Quốc của JOJO COCO. Bề mặt phủ men bóng vân Phantom Hologram đổi màu ngũ sắc độc bản, ôm giữ lọn tóc êm ái.",
+    longDesc: "Dòng kẹp càng cua dáng sóng mây Cloud Wavy đặc trưng từ thương hiệu JOJO COCO, chế tác từ Acrylic Resin tráng men ngọc giả Acetate cao cấp. Bề mặt sở hữu hiệu ứng Phantom Hologram đổi màu theo từng góc nghiêng của ánh sáng tự nhiên. Răng kẹp bo tròn nhẵn mịn, lò xo thép trợ lực đàn hồi cao, giữ chắc mái tóc từ tóc vừa đến tóc dày mà không gây đau da đầu hay gấp gãy nếp tóc.",
+    spec: "Chiều dài: ~8.8cm • Bản cao: ~4.8cm • Trọng lượng: 26g",
+    material: "Acrylic Resin tráng men ngọc & Lò xo thép không gỉ",
+    cardBg: "#F6F7F9",
+    cardAccent: "#4A6FA5",
+    image: "images/products/kep-song-jojo-hong.jpg",
+    hoverImage: "images/products/kep-song-jojo-xanh.jpg",
+    swatches: [
+      { name: "Hồng Thạch Anh", image: "images/products/kep-song-jojo-hong.jpg", color: "#f7cad0" },
+      { name: "Trắng Ánh Ngọc Trai", image: "images/products/kep-song-jojo-trang.jpg", color: "#f8f9fa" },
+      { name: "Xanh Biển Nguyệt Quang", image: "images/products/kep-song-jojo-xanh.jpg", color: "#cbe3fb" },
+      { name: "Xanh Bơ Matcha", image: "images/products/kep-song-jojo-xanh-bo.jpg", color: "#d8f3dc" },
+      { name: "Tím Khói Lilac", image: "images/products/kep-song-jojo-tim.jpg", color: "#e3d5ff" }
     ]
   }
 ];
