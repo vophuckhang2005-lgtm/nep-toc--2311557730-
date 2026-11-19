@@ -1,23 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="16" fill="#1D1D1F"/>
   <defs>
-    <linearGradient id="roseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ff758c"/>
-      <stop offset="100%" stop-color="#d6336c"/>
+    <linearGradient id="favWave" x1="18" y1="44" x2="46" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#F5EBE6"/>
+      <stop offset="100%" stop-color="#E28292"/>
     </linearGradient>
-    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#d6336c" flood-opacity="0.25"/>
+    <filter id="subtleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity="0.3"/>
     </filter>
   </defs>
-  <rect width="64" height="64" rx="18" fill="#1d1d1f"/>
-  <g transform="translate(32, 32)" filter="url(#softShadow)">
-    <!-- Elegant Hair Clip Petals -->
-    <ellipse cx="0" cy="-6" rx="14" ry="9" fill="url(#roseGrad)" opacity="0.95"/>
-    <ellipse cx="-8" cy="2" rx="10" ry="7" fill="#ffffff" opacity="0.9" transform="rotate(-30 -8 2)"/>
-    <ellipse cx="8" cy="2" rx="10" ry="7" fill="#ffffff" opacity="0.9" transform="rotate(30 8 2)"/>
-    <!-- Center core / clasp -->
-    <circle cx="0" cy="0" r="4.5" fill="#f8f9fa"/>
-    <circle cx="0" cy="0" r="2.5" fill="#d6336c"/>
-    <!-- Clip base teeth hint -->
-    <path d="M-6 8 Q0 12 6 8" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
-  </g>
+  <!-- Fluid Hair Crease & Claw Clip Arc (Stylized 'N') -->
+  <path d="M19 44 C19 27, 25.5 20, 32 20 C38.5 20, 38.5 44, 45 44 C48.5 44, 50 38, 50 32" 
+        stroke="url(#favWave)" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" filter="url(#subtleGlow)"/>
+  <circle cx="32" cy="32" r="3.5" fill="#E28292"/>
 </svg>

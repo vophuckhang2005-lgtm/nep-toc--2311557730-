@@ -6,7 +6,7 @@ function renderHeader() {
   h.innerHTML = `
     <header id="app-header">
       <div class="nav-inner">
-        <a href="index.html" class="logo">Nếp <span>Tóc</span></a>
+        <a href="index.html" class="logo"><img src="images/logo.svg" alt="Nếp Tóc Logo" class="brand-logo-img"/>Nếp <span>Tóc</span></a>
         <nav id="main-nav">
           <a href="index.html">Trang chủ</a>
           <a href="products.html">Sản phẩm</a>
@@ -131,7 +131,7 @@ function renderFooter() {
     <footer>
       <div class="footer-inner">
         <div>
-          <div class="footer-logo">Nếp <span>Tóc</span></div>
+          <div class="footer-logo"><img src="images/logo.svg" alt="Nếp Tóc Logo" class="brand-logo-img"/>Nếp <span>Tóc</span></div>
           <p class="footer-desc">Phụ kiện tóc & kẹp càng cua thiết kế tối giản, vật liệu cao cấp. Tinh tế trên từng nếp tóc của bạn.</p>
         </div>
         <div class="footer-col">
