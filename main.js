@@ -1004,55 +1004,47 @@ function updateAccountUI() {
   }
 }
 
-// ── Live Stylist Chat Knowledge Engine (14 Scenarios) ──
+// ── Live Stylist Chat Knowledge Engine (SoraHome Home Living) ──
 const STYLIST_KNOWLEDGE = [
   {
-    keys: ['khac', 'laser', 'ten', 'chu', 'chu ky', 'ky niem', 'ca nhan hoa', 'bespoke', 'studio'],
-    reply: 'Nếp Tóc hiện tập trung toàn bộ vào chất lượng gia công cao cấp của phôi kẹp Cellulose Acetate nguyên bản và cốt lò xo trợ lực bền bỉ trên 10.000 lần mở. Tiệm không triển khai khắc laser để giữ trọn vẹn độ bóng mịn và cấu trúc vật liệu hữu cơ của phôi kẹp ạ.'
+    keys: ['lau nha', 'cay lau', 'san nha', 'san go', 'microfiber', 'hut bui', 'toc rung', 'tu vat'],
+    reply: 'Với sàn nhà và bụi mịn, SoraHome khuyên bạn nên dùng **Cây lau nhà tự vắt xoay 360°**. Cơ chế vắt khô trợ lực 2 chiều không bẩn tay, đầu lau sợi microfiber tĩnh điện gom sạch tóc rụng và bụi mịn mà không gây xước sàn gỗ hay gạch men.'
   },
   {
-    keys: ['day', 'nhieu', 'dai', 'xoan', 'lon', 'bong benh', 'bui to'],
-    reply: 'Với tóc dày, dài hoặc búi củ tỏi lớn, bạn nên chọn kẹp càng cua cỡ đại như **Kẹp Càng Cua Đại Acetate Đồi Mồi Parisian Chic (10.5cm - 38k)** hoặc **Kẹp Càng Cua Sóng Mây JOJO COCO (9cm - 32.5k)**. Cốt lò xo thép trợ lực đàn hồi cao sẽ ôm trọn và giữ chắc nếp tóc suốt ngày dài mà không đau chân tóc.'
+    keys: ['toilet', 'bon cau', 'co toilet', 've sinh toilet', 'silicon', 'nha tam', 'phong tam'],
+    reply: 'Với bồn cầu và phòng tắm, sản phẩm tối ưu nhất là **Bộ cọ toilet silicon TPR treo tường**. Đầu cọ mềm dẻo 360° cọ sạch sâu mép vành bồn cầu, hoàn toàn không bám tóc hay đọng nước, đế treo tường thông thoáng tự khô ráo ngăn ngừa vi khuẩn.'
   },
   {
-    keys: ['mong', 'ngan', 'it', 'to', 'yeu', 'tuot', 'nhe'],
-    reply: 'Với tóc mỏng, tóc ngắn hoặc kẹp mái tạo kiểu, gợi ý tốt nhất là **Kẹp Cá Mập Acetate Xà Cừ Phong Cách Pháp (8cm - 18.5k)** hoặc **Kẹp Mái Bấm Clear Jelly Hoa Nhí (15.7k)**. Thiết kế nhẹ tênh và răng kẹp bo tròn bám tóc rất êm, không gây tuột hay hằn nếp tóc.'
+    keys: ['gat nuoc', 'kinh', 'lau kinh', 'bep', 'gian bep', 'khan lau', 'vet nuoc', 'guong'],
+    reply: 'Với mặt kính, gương phòng tắm và quầy bếp, bạn hãy dùng **Cây gạt nước silicone đa năng** kết hợp khăn lau sợi kép. Lưỡi gạt cao su mềm lướt êm, gạt sạch bọt xà phòng và nước đọng chỉ trong một đường lướt.'
   },
   {
     keys: ['ship', 'giao', 'freeship', 'phi', 'van chuyen', 'bao lau', 'nhanh', '24h'],
-    reply: 'Nếp Tóc **miễn phí giao hàng toàn TP.HCM cho đơn từ 99.000đ**. Với đơn dưới 99.000đ, phí ship đồng giá 20.000đ. Đơn nội thành TP.HCM được giao nhanh trong vòng **24h**, bạn đặt trước 12h trưa là có thể nhận ngay trong ngày ạ!'
+    reply: 'SoraHome **miễn phí giao hàng toàn quốc cho đơn từ 99.000đ**. Với đơn dưới 99.000đ, phí ship đồng giá 20.000đ. Đơn nội thành TP.HCM được giao nhanh trong vòng **24h**, nhận hàng kiểm tra trước khi thanh toán.'
   },
   {
     keys: ['kiem tra', 'xem hang', 'dong kiem', 'cod', 'thanh toan', 'tien mat', 'chuyen khoan', 'tra tien'],
-    reply: 'Bạn hoàn toàn yên tâm vì Nếp Tóc áp dụng **Đồng kiểm 100%**: Khi shipper giao đến, bạn được mở hộp kiểm tra đúng mẫu mã, màu sắc và kẹp thử lên tóc ưng ý mới thanh toán tiền mặt (COD). Nếu chưa vừa ý, bạn gửi lại shipper 0đ mà không mất bất kỳ khoản phí nào!'
+    reply: 'Bạn hoàn toàn yên tâm vì SoraHome áp dụng **Đồng kiểm 100%**: Khi shipper giao đến, bạn được mở hộp kiểm tra đúng mẫu mã, linh kiện phụ kiện đầy đủ và thử lắp ráp ưng ý mới thanh toán tiền mặt (COD). Nếu chưa vừa ý, bạn gửi lại shipper 0đ mà không mất bất kỳ chi phí nào!'
   },
   {
-    keys: ['bao hanh', 'doi tra', 'gay', 'lo xo', 'hong', 'loi', 'ben', 'hu'],
-    reply: 'Nếp Tóc cam kết: **Bảo hành lò xo 30 ngày** (đổi mới 1-1 miễn phí nếu lò xo bị lỏng hay gãy) và **Đổi mới dịu êm trong 7 ngày tận nhà** nếu muốn đổi size hay đổi màu khác. Shipper giao kẹp mới tận nơi và nhận lại kẹp cũ, bạn không cần ra bưu cục.'
+    keys: ['bao hanh', 'doi tra', 'loi', 'hong', 'gay', 'ben', 'hu'],
+    reply: 'SoraHome cam kết: **Bảo hành khớp nối & cơ cấu 30 ngày** (đổi mới 1-1 miễn phí nếu có lỗi kỹ thuật) và **Đổi mới dịu êm trong 7 ngày tận nhà**. Shipper giao sản phẩm mới tận nơi và nhận lại sản phẩm cũ, bạn không cần ra bưu cục.'
   },
   {
-    keys: ['hop', 'qua', 'tang', 'thiep', 'no', 'sinh nhat', 'ban gai', 'nguoi yeu', 'ky niem'],
-    reply: 'Khi đặt kẹp làm quà tặng sinh nhật hay kỷ niệm, bạn chỉ cần chọn gói *"Đóng gói hộp quà nơ lụa & thiệp viết tay"* (+15.000đ) trong giỏ hàng. Tiệm sẽ chuẩn bị hộp quà cao cấp, thắt nơ ruy-băng trang nhã và nắn nót viết thiệp tay theo lời chúc của bạn gửi đến người thương!'
+    keys: ['hop', 'dong goi', 'chong soc', 'thung'],
+    reply: 'Mỗi đơn hàng gửi đi từ SoraHome đều được đóng gói tỉ mỉ trong thùng carton chịu lực, chèn xốp bóng khí bảo vệ chống trầy xước và đính kèm phiếu hướng dẫn sử dụng chi tiết.'
   },
   {
-    keys: ['dia chi', 'o dau', 'tiem', 'cua hang', 'shop', 'gio', 'truc tiep', 'xem truc tiep'],
-    reply: 'Cửa hàng Nếp Tóc tọa lạc tại số **123 Nguyễn Thị Minh Khai, Quận 1, TP.HCM**. Giờ mở cửa từ **8:00 – 21:30** tất cả các ngày trong tuần. Mời bạn ghé tiệm để thử trực tiếp các mẫu kẹp xinh trên tóc nha!'
+    keys: ['dia chi', 'o dau', 'cua hang', 'shop', 'gio', 'truc tiep', 'xem truc tiep'],
+    reply: 'Cửa hàng trải nghiệm SoraHome tọa lạc tại **123 Nguyễn Thị Minh Khai, Quận 1, TP.HCM**. Giờ mở cửa từ **8:00 – 21:30** tất cả các ngày trong tuần. Mời bạn ghé tiệm để trải nghiệm trực tiếp các dụng cụ vệ sinh thông minh nha!'
   },
   {
-    keys: ['chat lieu', 'nhua', 'kim loai', 'acetate', 'titan', 'gi', 'set', 'oxy hoa'],
-    reply: 'Kẹp Nếp Tóc được chế tác từ **Cellulose Acetate sinh học** (chất liệu cao cấp chống va đập, bóng mịn nguồn gốc sợi thực vật) và **Hợp kim / thép trợ lực** phủ nano chống oxy hóa, không phai màu hay gỉ sét. Lò xo đàn hồi êm ái, độ bền trên 10.000 lần gập mở.'
+    keys: ['chat lieu', 'nhua', 'thep', 'inox', 'nhom', 'silicon', 'tpr', 'abs'],
+    reply: 'Các sản phẩm SoraHome được sản xuất từ **nhựa ABS/PP nguyên sinh cao cấp** chịu lực va đập, khớp nối gia cố hợp kim không gỉ, đầu cọ chất liệu **silicon TPR mềm dẻo kháng khuẩn** và bông lau **sợi Microfiber dệt xoắn** siêu thấm hút.'
   },
   {
-    keys: ['mau', 'ton da', 'phoi', 'outfit', 'da ngam', 'da sang', 'hop da'],
-    reply: 'Gợi ý chọn màu tôn da: Tông **Trắng Sữa Xà Cừ** và **Đồi Mồi Classic** hợp mọi màu da và outfit công sở. Tông **Hồng Thạch Anh**, **Xanh Pastel** và **Sweetheart Pha Lê** mang nét ngọt ngào chuẩn tiểu thư Pháp đi cafe cuối tuần.'
-  },
-  {
-    keys: ['cach kep', 'kieu toc', 'bui', 'bui cu toi', 'nua dau', 'tao kieu'],
-    reply: 'Để kẹp đẹp chuẩn phong cách Pháp: Gom tóc xoắn nhẹ 2 vòng rồi dùng kẹp càng cua giữ cố định bên hông búi tóc, sau đó rút vài lọn tóc mai buông lơi tự nhiên trước trán. Bạn có thể xem ảnh minh họa chi tiết tại mục **Lookbook Đời Thường** ở Trang chủ nhé!'
-  },
-  {
-    keys: ['khuyen mai', 'giam gia', 'voucher', 'ma', 'sale', 'uu dai', 'bot'],
-    reply: 'Hiện Nếp Tóc đang áp dụng các ưu đãi: Miễn phí giao hàng đơn từ 99k, Đồng kiểm tận tay trước khi trả tiền COD, và Đổi mới tận nhà 7 ngày. Từng chiếc kẹp đều được bọc giấy nến lụa và đóng trong hộp cứng kraft như một món quà.'
+    keys: ['khuyen mai', 'giam gia', 'voucher', 'ma', 'sale', 'uu dai'],
+    reply: 'Hiện SoraHome đang áp dụng các ưu đãi: Miễn phí giao hàng đơn từ 99k, Đồng kiểm tận tay trước khi trả tiền COD, và Đổi mới 1-1 trong 7 ngày tận nhà.'
   },
   {
     keys: ['chao', 'hello', 'hi', 'alo', 'oi', 'ad', 'shop oi'],
@@ -1060,7 +1052,7 @@ const STYLIST_KNOWLEDGE = [
   },
   {
     keys: ['cam on', 'thank', 'tks', 'ok', 'oke', 'da', 'vang'],
-    reply: 'Dạ, không có chi ạ! Chúc bạn chọn được chiếc kẹp thật ưng ý cho mái tóc của mình. Nếu cần hỗ trợ thêm bất cứ điều gì, bạn cứ nhắn tiệm bất kỳ lúc nào nhé!'
+    reply: 'Dạ, không có chi ạ! Chúc bạn tìm được giải pháp vệ sinh ưng ý cho tổ ấm tinh tươm của mình. Nếu cần hỗ trợ thêm bất cứ điều gì, bạn cứ nhắn SoraHome bất kỳ lúc nào nhé!'
   }
 ];
 
@@ -1092,7 +1084,7 @@ function findStylistReply(query) {
       }
     }
   }
-  return 'Cảm ơn bạn đã nhắn tin! Stylist Nếp Tóc luôn sẵn sàng hỗ trợ. Bạn có thể gọi Hotline hoặc Zalo **0901 234 567** để tiệm tư vấn gửi video cận cảnh từng mẫu kẹp trên tóc cho bạn nha!';
+  return 'Cảm ơn bạn đã nhắn tin! Đội ngũ tư vấn SoraHome luôn sẵn sàng hỗ trợ bạn. Bạn có thể gọi Hotline hoặc Zalo **0901 234 567** để được tư vấn chi tiết về từng dụng cụ vệ sinh nhà cửa thông minh nha!';
 }
 
 function handleLiveChatSend(e) {
