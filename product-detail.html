@@ -47,9 +47,9 @@
 <div id="site-footer"></div>
 <div class="toast-container"></div>
 
-<script src="products.js?v=26"></script>
-<script src="cart.js?v=26"></script>
-<script src="main.js?v=26"></script>
+<script src="products.js?v=27"></script>
+<script src="cart.js?v=27"></script>
+<script src="main.js?v=27"></script>
 <script>
   // Safe helper fallbacks in case of script delay or partial load
   function safeFmt(n) {
@@ -230,7 +230,7 @@
             <div class="detail-name">${p.name}</div>
             <div class="hair-fit-pill">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-              ${p.category === 'claw' ? 'Phù hợp: Tóc vừa đến tóc dày • Búi củ tỏi Pháp & kẹp gáy' : 'Phù hợp: Mọi chất tóc • Kẹp mái tạo kiểu & kẹp nửa đầu'}
+              Ứng dụng: ${p.categoryName} • Thiết kế thông minh cho tổ ấm
             </div>
             <div class="detail-price-row">
               <span class="detail-price">${safeFmt(p.price)}</span>
@@ -267,7 +267,7 @@
                 <div class="disclosure-body">
                   <div class="disclosure-inner">
                     <div class="disclosure-content">
-                      Khi shipper giao đến, bạn luôn được mở gói hàng kiểm tra màu sắc, ngắm độ bóng và kẹp thử lên tóc ưng ý mới thanh toán tiền mặt (COD). Nếu chưa vừa ý, bạn chỉ cần gửi lại shipper 0đ mà không mất bất kỳ khoản phí nào.
+                      Khi shipper giao đến, bạn luôn được mở kiện hàng kiểm tra mẫu mã, khớp nối, đầu gạt và lắp thử cán ưng ý mới thanh toán tiền mặt (COD). Nếu chưa vừa ý, bạn chỉ cần gửi lại shipper 0đ mà không mất bất kỳ khoản phí nào.
                     </div>
                   </div>
                 </div>
@@ -283,7 +283,7 @@
                 <div class="disclosure-body">
                   <div class="disclosure-inner">
                     <div class="disclosure-content">
-                      Nếu sản phẩm chưa thật sự vừa vặn với nhu cầu sử dụng của bạn hoặc bạn muốn đổi sang kích thước khác, SoraHome sẵn sàng đổi mới trong 7 ngày. Shipper giao mẫu mới tận nhà và nhận lại sản phẩm cũ, bạn không cần phải ra bưu cục.
+                      Nếu sản phẩm có lỗi cong vênh, rách lưỡi silicon hoặc bạn muốn đổi sang mẫu dụng cụ khác, SoraHome sẵn sàng đổi mới tận nhà trong 7 ngày. Shipper giao mẫu mới tận nơi và nhận lại sản phẩm cũ, bạn không cần phải ra bưu cục.
                     </div>
                   </div>
                 </div>
@@ -291,7 +291,7 @@
 
               <div class="disclosure-item">
                 <button class="disclosure-header" onclick="toggleDisclosure(this)" aria-expanded="false">
-                  <span class="disclosure-title">Cốt lò xo trợ lực — Bảo hành 30 ngày</span>
+                  <span class="disclosure-title">Khớp xoay & Chốt khóa cán — Bảo hành 30 ngày</span>
                   <span class="disclosure-chevron">
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                   </span>
@@ -299,7 +299,7 @@
                 <div class="disclosure-body">
                   <div class="disclosure-inner">
                     <div class="disclosure-content">
-                      Sản phẩm được gia công bền bỉ, chịu lực cao. Trong 30 ngày sử dụng, nếu sản phẩm gặp bất kỳ lỗi kỹ thuật nào từ nhà sản xuất, SoraHome đổi ngay sản phẩm mới 100% hoàn toàn miễn phí.
+                      Thân cán inox và khớp xoay cơ học được kiểm thử độ bền uốn gập cao. Trong 30 ngày sử dụng, nếu sản phẩm gặp lỗi khớp xoay, trờn ren khóa hay nứt gãy từ nhà sản xuất, SoraHome đổi ngay sản phẩm mới 100% hoàn toàn miễn phí.
                     </div>
                   </div>
                 </div>
@@ -307,7 +307,7 @@
 
               <div class="disclosure-item">
                 <button class="disclosure-header" onclick="toggleDisclosure(this)" aria-expanded="false">
-                  <span class="disclosure-title">Đóng gói quà tặng & Giao nhanh 24h</span>
+                  <span class="disclosure-title">Đóng gói an toàn & Giao nhanh toàn quốc</span>
                   <span class="disclosure-chevron">
                     <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
                   </span>
@@ -315,7 +315,7 @@
                 <div class="disclosure-body">
                   <div class="disclosure-inner">
                     <div class="disclosure-content">
-                      Mỗi chiếc kẹp đều được bọc giấy nến lụa chống trầy và đặt trong hộp cứng bảo vệ. Giao nhanh 1–2 ngày tại TP.HCM và miễn phí toàn bộ phí vận chuyển cho đơn hàng từ 99.000₫.
+                      Mỗi dụng cụ đều được bọc xốp chống sốc và đặt trong thùng carton cứng cáp bảo vệ an toàn khi vận chuyển. Giao nhanh 1–2 ngày tại TP.HCM và miễn phí toàn bộ phí vận chuyển cho đơn hàng từ 99.000₫.
                     </div>
                   </div>
                 </div>
@@ -613,7 +613,7 @@
       <div class="lightbox-title" id="lightbox-title">Chi tiết sản phẩm</div>
     </div>
     <div id="lightbox-visual" style="padding:20px 0;"></div>
-    <p style="font-size:12.5px; color:var(--apple-tertiary); margin:0;">Vật liệu Cellulose Acetate nguyên bản • Lò xo Titan trợ lực</p>
+    <p style="font-size:12.5px; color:var(--apple-tertiary); margin:0;">Cán Inox chống gỉ • Khớp xoay cơ học & Lưỡi silicon kháng khuẩn</p>
   </div>
 </div>
 </body>

@@ -199,18 +199,18 @@ function renderFloatingHelp() {
 
         <!-- Suggestion Chips (Horizontal Scrollable) -->
         <div class="chat-suggestion-chips" id="chat-suggestion-chips">
-          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tóc dày & dài nên chọn kẹp nào?')">Tóc dày / Dài</button>
-          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tóc mỏng kẹp mẫu nào không bị tuột?')">Tóc mỏng / Ngắn</button>
-          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Phí giao hàng và thời gian nhận?')">Phí ship & Giao 24h</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Cây lau nhà tự vắt có dùng được cho sàn gỗ không?')">Lau sàn gỗ & gạch</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Cây chà sàn 3in1 có kèm nhíp gắp tóc không?')">Cây chà sàn 3in1</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Cây gạt nước 360 độ dùng cho kính nào?')">Gạt nước xoay 360°</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Phí giao hàng và thời gian nhận?')">Phí ship & Giao nhanh</button>
           <button type="button" class="chat-chip-btn" onclick="sendChatChip('Có được kiểm tra hàng trước khi thanh toán không?')">Đồng kiểm COD</button>
-          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Chính sách bảo hành lò xo kẹp?')">Bảo hành 30 ngày</button>
-          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Tư vấn đóng gói hộp quà nơ lụa')">Gói hộp quà</button>
-          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Địa chỉ cửa hàng xem trực tiếp?')">Địa chỉ tiệm</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Chính sách bảo hành khớp nối và chốt khóa?')">Bảo hành 30 ngày</button>
+          <button type="button" class="chat-chip-btn" onclick="sendChatChip('Địa chỉ cửa hàng xem trực tiếp?')">Địa chỉ cửa hàng</button>
         </div>
       </div>
 
       <form class="live-chat-footer" id="live-chat-form" onsubmit="handleLiveChatSend(event)">
-        <input type="text" id="live-chat-input" placeholder="Hỏi về chất tóc, size kẹp..." autocomplete="off"/>
+        <input type="text" id="live-chat-input" placeholder="Hỏi về cây lau nhà, gạt nước, chà sàn 3in1..." autocomplete="off"/>
         <button type="submit" class="live-chat-send-btn" aria-label="Gửi">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </button>
@@ -721,7 +721,7 @@ function productVisualSecondarySVG(p, size = 88) {
     <line x1="58" y1="54" x2="68" y2="54" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
     <line x1="36" y1="62" x2="46" y2="62" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
     <line x1="54" y1="62" x2="64" y2="62" stroke="${ac}" stroke-width="3" stroke-linecap="round"/>
-    <text x="50" y="76" font-size="7.5" text-anchor="middle" fill="${ac}" font-weight="700" letter-spacing="1">LÒ XO TITAN</text>
+    <text x="50" y="76" font-size="7.5" text-anchor="middle" fill="${ac}" font-weight="700" letter-spacing="1">KHỚP XOAY 360°</text>
   </svg>`;
 }
 
@@ -730,7 +730,7 @@ function productCardHTML(p) {
   const tagClass = ['Bán chạy', 'Yêu thích', 'Độc quyền'].includes(p.tag) ? '' : 'yellow';
   const wishlisted = isWishlisted(p.id);
   const hasSecondary = !!p.hoverImage || (!p.image);
-  const hoverHint = p.hoverHint || (p.hoverImage ? 'Chi tiết kẹp & lò xo' : (p.image ? 'Xem trọn bộ' : 'Răng kẹp & lò xo'));
+  const hoverHint = p.hoverHint || (p.hoverImage ? 'Xem chi tiết dụng cụ' : (p.image ? 'Xem trọn bộ' : 'Chi tiết sản phẩm'));
 
   return `
     <a href="product-detail.html?id=${p.id}" class="product-card ${!hasSecondary ? 'no-hover-swap' : ''}">
