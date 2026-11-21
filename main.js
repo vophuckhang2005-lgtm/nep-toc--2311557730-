@@ -729,7 +729,7 @@ function productVisualSecondarySVG(p, size = 88) {
 function productCardHTML(p) {
   const tagClass = ['Bán chạy', 'Yêu thích', 'Độc quyền'].includes(p.tag) ? '' : 'yellow';
   const wishlisted = isWishlisted(p.id);
-  const hasSecondary = !!p.hoverImage || (!p.image);
+  const hasSecondary = false;
   const hoverHint = p.hoverHint || (p.hoverImage ? 'Xem chi tiết dụng cụ' : (p.image ? 'Xem trọn bộ' : 'Chi tiết sản phẩm'));
 
   return `

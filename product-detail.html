@@ -47,9 +47,9 @@
 <div id="site-footer"></div>
 <div class="toast-container"></div>
 
-<script src="products.js?v=27"></script>
-<script src="cart.js?v=27"></script>
-<script src="main.js?v=27"></script>
+<script src="products.js?v=28"></script>
+<script src="cart.js?v=28"></script>
+<script src="main.js?v=28"></script>
 <script>
   // Safe helper fallbacks in case of script delay or partial load
   function safeFmt(n) {
@@ -103,103 +103,45 @@
       return '<svg width="200" height="200" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="38" fill="' + (p.cardBg || '#f5f5f7') + '" stroke="' + (p.cardAccent || '#d6336c') + '" stroke-width="2.5"/><text x="50" y="54" font-size="9" text-anchor="middle" fill="' + (p.cardAccent || '#d6336c') + '" font-weight="700">' + (p.shortName || p.name) + '</text></svg>';
     }
 
+    window.switchGalleryImg = function(imgSrc, el) {
+      const mainImg = document.getElementById('detail-main-img');
+      if (mainImg) {
+        mainImg.style.opacity = '0.35';
+        setTimeout(function() {
+          mainImg.src = imgSrc;
+          mainImg.style.opacity = '1';
+        }, 120);
+      }
+      document.querySelectorAll('.gallery-thumb-item').forEach(function(i) {
+        i.style.borderColor = 'var(--apple-border-light)';
+      });
+      if (el) el.style.borderColor = 'var(--accent-rose)';
+    };
+
     function renderDetail() {
       const contentEl = document.getElementById('detail-content');
       if (!contentEl) return;
 
-      const vType = p.variantType || 'color';
-
-      // 1. Gallery Thumbnails Under Main Visual
+      // 1. Gallery Thumbnails Under Main Visual (Real Product Photo Angles)
       let galleryThumbHTML = '';
-      if (p.image || (p.swatches && p.swatches.some(s => s.image))) {
+      const photoList = p.gallery || [p.image];
+      if (photoList.length > 1) {
         galleryThumbHTML = `
-          <div class="gallery-thumbnail-row" id="gallery-thumbs">
-            ${(p.swatches || []).map(function(s, i) {
-              return '<div class="gallery-thumb-item ' + (i === 0 ? 'active' : '') + '" data-idx="' + i + '" title="' + s.name + '"><img src="' + (s.image || p.image) + '" alt="' + s.name + '" loading="lazy" /></div>';
-            }).join('')}
-          </div>
-        `;
-      } else {
-        galleryThumbHTML = `
-          <div style="display:flex; gap:8px; margin-top:12px;">
-            ${(p.swatches || []).map(function(s, i) {
-              return '<div class="swatch-preview" data-idx="' + i + '" style="width:48px;height:48px;border-radius:10px;border:2px solid ' + (i === 0 ? 'var(--black)' : '#ddd') + ';background:' + s.color + ';cursor:pointer;transition:border-color 0.15s;" title="' + s.name + '"></div>';
+          <div class="gallery-thumbnail-row" id="gallery-thumbs" style="display:flex; gap:10px; margin-top:14px; overflow-x:auto;">
+            ${photoList.map(function(imgSrc, i) {
+              return '<div class="gallery-thumb-item ' + (i === 0 ? 'active' : '') + '" onclick="switchGalleryImg(\'' + imgSrc + '\', this)" style="width:64px; height:64px; border-radius:12px; border:2px solid ' + (i === 0 ? 'var(--accent-rose)' : 'var(--apple-border-light)') + '; overflow:hidden; cursor:pointer; background:#fff; transition:all 0.2s;" title="Góc chụp ' + (i + 1) + '"><img src="' + imgSrc + '" alt="' + p.name + ' góc ' + (i + 1) + '" style="width:100%; height:100%; object-fit:contain; padding:4px;" loading="lazy" /></div>';
             }).join('')}
           </div>
         `;
       }
 
-      // 2. Contextual Variant Selector (Combo Cards / Shape Pills / Color Dots)
-      let variantSelectorHTML = '';
-      if (vType === 'combo') {
-        variantSelectorHTML = `
-          <div class="detail-section-title">${p.variantLabel || 'Chọn bộ sưu tập combo'} — <span id="swatch-label" style="font-weight:600; color:var(--apple-black); text-transform:none;">${selectedSwatch}</span></div>
-          <div class="combo-selector-grid" id="swatch-row">
-            ${(p.swatches || []).map(function(s, i) {
-              return `
-                <div class="combo-opt-card ${i === 0 ? 'selected' : ''}" data-swatch="${s.name}" data-idx="${i}">
-                  <div class="combo-thumb-box">
-                    <img src="${s.image || p.image}" alt="${s.name}" loading="lazy" />
-                  </div>
-                  <div class="combo-info-box">
-                    <div class="combo-name">${s.name}</div>
-                    <div class="combo-meta">
-                      <span class="combo-tag">${s.badge || 'Trọn bộ 8 món'}</span>
-                      <span class="combo-sub">${s.sub || ''}</span>
-                    </div>
-                  </div>
-                  <div class="combo-check-icon">
-                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  </div>
-                </div>
-              `;
-            }).join('')}
-          </div>
-
-          ${p.bundleIncludes && p.bundleIncludes.length ? `
-            <div class="bundle-includes-box">
-              <div class="bundle-includes-header">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-                <strong>Quy cách đóng gói & Chi tiết bộ sản phẩm:</strong>
-              </div>
-              <ul class="bundle-includes-list">
-                ${p.bundleIncludes.map(function(item) { return '<li>' + item + '</li>'; }).join('')}
-              </ul>
-            </div>
-          ` : ''}
-        `;
-      } else if (vType === 'shape') {
-        variantSelectorHTML = `
-          <div class="detail-section-title">${p.variantLabel || 'Kiểu dáng & Kích thước'} — <span id="swatch-label" style="font-weight:600; color:var(--apple-black); text-transform:none;">${selectedSwatch}</span></div>
-          <div class="shape-selector-row" id="swatch-row">
-            ${(p.swatches || []).map(function(s, i) {
-              return `
-                <div class="shape-opt-pill ${i === 0 ? 'selected' : ''}" data-swatch="${s.name}" data-idx="${i}">
-                  <div class="shape-thumb-mini">
-                    <img src="${s.image || p.image}" alt="${s.name}" loading="lazy" />
-                  </div>
-                  <span class="shape-name">${s.name}</span>
-                  ${s.sizeTag ? `<span class="shape-size-tag">${s.sizeTag}</span>` : ''}
-                </div>
-              `;
-            }).join('')}
-          </div>
-        `;
-      } else {
-        variantSelectorHTML = `
-          <div class="detail-section-title">${p.variantLabel || 'Màu sắc'} — <span id="swatch-label" style="font-weight:400; text-transform:none;">${selectedSwatch}</span></div>
-          <div class="swatch-row" id="swatch-row">
-            ${(p.swatches || []).map(function(s, i) {
-              return `
-                <div class="swatch-opt ${i === 0 ? 'selected' : ''}" data-swatch="${s.name}" data-idx="${i}">
-                  <div class="dot" style="background:${s.color};"></div>
-                  ${s.name}
-                </div>
-              `;
-            }).join('')}
-          </div>
-        `;
-      }
+      // 2. Variant Selector (Single Authentic Standard Version)
+      let variantSelectorHTML = `
+        <div style="background:#F8FAFC; border:1px solid var(--apple-border-light); border-radius:14px; padding:12px 18px; margin:16px 0 20px; display:flex; align-items:center; gap:10px;">
+          <div style="width:9px; height:9px; border-radius:50%; background:#0284C7;"></div>
+          <div style="font-size:13.5px; color:var(--apple-black); font-weight:600;">Phiên bản tiêu chuẩn chính hãng SoraHome</div>
+        </div>
+      `;
 
       contentEl.innerHTML = `
         <div class="product-nav-bar">
