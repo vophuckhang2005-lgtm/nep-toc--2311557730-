@@ -59,11 +59,11 @@ button {
   --apple-border: rgba(0, 0, 0, 0.08);
   --apple-border-light: rgba(0, 0, 0, 0.04);
   
-  /* Brand Accent: Sophisticated Rose & Warm Amber */
-  --accent-rose: #d6336c;
-  --accent-rose-hover: #b82356;
-  --accent-rose-soft: rgba(214, 51, 108, 0.08);
-  --accent-rose-border: rgba(214, 51, 108, 0.2);
+  /* Brand Accent: SoraHome Sky Blue & Fresh Living */
+  --accent-rose: #0284c7;
+  --accent-rose-hover: #0369a1;
+  --accent-rose-soft: rgba(2, 132, 199, 0.08);
+  --accent-rose-border: rgba(2, 132, 199, 0.2);
   --accent-amber: #e67700;
   --accent-blue: #0071e3;
 

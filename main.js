@@ -6,7 +6,7 @@ function renderHeader() {
   h.innerHTML = `
     <header id="app-header">
       <div class="nav-inner">
-        <a href="index.html" class="logo"><img src="images/logo.svg" alt="Nếp Tóc Logo" class="brand-logo-img"/>Nếp <span>Tóc</span></a>
+        <a href="index.html" class="logo"><img src="images/logo.svg" alt="SoraHome Logo" class="brand-logo-img"/>Sora<span>Home</span></a>
         <nav id="main-nav">
           <a href="index.html">Trang chủ</a>
           <a href="products.html">Sản phẩm</a>
@@ -131,8 +131,8 @@ function renderFooter() {
     <footer>
       <div class="footer-inner">
         <div>
-          <div class="footer-logo"><img src="images/logo.svg" alt="Nếp Tóc Logo" class="brand-logo-img"/>Nếp <span>Tóc</span></div>
-          <p class="footer-desc">Phụ kiện tóc & kẹp càng cua thiết kế tối giản, vật liệu cao cấp. Tinh tế trên từng nếp tóc của bạn.</p>
+          <div class="footer-logo"><img src="images/logo.svg" alt="SoraHome Logo" class="brand-logo-img"/>Sora<span>Home</span></div>
+          <p class="footer-desc">Dụng cụ vệ sinh & tiện ích gia đình phong cách tối giản. Mang lại không gian sống thoáng đãng, tinh tươm mỗi ngày.</p>
         </div>
         <div class="footer-col">
           <h4>Khám phá</h4>
@@ -147,13 +147,13 @@ function renderFooter() {
           <h4>Hỗ trợ & Liên hệ</h4>
           <p>123 Nguyễn Thị Minh Khai, Q.1, TP.HCM</p>
           <p>Hotline / Zalo: 0901 234 567</p>
-          <p>Email: hello@neptoc.vn</p>
+          <p>Email: hello@sorahome.vn</p>
           <p>Giờ làm việc: 8:00 – 21:30 hàng ngày</p>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 Nếp Tóc. Thiết kế theo tiêu chuẩn Apple Human Interface.</p>
-        <p>Thanh toán khi nhận hàng (COD) toàn TP.HCM</p>
+        <p>© 2026 SoraHome. Thiết kế theo tiêu chuẩn Apple Human Interface.</p>
+        <p>Thanh toán khi nhận hàng (COD) toàn quốc</p>
       </div>
     </footer>
   `;
@@ -180,9 +180,9 @@ function renderFloatingHelp() {
     <div class="live-chat-box" id="live-chat-box">
       <div class="live-chat-header">
         <div class="live-chat-stylist-info">
-          <div class="live-chat-avatar">NT</div>
+          <div class="live-chat-avatar">SH</div>
           <div>
-            <div class="live-chat-name">Stylist Nếp Tóc</div>
+            <div class="live-chat-name">Chuyên viên SoraHome</div>
             <div class="live-chat-status"><span class="chat-status-green"></span>Trực tuyến • Phản hồi ngay</div>
           </div>
         </div>
@@ -192,7 +192,7 @@ function renderFloatingHelp() {
       <div class="live-chat-body" id="live-chat-messages">
         <div class="chat-bubble-row bot">
           <div class="chat-bubble">
-            Xin chào! Mình là Stylist của Nếp Tóc. Bạn cần tư vấn chọn kẹp cho chất tóc, độ dài hay phí giao hàng cứ nhắn mình nhé!
+            Xin chào! Mình là Chuyên viên tư vấn SoraHome. Bạn cần hỗ trợ chọn dụng cụ vệ sinh hay thông tin đơn hàng cứ nhắn mình nhé!
           </div>
           <span class="chat-timestamp">Vừa xong</span>
         </div>
@@ -1056,7 +1056,7 @@ const STYLIST_KNOWLEDGE = [
   },
   {
     keys: ['chao', 'hello', 'hi', 'alo', 'oi', 'ad', 'shop oi'],
-    reply: 'Chào bạn! Mình là Stylist Nếp Tóc. Bạn cần tìm kẹp cho độ dày tóc nào hay phối cùng trang phục gì, cứ nhắn mình tư vấn ngay nhé!'
+    reply: 'Chào bạn! Mình là Chuyên viên tư vấn SoraHome. Bạn cần tìm dụng cụ vệ sinh nhà cửa hay tư vấn giao hàng cứ nhắn mình nhé!'
   },
   {
     keys: ['cam on', 'thank', 'tks', 'ok', 'oke', 'da', 'vang'],
