@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8"/>
@@ -11,7 +11,7 @@
   <meta property="og:title" content="Giỏ hàng của bạn — SoraHome"/>
   <meta property="og:description" content="Kiểm tra lại danh sách dụng cụ vệ sinh nhà cửa và ưu đãi miễn phí giao hàng trước khi đặt hàng."/>
   <meta property="og:image" content="favicon.png?v=26"/>
-  <link rel="stylesheet" href="style.css?v=26"/>
+  <link rel="stylesheet" href="style.css?v=29"/>
 </head>
 <body>
 
@@ -36,18 +36,6 @@
     <div>
       <div id="cart-items-list"></div>
 
-      <!-- Feature 3: Gift Packaging Option in Cart Page -->
-      <div class="gift-option-card" id="cart-gift-card">
-        <label class="gift-option-header">
-          <input type="checkbox" id="cart-gift-check" onchange="handleCartPageGiftToggle(this.checked)"/>
-          <span class="gift-option-title">Đóng gói hộp quà nơ lụa & thiệp viết tay</span>
-          <span class="gift-option-price">+15.000đ</span>
-        </label>
-        <div class="gift-note-box" id="cart-gift-note-box">
-          <textarea id="cart-gift-note" class="gift-note-input" rows="2" placeholder="Ghi lời chúc lên thiệp (ví dụ: Chúc em luôn xinh đẹp, tự tin...)" oninput="handleCartPageGiftNote(this.value)"></textarea>
-        </div>
-      </div>
-
       <div style="margin-top:20px; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
         <a href="products.html" style="font-size:13.5px; font-weight:600; color:var(--accent-rose); text-decoration:none;">← Tiếp tục mua sắm</a>
         <button id="clear-cart-btn" style="font-size:13px; font-weight:500; color:var(--apple-tertiary); margin-left:auto; background:none; border:none; cursor:pointer;" onclick="confirmClear()">Xóa toàn bộ</button>
@@ -58,7 +46,6 @@
     <div class="cart-summary-box">
       <div class="summary-title">Tóm tắt đơn hàng</div>
       <div class="summary-row"><span>Tạm tính</span><span id="sum-subtotal">—</span></div>
-      <div class="summary-row" id="sum-gift-row" style="display:none; color:var(--accent-rose);"><span>Hộp quà & thiệp</span><span id="sum-gift">—</span></div>
       <div class="summary-row" id="sum-ship-row"><span>Phí giao hàng</span><span id="sum-ship">—</span></div>
       <div id="free-ship-banner" class="free-ship-notice" style="display:none;">Bạn được miễn phí giao hàng</div>
       <div id="near-free-ship" class="free-ship-notice" style="display:none; background:#555;"></div>
@@ -67,7 +54,7 @@
         <span class="summary-total-price" id="sum-total">—</span>
       </div>
       <a href="checkout.html" class="btn-checkout" id="checkout-btn">Tiến hành đặt hàng COD →</a>
-      <p style="font-size:12px; color:#aaa; text-align:center; margin-top:12px;">Thanh toán khi nhận hàng (COD) · Giao nhanh 24h</p>
+      <p style="font-size:12px; color:#aaa; text-align:center; margin-top:12px;">Thanh toán khi nhận hàng (COD) · Giao nhanh toàn quốc</p>
     </div>
   </div>
 </div>
@@ -75,9 +62,9 @@
 <div id="site-footer"></div>
 <div class="toast-container"></div>
 
-<script src="products.js?v=28"></script>
-<script src="cart.js?v=28"></script>
-<script src="main.js?v=28"></script>
+<script src="products.js?v=29"></script>
+<script src="cart.js?v=29"></script>
+<script src="main.js?v=29"></script>
 <script>
   renderHeader();
   renderFooter();
@@ -134,31 +121,7 @@
     // Summary
     const sub = getSubtotal();
     const ship = getShipFee();
-    const gift = getGiftOption();
     const total = getTotal();
-
-    // Gift Checkbox Sync
-    const giftCheck = document.getElementById('cart-gift-check');
-    const giftCard = document.getElementById('cart-gift-card');
-    const giftNoteBox = document.getElementById('cart-gift-note-box');
-    const giftNote = document.getElementById('cart-gift-note');
-    const giftRow = document.getElementById('sum-gift-row');
-
-    if (giftCheck && giftCard && giftNoteBox && giftNote) {
-      giftCheck.checked = gift.enabled;
-      giftCard.classList.toggle('checked', gift.enabled);
-      giftNoteBox.classList.toggle('show', gift.enabled);
-      if (document.activeElement !== giftNote) {
-        giftNote.value = gift.note || '';
-      }
-    }
-
-    if (gift.enabled) {
-      giftRow.style.display = 'flex';
-      document.getElementById('sum-gift').textContent = '+' + fmt(GIFT_FEE);
-    } else {
-      giftRow.style.display = 'none';
-    }
 
     document.getElementById('sum-subtotal').textContent = fmt(sub);
     document.getElementById('sum-ship').textContent = ship === 0 ? 'Miễn phí' : fmt(ship);
@@ -177,17 +140,6 @@
         document.getElementById('near-free-ship').style.display = 'none';
       }
     }
-  }
-
-  function handleCartPageGiftToggle(checked) {
-    const noteEl = document.getElementById('cart-gift-note');
-    const note = noteEl ? noteEl.value : '';
-    setGiftOption(checked, note);
-    renderCart();
-  }
-
-  function handleCartPageGiftNote(val) {
-    setGiftOption(true, val);
   }
 
   function doRemove(id, swatch, engText) {

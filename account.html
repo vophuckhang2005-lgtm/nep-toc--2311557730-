@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8"/>
@@ -12,7 +12,7 @@
   <meta property="og:title" content="Tài khoản cá nhân — SoraHome"/>
   <meta property="og:description" content="Quản lý thông tin cá nhân, theo dõi lịch sử đơn hàng và địa chỉ giao hàng tại SoraHome."/>
   <meta property="og:image" content="favicon.png?v=26"/>
-  <link rel="stylesheet" href="style.css?v=26"/>
+  <link rel="stylesheet" href="style.css?v=29"/>
 </head>
 <body>
 
@@ -241,9 +241,9 @@
 <div id="site-footer"></div>
 <div class="toast-container"></div>
 
-<script src="products.js?v=28"></script>
-<script src="cart.js?v=28"></script>
-<script src="main.js?v=28"></script>
+<script src="products.js?v=29"></script>
+<script src="cart.js?v=29"></script>
+<script src="main.js?v=29"></script>
 <!-- Firebase JS SDK qua CDN -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
@@ -419,12 +419,6 @@
             `).join('')}
           </div>
 
-          ${ord.gift && ord.gift.enabled ? `
-            <div style="background:#fafafc; border:1px solid var(--apple-border); border-radius:8px; padding:10px 14px; font-size:12.5px; color:var(--apple-secondary); margin-bottom:12px;">
-              Hộp quà nơ lụa & thiệp: "${ord.gift.note || 'Không có ghi chúc'}"
-            </div>
-          ` : ''}
-
           <!-- Order Summary Footer -->
           <div style="display:flex; justify-content:space-between; align-items:center; border-top:0.5px solid var(--apple-border-light); padding-top:14px; margin-top:8px; flex-wrap:wrap; gap:12px;">
             <div style="font-size:13px; color:var(--apple-secondary);">
@@ -457,8 +451,8 @@
       grid.innerHTML = `
         <div style="grid-column:1/-1; text-align:center; padding:48px 20px; background:var(--apple-surface); border:1px solid var(--apple-border-light); border-radius:var(--radius-lg);">
           <div style="font-size:16px; font-weight:700; color:var(--apple-black); margin-bottom:6px;">Chưa có sản phẩm yêu thích nào</div>
-          <p style="font-size:13.5px; color:var(--apple-secondary); margin-bottom:20px;">Hãy bấm biểu tượng trái tim trên các mẫu kẹp bạn ưng ý nhé.</p>
-          <a href="products.html" class="btn-primary" style="display:inline-block; font-size:13.5px; padding:10px 24px;">Khám phá kẹp ngay</a>
+          <p style="font-size:13.5px; color:var(--apple-secondary); margin-bottom:20px;">Hãy bấm biểu tượng trái tim trên các dụng cụ vệ sinh bạn ưng ý nhé.</p>
+          <a href="products.html" class="btn-primary" style="display:inline-block; font-size:13.5px; padding:10px 24px;">Khám phá sản phẩm ngay</a>
         </div>
       `;
       return;

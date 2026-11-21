@@ -1,9 +1,8 @@
-// cart.js — shared cart logic & gift packaging, dùng localStorage
+// cart.js — shared cart logic, dùng localStorage
 const CART_KEY = 'nep_toc_cart';
-const GIFT_KEY = 'nep_toc_gift_option';
 const FREE_SHIP_THRESHOLD = 99000;
 const SHIP_FEE = 20000;
-const GIFT_FEE = 15000;
+const GIFT_FEE = 0;
 
 function getCart() {
   try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
@@ -19,18 +18,11 @@ function saveCart(cart) {
 }
 
 function getGiftOption() {
-  try {
-    return JSON.parse(localStorage.getItem(GIFT_KEY)) || { enabled: false, note: '' };
-  } catch (e) {
-    return { enabled: false, note: '' };
-  }
+  return { enabled: false, note: '' };
 }
 
 function setGiftOption(enabled, note = '') {
-  localStorage.setItem(GIFT_KEY, JSON.stringify({ enabled, note }));
-  if (typeof renderCartDrawerContent === 'function') {
-    renderCartDrawerContent();
-  }
+  // Disabled - Household cleaning tools don't use gift ribbons
 }
 
 function addToCart(productId, qty = 1, swatch = null, customEngraving = null) {
@@ -113,7 +105,6 @@ function updateQty(productId, swatch, newQty, engravingText = null) {
 
 function clearCart() {
   localStorage.removeItem(CART_KEY);
-  localStorage.removeItem(GIFT_KEY);
   updateCartBadge();
   if (typeof renderCartDrawerContent === 'function') {
     renderCartDrawerContent();
@@ -137,9 +128,7 @@ function getShipFee() {
 }
 
 function getTotal() {
-  const gift = getGiftOption();
-  const giftCost = (gift.enabled && getCart().length > 0) ? GIFT_FEE : 0;
-  return getSubtotal() + getShipFee() + giftCost;
+  return getSubtotal() + getShipFee();
 }
 
 function fmt(n) {

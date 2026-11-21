@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8"/>
@@ -11,7 +11,7 @@
   <meta property="og:title" content="Thanh toán đơn hàng — SoraHome"/>
   <meta property="og:description" content="Thanh toán COD khi nhận hàng, kiểm tra hàng tận tay toàn quốc."/>
   <meta property="og:image" content="favicon.png?v=26"/>
-  <link rel="stylesheet" href="style.css?v=26"/>
+  <link rel="stylesheet" href="style.css?v=29"/>
 </head>
 <body>
 
@@ -109,7 +109,6 @@
       <div id="order-items-list" style="margin-bottom:16px;"></div>
       <div style="border-top:1px solid var(--apple-border); padding-top:14px;">
         <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span>Tạm tính</span><span id="co-subtotal"></span></div>
-        <div id="co-gift-row" style="display:none;justify-content:space-between;margin-bottom:8px;font-size:14px;color:var(--accent-rose);"><span>Hộp quà & thiệp</span><span id="co-gift"></span></div>
         <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span>Phí giao hàng</span><span id="co-ship"></span></div>
         <div style="display:flex;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid #ccc;">
           <span style="font-weight:700; font-size:16px;">Tổng cộng</span>
@@ -142,9 +141,9 @@
 <div id="site-footer"></div>
 <div class="toast-container"></div>
 
-<script src="products.js?v=28"></script>
-<script src="cart.js?v=28"></script>
-<script src="main.js?v=28"></script>
+<script src="products.js?v=29"></script>
+<script src="cart.js?v=29"></script>
+<script src="main.js?v=29"></script>
 <!-- Firebase JS SDK qua CDN -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
@@ -173,19 +172,9 @@
 
     const sub = getSubtotal();
     const ship = getShipFee();
-    const gift = getGiftOption();
 
     document.getElementById('co-subtotal').textContent = fmt(sub);
     document.getElementById('co-ship').textContent = ship === 0 ? 'Miễn phí' : fmt(ship);
-
-    const giftRow = document.getElementById('co-gift-row');
-    if (gift.enabled) {
-      giftRow.style.display = 'flex';
-      document.getElementById('co-gift').textContent = '+' + fmt(GIFT_FEE);
-    } else {
-      giftRow.style.display = 'none';
-    }
-
     document.getElementById('co-total').textContent = fmt(getTotal());
   }
 
@@ -291,7 +280,6 @@
     const note = document.getElementById('note').value.trim();
     const sub = getSubtotal();
     const ship = getShipFee();
-    const gift = getGiftOption();
     const total = getTotal();
 
     try {
@@ -306,7 +294,7 @@
         },
         sanPham: getCart(),
         tamTinh: sub,
-        phiGiao: ship + (gift && gift.enabled ? GIFT_FEE : 0),
+        phiGiao: ship,
         tongTien: total
       });
 
@@ -317,7 +305,6 @@
         items: getCart(),
         subtotal: sub,
         ship: ship,
-        gift: gift,
         total: total,
         customer: { fullname, phone, address, note },
         status: 'Đang xử lý'

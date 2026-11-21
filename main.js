@@ -170,7 +170,7 @@ function renderFloatingHelp() {
       <a href="tel:0901234567" class="float-btn phone-btn" title="Hotline 0901 234 567" aria-label="Hotline">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       </a>
-      <button class="float-btn chat-btn" id="btn-toggle-chat" title="Tư vấn chọn kẹp tóc" aria-label="Khung chat tư vấn">
+      <button class="float-btn chat-btn" id="btn-toggle-chat" title="Tư vấn dụng cụ vệ sinh SoraHome" aria-label="Khung chat tư vấn">
         <span class="chat-online-dot"></span>
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
       </button>
@@ -300,7 +300,6 @@ function renderCartDrawerContent() {
 
   const cart = getCart();
   const subtotal = getSubtotal();
-  const gift = getGiftOption();
 
   // 1. Free Shipping Progress Bar
   const diff = FREE_SHIP_THRESHOLD - subtotal;
@@ -329,7 +328,7 @@ function renderCartDrawerContent() {
       <div class="drawer-empty-msg">
         <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8" style="margin:0 auto 12px; color:var(--apple-tertiary);"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         <p style="font-size:15px; font-weight:600; color:var(--apple-black); margin-bottom:4px;">Túi đồ của bạn đang trống</p>
-        <p style="font-size:13px; color:var(--apple-secondary); margin-bottom:20px;">Hãy dạo một vòng và chọn chiếc kẹp bạn yêu thích nhé.</p>
+        <p style="font-size:13px; color:var(--apple-secondary); margin-bottom:20px;">Hãy dạo một vòng và chọn dụng cụ vệ sinh phù hợp cho tổ ấm nhé.</p>
         <a href="products.html" class="btn-primary" style="display:inline-block; font-size:13px; padding:10px 22px;" onclick="closeCartDrawer()">Khám phá ngay</a>
       </div>
     `;
@@ -370,18 +369,6 @@ function renderCartDrawerContent() {
         </div>
       `).join('')}
     </div>
-
-    <!-- Feature 3: Gift Packaging Option in Drawer -->
-    <div class="gift-option-card ${gift.enabled ? 'checked' : ''}" id="drawer-gift-card">
-      <label class="gift-option-header">
-        <input type="checkbox" id="drawer-gift-check" ${gift.enabled ? 'checked' : ''} onchange="handleDrawerGiftToggle(this.checked)"/>
-        <span class="gift-option-title">Đóng gói hộp quà nơ lụa & thiệp viết tay</span>
-        <span class="gift-option-price">+15.000đ</span>
-      </label>
-      <div class="gift-note-box ${gift.enabled ? 'show' : ''}" id="drawer-gift-note-box">
-        <textarea id="drawer-gift-note" class="gift-note-input" rows="2" placeholder="Ghi lời chúc lên thiệp (ví dụ: Chúc em luôn xinh đẹp rạng ngời...)" oninput="handleDrawerGiftNote(this.value)">${gift.note || ''}</textarea>
-      </div>
-    </div>
   `;
 
   // 3. Footer
@@ -391,12 +378,6 @@ function renderCartDrawerContent() {
       <span>Tạm tính</span>
       <span style="font-weight:600; color:var(--apple-black);">${fmt(subtotal)}</span>
     </div>
-    ${gift.enabled ? `
-      <div class="drawer-subtotal-row">
-        <span>Hộp quà & thiệp</span>
-        <span style="font-weight:600; color:var(--accent-rose);">+${fmt(GIFT_FEE)}</span>
-      </div>
-    ` : ''}
     <div class="drawer-subtotal-row">
       <span>Phí giao hàng</span>
       <span style="font-weight:600; color:var(--apple-black);">${getShipFee() === 0 ? 'Miễn phí' : fmt(getShipFee())}</span>
@@ -408,16 +389,6 @@ function renderCartDrawerContent() {
     <a href="checkout.html" class="btn-drawer-checkout" onclick="closeCartDrawer()">Đặt hàng COD ngay →</a>
     <a href="cart.html" class="drawer-view-cart-link" onclick="closeCartDrawer()">Xem trang giỏ hàng chi tiết</a>
   `;
-}
-
-function handleDrawerGiftToggle(checked) {
-  const noteEl = document.getElementById('drawer-gift-note');
-  const note = noteEl ? noteEl.value : '';
-  setGiftOption(checked, note);
-}
-
-function handleDrawerGiftNote(val) {
-  setGiftOption(true, val);
 }
 
 // ── Apple Slide-Out Wishlist Drawer (Xem lại danh sách Yêu thích) ──
