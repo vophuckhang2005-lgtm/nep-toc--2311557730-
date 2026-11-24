@@ -1,4 +1,4 @@
-/* style.css — Nếp Tóc | Nâng cấp theo chuẩn Apple Design (WWDC Fluid Interfaces) */
+/* style.css — SoraHome | Nâng cấp theo chuẩn Apple Design (WWDC Fluid Interfaces) */
 
 /* ── Typography & System Fonts ── */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -5554,4 +5554,17 @@ body.has-sticky-atc .floating-contact {
 .soft-faq-item.open .soft-faq-answer {
   max-height: 200px;
   padding: 0 22px 18px;
+}
+
+/* ── Accessibility: Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
