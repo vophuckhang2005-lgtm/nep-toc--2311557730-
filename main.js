@@ -4,6 +4,12 @@ function renderHeader() {
   const h = document.getElementById('site-header');
   if (!h) return;
   h.innerHTML = `
+    <div class="promo-topbar" role="region" aria-label="Thông báo khuyến mãi">
+      <span class="promo-topbar-text">
+        <span>Ưu đãi: <strong>Freeship đơn từ 99.000₫</strong> • Đồng kiểm COD 100% trước khi thanh toán</span>
+      </span>
+      <span class="practice-badge">Website thực hành – không bán hàng thật</span>
+    </div>
     <header id="app-header">
       <div class="nav-inner">
         <a href="index.html" class="logo"><img src="images/logo.svg" alt="SoraHome Logo" class="brand-logo-img"/>Sora<span>Home</span></a>
@@ -152,14 +158,14 @@ function renderFooter() {
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 SoraHome. Thiết kế theo tiêu chuẩn Apple Human Interface.</p>
+        <p>© 2026 SoraHome. <strong>Website thực hành – không bán hàng thật</strong>.</p>
         <p>Thanh toán khi nhận hàng (COD) toàn quốc</p>
       </div>
     </footer>
   `;
 }
 
-// Floating Quick Contact & Emi Jay Live Chat Widget (Icon Only)
+// Floating Quick Contact & SoraHome Live Chat Widget (Icon Only)
 function renderFloatingHelp() {
   if (document.getElementById('floating-contact-btn')) return;
   const wrap = document.createElement('div');
@@ -176,7 +182,7 @@ function renderFloatingHelp() {
       </button>
     </div>
 
-    <!-- Emi Jay Live Chat Box -->
+    <!-- SoraHome Live Chat Box -->
     <div class="live-chat-box" id="live-chat-box">
       <div class="live-chat-header">
         <div class="live-chat-stylist-info">

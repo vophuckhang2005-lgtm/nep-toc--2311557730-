@@ -1,4 +1,4 @@
-// Cấu hình Firebase cho dự án Nếp Tóc
+// Cấu hình Firebase cho dự án SoraHome
 const firebaseConfig = {
   apiKey: "AIzaSyD_6sMed1LQ6Z-BM4R8hxu3nsgAkREa3CA",
   authDomain: "nep-toc-2311557730.firebaseapp.com",

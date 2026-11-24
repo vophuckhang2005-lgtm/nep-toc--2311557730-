@@ -13,7 +13,7 @@
   <meta property="og:title" content="SoraHome — Dụng cụ vệ sinh & Giải pháp nhà sạch tối giản"/>
   <meta property="og:description" content="Nhà sạch tinh tươm, sống trọn an yên. Dụng cụ vệ sinh nhà cửa thông minh thiết kế tối giản, vật liệu bền bỉ."/>
   <meta property="og:image" content="favicon.png?v=26"/>
-  <link rel="stylesheet" href="style.css?v=29"/>
+  <link rel="stylesheet" href="style.css?v=30"/>
 </head>
 <body>
 
@@ -112,8 +112,8 @@
 <section class="scroll-reveal" style="max-width:1200px; margin:0 auto; padding:0 28px 80px;">
   <h2 class="section-title" style="margin-bottom:8px;">Danh mục <em>sản phẩm</em></h2>
   <p class="section-sub" style="margin-bottom:32px;">Giải pháp vệ sinh chuyên dụng cho từng không gian sống</p>
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
-    <a href="products.html?cat=floor" class="scroll-reveal-left delay-1" style="display:block; background:#ffffff; border:1px solid var(--apple-border-light); border-radius:var(--radius-lg); padding:36px 32px; box-shadow:var(--shadow-card); transition:transform 0.3s var(--spring-snappy), box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-hover)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-card)'">
+  <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px;">
+    <a href="products.html?cat=floor" class="scroll-reveal-left delay-1" style="display:block; background:#ffffff; border:1px solid var(--apple-border-light); border-radius:var(--radius-lg); padding:32px 28px; box-shadow:var(--shadow-card); transition:transform 0.3s var(--spring-snappy), box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-hover)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-card)'">
       <div style="margin-bottom:16px;">
         <svg width="60" height="60" viewBox="0 0 64 64" fill="none">
           <circle cx="32" cy="32" r="28" fill="#F0F9FF"/>
@@ -127,7 +127,7 @@
       <div style="font-size:13.5px; color:var(--apple-secondary);">Giải pháp lau dọn sàn nhà, sàn gỗ & gạch men</div>
     </a>
 
-    <a href="products.html?cat=bathroom" class="scroll-reveal-right delay-2" style="display:block; background:#ffffff; border:1px solid var(--apple-border-light); border-radius:var(--radius-lg); padding:36px 32px; box-shadow:var(--shadow-card); transition:transform 0.3s var(--spring-snappy), box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-hover)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-card)'">
+    <a href="products.html?cat=bathroom" class="scroll-reveal delay-2" style="display:block; background:#ffffff; border:1px solid var(--apple-border-light); border-radius:var(--radius-lg); padding:32px 28px; box-shadow:var(--shadow-card); transition:transform 0.3s var(--spring-snappy), box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-hover)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-card)'">
       <div style="margin-bottom:16px;">
         <svg width="60" height="60" viewBox="0 0 64 64" fill="none">
           <circle cx="32" cy="32" r="28" fill="#F0F9FF"/>
@@ -141,15 +141,29 @@
       <div style="font-size:20px; font-weight:700; color:var(--apple-black); letter-spacing:-0.02em; margin-bottom:4px;">Phòng Tắm & Toilet</div>
       <div style="font-size:13.5px; color:var(--apple-secondary);">Dụng cụ cọ rửa, chà sàn & vệ sinh bồn cầu</div>
     </a>
+
+    <a href="products.html?cat=glass" class="scroll-reveal-right delay-3" style="display:block; background:#ffffff; border:1px solid var(--apple-border-light); border-radius:var(--radius-lg); padding:32px 28px; box-shadow:var(--shadow-card); transition:transform 0.3s var(--spring-snappy), box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-hover)'" onmouseout="this.style.transform='';this.style.boxShadow='var(--shadow-card)'">
+      <div style="margin-bottom:16px;">
+        <svg width="60" height="60" viewBox="0 0 64 64" fill="none">
+          <circle cx="32" cy="32" r="28" fill="#F0F9FF"/>
+          <!-- Modern Squeegee / Glass Wiper Icon -->
+          <rect x="16" y="18" width="32" height="7" rx="3" fill="#38BDF8" stroke="#0284C7" stroke-width="2.5"/>
+          <line x1="32" y1="25" x2="32" y2="50" stroke="#0284C7" stroke-width="3" stroke-linecap="round"/>
+          <path d="M20 34 L26 28 M38 40 L44 34" stroke="#0284C7" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+        </svg>
+      </div>
+      <div style="font-size:20px; font-weight:700; color:var(--apple-black); letter-spacing:-0.02em; margin-bottom:4px;">Gạt Nước & Lau Kính</div>
+      <div style="font-size:13.5px; color:var(--apple-secondary);">Gạt sạch nước đọng, gương kính & mặt bàn bếp</div>
+    </a>
   </div>
 </section>
 
 <div id="site-footer"></div>
 <div class="toast-container"></div>
 
-<script src="products.js?v=29"></script>
-<script src="cart.js?v=29"></script>
-<script src="main.js?v=29"></script>
+<script src="products.js?v=30"></script>
+<script src="cart.js?v=30"></script>
+<script src="main.js?v=30"></script>
 <script>
   renderHeader();
   renderFooter();
