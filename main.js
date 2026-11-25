@@ -15,8 +15,8 @@ function renderHeader() {
         <a href="index.html" class="logo"><img src="images/logo.svg" alt="SoraHome Logo" class="brand-logo-img"/>Sora<span>Home</span></a>
         <nav id="main-nav">
           <a href="index.html">Trang chủ</a>
-          <a href="products.html">Sản phẩm</a>
           <a href="about.html">Về chúng tôi</a>
+          <a href="products.html">Sản phẩm</a>
           <a href="policy.html">Chính sách</a>
           <a href="contact.html">Liên hệ</a>
         </nav>
