@@ -706,6 +706,7 @@ function productVisualSecondarySVG(p, size = 88) {
 function productCardHTML(p) {
   const tagClass = ['Bán chạy', 'Yêu thích', 'Độc quyền'].includes(p.tag) ? '' : 'yellow';
   const wishlisted = isWishlisted(p.id);
+  const compared = typeof isCompared === 'function' ? isCompared(p.id) : false;
   const hasSecondary = false;
   const hoverHint = p.hoverHint || (p.hoverImage ? 'Xem chi tiết dụng cụ' : (p.image ? 'Xem trọn bộ' : 'Chi tiết sản phẩm'));
 
@@ -721,6 +722,10 @@ function productCardHTML(p) {
             ${productVisualSecondarySVG(p)}
           </div>
         ` : ''}
+
+        <button class="btn-compare ${compared ? 'active' : ''}" data-compare-id="${p.id}" onclick="event.preventDefault(); event.stopPropagation(); toggleCompare(${p.id})" title="So sánh sản phẩm">
+          ${compared ? '✓ Đang so sánh' : '+ So sánh'}
+        </button>
 
         <button class="btn-wishlist ${wishlisted ? 'active' : ''}" onclick="event.preventDefault(); event.stopPropagation(); handleWishlist(${p.id}, this)" title="Lưu yêu thích">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="${wishlisted ? '#d6336c' : 'none'}" stroke="${wishlisted ? '#d6336c' : '#1d1d1f'}" stroke-width="2">
@@ -1231,7 +1236,200 @@ window.addEventListener('scroll', () => {
 
 // Auto-run on load
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initScrollReveal);
+  document.addEventListener('DOMContentLoaded', () => {
+    initScrollReveal();
+    renderCompareBar();
+  });
 } else {
-  setTimeout(initScrollReveal, 100);
+  setTimeout(() => {
+    initScrollReveal();
+    renderCompareBar();
+  }, 100);
+}
+
+// ── Feature: Product Comparison (Compare up to 2 products) ──
+const COMPARE_KEY = 'sorahome_compare';
+
+function getCompareList() {
+  try {
+    const raw = JSON.parse(sessionStorage.getItem(COMPARE_KEY) || '[]');
+    return Array.isArray(raw) ? raw.slice(0, 2) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveCompareList(list) {
+  sessionStorage.setItem(COMPARE_KEY, JSON.stringify(list.slice(0, 2)));
+}
+
+function isCompared(id) {
+  return getCompareList().includes(Number(id));
+}
+
+function updateCompareButtonsUI() {
+  const list = getCompareList();
+  document.querySelectorAll('.btn-compare[data-compare-id]').forEach(btn => {
+    const id = Number(btn.dataset.compareId);
+    const active = list.includes(id);
+    btn.classList.toggle('active', active);
+    btn.textContent = active ? '✓ Đang so sánh' : '+ So sánh';
+  });
+}
+
+function toggleCompare(id) {
+  const numId = Number(id);
+  let list = getCompareList();
+  if (list.includes(numId)) {
+    list = list.filter(x => x !== numId);
+    showToast('Đã bỏ khỏi danh sách so sánh');
+  } else {
+    if (list.length >= 2) {
+      showToast('Chỉ so sánh tối đa 2 sản phẩm cùng lúc', 'error');
+      return;
+    }
+    list.push(numId);
+    showToast(list.length === 2 ? 'Đã chọn đủ 2 sản phẩm để so sánh' : 'Chọn thêm 1 sản phẩm nữa để so sánh');
+  }
+  saveCompareList(list);
+  updateCompareButtonsUI();
+  renderCompareBar();
+}
+
+function clearCompare() {
+  saveCompareList([]);
+  updateCompareButtonsUI();
+  renderCompareBar();
+}
+
+function renderCompareBar() {
+  if (typeof PRODUCTS === 'undefined') return;
+  const list = getCompareList();
+  let bar = document.getElementById('compare-bar');
+
+  if (list.length === 0) {
+    if (bar) bar.remove();
+    return;
+  }
+
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'compare-bar';
+    bar.className = 'compare-bar';
+    document.body.appendChild(bar);
+  }
+
+  const items = list.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
+  bar.innerHTML = `
+    <div class="compare-bar-items">
+      ${items.map(p => `
+        <div class="compare-chip">
+          <img src="${p.image}" alt="${p.shortName || p.name}"/>
+          <span>${p.shortName || p.name}</span>
+          <button type="button" onclick="toggleCompare(${p.id})" aria-label="Bỏ ${p.name}">×</button>
+        </div>
+      `).join('')}
+      ${items.length === 1 ? '<div class="compare-placeholder">Chọn thêm 1 món nữa...</div>' : ''}
+    </div>
+    <div class="compare-bar-actions">
+      <button type="button" class="btn-compare-clear" onclick="clearCompare()">Xóa</button>
+      <button type="button" class="btn-primary btn-compare-go" ${items.length < 2 ? 'disabled' : ''} onclick="openCompareModal()">
+        So sánh (${items.length}/2)
+      </button>
+    </div>
+  `;
+}
+
+function openCompareModal() {
+  if (typeof PRODUCTS === 'undefined') return;
+  const items = getCompareList().map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
+  if (items.length < 2) return;
+
+  let modal = document.getElementById('compare-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'compare-modal';
+    modal.className = 'modal-overlay';
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeCompareModal();
+    });
+    document.body.appendChild(modal);
+  }
+
+  const [a, b] = items;
+  const discountPct = (p) => p.originalPrice > p.price ? Math.round((1 - p.price / p.originalPrice) * 100) : 0;
+
+  modal.innerHTML = `
+    <div class="modal-box compare-modal-box">
+      <div class="compare-modal-header">
+        <div>
+          <h3 style="font-size:20px; font-weight:800; color:var(--apple-black);">So sánh sản phẩm</h3>
+          <p style="font-size:13px; color:var(--apple-secondary); margin-top:2px;">Đối chiếu thông số & chất liệu để chọn đúng dụng cụ</p>
+        </div>
+        <button type="button" class="compare-modal-close" onclick="closeCompareModal()" aria-label="Đóng">×</button>
+      </div>
+      <div class="compare-table-wrap">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Tiêu chí</th>
+              ${items.map(p => `
+                <th>
+                  <img src="${p.image}" alt="${p.name}" class="compare-thumb"/>
+                  <div class="compare-prod-name">${p.name}</div>
+                </th>
+              `).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Giá bán</td>
+              ${items.map(p => `
+                <td>
+                  <strong style="color:var(--accent-rose); font-size:16px;">${fmt(p.price)}</strong>
+                  ${discountPct(p) > 0 ? `<div style="font-size:12px; color:var(--apple-tertiary);"><span style="text-decoration:line-through;">${fmt(p.originalPrice)}</span> (-${discountPct(p)}%)</div>` : ''}
+                </td>
+              `).join('')}
+            </tr>
+            <tr>
+              <td>Danh mục</td>
+              <td>${a.categoryName}</td>
+              <td>${b.categoryName}</td>
+            </tr>
+            <tr>
+              <td>Đánh giá</td>
+              <td>⭐ ${a.rating} (${a.reviewsCount} lượt)</td>
+              <td>⭐ ${b.rating} (${b.reviewsCount} lượt)</td>
+            </tr>
+            <tr>
+              <td>Thông số</td>
+              <td>${a.spec || 'Đang cập nhật'}</td>
+              <td>${b.spec || 'Đang cập nhật'}</td>
+            </tr>
+            <tr>
+              <td>Chất liệu</td>
+              <td>${a.material || 'Đang cập nhật'}</td>
+              <td>${b.material || 'Đang cập nhật'}</td>
+            </tr>
+            <tr>
+              <td>Chọn mua</td>
+              ${items.map(p => `
+                <td>
+                  <button type="button" class="btn-primary" style="width:100%; padding:9px 12px; font-size:13px;" onclick="quickAdd(${p.id}); closeCompareModal();">
+                    Thêm vào giỏ
+                  </button>
+                </td>
+              `).join('')}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+  modal.classList.add('open');
+}
+
+function closeCompareModal() {
+  const modal = document.getElementById('compare-modal');
+  if (modal) modal.classList.remove('open');
 }

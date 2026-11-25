@@ -115,8 +115,12 @@
           <span style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--pink);" id="co-total"></span>
         </div>
       </div>
-      <div style="margin-top:16px; background:var(--apple-surface-secondary); border:1px solid var(--apple-border); border-radius:8px; padding:10px 14px; font-size:13px; font-weight:600;">
-        Giao hàng 24h nội thành TP.HCM
+      <div id="delivery-estimate-box" style="margin-top:16px; background:var(--apple-surface-secondary); border:1px solid var(--apple-border); border-radius:12px; padding:12px 14px; font-size:13px; line-height:1.5;">
+        <div style="font-weight:700; color:var(--apple-black); display:flex; align-items:center; gap:6px;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="var(--accent-rose)" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          <span id="delivery-estimate-title">Dự kiến giao hàng: 1–2 ngày</span>
+        </div>
+        <div id="delivery-estimate-detail" style="color:var(--apple-secondary); font-size:12.5px; margin-top:4px;"></div>
       </div>
     </div>
   </div>
@@ -197,6 +201,48 @@
       ward: (loggedUser && loggedUser.ward) ? loggedUser.ward : ''
     }
   );
+
+  // Delivery Time Estimator based on selected city
+  function formatDeliveryDate(daysFromNow) {
+    const d = new Date();
+    d.setDate(d.getDate() + daysFromNow);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    return `${day}/${month}`;
+  }
+
+  function updateDeliveryEstimate() {
+    const cityEl = document.getElementById('co-city');
+    const titleEl = document.getElementById('delivery-estimate-title');
+    const detailEl = document.getElementById('delivery-estimate-detail');
+    if (!cityEl || !titleEl || !detailEl) return;
+
+    const city = cityEl.value || 'TP. Hồ Chí Minh';
+    let minDays = 3;
+    let maxDays = 5;
+    let zoneLabel = 'Giao tiêu chuẩn toàn quốc';
+
+    if (city === 'TP. Hồ Chí Minh') {
+      minDays = 1;
+      maxDays = 2;
+      zoneLabel = 'Giao nhanh nội thành TP.HCM (24h–48h)';
+    } else if (['Hà Nội', 'Đà Nẵng', 'Cần Thơ', 'Bình Dương', 'Đồng Nai'].includes(city)) {
+      minDays = 2;
+      maxDays = 3;
+      zoneLabel = `Giao nhanh liên tỉnh đến ${city}`;
+    } else {
+      zoneLabel = `Giao tiêu chuẩn đến ${city}`;
+    }
+
+    titleEl.textContent = `Dự kiến nhận hàng: ${formatDeliveryDate(minDays)} – ${formatDeliveryDate(maxDays)}`;
+    detailEl.textContent = `${zoneLabel} • Đặt hôm nay, xử lý trong ngày`;
+  }
+
+  const coCityEl = document.getElementById('co-city');
+  if (coCityEl) {
+    coCityEl.addEventListener('change', updateDeliveryEstimate);
+    updateDeliveryEstimate();
+  }
 
   // Validation
   function validate() {
