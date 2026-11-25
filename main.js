@@ -1426,10 +1426,10 @@ function openCompareModal() {
       </div>
     </div>
   `;
-  modal.classList.add('open');
+  modal.classList.add('show');
 }
 
 function closeCompareModal() {
   const modal = document.getElementById('compare-modal');
-  if (modal) modal.classList.remove('open');
+  if (modal) modal.classList.remove('show');
 }
