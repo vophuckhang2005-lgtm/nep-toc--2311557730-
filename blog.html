@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog Mẹo Nhà Sạch — SoraHome</title>
+  <meta name="description" content="Chia sẻ bí quyết dọn dẹp nhà cửa nhẹ nhàng, xử lý vết bẩn, bảo quản sàn gỗ và giữ phòng tắm luôn khô thoáng cùng SoraHome."/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=26"/>
+  <link rel="alternate icon" type="image/x-icon" href="favicon.ico?v=26"/>
+  <link rel="apple-touch-icon" href="favicon.png?v=26"/>
+  <meta name="theme-color" content="#38BDF8"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Blog Mẹo Nhà Sạch — SoraHome"/>
+  <meta property="og:description" content="Bí quyết giữ tổ ấm tinh tươm, nhẹ nhàng và khoa học mỗi ngày."/>
+  <meta property="og:image" content="favicon.png?v=26"/>
+  <link rel="stylesheet" href="style.css?v=30"/>
+</head>
+<body>
+
+<div id="site-header"></div>
+
+<div class="page">
+  <div style="margin-bottom:28px;">
+    <div class="smart-eyebrow">Góc chia sẻ SoraHome</div>
+    <h1 class="section-title">Mẹo <em>nhà sạch</em> mỗi ngày</h1>
+    <p class="section-sub">Những bí quyết dọn dẹp nhẹ nhàng, khoa học giúp tổ ấm luôn khô thoáng và tinh tươm</p>
+  </div>
+
+  <!-- Filter Pills -->
+  <div class="filter-bar" id="blog-filter-bar" style="margin-bottom:28px;">
+    <button class="filter-btn active" data-topic="all">Tất cả bài viết</button>
+    <button class="filter-btn" data-topic="floor">Sàn nhà</button>
+    <button class="filter-btn" data-topic="bathroom">Nhà tắm & Toilet</button>
+    <button class="filter-btn" data-topic="glass">Kính & Bếp</button>
+  </div>
+
+  <!-- Blog Grid -->
+  <div class="blog-grid" id="blog-grid"></div>
+</div>
+
+<!-- Reader Modal -->
+<div class="modal-overlay" id="blog-modal" onclick="if(event.target===this) closeBlogModal()">
+  <div class="modal-box blog-modal-box">
+    <div class="compare-modal-header">
+      <div>
+        <span class="blog-tag" id="bm-tag">Mẹo hay</span>
+        <h2 id="bm-title" style="font-size:22px; font-weight:800; color:var(--apple-black); margin-top:8px; line-height:1.3;"></h2>
+        <div id="bm-meta" style="font-size:12.5px; color:var(--apple-tertiary); margin-top:4px;"></div>
+      </div>
+      <button type="button" class="compare-modal-close" onclick="closeBlogModal()" aria-label="Đóng">×</button>
+    </div>
+    <img id="bm-img" src="" alt="" class="blog-modal-img"/>
+    <div id="bm-content" class="blog-modal-content"></div>
+    <div class="blog-rec-box">
+      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--accent-rose); margin-bottom:10px;">
+        Dụng cụ gợi ý trong bài
+      </div>
+      <div id="bm-products" class="quiz-result-items"></div>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer"></div>
+<div class="toast-container"></div>
+
+<script src="products.js?v=30"></script>
+<script src="cart.js?v=30"></script>
+<script src="main.js?v=30"></script>
+<script>
+  renderHeader();
+  renderFooter();
+
+  const BLOG_POSTS = [
+    {
+      id: 1,
+      topic: 'floor',
+      topicLabel: 'Sàn nhà',
+      title: 'Cách lau sàn gỗ và gạch men sạch bóng mà không để lại vệt nước',
+      readTime: '3 phút đọc',
+      date: '25/11/2026',
+      image: 'images/lifestyle/living-space-livingroom.jpg',
+      excerpt: 'Nước đọng quá nhiều là nguyên nhân hàng đầu khiến sàn gỗ bị phồng rộp và gạch men bị mờ đục sau khi lau.',
+      paragraphs: [
+        'Nhiều gia đình có thói quen nhúng giẻ thật đẫm nước rồi lau trực tiếp lên sàn gỗ hoặc gạch men bóng. Lượng nước dư thừa không chỉ lâu khô, dễ gây trơn trượt mà còn để lại các vệt ố trắng khi bay hơi.',
+        'Nguyên tắc vàng là giữ độ ẩm ở mức vừa đủ (vắt kiệt khoảng 90–95%). Sử dụng sợi Microfiber dệt nano tĩnh điện giúp hút giữ bụi mịn và tóc rụng ngay trong lượt kéo đầu tiên mà không cần hóa chất tẩy rửa mạnh.',
+        'Với những căn hộ có diện tích phòng khách rộng, bàn lau kích thước lớn 45cm kết hợp con trượt tự vắt hai chiều sẽ giúp bạn rút ngắn một nửa thời gian dọn dẹp mỗi ngày.'
+      ],
+      productIds: [4, 1]
+    },
+    {
+      id: 2,
+      topic: 'bathroom',
+      topicLabel: 'Nhà tắm & Toilet',
+      title: 'Mẹo đánh bay cặn canxi và rêu mốc nơi chân tường nhà tắm trong 5 phút',
+      readTime: '4 phút đọc',
+      date: '24/11/2026',
+      image: 'images/lifestyle/living-space-bathroom.jpg',
+      excerpt: 'Chân tường và đường ron gạch ẩm ướt rất dễ bám ố vàng. Chỉ cần đúng góc cọ và gạt khô ngay sau khi tắm.',
+      paragraphs: [
+        'Khu vực góc tường tiếp giáp sàn nhà tắm thường bị đầu chổi tròn thông thường bỏ sót, khiến xà phòng và cặn canxi tích tụ thành mảng bám ố vàng khó chịu.',
+        'Hãy chọn đầu chổi thiết kế vát nhọn chữ V 90 độ để sợi cước cứng dễ dàng len sâu vào đường ron gạch và khe góc hẹp. Sau khi chà rửa, dùng ngay lưỡi cao su hoặc thanh silicon gạt khô nước đọng về phía miệng cống.',
+        'Thói quen gạt khô sàn nhà tắm chỉ mất chưa tới 30 giây nhưng giúp giảm tới 80% nguy cơ mọc rêu mốc và hạn chế trơn trượt cho người lớn tuổi, trẻ nhỏ.'
+      ],
+      productIds: [2, 3]
+    },
+    {
+      id: 3,
+      topic: 'glass',
+      topicLabel: 'Kính & Bếp',
+      title: 'Gương phòng tắm và mặt bàn bếp luôn sáng trong chỉ với 1 đường gạt',
+      readTime: '3 phút đọc',
+      date: '22/11/2026',
+      image: 'images/lifestyle/living-space-kitchen.jpg',
+      excerpt: 'Thay vì dùng khăn vải dễ để lại xơ bông và vệt loang, lưỡi gạt silicon đàn hồi giúp bề mặt khô ráo tức thì.',
+      paragraphs: [
+        'Lau gương hoặc vách kính tắm bằng khăn vải thông thường thường để lại bụi vải và vệt mờ khi có ánh đèn chiếu vào.',
+        'Bí quyết là xịt nhẹ dung dịch làm sạch hoặc nước ấm, sau đó dùng cây gạt lưỡi silicon mềm miết đều từ trên xuống dưới theo một đường thẳng liên tục. Với các góc khuất hoặc kính trên cao, khớp xoay 360 độ sẽ giúp lưỡi gạt luôn áp sát mặt phẳng mà không cần với tay.',
+        'Cách này cũng cực kỳ hiệu quả để gạt sạch nước đọng và bọt xà phòng trên mặt bàn đá gian bếp sau khi rửa chén.'
+      ],
+      productIds: [1]
+    },
+    {
+      id: 4,
+      topic: 'bathroom',
+      topicLabel: 'Nhà tắm & Toilet',
+      title: 'Giữ khu vực bồn cầu luôn sạch khuẩn, khô thoáng và không mùi ẩm',
+      readTime: '3 phút đọc',
+      date: '20/11/2026',
+      image: 'images/products/bo-co-toilet-3in1-1.jpg',
+      excerpt: 'Vi khuẩn thường trú ngụ ở vành trong bồn cầu và ngay bên trong hộp đựng chổi cọ bị đọng nước.',
+      paragraphs: [
+        'Chổi cọ toilet đầu tròn truyền thống rất khó chạm tới phần gờ cong bên trong vành xả nước. Sử dụng đầu cọ uốn cong chữ V kết hợp cọ mini phụ cho khe nút xả giúp làm sạch triệt để những vị trí khuất mắt nhất.',
+        'Một chi tiết nhỏ nhưng rất quan trọng: hãy chọn loại có hộp đế đựng thông gió thoát nước ở đáy. Khi đầu cọ tự ráo và khô nhanh sau mỗi lần dùng, nhà vệ sinh sẽ không còn mùi ẩm mốc khó chịu.'
+      ],
+      productIds: [5, 3]
+    }
+  ];
+
+  let activeTopic = 'all';
+
+  function renderBlogGrid() {
+    const grid = document.getElementById('blog-grid');
+    const posts = activeTopic === 'all' ? BLOG_POSTS : BLOG_POSTS.filter(p => p.topic === activeTopic);
+    grid.innerHTML = posts.map(post => `
+      <article class="blog-card" onclick="openBlogModal(${post.id})">
+        <div class="blog-card-img-wrap">
+          <img src="${post.image}" alt="${post.title}" loading="lazy"/>
+          <span class="blog-tag blog-tag-float">${post.topicLabel}</span>
+        </div>
+        <div class="blog-card-body">
+          <div class="blog-meta">${post.date} • ${post.readTime}</div>
+          <h3 class="blog-card-title">${post.title}</h3>
+          <p class="blog-card-excerpt">${post.excerpt}</p>
+          <span class="btn-shop-look">Đọc tiếp →</span>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  document.getElementById('blog-filter-bar').addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    activeTopic = btn.dataset.topic;
+    document.querySelectorAll('#blog-filter-bar .filter-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.topic === activeTopic);
+    });
+    renderBlogGrid();
+  });
+
+  function openBlogModal(postId) {
+    const post = BLOG_POSTS.find(p => p.id === postId);
+    if (!post) return;
+    document.getElementById('bm-tag').textContent = post.topicLabel;
+    document.getElementById('bm-title').textContent = post.title;
+    document.getElementById('bm-meta').textContent = `${post.date} • ${post.readTime}`;
+    document.getElementById('bm-img').src = post.image;
+    document.getElementById('bm-img').alt = post.title;
+    document.getElementById('bm-content').innerHTML = post.paragraphs.map(p => `<p>${p}</p>`).join('');
+
+    const recEl = document.getElementById('bm-products');
+    if (typeof PRODUCTS !== 'undefined') {
+      const items = post.productIds.map(id => PRODUCTS.find(x => x.id === id)).filter(Boolean);
+      recEl.innerHTML = items.map(p => `
+        <div class="quiz-rec-item">
+          <img src="${p.image}" alt="${p.shortName || p.name}"/>
+          <div style="flex:1; min-width:0;">
+            <a href="product-detail.html?id=${p.id}" class="quiz-rec-name">${p.name}</a>
+            <div class="quiz-rec-price">${fmt(p.price)}</div>
+          </div>
+          <button type="button" class="btn-primary" style="padding:8px 14px; font-size:12.5px;" onclick="quickAdd(${p.id})">+ Giỏ</button>
+        </div>
+      `).join('');
+    }
+    document.getElementById('blog-modal').classList.add('show');
+  }
+
+  function closeBlogModal() {
+    document.getElementById('blog-modal').classList.remove('show');
+  }
+
+  renderBlogGrid();
+</script>
+</body>
+</html>
