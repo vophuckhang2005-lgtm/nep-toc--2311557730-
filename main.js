@@ -17,8 +17,8 @@ function renderHeader() {
           <a href="index.html">Trang chủ</a>
           <a href="about.html">Về chúng tôi</a>
           <a href="products.html">Sản phẩm</a>
-          <a href="blog.html">Blog</a>
           <a href="policy.html">Chính sách</a>
+          <a href="blog.html">Blog</a>
           <a href="contact.html">Liên hệ</a>
         </nav>
         <div class="nav-actions">
@@ -146,8 +146,8 @@ function renderFooter() {
           <a href="index.html">Trang chủ</a>
           <a href="products.html">Tất cả sản phẩm</a>
           <a href="about.html">Về chúng tôi</a>
-          <a href="blog.html">Blog mẹo nhà sạch</a>
           <a href="policy.html">Chính sách bảo hành</a>
+          <a href="blog.html">Blog mẹo nhà sạch</a>
           <a href="contact.html">Liên hệ cửa hàng</a>
           <a href="account.html">Tài khoản & Đơn hàng</a>
         </div>
