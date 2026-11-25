@@ -5741,21 +5741,52 @@ body.has-sticky-atc .floating-contact {
 .smart-section {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 28px 72px;
+  padding: 20px 28px 64px;
 }
 
 .smart-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.05fr 0.95fr;
   gap: 24px;
+  align-items: stretch;
 }
 
 .smart-card {
-  background: var(--apple-surface);
-  border: 1px solid var(--apple-border-light);
-  border-radius: var(--radius-lg);
-  padding: 28px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfd 100%);
+  border: 1px solid var(--apple-border);
+  border-radius: 24px;
+  padding: 30px;
   box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-steps-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.quiz-step-pill {
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--apple-surface-secondary);
+  color: var(--apple-tertiary);
+  transition: all var(--spring-quick);
+}
+
+.quiz-step-pill.active {
+  background: var(--accent-rose-soft);
+  color: var(--accent-rose);
+  font-weight: 700;
+}
+
+.quiz-step-pill.done {
+  background: rgba(22, 163, 74, 0.1);
+  color: #15803d;
 }
 
 .smart-eyebrow {
@@ -5810,18 +5841,34 @@ body.has-sticky-atc .floating-contact {
 
 .quiz-opt-btn {
   text-align: left;
-  padding: 13px 16px;
+  padding: 14px 16px;
   border-radius: var(--radius-md);
   border: 1px solid var(--apple-border);
-  background: var(--apple-surface-secondary);
+  background: var(--apple-surface);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   transition: all var(--spring-quick);
 }
 
 .quiz-opt-btn:hover {
-  background: #ffffff;
+  background: var(--accent-rose-soft);
   border-color: var(--accent-rose);
   box-shadow: var(--shadow-subtle);
   transform: translateY(-1px);
+}
+
+.quiz-opt-arrow {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--apple-tertiary);
+  transition: transform var(--spring-quick), color var(--spring-quick);
+}
+
+.quiz-opt-btn:hover .quiz-opt-arrow {
+  color: var(--accent-rose);
+  transform: translateX(3px);
 }
 
 .quiz-opt-title {

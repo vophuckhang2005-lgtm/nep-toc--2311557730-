@@ -1473,7 +1473,16 @@ let quizAnswers = {};
 function renderQuiz() {
   const body = document.getElementById('quiz-body');
   const bar = document.getElementById('quiz-progress-bar');
+  const pillsEl = document.getElementById('quiz-steps-pills');
   if (!body || typeof PRODUCTS === 'undefined') return;
+
+  if (pillsEl) {
+    const labels = ['01 Khu vực', '02 Vấn đề', '03 Ưu tiên'];
+    pillsEl.innerHTML = labels.map((lbl, idx) => {
+      const stateClass = idx < quizStepIdx ? 'done' : (idx === quizStepIdx ? 'active' : '');
+      return `<span class="quiz-step-pill ${stateClass}">${idx < quizStepIdx ? '✓ ' : ''}${lbl}</span>`;
+    }).join('');
+  }
 
   if (quizStepIdx < QUIZ_STEPS.length) {
     if (bar) bar.style.width = `${((quizStepIdx + 1) / QUIZ_STEPS.length) * 100}%`;
@@ -1483,8 +1492,11 @@ function renderQuiz() {
       <div class="quiz-options">
         ${step.options.map(opt => `
           <button type="button" class="quiz-opt-btn" onclick="selectQuizOption('${step.key}', '${opt.value}')">
-            <div class="quiz-opt-title">${opt.label}</div>
-            <div class="quiz-opt-desc">${opt.desc}</div>
+            <div>
+              <div class="quiz-opt-title">${opt.label}</div>
+              <div class="quiz-opt-desc">${opt.desc}</div>
+            </div>
+            <span class="quiz-opt-arrow">→</span>
           </button>
         `).join('')}
       </div>
