@@ -5737,6 +5737,253 @@ body.has-sticky-atc .floating-contact {
   }
 }
 
+/* ── Feature 2: Smart 3-Step Quiz & Space Combos ── */
+.smart-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 28px 72px;
+}
+
+.smart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.smart-card {
+  background: var(--apple-surface);
+  border: 1px solid var(--apple-border-light);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-card);
+}
+
+.smart-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-rose);
+  margin-bottom: 6px;
+}
+
+.smart-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--apple-black);
+  margin-bottom: 14px;
+}
+
+.smart-title em {
+  font-style: normal;
+  color: var(--accent-rose);
+}
+
+.quiz-progress {
+  height: 5px;
+  background: var(--apple-surface-secondary);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.quiz-progress-bar {
+  height: 100%;
+  background: var(--accent-rose);
+  border-radius: var(--radius-pill);
+  transition: width 0.35s var(--spring-bounce);
+}
+
+.quiz-question {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--apple-black);
+  margin-bottom: 14px;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-opt-btn {
+  text-align: left;
+  padding: 13px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--apple-border);
+  background: var(--apple-surface-secondary);
+  transition: all var(--spring-quick);
+}
+
+.quiz-opt-btn:hover {
+  background: #ffffff;
+  border-color: var(--accent-rose);
+  box-shadow: var(--shadow-subtle);
+  transform: translateY(-1px);
+}
+
+.quiz-opt-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--apple-black);
+}
+
+.quiz-opt-desc {
+  font-size: 12.5px;
+  color: var(--apple-secondary);
+  margin-top: 2px;
+}
+
+.quiz-back-btn {
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--apple-secondary);
+}
+
+.quiz-result-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--accent-rose-soft);
+  color: var(--accent-rose);
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.quiz-result-reason {
+  font-size: 13.5px;
+  color: var(--apple-secondary);
+  margin-bottom: 14px;
+}
+
+.quiz-result-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.quiz-rec-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  background: var(--apple-surface-secondary);
+}
+
+.quiz-rec-item img {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.quiz-rec-name {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--apple-black);
+}
+
+.quiz-rec-price {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent-rose);
+}
+
+.combo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.combo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--apple-border);
+  background: var(--apple-surface-secondary);
+}
+
+.combo-thumbs {
+  display: flex;
+  align-items: center;
+}
+
+.combo-thumbs img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ffffff;
+  margin-left: -10px;
+}
+
+.combo-thumbs img:first-child {
+  margin-left: 0;
+}
+
+.combo-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--apple-black);
+}
+
+.combo-desc {
+  font-size: 12px;
+  color: var(--apple-secondary);
+  margin-top: 2px;
+}
+
+.combo-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.combo-price {
+  font-size: 13.5px;
+  font-weight: 800;
+  color: var(--accent-rose);
+}
+
+.combo-ship-tag {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: rgba(22, 163, 74, 0.12);
+  color: #15803d;
+}
+
+.combo-add-btn {
+  padding: 8px 14px !important;
+  font-size: 12.5px !important;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .smart-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .combo-item {
+    flex-wrap: wrap;
+  }
+  .combo-add-btn {
+    width: 100%;
+  }
+}
+
 /* ── Accessibility: Reduced Motion ── */
 @media (prefers-reduced-motion: reduce) {
   html {

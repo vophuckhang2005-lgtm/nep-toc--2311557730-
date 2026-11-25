@@ -1433,3 +1433,202 @@ function closeCompareModal() {
   const modal = document.getElementById('compare-modal');
   if (modal) modal.classList.remove('show');
 }
+
+// ── Feature 2: Smart 3-Step Tool Quiz & Space Combos ──
+const QUIZ_STEPS = [
+  {
+    key: 'area',
+    question: 'Bước 1/3: Bạn muốn làm sạch khu vực nào nhất?',
+    options: [
+      { value: 'floor', label: 'Phòng khách & Sàn nhà', desc: 'Sàn gỗ, gạch men, gầm bàn ghế' },
+      { value: 'bathroom', label: 'Phòng tắm & Toilet', desc: 'Chân tường, ron gạch, bồn cầu' },
+      { value: 'glass', label: 'Gian bếp & Mặt kính', desc: 'Gương soi, vách kính, mặt bàn đá' }
+    ]
+  },
+  {
+    key: 'need',
+    question: 'Bước 2/3: Vấn đề khiến bạn khó chịu nhất là gì?',
+    options: [
+      { value: 'daily', label: 'Bụi mịn, tóc rụng hàng ngày', desc: 'Cần lau nhanh, khô ráo, không chạm tay' },
+      { value: 'stain', label: 'Rêu mốc, cặn canxi & góc kẹt', desc: 'Cần cọ cứng chà sạch khe hẹp' },
+      { value: 'water', label: 'Nước đọng & vệt ố trên mặt phẳng', desc: 'Cần gạt sạch nước tức thì' }
+    ]
+  },
+  {
+    key: 'priority',
+    question: 'Bước 3/3: Bạn ưu tiên tiêu chí nào nhất?',
+    options: [
+      { value: 'fast', label: 'Nhanh gọn, tiết kiệm sức', desc: 'Bàn lau rộng, trợ lực nhẹ nhàng' },
+      { value: 'deep', label: 'Sạch sâu từng ngóc ngách', desc: 'Đầu cọ chuyên dụng, len lỏi khe nhỏ' },
+      { value: 'budget', label: 'Gọn nhẹ & tiết kiệm chi phí', desc: 'Đa năng, giá hợp lý nhất' }
+    ]
+  }
+];
+
+let quizStepIdx = 0;
+let quizAnswers = {};
+
+function renderQuiz() {
+  const body = document.getElementById('quiz-body');
+  const bar = document.getElementById('quiz-progress-bar');
+  if (!body || typeof PRODUCTS === 'undefined') return;
+
+  if (quizStepIdx < QUIZ_STEPS.length) {
+    if (bar) bar.style.width = `${((quizStepIdx + 1) / QUIZ_STEPS.length) * 100}%`;
+    const step = QUIZ_STEPS[quizStepIdx];
+    body.innerHTML = `
+      <div class="quiz-question">${step.question}</div>
+      <div class="quiz-options">
+        ${step.options.map(opt => `
+          <button type="button" class="quiz-opt-btn" onclick="selectQuizOption('${step.key}', '${opt.value}')">
+            <div class="quiz-opt-title">${opt.label}</div>
+            <div class="quiz-opt-desc">${opt.desc}</div>
+          </button>
+        `).join('')}
+      </div>
+      ${quizStepIdx > 0 ? `<button type="button" class="quiz-back-btn" onclick="prevQuizStep()">← Quay lại bước trước</button>` : ''}
+    `;
+    return;
+  }
+
+  if (bar) bar.style.width = '100%';
+  const rec = getQuizRecommendation();
+  body.innerHTML = `
+    <div class="quiz-result">
+      <div class="quiz-result-badge">Gợi ý phù hợp nhất cho bạn</div>
+      <div class="quiz-result-reason">${rec.reason}</div>
+      <div class="quiz-result-items">
+        ${rec.items.map(p => `
+          <div class="quiz-rec-item">
+            <img src="${p.image}" alt="${p.shortName || p.name}"/>
+            <div style="flex:1; min-width:0;">
+              <a href="product-detail.html?id=${p.id}" class="quiz-rec-name">${p.name}</a>
+              <div class="quiz-rec-price">${fmt(p.price)}</div>
+            </div>
+            <button type="button" class="btn-primary" style="padding:8px 14px; font-size:12.5px;" onclick="quickAdd(${p.id})">+ Giỏ</button>
+          </div>
+        `).join('')}
+      </div>
+      <div style="display:flex; gap:10px; margin-top:14px; flex-wrap:wrap;">
+        <button type="button" class="btn-primary" style="flex:1;" onclick="addComboToCart([${rec.items.map(i => i.id).join(',')}], 'bộ gợi ý')">Thêm cả ${rec.items.length} món vào giỏ</button>
+        <button type="button" class="btn-outline" onclick="resetQuiz()">Chọn lại</button>
+      </div>
+    </div>
+  `;
+}
+
+function selectQuizOption(key, value) {
+  quizAnswers[key] = value;
+  quizStepIdx += 1;
+  renderQuiz();
+}
+
+function prevQuizStep() {
+  if (quizStepIdx > 0) {
+    quizStepIdx -= 1;
+    renderQuiz();
+  }
+}
+
+function resetQuiz() {
+  quizStepIdx = 0;
+  quizAnswers = {};
+  renderQuiz();
+}
+
+function getQuizRecommendation() {
+  const { area, need, priority } = quizAnswers;
+  let primaryId = 4;
+  let secondaryId = 1;
+  let reason = 'Bộ đôi lau sàn và gạt nước giúp dọn dẹp nhanh gấp đôi mà không cần chạm tay vào nước bẩn.';
+
+  if (area === 'bathroom') {
+    if (need === 'stain' || priority === 'deep') {
+      primaryId = 2;
+      secondaryId = 5;
+      reason = 'Đầu cọ chữ V 90° xử lý sạch ron gạch & chân tường, kết hợp Bộ Cọ Toilet 3in1 kháng khuẩn.';
+    } else {
+      primaryId = 3;
+      secondaryId = 2;
+      reason = 'Cây Chà Sàn 3in1 vừa cọ sạch cặn canxi vừa gạt khô sàn nhà tắm chống trơn trượt tức thì.';
+    }
+  } else if (area === 'glass') {
+    primaryId = 1;
+    secondaryId = need === 'stain' ? 3 : 4;
+    reason = 'Lưỡi silicon 35cm khớp xoay 360° gạt sạch 100% bọt xà phòng, dầu mỡ và vệt nước trên kính & bàn bếp.';
+  } else {
+    primaryId = priority === 'budget' ? 1 : 4;
+    secondaryId = priority === 'budget' ? 3 : 1;
+    reason = 'Bàn lau 45cm tự vắt kiệt 95% nước, hút sạch bụi mịn & tóc rụng trên sàn gỗ và gạch men.';
+  }
+
+  const items = [primaryId, secondaryId]
+    .map(id => PRODUCTS.find(p => p.id === id))
+    .filter(Boolean);
+  return { items, reason };
+}
+
+const SPACE_COMBOS = [
+  {
+    id: 'combo-bathroom',
+    title: 'Combo Nhà Tắm Sạch Khuẩn',
+    desc: 'Chà góc tường + Chà sàn 3in1 + Bộ cọ Toilet 3in1',
+    productIds: [2, 3, 5]
+  },
+  {
+    id: 'combo-living',
+    title: 'Combo Sàn Nhà & Kính Sáng Bóng',
+    desc: 'Cây lau nhà tự vắt 45cm + Cây gạt nước xoay 360°',
+    productIds: [4, 1]
+  },
+  {
+    id: 'combo-full',
+    title: 'Combo Toàn Diện Tổ Ấm',
+    desc: 'Cây lau nhà 45cm + Chà sàn 3in1 + Gạt nước 360°',
+    productIds: [4, 3, 1]
+  }
+];
+
+function renderSpaceCombos() {
+  const container = document.getElementById('combo-list');
+  if (!container || typeof PRODUCTS === 'undefined') return;
+
+  container.innerHTML = SPACE_COMBOS.map(combo => {
+    const items = combo.productIds.map(id => PRODUCTS.find(p => p.id === id)).filter(Boolean);
+    const total = items.reduce((s, p) => s + p.price, 0);
+    return `
+      <div class="combo-item">
+        <div class="combo-thumbs">
+          ${items.map(p => `<img src="${p.image}" alt="${p.shortName || p.name}"/>`).join('')}
+        </div>
+        <div style="flex:1; min-width:0;">
+          <div class="combo-name">${combo.title}</div>
+          <div class="combo-desc">${combo.desc}</div>
+          <div class="combo-meta">
+            <span class="combo-price">${fmt(total)}</span>
+            <span class="combo-ship-tag">Freeship</span>
+          </div>
+        </div>
+        <button type="button" class="btn-primary combo-add-btn" onclick="addComboToCart([${combo.productIds.join(',')}], '${combo.title}')">
+          Thêm cả bộ
+        </button>
+      </div>
+    `;
+  }).join('');
+}
+
+function addComboToCart(ids, label) {
+  if (!Array.isArray(ids) || typeof addToCart !== 'function') return;
+  ids.forEach(id => addToCart(id, 1, null));
+  showToast(`Đã thêm ${label || 'combo'} (${ids.length} món) vào giỏ hàng`);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    renderQuiz();
+    renderSpaceCombos();
+  });
+} else {
+  renderQuiz();
+  renderSpaceCombos();
+}
