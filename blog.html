@@ -51,12 +51,6 @@
     </div>
     <img id="bm-img" src="" alt="" class="blog-modal-img"/>
     <div id="bm-content" class="blog-modal-content"></div>
-    <div class="blog-rec-box">
-      <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--accent-rose); margin-bottom:10px;">
-        Dụng cụ gợi ý trong bài
-      </div>
-      <div id="bm-products" class="quiz-result-items"></div>
-    </div>
   </div>
 </div>
 
@@ -176,21 +170,6 @@
     document.getElementById('bm-img').src = post.image;
     document.getElementById('bm-img').alt = post.title;
     document.getElementById('bm-content').innerHTML = post.paragraphs.map(p => `<p>${p}</p>`).join('');
-
-    const recEl = document.getElementById('bm-products');
-    if (typeof PRODUCTS !== 'undefined') {
-      const items = post.productIds.map(id => PRODUCTS.find(x => x.id === id)).filter(Boolean);
-      recEl.innerHTML = items.map(p => `
-        <div class="quiz-rec-item">
-          <img src="${p.image}" alt="${p.shortName || p.name}"/>
-          <div style="flex:1; min-width:0;">
-            <a href="product-detail.html?id=${p.id}" class="quiz-rec-name">${p.name}</a>
-            <div class="quiz-rec-price">${fmt(p.price)}</div>
-          </div>
-          <button type="button" class="btn-primary" style="padding:8px 14px; font-size:12.5px;" onclick="quickAdd(${p.id})">+ Giỏ</button>
-        </div>
-      `).join('');
-    }
     document.getElementById('blog-modal').classList.add('show');
   }
 
